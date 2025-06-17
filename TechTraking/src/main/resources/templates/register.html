@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi página</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="formbold-main-wrapper">
+  <!-- Author: FormBold Team -->
+  <!-- Learn More: https://formbold.com -->
+  <div class="formbold-form-wrapper">
+
+    <form >
+      <div class="formbold-form-title">
+        <h2 class="">Register User</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt.
+        </p>
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="firstname" class="formbold-form-label">
+            Nombre Completo
+          </label>
+          <input
+                  type="text"
+                  name="firstname"
+                  id="NombreC"
+                  class="formbold-form-input"
+          />
+        </div>
+        <div>
+          <label for="lastname" class="formbold-form-label"> Id</label>
+          <input
+                  type="text"
+                  name="lastname"
+                  id="Id"
+                  class="formbold-form-input"
+          />
+        </div>
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="email" class="formbold-form-label"> correo </label>
+          <input
+                  type="email"
+                  name="email"
+                  id="correo"
+                  class="formbold-form-input"
+          />
+        </div>
+        <div>
+          <label for="phone" class="formbold-form-label"> contraseña </label>
+          <input
+                  type="text"
+                  name="password"
+                  id="password"
+                  class="formbold-form-input"
+          />
+        </div>
+      </div>
+      <div>
+        <label for="rol" class="formbold-form-label">Rol</label>
+        <select id="rol" class="formbold-form-input">
+          <option value="1">Superadmin</option>
+          <option value="2">Admin</option>
+          <option value="3">Técnico</option>
+          <option value="4">Almacenista</option>
+        </select>
+      </div>
+      <button class="formbold-btn" id="registrar">Register Now</button>
+    </form>
+  </div>
+</div>
+<script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>
