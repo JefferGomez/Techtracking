@@ -1,7 +1,9 @@
 package com.devs.TechTraking.controllers;
 import com.devs.TechTraking.model.Usuarios;
 import com.devs.TechTraking.repository.UsuarioRepository;
+import com.devs.TechTraking.service.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -13,21 +15,22 @@ import java.util.List;
 public class UsuarioController {
 
     @Autowired
-    UsuarioRepository repository;
+    UsuariosService usuariosService;
 
 
 
     @GetMapping("/verUsuarios")
     public List<Usuarios> obtenerUsuarios(){
 
-        return repository.findAll();
+        return usuariosService.obtenerUsuarios();
 
     }
 
     @PostMapping("/crearUsuarios")
-    public void guardarUsuario(@RequestBody Usuarios usuario){
+    public ResponseEntity<Usuarios> guardarUsuario(@RequestBody Usuarios usuario){
 
-        repository.save(usuario);
+        Usuarios nuevoUsuario=usuariosService.crearUsuarios(usuario);
+        return ResponseEntity.ok(nuevoUsuario);
 
     }
 
