@@ -5,6 +5,8 @@ let boton = document.getElementById("registrar")
 
 boton.addEventListener("click",evento =>{
 
+
+    evento.preventDefault();
     registrarUsuario();
 
 })
@@ -18,10 +20,10 @@ let registrarUsuario = async()=>{
     campos.nombre=document.getElementById("NombreC").value
     campos.id = document.getElementById("Id").value
     campos.correo = document.getElementById("correo").value
-    campos.password = document.getElementById("password").value
+    campos.contraseña = document.getElementById("password").value
     campos.rol = { id: parseInt(document.getElementById("rol").value) };
 
-    const peticion = await fetch("http://localhost:8080/Usuarios/crearUsuarios",
+    const peticion = await fetch("http://localhost:8080/superadmin/crearUsuarios",
         {
 
             method:'POST',
@@ -30,6 +32,15 @@ let registrarUsuario = async()=>{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(campos)
+
+        })
+
+        .then(response => {
+            if (response.ok){
+                window.location.href = "/superadmin"
+                } else{
+                        alert("Error Al Registrar Usuario")
+                }
 
         })
 }

@@ -10,7 +10,7 @@ public class Usuarios {
     private Integer id;
     private String nombre;
     private String correo;
-    private String password;
+    private String contraseña;
     @ManyToOne
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
@@ -18,11 +18,11 @@ public class Usuarios {
     public Usuarios() {
     }
 
-    public Usuarios(Integer id, String nombre, String correo, String password, Rol rol) {
+    public Usuarios(Integer id, String nombre, String correo, String contraseña, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.password = password;
+        this.contraseña = contraseña;
         this.rol = rol;
     }
 
@@ -51,12 +51,12 @@ public class Usuarios {
         this.correo = correo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public Rol getRol() {

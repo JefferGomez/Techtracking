@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/Usuarios")
+@RequestMapping("/superadmin")
 public class UsuarioController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class UsuarioController {
 
 
 
-    @GetMapping("/verUsuarios")
+    @GetMapping
     public List<Usuarios> obtenerUsuarios(){
 
         return usuariosService.obtenerUsuarios();
@@ -31,6 +31,7 @@ public class UsuarioController {
 
         Usuarios nuevoUsuario=usuariosService.crearUsuarios(usuario);
         return ResponseEntity.ok(nuevoUsuario);
+
 
     }
 
