@@ -11,7 +11,7 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String mostrarInicio() {
-        return "register";
+        return "registerUsuarios";
     }
 
 }

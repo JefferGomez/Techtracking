@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Selecciona el botón con id "forgotBtn" y le agrega un evento de clic
   document.getElementById('forgotBtn').addEventListener('click', function () {
     alert('Redirecting to password recovery...'); // Muestra una alerta
-    window.location.href = 'forgot-password.html'; // Redirige a la página de recuperar contraseña
+    window.location.href = 'CorreoRecuperar.html'; // Redirige a la página de recuperar contraseña
   });
 
   // --- Botón "Try Logging In Again" ---

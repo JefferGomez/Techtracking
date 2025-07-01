@@ -11,8 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
-
-
+import java.util.Optional;
 
 
 @Service
@@ -54,7 +53,45 @@ public class UsuariosService implements UserDetailsService{
         );
     }
 
+    public Optional<Usuarios> editarUsuario(Integer id, Usuarios datosActualizados) {
+        Optional<Usuarios> optionalUsuario = usuarioRepository.findById(id);
+
+        if (optionalUsuario.isPresent()) {
+            Usuarios usuarioExistente = optionalUsuario.get();
+
+            // Solo actualizamos correo y contraseña
+            usuarioExistente.setCorreo(datosActualizados.getCorreo());
+            usuarioExistente.setContraseña(passwordEncoder.encode(datosActualizados.getContraseña()));
+
+            usuarioRepository.save(usuarioExistente);
+            return Optional.of(usuarioExistente);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public boolean eliminarUsuario(Integer id){
+
+        Optional<Usuarios> usuario = usuarioRepository.findById(id);
+
+        if (usuario.isPresent()){
+
+            usuarioRepository.deleteById(id);
+            return true;
+
+        }else{
+
+            return false;
+
+        }
 
 
+
+    }
 
 }
+
+
+
+
+

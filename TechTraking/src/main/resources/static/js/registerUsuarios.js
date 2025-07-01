@@ -15,12 +15,21 @@ boton.addEventListener("click",evento =>{
 
 let registrarUsuario = async()=>{
 
+   const password = document.getElementById("password").value;
+  const confirmPassword = document.querySelector("[name='confirmPassword']").value;
+
+  if (password !== confirmPassword) {
+    alert("Las contraseñas no coinciden.");
+    return;
+  }
+
+
     let campos = {}
 
     campos.nombre=document.getElementById("NombreC").value
     campos.id = document.getElementById("Id").value
     campos.correo = document.getElementById("correo").value
-    campos.contraseña = document.getElementById("password").value
+    campos.contraseña = password
     campos.rol = { id: parseInt(document.getElementById("rol").value) };
 
     const peticion = await fetch("http://localhost:8080/superadmin/crearUsuarios",
@@ -37,10 +46,10 @@ let registrarUsuario = async()=>{
 
         .then(response => {
             if (response.ok){
-                window.location.href = "/superadmin"
+                window.location.href = "/superadmin/Usuarios"
                 } else{
                         alert("Error Al Registrar Usuario")
                 }
 
         })
-}
+    }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>TechTracking</title>
+  <link rel="stylesheet" th:href="@{/css/RegistrarUsuarios.css}">
+</head>
+<body>
+<div class="header">
+  <div class="logo"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
+  <div class="nav">Gestión de usuarios</div>
+  <div class="user">SuperAdmin</div>
+</div>
+
+<div class="container">
+  <form id="userForm">
+    <div class="form-section">
+      <h3>Detalles de la cuenta</h3>
+      <input type="email" name="email" id="correo" placeholder="Ingrese el email" required />
+      <input type="text" name="password" id="password" placeholder="Ingresar contraseña" required />
+      <input type="text" name="confirmPassword" placeholder="Confirmar Contraseña" required />
+      <select name="rol" id="rol" required>
+        <option value="" disabled selected hidden>Seleccione un rol</option>
+        <option value="2">Administrador</option>
+        <option value="3">Técnico</option>
+        <option value="4">Almacenista</option>
+      </select>
+    </div>
+
+    <div class="form-section">
+      <h3>Información básica</h3>
+      <input type="text" name="nombreCompleto" id="NombreC" placeholder="Ingresa tu nombre completo" required oninput="this.value = this.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóúñÑ\s]/g, '')"/>
+      <input type="text" name="identificacion"  id="Id" placeholder="Número de identificación" required oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
+    </div>
+
+    <div class="button-container">
+      <button type="submit" id="registrar" class="btn">✅ Confirmar Creación</button>
+    </div>
+  </form>
+</div>
+<script th:src="@{/js/registerUsuarios.js}"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ public class RedireccionarController {
                  .orElse("");
 
         return switch (rol) {
-            case "SUPERADMIN" -> "redirect:/superadmin";
+            case "SUPERADMIN" -> "redirect:/superadmin/Usuarios";
             case "ADMIN" -> "redirect:/admin";
             case "TECNICO" -> "redirect:/tecnico";
             case "ALMACENISTA" -> "redirect:/almacenista";

@@ -4,12 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class errorAutenticacionController {
+public class CorreoRecuperacion {
 
-    @GetMapping("/errorAutenticacion")
-    public String mostrarError(){
-        return "errorAutenticacion";
+    @GetMapping("/CorreoRecuperar")
+    public String CorreoRecuperar() {
+        return "CorreoRecuperacion";
     }
-
 
 }
