@@ -10,7 +10,7 @@ public class DashBoardSuperAdmin {
     @GetMapping("/superadmin/Usuarios")
     private String listarUsuarios(){
 
-        return "dashboardAdmin";
+        return "dashboardSuperAdmin";
 
     }
 
