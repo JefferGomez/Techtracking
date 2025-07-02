@@ -13,7 +13,6 @@ public class cambiarContraseñaController {
     @GetMapping("/auth/cambiarContrasena")
     public String cambioContraseña(@RequestParam("token") String token, Model model) {
         model.addAttribute("token", token);
-        System.out.println("Token recibido: " + token);
         return "cambiarContraseña";
     }
 
