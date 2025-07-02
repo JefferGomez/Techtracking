@@ -1,6 +1,7 @@
 package com.devs.TechTraking.config;
 
 
+import com.devs.TechTraking.security.FailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final FailureHandler failureHandler;
+
+    public SecurityConfig(FailureHandler failureHandler) {
+        this.failureHandler = failureHandler;
+    }
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
@@ -24,7 +32,7 @@ public class SecurityConfig {
                .csrf(AbstractHttpConfigurer::disable)
                .authorizeHttpRequests(authRequest ->
                        authRequest
-                               .requestMatchers("/","/css/**", "/js/**","/img/**","/CorreoRecuperar").permitAll()
+                               .requestMatchers("/","/css/**", "/js/**","/img/**","/auth/**").permitAll()
                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                .requestMatchers("/tecnico/**").hasAuthority("TECNICO")
                                .requestMatchers("/almacenista/**").hasAuthority("ALMACENISTA")
@@ -33,8 +41,8 @@ public class SecurityConfig {
                         )
                .formLogin(form -> form
                        .loginPage("/")
-                       .loginProcessingUrl("/")
-                       .failureUrl("/errorAutenticacion")
+                       .loginProcessingUrl("/procesarLogin")
+                       .failureHandler(failureHandler)
                        .usernameParameter("correo")
                        .passwordParameter("contraseña")
                        .defaultSuccessUrl("/redireccionar", true)

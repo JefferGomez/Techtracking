@@ -17,6 +17,8 @@ import java.util.Optional;
 @Service
 public class UsuariosService implements UserDetailsService{
 
+
+
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -46,11 +48,7 @@ public class UsuariosService implements UserDetailsService{
 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getRol().getNombre().name());
 
-        return new org.springframework.security.core.userdetails.User(
-                usuario.getCorreo(),
-                usuario.getContraseña(),
-                Collections.singleton(authority)
-        );
+        return usuario;
     }
 
     public Optional<Usuarios> editarUsuario(Integer id, Usuarios datosActualizados) {
@@ -88,6 +86,8 @@ public class UsuariosService implements UserDetailsService{
 
 
     }
+
+
 
 }
 

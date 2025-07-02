@@ -10,15 +10,16 @@
   <div Recovery-box>
     <h1>Recuperación de Contraseña</h1>
     <form action="php/validar.php" method="POST">
-      <label for="email">Correo Electrónico:</label>
-      <input type="email" name="email" id="email" required>
-      <button type="submit">Enviar</button>
+      <label for="correo">Correo Electrónico:</label>
+      <input type="email" name="email" id="correo" required>
+      <button type="button" onclick="enviarCorreo()">Enviar</button>
     </form>
+    <p id="mensaje"></p>
     <p class="terms">Recibirás un correo electrónico con instrucciones para restablecer tu contraseña.</p>
     <p>ir a iniciar sesión <a href="login.html">Inicia sesión</a></p>
   </div>
 </div>
 
-<script th:src="@{/js/errorAutenticacion.js}"></script>
+<script th:src="@{/js/correoRecuperacion.js}"></script>
 </body>
 </html>
