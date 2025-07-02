@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +57,6 @@ public class UsuariosService implements UserDetailsService{
         if (optionalUsuario.isPresent()) {
             Usuarios usuarioExistente = optionalUsuario.get();
 
-            // Solo actualizamos correo y contraseña
             usuarioExistente.setCorreo(datosActualizados.getCorreo());
             usuarioExistente.setContraseña(passwordEncoder.encode(datosActualizados.getContraseña()));
 

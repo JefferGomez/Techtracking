@@ -29,7 +29,6 @@ public class FailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
-        System.out.println("Entró al FailureHandler");
 
         String correo = request.getParameter("correo");
 
@@ -42,7 +41,6 @@ public class FailureHandler implements AuthenticationFailureHandler {
         Optional<Usuarios> optionalUsuarios = usuarioRepository.findByCorreo(correo);
 
         if (optionalUsuarios.isPresent()) {
-            System.out.println("Usuario encontrado");
 
             Usuarios usuarios = optionalUsuarios.get();
 
@@ -58,17 +56,13 @@ public class FailureHandler implements AuthenticationFailureHandler {
             if (bloquear) {
                 usuarios.setBloqueado(true);
                 usuarioRepository.save(usuarios);
-                System.out.println("Usuario bloqueado. Redirigiendo a intentosFallidos");
                 request.getRequestDispatcher("/auth/intentosFallidos").forward(request, response);
                 return;
             }
 
-            System.out.println("Menos de 3 intentos. Redirigiendo a errorAutenticacion");
             request.getRequestDispatcher("/auth/errorAutenticacion").forward(request, response);
             return;
 
-        } else {
-            System.out.println("Usuario NO encontrado. Redirigiendo a errorAutenticacion");
         }
 
         request.getRequestDispatcher("/auth/errorAutenticacion").forward(request, response);
