@@ -1,0 +1,70 @@
+/* Aplica un estilo base a todos los elementos */
+* {
+  margin: 0; /* Quita margen por defecto */
+  padding: 0; /* Quita relleno por defecto */
+  box-sizing: border-box; /* Hace que los bordes y el relleno no afecten el tamaño total */
+  font-family: 'Segoe UI', Tahoma, sans-serif; /* Fuente moderna y legible */
+}
+
+/* Estilo general del cuerpo de la página */
+body {
+  height: 100vh; /* Ocupa el 100% del alto de la ventana */
+  background-color: #f9f9f9; /* Fondo gris muy claro */
+  display: flex; /* Activa el sistema de distribución flexible */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+/* Tarjeta blanca con sombra que contiene el mensaje de error */
+.card {
+  background-color: white; /* Fondo blanco */
+  padding: 30px; /* Espacio interior */
+  border-radius: 12px; /* Bordes redondeados */
+  width: 100%; max-width: 400px; /* Ancho máximo de 400px, se adapta a pantallas pequeñas */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor */
+  text-align: center; /* Centra el texto */
+  border: 1px solid #eee; /* Borde gris claro */
+}
+
+/* Ícono de advertencia */
+.warning-icon {
+  font-size: 32px; /* Tamaño grande */
+  color: #d62828; /* Rojo intenso */
+  margin-bottom: 16px; /* Espacio debajo */
+}
+
+/* Título principal */
+.title {
+  font-size: 22px; /* Tamaño de letra */
+  font-weight: bold; /* Negrita */
+  color: #222; /* Gris oscuro */
+  margin-bottom: 12px; /* Espacio debajo */
+}
+
+/* Mensaje explicativo del error */
+.message {
+  font-size: 14px; /* Tamaño de letra */
+  color: #555; /* Gris medio */
+  margin-bottom: 24px; /* Espacio debajo */
+  line-height: 1.5; /* Espaciado entre líneas */
+}
+
+/* Estilo de los botones */
+.btn {
+  display: block; /* Hace que ocupe todo el ancho disponible */
+  width: 100%; /* Ocupa el 100% del contenedor */
+  padding: 12px 0; /* Alto del botón */
+  background-color: #c1121f; /* Rojo fuerte */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  font-size: 15px; /* Tamaño de texto */
+  border-radius: 6px; /* Bordes redondeados */
+  margin-bottom: 12px; /* Espacio entre botones */
+  cursor: pointer; /* Cambia el cursor a manito */
+  transition: background-color 0.3s ease; /* Efecto suave al pasar el cursor */
+}
+
+/* Estilo cuando el mouse está encima del botón */
+.btn:hover {
+  background-color: #a10e1a; /* Un rojo más oscuro */
+}
