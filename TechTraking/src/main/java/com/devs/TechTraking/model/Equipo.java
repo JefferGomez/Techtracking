@@ -14,7 +14,8 @@ public class Equipo {
     private String tipo;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", nullable = false)
+
     @JsonBackReference
     private Cliente cliente;
 

@@ -10,9 +10,9 @@
     <div class="login-box">
         <img th:src="@{/img/sm.png}" alt="TechTraking Logo" class="logo">
         <h2>Iniciar Sesión en <strong>TechTraking</strong></h2>
-        <form id="loginForm" method="post">
-            <label for="username">Correo</label>
-            <input type="text" id="username" name="correo" placeholder="Enter your username or email" required>
+        <form id="loginForm" method="post" action="/procesarLogin">
+            <label for="correo">Correo</label>
+            <input type="text" id="correo" name="correo" placeholder="Enter your username or email" required>
 
             <label for="password">Contraseña</label>
             <div class="password-wrapper">

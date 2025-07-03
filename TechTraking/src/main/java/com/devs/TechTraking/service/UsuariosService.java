@@ -9,13 +9,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
 public class UsuariosService implements UserDetailsService{
+
+
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -46,11 +48,7 @@ public class UsuariosService implements UserDetailsService{
 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getRol().getNombre().name());
 
-        return new org.springframework.security.core.userdetails.User(
-                usuario.getCorreo(),
-                usuario.getContraseña(),
-                Collections.singleton(authority)
-        );
+        return usuario;
     }
 
     public Optional<Usuarios> editarUsuario(Integer id, Usuarios datosActualizados) {
@@ -59,7 +57,6 @@ public class UsuariosService implements UserDetailsService{
         if (optionalUsuario.isPresent()) {
             Usuarios usuarioExistente = optionalUsuario.get();
 
-            // Solo actualizamos correo y contraseña
             usuarioExistente.setCorreo(datosActualizados.getCorreo());
             usuarioExistente.setContraseña(passwordEncoder.encode(datosActualizados.getContraseña()));
 
@@ -88,6 +85,8 @@ public class UsuariosService implements UserDetailsService{
 
 
     }
+
+
 
 }
 
