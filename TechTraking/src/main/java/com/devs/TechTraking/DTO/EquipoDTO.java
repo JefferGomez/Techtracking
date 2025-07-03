@@ -1,26 +1,28 @@
-package com.devs.TechTraking.model;
+package com.devs.TechTraking.DTO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+public class EquipoDTO {
 
-@Entity
-public class Equipo {
-
-    @Id
-    private int id;
+    private int id; // ✅ ID manual
     private String marca;
     private String modelo;
     private String serie;
     private String tipo;
+    private Long clienteId;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    // Constructor vacío
+    public EquipoDTO() {}
 
-    @JsonBackReference
-    private Cliente cliente;
+    // Constructor con todos los campos
+    public EquipoDTO(int id, String marca, String modelo, String serie, String tipo, Long clienteId) {
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.serie = serie;
+        this.tipo = tipo;
+        this.clienteId = clienteId;
+    }
 
-    public Equipo() {}
-
+    // ✅ Getter y Setter del ID
     public int getId() {
         return id;
     }
@@ -29,6 +31,7 @@ public class Equipo {
         this.id = id;
     }
 
+    // Getters y Setters existentes
     public String getMarca() {
         return marca;
     }
@@ -61,14 +64,11 @@ public class Equipo {
         this.tipo = tipo;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Long getClienteId() {
+        return clienteId;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
     }
 }
-
-
-
