@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/equipos")
+@RequestMapping("/admin")
 
 public class EquipoController {
 
     @Autowired
     public EquipoService equipoService;
 
-    @PostMapping
+    @PostMapping("/crearequipo")
     public ResponseEntity<Equipo> crearEquipo(@RequestBody Equipo equipo){
         return ResponseEntity.ok(equipoService.guardar(equipo));
 
     }
 
-    @GetMapping
+    @GetMapping("/mostrarequipos")
     public List<Equipo> listarEquipos(){
         return equipoService.listartodos();
     }

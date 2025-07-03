@@ -1,0 +1,53 @@
+<!DOCTYPE html> <!-- Indica que este documento es HTML5 -->
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head> <!-- Sección de configuración y enlaces -->
+  <meta charset="UTF-8"> <!-- Codificación para caracteres especiales -->
+  <title>Detalle del Equipo - ServiMarketing</title> <!-- Título de la pestaña -->
+  <link rel="stylesheet" th:href="css/vistaequipos.css"> <!-- Enlace al CSS -->
+</head>
+
+<body> <!-- Cuerpo visible de la página -->
+
+  <header> <!-- Encabezado con logo y título -->
+    <div class="encabezado"> <!-- Contenedor del encabezado -->
+      <img src="img/SM.png" alt="Logo" class="logo"> <!-- Logo de la empresa -->
+      <h1>Detalle del Equipo</h1> <!-- Título central de la página -->
+    </div>
+  </header>
+
+  <main> <!-- Contenido principal -->
+    <div class="detalle-wrapper"> <!-- Contenedor general -->
+
+      <!-- Sección Izquierda: Información General -->
+      <section class="info-general">
+
+        <!-- Tarjeta de Cliente -->
+        <div class="card">
+          <h2>Datos del Cliente</h2> <!-- Título de sección -->
+          <div class="datos-cliente"> <!-- Contenedor de info -->
+            <p><strong>NIT:</strong> <span id="NIT"></span></p> <!-- NIT dinámico -->
+            <p><strong>Nombre:</strong> <span id="Empresa"></span></p> <!-- Nombre -->
+            <p><strong>Dirección:</strong> <span id="direccionCliente"></span></p> <!-- Dirección -->
+            <p><strong>Teléfono:</strong> <span id="Telefono"></span></p> <!-- Teléfono -->
+            <p><strong>Correo:</strong> <span id="correoCliente"></span></p> <!-- Correo -->
+          </div>
+        </div>
+
+        <!-- Tarjeta de Equipo -->
+        <div class="card">
+          <h2>Información del Equipo</h2> <!-- Título de sección -->
+          <p><strong>Marca del Equipo:</strong> <span id="nombreEquipo"></span></p> <!-- Marca -->
+          <p><strong>Modelo:</strong> <span id="modelo"></span></p> <!-- Modelo -->
+          <p><strong>Serie:</strong> <span id="serie"></span></p> <!-- Serie -->
+          <p><strong>Tipo:</strong> <span id="tipo"></span></p> <!-- Tipo -->
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Enlace al script que traerá datos desde el backend -->
+  <script th:src="@{/js/vistaequipo.js}"></script>
+</body>
+</html>
