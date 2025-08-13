@@ -1,9 +1,29 @@
 body {
-  margin: 0; /* Elimina el margen por defecto alrededor del cuerpo */
-  font-family: 'Segoe UI', sans-serif; /* Define la fuente de letra usada */
-  background: #f4f4f4; /* Color de fondo gris claro */
-  padding: 20px; /* Espacio interno de 20px alrededor del contenido */
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4; /* Fondo base */
+  padding: 20px;
+  position: relative; /* Necesario para el pseudo-elemento */
 }
+
+/* Marca de agua de fondo */
+body::before {
+  content: "";
+  display: block; /* 👈 esto asegura que se renderice */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/img/fondo1.png');
+  background-size: 300px auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.08;
+  z-index: -1;
+}
+
+
 
 .logo {
   max-width: 300px; /* Ancho máximo del logo */
@@ -110,3 +130,35 @@ input[type="text"] {
   width: 250px; /* Ancho del logo */
   height: auto; /* Altura automática proporcional */
 }
+
+/* Fondo base */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4; /* Fondo gris claro */
+  padding: 20px;
+  position: relative;
+  min-height: 100vh; /* Altura mínima pantalla completa */
+}
+
+/* Marca de agua centrada */
+body::before {
+  content: "";
+  position: fixed;  /* Permanece fijo al hacer scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-image: url('/img/fondo1.png'); /* Ruta a tu logo */
+  background-size: 300px auto; /* Tamaño del logo */
+  background-repeat: no-repeat;
+  background-position: center center; /* Centrado vertical y horizontal */
+
+  opacity: 0.08; /* Transparencia para que no moleste */
+
+  z-index: -1; /* Lo coloca detrás de todo */
+  display: block;
+  pointer-events: none; /* Evita que bloquee clics */
+}
+

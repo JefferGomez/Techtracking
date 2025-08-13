@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class vistacontroller {
 
-    @GetMapping("/admin/mostrarequipo")
+    @GetMapping("/admin/vistaequipo")
     public String vista(){
         return "vistaequipo";
     }
- }
+}
 
