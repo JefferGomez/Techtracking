@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Primer commit backEnd">
+    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Se hace actualizacion de vista de equipos asociados a cada cliente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/VistaEquipoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/VistaEquipoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/vistacontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/vistacontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/vistaequipo.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/vistaequipo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/vistaequipo.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/vistaequipo.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +125,23 @@
       <option name="project" value="LOCAL" />
       <updated>1750034781176</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Se hace actualizacion de vista de equipos asociados a cada cliente">
+      <option name="closed" value="true" />
+      <created>1755050175377</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1755050175377</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Se hace actualizacion de vista de equipos asociados a cada cliente">
+      <option name="closed" value="true" />
+      <created>1755050292074</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1755050292074</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,6 +184,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primer commit backEnd" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primer commit backEnd" />
+    <MESSAGE value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
   </component>
 </project>
