@@ -18,6 +18,7 @@ public class Usuarios implements UserDetails {
     private String correo;
     private String contraseña;
     private boolean bloqueado = false;
+    private boolean contraseñaTemporal;
     @ManyToOne
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
@@ -82,6 +83,14 @@ public class Usuarios implements UserDetails {
         this.bloqueado = bloqueado;
     }
 
+    public boolean isContraseñaTemporal() {
+        return contraseñaTemporal;
+    }
+
+    public void setContraseñaTemporal(boolean contraseñaTemporal) {
+        this.contraseñaTemporal = contraseñaTemporal;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(this.rol.getNombre().name()));
@@ -116,6 +125,5 @@ public class Usuarios implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 
 }

@@ -82,6 +82,7 @@ public class AuthController {
             Usuarios usuarios = optionalUsuario.get();
             usuarios.setContraseña(passwordEncoder.encode((nuevaContraseña)));
             usuarios.setBloqueado(false);
+            usuarios.setContraseñaTemporal(false);
             usuarioRepository.save(usuarios);
 
             return ResponseEntity.ok("Contraseña Actualizada");
