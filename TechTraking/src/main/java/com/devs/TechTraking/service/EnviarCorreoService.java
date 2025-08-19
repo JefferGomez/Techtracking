@@ -37,5 +37,28 @@ public class EnviarCorreoService {
 
     }
 
+    public void EnviarInformacionUsuario(String destino,String nombre,String correo,
+                                         String rol,String contrasenaTemporal){
+
+
+        SimpleMailMessage mensaje = new SimpleMailMessage();
+        mensaje.setTo(destino);
+        mensaje.setSubject("Bienvenido a TechTracking");
+
+        String cuerpo = "Hola " + nombre + ",\n\n"
+                + "Tu usuario ha sido creado exitosamente en TechTracking.\n\n"
+                + "📌 Credenciales de acceso:\n"
+                + "Usuario: " + correo + "\n"
+                + "Contraseña temporal: " + contrasenaTemporal + "\n"
+                + "Rol asignado: " + rol + "\n\n"
+                + "Por seguridad, deberás cambiar tu contraseña en el primer inicio de sesión.\n\n"
+                + "Saludos,\nEquipo TechTracking";
+
+        mensaje.setText(cuerpo);
+        mailSender.send(mensaje);
+
+
+    }
+
 
 }

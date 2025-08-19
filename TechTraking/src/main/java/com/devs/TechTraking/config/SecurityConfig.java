@@ -1,7 +1,6 @@
 package com.devs.TechTraking.config;
-
-
 import com.devs.TechTraking.security.FailureHandler;
+import com.devs.TechTraking.security.SuccesHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,14 +12,18 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     private final FailureHandler failureHandler;
+    private final SuccesHandler succesHandler;
 
-    public SecurityConfig(FailureHandler failureHandler) {
+    public SecurityConfig(FailureHandler failureHandler, SuccesHandler succesHandler) {
         this.failureHandler = failureHandler;
+        this.succesHandler = succesHandler;
     }
 
 
@@ -44,7 +47,7 @@ public class SecurityConfig {
                        .failureHandler(failureHandler)
                        .usernameParameter("correo")
                        .passwordParameter("contraseña")
-                       .defaultSuccessUrl("/redireccionar", true)
+                       .successHandler(succesHandler)
                        .permitAll()
                )
                .build();
