@@ -1,16 +1,12 @@
-package com.devs.TechTraking.model;
+package com.devs.TechTraking.DTO;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-public class Revision {
+public class RevisionDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ Checklist (31 preguntas Sí/No del documento)
+    // ✅ Checklist (31 preguntas Sí/No)
     private boolean equipoEnciende;
     private boolean displayFunciona;
     private boolean alarmasActivas;
@@ -43,23 +39,14 @@ public class Revision {
     private boolean rotulosVisibles;
     private boolean manualDisponible;
 
-    // 🔹 Relación con Cliente
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
+    // Relaciones simplificadas
+    private Long clienteId;
+    private Long equipoId;
 
-    // 🔹 Relación con Equipo
-    @ManyToOne
-    @JoinColumn(name = "equipo_id", nullable = false)
-    private Equipo equipo;
-
-    // Otros datos de la revisión
     private String observaciones;
-    private LocalDateTime fecha = LocalDateTime.now();
+    private LocalDateTime fecha;
 
-    // --- Getters & Setters ---
-
-    public Revision() {
+    public RevisionDto() {
     }
 
     public Long getId() {
@@ -318,20 +305,20 @@ public class Revision {
         this.manualDisponible = manualDisponible;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Long getClienteId() {
+        return clienteId;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
+    public Long getEquipoId() {
+        return equipoId;
     }
 
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
+    public void setEquipoId(Long equipoId) {
+        this.equipoId = equipoId;
     }
 
     public String getObservaciones() {
