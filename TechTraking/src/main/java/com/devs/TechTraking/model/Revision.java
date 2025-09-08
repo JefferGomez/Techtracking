@@ -13,7 +13,6 @@ public class Revision {
     // ✅ Checklist (31 preguntas Sí/No del documento)
     private boolean equipoEnciende;
     private boolean displayFunciona;
-    private boolean alarmasActivas-;
     private boolean presentaFugas;-
     private boolean cablesEnBuenEstado;
     private boolean nivelesCorrectos;
