@@ -27,6 +27,12 @@
       </select>
     </div>
 
+    <div class="form-section" id="tecnicoFields" style="display: none;">
+      <h3>Información del Técnico</h3>
+      <input type="text" id="especialidad" placeholder="Especialidad del técnico" />
+      <input type="text" id="telefono" placeholder="Teléfono del técnico" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
+    </div>
+
     <div class="form-section">
       <h3>Información básica</h3>
       <input type="text" name="nombreCompleto" id="NombreC" placeholder="Ingresa tu nombre completo" required oninput="this.value = this.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóúñÑ\s]/g, '')"/>
