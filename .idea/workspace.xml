@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Se hace actualizacion de vista de equipos asociados a cada cliente">
+    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Se crea  html del formulario, ya anteriormente se envio el JS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/DTO/Revision.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +16,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -67,7 +66,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Felipe-González&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#9 on Felipe-González&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Desktop/Programacion carpetas/TechTraking&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
@@ -176,7 +175,31 @@
       <option name="project" value="LOCAL" />
       <updated>1756780250697</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se hace actualizacion de vista de equipos asociados a cada cliente">
+      <option name="closed" value="true" />
+      <created>1757296165125</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1757296165125</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Se hace actualizacion de vista de equipos asociados a cada cliente">
+      <option name="closed" value="true" />
+      <created>1757296633016</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1757296633016</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Se crea  html del formulario, ya anteriormente se envio el JS">
+      <option name="closed" value="true" />
+      <created>1757297654304</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1757297654304</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,6 +243,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primer commit backEnd" />
     <MESSAGE value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
+    <MESSAGE value="Se crea  html del formulario, ya anteriormente se envio el JS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se crea  html del formulario, ya anteriormente se envio el JS" />
   </component>
 </project>
