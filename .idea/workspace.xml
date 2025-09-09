@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="evio de controllers y service de la Revision">
+    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="actualizacion de todo lo de &quot;Revision&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/DTO/RevisionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/DTO/RevisionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/RevisionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/RevisionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/mapper/Revision.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/mapper/Revision.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Revision.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Revision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/vistaequipo.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/vistaequipo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +71,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Felipe-González&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#13 on Felipe-González&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Desktop/Programacion carpetas/TechTraking&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
@@ -188,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757377732399</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="actualizacion de todo lo de &quot;Revision&quot;">
+      <option name="closed" value="true" />
+      <created>1757386972317</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1757386972317</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,6 +238,7 @@
     <MESSAGE value="Primer commit backEnd" />
     <MESSAGE value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
     <MESSAGE value="evio de controllers y service de la Revision" />
-    <option name="LAST_COMMIT_MESSAGE" value="evio de controllers y service de la Revision" />
+    <MESSAGE value="actualizacion de todo lo de &quot;Revision&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="actualizacion de todo lo de &quot;Revision&quot;" />
   </component>
 </project>
