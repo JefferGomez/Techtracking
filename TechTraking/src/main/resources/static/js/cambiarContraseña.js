@@ -83,7 +83,7 @@ submitBtn.addEventListener("click", async function () {
 
     if (response.ok) {
       alert("Contraseña cambiada correctamente");
-      window.location.href = "/login"; // Redirige si quieres
+      window.location.href = "/";
     } else {
       const msg = await response.text();
       alert("Error al cambiar la contraseña: " + msg);
