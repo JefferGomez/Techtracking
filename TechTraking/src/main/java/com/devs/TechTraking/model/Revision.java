@@ -11,36 +11,42 @@ public class Revision {
     private Long id;
 
     // ✅ Checklist (31 preguntas Sí/No del documento)
+    //ESTADO GENERAL
     private boolean equipoEnciende;
-    private boolean displayFunciona;
-    private boolean presentaFugas;-
-    private boolean cablesEnBuenEstado;
-    private boolean nivelesCorrectos;
-    private boolean limpiezaGeneral;
-    private boolean filtrosLimpios;
-    private boolean ventilacionAdecuada;
-    private boolean botonEmergenciaFunciona;
-    private boolean calibracionCorrecta;
-    private boolean accesoriosCompletos;
-    private boolean fusiblesBuenEstado;
-    private boolean conexionesFirmes;
-    private boolean tierraFisicaCorrecta;
-    private boolean lucesIndicadorasFuncionan;
-    private boolean ventiladoresOperativos;
-    private boolean bateriasOperativas;
-    private boolean gabineteSinOxido;
-    private boolean perillasBuenEstado;
-    private boolean manguerasBuenEstado;
-    private boolean presionAdecuada;
-    private boolean temperaturaNormal;
-    private boolean sensoresFuncionales;
-    private boolean softwareActualizado;
-    private boolean sistemaSonoroFunciona;
-    private boolean tapasCorrectamenteColocadas;
-    private boolean puertasCierranBien;
-    private boolean sinVibraciones;
-    private boolean rotulosVisibles;
-    private boolean manualDisponible;
+    private boolean estaOperando;
+    private boolean estaPartido;
+    private boolean estaManchado;
+    //PIEZAS FALTANTES
+    private boolean tornillos;
+    private boolean tapas;
+    private boolean display;
+    private boolean tarjetasElectronicas;
+    private boolean botones;
+    private boolean cabezal;
+    //PARTE MECANICA
+    private boolean oxido;
+    private boolean ruidos;
+    private boolean piñoneriaEnBuenEstado;
+    private boolean correasEnBuenEstado;
+    //PANTALLA
+    private boolean funciona;
+    private boolean partida;
+    private boolean lineasQuemadas;
+    private boolean quemada;
+    //CABEZAL DE IMPRESION
+    private boolean bueno;
+    private boolean lineasBlancas;
+    private boolean calibrado;
+    private boolean limpio;
+    //RODILLO DE IMPRESION
+    private boolean buenos;
+    private boolean picados;
+    private boolean rayados;
+    private boolean adhesivo;
+    //ESTADO ELECTRONICO
+    private boolean humedad;
+    private boolean tarjetaElectronica;
+
 
     // 🔹 Relación con Cliente
     @ManyToOne
@@ -73,248 +79,224 @@ public class Revision {
         return equipoEnciende;
     }
 
+    public boolean isEstaOperando() {
+        return estaOperando;
+    }
+
+    public void setEstaOperando(boolean estaOperando) {
+        this.estaOperando = estaOperando;
+    }
+
     public void setEquipoEnciende(boolean equipoEnciende) {
         this.equipoEnciende = equipoEnciende;
     }
 
-    public boolean isDisplayFunciona() {
-        return displayFunciona;
+    public boolean isEstaPartido() {
+        return estaPartido;
     }
 
-    public void setDisplayFunciona(boolean displayFunciona) {
-        this.displayFunciona = displayFunciona;
+    public void setEstaPartido(boolean estaPartido) {
+        this.estaPartido = estaPartido;
     }
 
-    public boolean isAlarmasActivas() {
-        return alarmasActivas;
+    public boolean isEstaManchado() {
+        return estaManchado;
     }
 
-    public void setAlarmasActivas(boolean alarmasActivas) {
-        this.alarmasActivas = alarmasActivas;
+    public void setEstaManchado(boolean estaManchado) {
+        this.estaManchado = estaManchado;
     }
 
-    public boolean isPresentaFugas() {
-        return presentaFugas;
+    public boolean isTornillos() {
+        return tornillos;
     }
 
-    public void setPresentaFugas(boolean presentaFugas) {
-        this.presentaFugas = presentaFugas;
+    public void setTornillos(boolean tornillos) {
+        this.tornillos = tornillos;
     }
 
-    public boolean isCablesEnBuenEstado() {
-        return cablesEnBuenEstado;
+    public boolean isTapas() {
+        return tapas;
     }
 
-    public void setCablesEnBuenEstado(boolean cablesEnBuenEstado) {
-        this.cablesEnBuenEstado = cablesEnBuenEstado;
+    public void setTapas(boolean tapas) {
+        this.tapas = tapas;
     }
 
-    public boolean isNivelesCorrectos() {
-        return nivelesCorrectos;
+    public boolean isDisplay() {
+        return display;
     }
 
-    public void setNivelesCorrectos(boolean nivelesCorrectos) {
-        this.nivelesCorrectos = nivelesCorrectos;
+    public void setDisplay(boolean display) {
+        this.display = display;
     }
 
-    public boolean isLimpiezaGeneral() {
-        return limpiezaGeneral;
+    public boolean isTarjetasElectronicas() {
+        return tarjetasElectronicas;
     }
 
-    public void setLimpiezaGeneral(boolean limpiezaGeneral) {
-        this.limpiezaGeneral = limpiezaGeneral;
+    public void setTarjetasElectronicas(boolean tarjetasElectronicas) {
+        this.tarjetasElectronicas = tarjetasElectronicas;
     }
 
-    public boolean isFiltrosLimpios() {
-        return filtrosLimpios;
+    public boolean isBotones() {
+        return botones;
     }
 
-    public void setFiltrosLimpios(boolean filtrosLimpios) {
-        this.filtrosLimpios = filtrosLimpios;
+    public void setBotones(boolean botones) {
+        this.botones = botones;
     }
 
-    public boolean isVentilacionAdecuada() {
-        return ventilacionAdecuada;
+    public boolean isCabezal() {
+        return cabezal;
     }
 
-    public void setVentilacionAdecuada(boolean ventilacionAdecuada) {
-        this.ventilacionAdecuada = ventilacionAdecuada;
+    public void setCabezal(boolean cabezal) {
+        this.cabezal = cabezal;
     }
 
-    public boolean isBotonEmergenciaFunciona() {
-        return botonEmergenciaFunciona;
+    public boolean isOxido() {
+        return oxido;
     }
 
-    public void setBotonEmergenciaFunciona(boolean botonEmergenciaFunciona) {
-        this.botonEmergenciaFunciona = botonEmergenciaFunciona;
+    public void setOxido(boolean oxido) {
+        this.oxido = oxido;
     }
 
-    public boolean isCalibracionCorrecta() {
-        return calibracionCorrecta;
+    public boolean isRuidos() {
+        return ruidos;
     }
 
-    public void setCalibracionCorrecta(boolean calibracionCorrecta) {
-        this.calibracionCorrecta = calibracionCorrecta;
+    public void setRuidos(boolean ruidos) {
+        this.ruidos = ruidos;
     }
 
-    public boolean isAccesoriosCompletos() {
-        return accesoriosCompletos;
+    public boolean isPiñoneriaEnBuenEstado() {
+        return piñoneriaEnBuenEstado;
     }
 
-    public void setAccesoriosCompletos(boolean accesoriosCompletos) {
-        this.accesoriosCompletos = accesoriosCompletos;
+    public void setPiñoneriaEnBuenEstado(boolean piñoneriaEnBuenEstado) {
+        this.piñoneriaEnBuenEstado = piñoneriaEnBuenEstado;
     }
 
-    public boolean isFusiblesBuenEstado() {
-        return fusiblesBuenEstado;
+    public boolean isCorreasEnBuenEstado() {
+        return correasEnBuenEstado;
     }
 
-    public void setFusiblesBuenEstado(boolean fusiblesBuenEstado) {
-        this.fusiblesBuenEstado = fusiblesBuenEstado;
+    public void setCorreasEnBuenEstado(boolean correasEnBuenEstado) {
+        this.correasEnBuenEstado = correasEnBuenEstado;
     }
 
-    public boolean isConexionesFirmes() {
-        return conexionesFirmes;
+    public boolean isFunciona() {
+        return funciona;
     }
 
-    public void setConexionesFirmes(boolean conexionesFirmes) {
-        this.conexionesFirmes = conexionesFirmes;
+    public void setFunciona(boolean funciona) {
+        this.funciona = funciona;
     }
 
-    public boolean isTierraFisicaCorrecta() {
-        return tierraFisicaCorrecta;
+    public boolean isPartida() {
+        return partida;
     }
 
-    public void setTierraFisicaCorrecta(boolean tierraFisicaCorrecta) {
-        this.tierraFisicaCorrecta = tierraFisicaCorrecta;
+    public void setPartida(boolean partida) {
+        this.partida = partida;
     }
 
-    public boolean isLucesIndicadorasFuncionan() {
-        return lucesIndicadorasFuncionan;
+    public boolean isLineasQuemadas() {
+        return lineasQuemadas;
     }
 
-    public void setLucesIndicadorasFuncionan(boolean lucesIndicadorasFuncionan) {
-        this.lucesIndicadorasFuncionan = lucesIndicadorasFuncionan;
+    public void setLineasQuemadas(boolean lineasQuemadas) {
+        this.lineasQuemadas = lineasQuemadas;
     }
 
-    public boolean isVentiladoresOperativos() {
-        return ventiladoresOperativos;
+    public boolean isQuemada() {
+        return quemada;
     }
 
-    public void setVentiladoresOperativos(boolean ventiladoresOperativos) {
-        this.ventiladoresOperativos = ventiladoresOperativos;
+    public void setQuemada(boolean quemada) {
+        this.quemada = quemada;
     }
 
-    public boolean isBateriasOperativas() {
-        return bateriasOperativas;
+    public boolean isBueno() {
+        return bueno;
     }
 
-    public void setBateriasOperativas(boolean bateriasOperativas) {
-        this.bateriasOperativas = bateriasOperativas;
+    public void setBueno(boolean bueno) {
+        this.bueno = bueno;
     }
 
-    public boolean isGabineteSinOxido() {
-        return gabineteSinOxido;
+    public boolean isLineasBlancas() {
+        return lineasBlancas;
     }
 
-    public void setGabineteSinOxido(boolean gabineteSinOxido) {
-        this.gabineteSinOxido = gabineteSinOxido;
+    public void setLineasBlancas(boolean lineasBlancas) {
+        this.lineasBlancas = lineasBlancas;
     }
 
-    public boolean isPerillasBuenEstado() {
-        return perillasBuenEstado;
+    public boolean isCalibrado() {
+        return calibrado;
     }
 
-    public void setPerillasBuenEstado(boolean perillasBuenEstado) {
-        this.perillasBuenEstado = perillasBuenEstado;
+    public void setCalibrado(boolean calibrado) {
+        this.calibrado = calibrado;
     }
 
-    public boolean isManguerasBuenEstado() {
-        return manguerasBuenEstado;
+    public boolean isLimpio() {
+        return limpio;
     }
 
-    public void setManguerasBuenEstado(boolean manguerasBuenEstado) {
-        this.manguerasBuenEstado = manguerasBuenEstado;
+    public void setLimpio(boolean limpio) {
+        this.limpio = limpio;
     }
 
-    public boolean isPresionAdecuada() {
-        return presionAdecuada;
+    public boolean isBuenos() {
+        return buenos;
     }
 
-    public void setPresionAdecuada(boolean presionAdecuada) {
-        this.presionAdecuada = presionAdecuada;
+    public void setBuenos(boolean buenos) {
+        this.buenos = buenos;
     }
 
-    public boolean isTemperaturaNormal() {
-        return temperaturaNormal;
+    public boolean isPicados() {
+        return picados;
     }
 
-    public void setTemperaturaNormal(boolean temperaturaNormal) {
-        this.temperaturaNormal = temperaturaNormal;
+    public void setPicados(boolean picados) {
+        this.picados = picados;
     }
 
-    public boolean isSensoresFuncionales() {
-        return sensoresFuncionales;
+    public boolean isRayados() {
+        return rayados;
     }
 
-    public void setSensoresFuncionales(boolean sensoresFuncionales) {
-        this.sensoresFuncionales = sensoresFuncionales;
+    public void setRayados(boolean rayados) {
+        this.rayados = rayados;
     }
 
-    public boolean isSoftwareActualizado() {
-        return softwareActualizado;
+    public boolean isAdhesivo() {
+        return adhesivo;
     }
 
-    public void setSoftwareActualizado(boolean softwareActualizado) {
-        this.softwareActualizado = softwareActualizado;
+    public void setAdhesivo(boolean adhesivo) {
+        this.adhesivo = adhesivo;
     }
 
-    public boolean isSistemaSonoroFunciona() {
-        return sistemaSonoroFunciona;
+    public boolean isHumedad() {
+        return humedad;
     }
 
-    public void setSistemaSonoroFunciona(boolean sistemaSonoroFunciona) {
-        this.sistemaSonoroFunciona = sistemaSonoroFunciona;
+    public void setHumedad(boolean humedad) {
+        this.humedad = humedad;
     }
 
-    public boolean isTapasCorrectamenteColocadas() {
-        return tapasCorrectamenteColocadas;
+    public boolean isTarjetaElectronica() {
+        return tarjetaElectronica;
     }
 
-    public void setTapasCorrectamenteColocadas(boolean tapasCorrectamenteColocadas) {
-        this.tapasCorrectamenteColocadas = tapasCorrectamenteColocadas;
-    }
-
-    public boolean isPuertasCierranBien() {
-        return puertasCierranBien;
-    }
-
-    public void setPuertasCierranBien(boolean puertasCierranBien) {
-        this.puertasCierranBien = puertasCierranBien;
-    }
-
-    public boolean isSinVibraciones() {
-        return sinVibraciones;
-    }
-
-    public void setSinVibraciones(boolean sinVibraciones) {
-        this.sinVibraciones = sinVibraciones;
-    }
-
-    public boolean isRotulosVisibles() {
-        return rotulosVisibles;
-    }
-
-    public void setRotulosVisibles(boolean rotulosVisibles) {
-        this.rotulosVisibles = rotulosVisibles;
-    }
-
-    public boolean isManualDisponible() {
-        return manualDisponible;
-    }
-
-    public void setManualDisponible(boolean manualDisponible) {
-        this.manualDisponible = manualDisponible;
+    public void setTarjetaElectronica(boolean tarjetaElectronica) {
+        this.tarjetaElectronica = tarjetaElectronica;
     }
 
     public Cliente getCliente() {
