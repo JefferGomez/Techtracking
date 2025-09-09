@@ -18,7 +18,8 @@ import java.util.Optional;
 public class UsuariosService implements UserDetailsService{
 
 
-
+    @Autowired
+    private EnviarCorreoService enviarCorreoService;
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
@@ -34,9 +35,24 @@ public class UsuariosService implements UserDetailsService{
 
     public Usuarios crearUsuarios(Usuarios usuarios){
 
+
+         String contraseñaTemporal = usuarios.getContraseña();
          String contraseñaCodificada = passwordEncoder.encode(usuarios.getContraseña());
          usuarios.setContraseña(contraseñaCodificada);
-         return usuarioRepository.save(usuarios);
+         usuarios.setContraseñaTemporal(true);
+         Usuarios nuevo = usuarioRepository.save(usuarios);
+
+         String rolNombre=nuevo.getRol().getNombre().name();
+
+         enviarCorreoService.EnviarInformacionUsuario(
+                 nuevo.getCorreo(),
+                 nuevo.getNombre(),
+                 nuevo.getCorreo(),
+                 rolNombre,
+                 contraseñaTemporal
+         );
+
+         return nuevo;
 
     }
 

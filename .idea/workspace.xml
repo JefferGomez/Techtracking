@@ -44,8 +44,13 @@
     &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/JefferGomez/Techtracking.git&quot;,
     &quot;accountId&quot;: &quot;f11f2c74-e519-4707-a462-aaed2b61354c&quot;
+
     }
     }</component>
+
+  }
+}</component>
+
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
