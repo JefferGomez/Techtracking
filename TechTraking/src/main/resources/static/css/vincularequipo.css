@@ -1,0 +1,188 @@
+/*ESTILOS GENERALES DEL BODY */
+body {
+  margin: 0; /* Elimina los márgenes por defecto */
+  font-family: 'Segoe UI', sans-serif; /* Fuente moderna y legible */
+  background: #f4f4f4; /* Fondo gris claro para contraste */
+  padding: 20px; /* Espacio interior del body */
+}
+
+/* ENCABEZADO (LOGO Y CAMPOS) */
+header {
+  display: flex; /* Activa Flexbox */
+  flex-direction: column; /* Alinea verticalmente los elementos */
+  align-items: center; /* Centra horizontalmente */
+  text-align: center; /* Centra texto */
+}
+
+.logo {
+  max-width: 380px; /* Límite de ancho del logo */
+  margin-bottom: 1px; /* Espacio inferior reducido */
+}
+
+/*  CONTENEDOR PRINCIPAL */
+main {
+  max-width: 1000px; /* Limita ancho máximo */
+  margin: 30px auto; /* Centrado horizontal con margen superior/inferior */
+  background: white; /* Fondo blanco para el formulario */
+  padding: 30px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra suave */
+}
+select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+}
+/*  FORMULARIO (DIVIDIDO EN 2 COLUMNAS) */
+.formulario {
+  display: flex; /* Activa Flexbox */
+  gap: 40px; /* Espacio entre secciones izquierda y derecha */
+}
+
+/* SECCIONES DEL FORMULARIO */
+section {
+  flex: 1; /* Ambas secciones ocupan el mismo espacio */
+  display: flex; /* Activa Flexbox interno */
+  flex-direction: column; /* Alinea los inputs uno debajo del otro */
+  gap: 12px; /* Espacio entre campos */
+}
+
+/* CAMPOS DE TEXTO Y FECHA */
+input[type="text"], input[type="date"] {
+  padding: 10px; /* Espacio interior */
+  font-size: 14px; /* Tamaño de texto legible */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 6px; /* Bordes redondeados */
+}
+
+/* BUSCADOR DE CLIENTE */
+.busqueda {
+  display: flex; /* Input y botón en la misma línea */
+  gap: 10px; /* Espacio entre input y botón */
+}
+
+.busqueda input {
+  flex: 1; /* Input ocupa el máximo espacio disponible */
+}
+
+.busqueda button {
+  padding: 10px;
+  background: #007bff; /* Azul principal */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* BOTÓN FINAL DE VINCULACIÓN*/
+.vincular {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  background: #28a745; /* Verde éxito */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.vincular:disabled {
+  background: #aaa; /* Gris para desactivado */
+  cursor: not-allowed;
+}
+
+/* BLOQUE: NOMBRE DEL EQUIPO + ESTADO (EN UNA LÍNEA)*/
+.nombre-estado {
+  display: flex; /* Flex para poner los dos bloques en una línea */
+  gap: 20px; /* Espacio entre los dos */
+  align-items: center; /* Alinea verticalmente los inputs y select */
+  flex-wrap: wrap; /* Si no cabe, se baja en móvil */
+  margin-bottom: 10px; /* Espacio con lo siguiente */
+}
+
+/* CAMPO: NOMBRE DEL EQUIPO */
+.nombre-equipo {
+  display: flex;
+  flex-direction: column; /* Label arriba, input debajo */
+  flex: 1; /* Ocupa más espacio que el estado */
+  gap: 6px;
+  max-width: 400px;
+}
+
+.nombre-equipo label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nombre-equipo input {
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* CAMPO: ESTADO (SELECT A LA DERECHA) */
+.estado-select-horizontal label{
+  display: flex;
+  align-items: center; /* Centra el label y el select en la misma línea */
+  gap: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.nombre-estado {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* Nombre del Equipo alineado en una sola línea */
+.nombre-equipo-horizontal {
+  display: flex;
+  align-items: center; /* Alinea el label y el input en la misma línea */
+  gap: 10px;
+  flex: 1;
+}
+
+.nombre-equipo-horizontal label {
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap; /* Evita que el texto del label se rompa en varias líneas */
+}
+
+.nombre-equipo-horizontal input {
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Estado (label + select en una sola línea) */
+.estado-select-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.estado-select-horizontal label {
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.estado-dropdown {
+  width: 180px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+}

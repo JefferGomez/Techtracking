@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - ServiMarketing</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container"> <!-- Contenedor principal de toda la página -->
+
+    <div class="encabezado"> <!-- Sección superior con logo y título -->
+       <!-- <img src="img/SM.png" alt="Logo" class="logo">  Logo de la empresa -->
+        <h1>Búsqueda de Clientes</h1> <!-- Título principal -->
+    </div>
+
+    <div class="barra"> <!-- Barra de búsqueda y botones -->
+        <input type="text" placeholder="🔍 Buscar clientes..."> <!-- Campo para escribir búsqueda -->
+        <div class="acciones"> <!-- Contenedor de botones de acción -->
+            <button type="button" class="nuevo" onclick="window.location.href='/admin/crearclientes'">+ Nuevo Cliente</button>
+            <button type="button" class="vincular" onclick="window.location.href='/admin/crearequipo'">Vincular Equipo</button>
+
+
+        </div>
+    </div>
+
+    <table> <!-- Tabla para mostrar resultados -->
+        <thead> <!-- Encabezados de la tabla -->
+        <tr>
+            <th>ID</th> <!-- Id del cliente -->
+            <th>Nombre</th> <!-- Nombre del cliente -->
+            <th>Dirección</th> <!-- Direccion del cliente -->
+            <th>Telefono</th> <!-- Telefono -->
+            <th>Correo</th> <!--Correo electrónico -->
+            <th>Acción</th>
+
+        </tr>
+        </thead>
+        <tbody> <tbody id="clientesBody"><!-- Cuerpo de la tabla con datos de ejemplo -->
+
+
+        </tbody>
+    </table>
+
+    <div class="paginacion"> <!-- Sección inferior para navegar entre páginas -->
+        <button>&laquo; Anterior</button> <!-- Botón para ir a la página anterior -->
+        <span class="pagina-activa">1</span> <!-- Número de página actual -->
+        <button>Siguiente &raquo;</button> <!-- Botón para ir a la siguiente página -->
+    </div>
+
+</div>
+
+<script th:src="@{/js/dashboard-clientes.js}"></script>
+</body>
+</html>
