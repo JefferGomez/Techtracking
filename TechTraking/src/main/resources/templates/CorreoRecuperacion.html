@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>TechTracking</title>
+  <link rel="stylesheet" th:href="@{/css/CorreoRecuperar.css}">
+</head>
+<body>
+<div class="Recovery-container">
+  <div Recovery-box>
+    <h1>Recuperación de Contraseña</h1>
+    <form action="php/validar.php" method="POST">
+      <label for="correo">Correo Electrónico:</label>
+      <input type="email" name="email" id="correo" required>
+      <button type="button" onclick="enviarCorreo()">Enviar</button>
+    </form>
+    <p id="mensaje"></p>
+    <p class="terms">Recibirás un correo electrónico con instrucciones para restablecer tu contraseña.</p>
+    <p>ir a iniciar sesión <a href="login.html">Inicia sesión</a></p>
+  </div>
+</div>
+
+<script th:src="@{/js/correoRecuperacion.js}"></script>
+</body>
+</html>

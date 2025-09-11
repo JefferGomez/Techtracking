@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Revisión</title>
+</head>
+<body>
+<h2>Formulario de Revisión</h2>
+
+<form id="revisionForm">
+    <label>Cliente ID:</label>
+    <input type="number" id="clienteId" name="clienteId" required><br><br>
+
+    <label>Equipo ID:</label>
+    <input type="number" id="equipoId" name="equipoId" required><br><br>
+
+    <h3>Checklist (31 preguntas)</h3>
+
+    <label><input type="checkbox" id="equipoEnciende"> ¿El equipo enciende?</label><br>
+    <label><input type="checkbox" id="displayFunciona"> ¿El display funciona?</label><br>
+    <label><input type="checkbox" id="alarmasActivas"> ¿Alarmas activas?</label><br>
+    <label><input type="checkbox" id="presentaFugas"> ¿Presenta fugas?</label><br>
+    <label><input type="checkbox" id="cablesEnBuenEstado"> ¿Cables en buen estado?</label><br>
+    <label><input type="checkbox" id="nivelesCorrectos"> ¿Niveles correctos?</label><br>
+    <label><input type="checkbox" id="limpiezaGeneral"> ¿Limpieza general?</label><br>
+    <label><input type="checkbox" id="filtrosLimpios"> ¿Filtros limpios?</label><br>
+    <label><input type="checkbox" id="ventilacionAdecuada"> ¿Ventilación adecuada?</label><br>
+    <label><input type="checkbox" id="botonEmergenciaFunciona"> ¿Botón de emergencia funciona?</label><br>
+    <label><input type="checkbox" id="calibracionCorrecta"> ¿Calibración correcta?</label><br>
+    <label><input type="checkbox" id="accesoriosCompletos"> ¿Accesorios completos?</label><br>
+    <label><input type="checkbox" id="fusiblesBuenEstado"> ¿Fusibles en buen estado?</label><br>
+    <label><input type="checkbox" id="conexionesFirmes"> ¿Conexiones firmes?</label><br>
+    <label><input type="checkbox" id="tierraFisicaCorrecta"> ¿Tierra física correcta?</label><br>
+    <label><input type="checkbox" id="lucesIndicadorasFuncionan"> ¿Luces indicadoras funcionan?</label><br>
+    <label><input type="checkbox" id="ventiladoresOperativos"> ¿Ventiladores operativos?</label><br>
+    <label><input type="checkbox" id="bateriasOperativas"> ¿Baterías operativas?</label><br>
+    <label><input type="checkbox" id="gabineteSinOxido"> ¿Gabinete sin óxido?</label><br>
+    <label><input type="checkbox" id="perillasBuenEstado"> ¿Perillas en buen estado?</label><br>
+    <label><input type="checkbox" id="manguerasBuenEstado"> ¿Mangueras en buen estado?</label><br>
+    <label><input type="checkbox" id="presionAdecuada"> ¿Presión adecuada?</label><br>
+    <label><input type="checkbox" id="temperaturaNormal"> ¿Temperatura normal?</label><br>
+    <label><input type="checkbox" id="sensoresFuncionales"> ¿Sensores funcionales?</label><br>
+    <label><input type="checkbox" id="softwareActualizado"> ¿Software actualizado?</label><br>
+    <label><input type="checkbox" id="sistemaSonoroFunciona"> ¿Sistema sonoro funciona?</label><br>
+    <label><input type="checkbox" id="tapasCorrectamenteColocadas"> ¿Tapas correctamente colocadas?</label><br>
+    <label><input type="checkbox" id="puertasCierranBien"> ¿Puertas cierran bien?</label><br>
+    <label><input type="checkbox" id="sinVibraciones"> ¿Sin vibraciones?</label><br>
+    <label><input type="checkbox" id="rotulosVisibles"> ¿Rótulos visibles?</label><br>
+    <label><input type="checkbox" id="manualDisponible"> ¿Manual disponible?</label><br><br>
+
+    <h3>Observaciones</h3>
+    <textarea id="observaciones"></textarea><br><br>
+
+    <button type="submit">Guardar Revisión</button>
+</form>
+
+<script th:src="@{/js/revision.js}"></script>
+</body>
+</html>

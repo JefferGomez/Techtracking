@@ -1,0 +1,108 @@
+/* listaUsuarios.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+.header {
+    background-color: #007BFF; /* azul principal */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo-blue {
+    color: white;
+    font-weight: bold;
+}
+
+.logo-red {
+    color: #FF4C4C;
+    font-weight: bold;
+}
+
+.dashboard {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.1);
+    border-radius: 8px;
+}
+
+.overview {
+    margin-bottom: 30px;
+}
+
+.overview h2 {
+    color: #007BFF;
+}
+
+.overview p {
+    font-size: 1.2em;
+}
+
+.clientes h2 {
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f9ff;
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 10px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+    }
+
+    td {
+        padding-left: 50%;
+        position: relative;
+    }
+
+    td::before {
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    td:nth-of-type(1)::before { content: "Nombre"; }
+    td:nth-of-type(2)::before { content: "Dirección"; }
+    td:nth-of-type(3)::before { content: "Teléfono"; }
+    td:nth-of-type(4)::before { content: "Correo"; }
+    td:nth-of-type(5)::before { content: "ID"; }
+    td:nth-of-type(6)::before { content: "Equipos"; }
+}
