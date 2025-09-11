@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  fetch(`http://localhost:8080/api/vistaequipo/${clienteId}`)
+  fetch(`http://localhost:8080/admin/vistaequipo/${clienteId}`)
     .then(response => response.json())
     .then(data => {
       // Cliente info
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Equipos en tabla
       const tabla = document.getElementById('tablaEquipos');
-      tabla.innerHTML = ''; // limpiar por si acaso
+      tabla.innerHTML = '';
 
       const equipos = data.cliente.equipos || [];
       equipos.forEach(equipo => {

@@ -1,352 +1,113 @@
-package com.devs.TechTraking.model;
-
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
-
-@Entity
-public class Revision {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // ✅ Checklist (31 preguntas Sí/No del documento)
-    private boolean equipoEnciende;
-    private boolean displayFunciona;
-    private boolean alarmasActivas;
-    private boolean presentaFugas;
-    private boolean cablesEnBuenEstado;
-    private boolean nivelesCorrectos;
-    private boolean limpiezaGeneral;
-    private boolean filtrosLimpios;
-    private boolean ventilacionAdecuada;
-    private boolean botonEmergenciaFunciona;
-    private boolean calibracionCorrecta;
-    private boolean accesoriosCompletos;
-    private boolean fusiblesBuenEstado;
-    private boolean conexionesFirmes;
-    private boolean tierraFisicaCorrecta;
-    private boolean lucesIndicadorasFuncionan;
-    private boolean ventiladoresOperativos;
-    private boolean bateriasOperativas;
-    private boolean gabineteSinOxido;
-    private boolean perillasBuenEstado;
-    private boolean manguerasBuenEstado;
-    private boolean presionAdecuada;
-    private boolean temperaturaNormal;
-    private boolean sensoresFuncionales;
-    private boolean softwareActualizado;
-    private boolean sistemaSonoroFunciona;
-    private boolean tapasCorrectamenteColocadas;
-    private boolean puertasCierranBien;
-    private boolean sinVibraciones;
-    private boolean rotulosVisibles;
-    private boolean manualDisponible;
-
-    // 🔹 Relación con Cliente
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
-
-    // 🔹 Relación con Equipo
-    @ManyToOne
-    @JoinColumn(name = "equipo_id", nullable = false)
-    private Equipo equipo;
-
-    // Otros datos de la revisión
-    private String observaciones;
-    private LocalDateTime fecha = LocalDateTime.now();
-
-    // --- Getters & Setters ---
-
-    public Revision() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean isEquipoEnciende() {
-        return equipoEnciende;
-    }
-
-    public void setEquipoEnciende(boolean equipoEnciende) {
-        this.equipoEnciende = equipoEnciende;
-    }
-
-    public boolean isDisplayFunciona() {
-        return displayFunciona;
-    }
-
-    public void setDisplayFunciona(boolean displayFunciona) {
-        this.displayFunciona = displayFunciona;
-    }
-
-    public boolean isAlarmasActivas() {
-        return alarmasActivas;
-    }
-
-    public void setAlarmasActivas(boolean alarmasActivas) {
-        this.alarmasActivas = alarmasActivas;
-    }
-
-    public boolean isPresentaFugas() {
-        return presentaFugas;
-    }
-
-    public void setPresentaFugas(boolean presentaFugas) {
-        this.presentaFugas = presentaFugas;
-    }
-
-    public boolean isCablesEnBuenEstado() {
-        return cablesEnBuenEstado;
-    }
-
-    public void setCablesEnBuenEstado(boolean cablesEnBuenEstado) {
-        this.cablesEnBuenEstado = cablesEnBuenEstado;
-    }
-
-    public boolean isNivelesCorrectos() {
-        return nivelesCorrectos;
-    }
-
-    public void setNivelesCorrectos(boolean nivelesCorrectos) {
-        this.nivelesCorrectos = nivelesCorrectos;
-    }
-
-    public boolean isLimpiezaGeneral() {
-        return limpiezaGeneral;
-    }
-
-    public void setLimpiezaGeneral(boolean limpiezaGeneral) {
-        this.limpiezaGeneral = limpiezaGeneral;
-    }
-
-    public boolean isFiltrosLimpios() {
-        return filtrosLimpios;
-    }
-
-    public void setFiltrosLimpios(boolean filtrosLimpios) {
-        this.filtrosLimpios = filtrosLimpios;
-    }
-
-    public boolean isVentilacionAdecuada() {
-        return ventilacionAdecuada;
-    }
-
-    public void setVentilacionAdecuada(boolean ventilacionAdecuada) {
-        this.ventilacionAdecuada = ventilacionAdecuada;
-    }
-
-    public boolean isBotonEmergenciaFunciona() {
-        return botonEmergenciaFunciona;
-    }
-
-    public void setBotonEmergenciaFunciona(boolean botonEmergenciaFunciona) {
-        this.botonEmergenciaFunciona = botonEmergenciaFunciona;
-    }
-
-    public boolean isCalibracionCorrecta() {
-        return calibracionCorrecta;
-    }
-
-    public void setCalibracionCorrecta(boolean calibracionCorrecta) {
-        this.calibracionCorrecta = calibracionCorrecta;
-    }
-
-    public boolean isAccesoriosCompletos() {
-        return accesoriosCompletos;
-    }
-
-    public void setAccesoriosCompletos(boolean accesoriosCompletos) {
-        this.accesoriosCompletos = accesoriosCompletos;
-    }
-
-    public boolean isFusiblesBuenEstado() {
-        return fusiblesBuenEstado;
-    }
-
-    public void setFusiblesBuenEstado(boolean fusiblesBuenEstado) {
-        this.fusiblesBuenEstado = fusiblesBuenEstado;
-    }
-
-    public boolean isConexionesFirmes() {
-        return conexionesFirmes;
-    }
-
-    public void setConexionesFirmes(boolean conexionesFirmes) {
-        this.conexionesFirmes = conexionesFirmes;
-    }
-
-    public boolean isTierraFisicaCorrecta() {
-        return tierraFisicaCorrecta;
-    }
-
-    public void setTierraFisicaCorrecta(boolean tierraFisicaCorrecta) {
-        this.tierraFisicaCorrecta = tierraFisicaCorrecta;
-    }
-
-    public boolean isLucesIndicadorasFuncionan() {
-        return lucesIndicadorasFuncionan;
-    }
-
-    public void setLucesIndicadorasFuncionan(boolean lucesIndicadorasFuncionan) {
-        this.lucesIndicadorasFuncionan = lucesIndicadorasFuncionan;
-    }
-
-    public boolean isVentiladoresOperativos() {
-        return ventiladoresOperativos;
-    }
-
-    public void setVentiladoresOperativos(boolean ventiladoresOperativos) {
-        this.ventiladoresOperativos = ventiladoresOperativos;
-    }
-
-    public boolean isBateriasOperativas() {
-        return bateriasOperativas;
-    }
-
-    public void setBateriasOperativas(boolean bateriasOperativas) {
-        this.bateriasOperativas = bateriasOperativas;
-    }
-
-    public boolean isGabineteSinOxido() {
-        return gabineteSinOxido;
-    }
-
-    public void setGabineteSinOxido(boolean gabineteSinOxido) {
-        this.gabineteSinOxido = gabineteSinOxido;
-    }
-
-    public boolean isPerillasBuenEstado() {
-        return perillasBuenEstado;
-    }
-
-    public void setPerillasBuenEstado(boolean perillasBuenEstado) {
-        this.perillasBuenEstado = perillasBuenEstado;
-    }
-
-    public boolean isManguerasBuenEstado() {
-        return manguerasBuenEstado;
-    }
-
-    public void setManguerasBuenEstado(boolean manguerasBuenEstado) {
-        this.manguerasBuenEstado = manguerasBuenEstado;
-    }
-
-    public boolean isPresionAdecuada() {
-        return presionAdecuada;
-    }
-
-    public void setPresionAdecuada(boolean presionAdecuada) {
-        this.presionAdecuada = presionAdecuada;
-    }
-
-    public boolean isTemperaturaNormal() {
-        return temperaturaNormal;
-    }
-
-    public void setTemperaturaNormal(boolean temperaturaNormal) {
-        this.temperaturaNormal = temperaturaNormal;
-    }
-
-    public boolean isSensoresFuncionales() {
-        return sensoresFuncionales;
-    }
-
-    public void setSensoresFuncionales(boolean sensoresFuncionales) {
-        this.sensoresFuncionales = sensoresFuncionales;
-    }
-
-    public boolean isSoftwareActualizado() {
-        return softwareActualizado;
-    }
-
-    public void setSoftwareActualizado(boolean softwareActualizado) {
-        this.softwareActualizado = softwareActualizado;
-    }
+package com.devs.TechTraking.mapper;
+
+import com.devs.TechTraking.DTO.RevisionDto;
+import com.devs.TechTraking.model.Cliente;
+import com.devs.TechTraking.model.Equipo;
+import com.devs.TechTraking.model.Revision;
+
+public class RevisionMapper {
+
+    // 🔹 DTO → Entity
+    public static Revision toEntity(RevisionDto dto, Cliente cliente, Equipo equipo) {
+        Revision revision = new Revision();
+        revision.setId(dto.getId());
+
+        // Checklist
+        revision.setEquipoEnciende(dto.isEquipoEnciende());
+        revision.setEstaOperando(dto.isEstaOperando());
+        revision.setEstaPartido(dto.isEstaPartido());
+        revision.setEstaManchado(dto.isEstaManchado());
+
+        revision.setTornillos(dto.isTornillos());
+        revision.setTapas(dto.isTapas());
+        revision.setDisplay(dto.isDisplay());
+        revision.setTarjetasElectronicas(dto.isTarjetasElectronicas());
+        revision.setBotones(dto.isBotones());
+        revision.setCabezal(dto.isCabezal());
+
+        revision.setOxido(dto.isOxido());
+        revision.setRuidos(dto.isRuidos());
+        revision.setPiñoneriaEnBuenEstado(dto.isPiñoneriaEnBuenEstado());
+        revision.setCorreasEnBuenEstado(dto.isCorreasEnBuenEstado());
+
+        revision.setFunciona(dto.isFunciona());
+        revision.setPartida(dto.isPartida());
+        revision.setLineasQuemadas(dto.isLineasQuemadas());
+        revision.setQuemada(dto.isQuemada());
+
+        revision.setBueno(dto.isBueno());
+        revision.setLineasBlancas(dto.isLineasBlancas());
+        revision.setCalibrado(dto.isCalibrado());
+        revision.setLimpio(dto.isLimpio());
+
+        revision.setBuenos(dto.isBuenos());
+        revision.setPicados(dto.isPicados());
+        revision.setRayados(dto.isRayados());
+        revision.setAdhesivo(dto.isAdhesivo());
+
+        revision.setHumedad(dto.isHumedad());
+        revision.setTarjetaElectronica(dto.isTarjetaElectronica());
+
+        // Relaciones
+        revision.setCliente(cliente);
+        revision.setEquipo(equipo);
+
+        // Otros
+        revision.setObservaciones(dto.getObservaciones());
+        revision.setFecha(dto.getFecha() != null ? dto.getFecha() : revision.getFecha());
+
+        return revision;
+    }
+
+    // 🔹 Entity → DTO
+    public static RevisionDto toDto(Revision revision) {
+        RevisionDto dto = new RevisionDto();
+        dto.setId(revision.getId());
+
+        // Checklist
+        dto.setEquipoEnciende(revision.isEquipoEnciende());
+        dto.setEstaOperando(revision.isEstaOperando());
+        dto.setEstaPartido(revision.isEstaPartido());
+        dto.setEstaManchado(revision.isEstaManchado());
+
+        dto.setTornillos(revision.isTornillos());
+        dto.setTapas(revision.isTapas());
+        dto.setDisplay(revision.isDisplay());
+        dto.setTarjetasElectronicas(revision.isTarjetasElectronicas());
+        dto.setBotones(revision.isBotones());
+        dto.setCabezal(revision.isCabezal());
+
+        dto.setOxido(revision.isOxido());
+        dto.setRuidos(revision.isRuidos());
+        dto.setPiñoneriaEnBuenEstado(revision.isPiñoneriaEnBuenEstado());
+        dto.setCorreasEnBuenEstado(revision.isCorreasEnBuenEstado());
+
+        dto.setFunciona(revision.isFunciona());
+        dto.setPartida(revision.isPartida());
+        dto.setLineasQuemadas(revision.isLineasQuemadas());
+        dto.setQuemada(revision.isQuemada());
+
+        dto.setBueno(revision.isBueno());
+        dto.setLineasBlancas(revision.isLineasBlancas());
+        dto.setCalibrado(revision.isCalibrado());
+        dto.setLimpio(revision.isLimpio());
+
+        dto.setBuenos(revision.isBuenos());
+        dto.setPicados(revision.isPicados());
+        dto.setRayados(revision.isRayados());
+        dto.setAdhesivo(revision.isAdhesivo());
+
+        dto.setHumedad(revision.isHumedad());
+        dto.setTarjetaElectronica(revision.isTarjetaElectronica());
 
-    public boolean isSistemaSonoroFunciona() {
-        return sistemaSonoroFunciona;
-    }
-
-    public void setSistemaSonoroFunciona(boolean sistemaSonoroFunciona) {
-        this.sistemaSonoroFunciona = sistemaSonoroFunciona;
-    }
-
-    public boolean isTapasCorrectamenteColocadas() {
-        return tapasCorrectamenteColocadas;
-    }
-
-    public void setTapasCorrectamenteColocadas(boolean tapasCorrectamenteColocadas) {
-        this.tapasCorrectamenteColocadas = tapasCorrectamenteColocadas;
-    }
-
-    public boolean isPuertasCierranBien() {
-        return puertasCierranBien;
-    }
-
-    public void setPuertasCierranBien(boolean puertasCierranBien) {
-        this.puertasCierranBien = puertasCierranBien;
-    }
-
-    public boolean isSinVibraciones() {
-        return sinVibraciones;
-    }
-
-    public void setSinVibraciones(boolean sinVibraciones) {
-        this.sinVibraciones = sinVibraciones;
-    }
-
-    public boolean isRotulosVisibles() {
-        return rotulosVisibles;
-    }
-
-    public void setRotulosVisibles(boolean rotulosVisibles) {
-        this.rotulosVisibles = rotulosVisibles;
-    }
-
-    public boolean isManualDisponible() {
-        return manualDisponible;
-    }
-
-    public void setManualDisponible(boolean manualDisponible) {
-        this.manualDisponible = manualDisponible;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
+        // Relaciones (solo IDs)
+        dto.setClienteId(revision.getCliente() != null ? revision.getCliente().getId() : null);
+        dto.setEquipoId(revision.getEquipo() != null ? revision.getEquipo().getId() : null);
 
-    public Equipo getEquipo() {
-        return equipo;
-    }
-
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
+        // Otros
+        dto.setObservaciones(revision.getObservaciones());
+        dto.setFecha(revision.getFecha());
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+        return dto;
     }
 }
