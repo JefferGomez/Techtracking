@@ -1,0 +1,191 @@
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  background: #f8f9fb;
+  color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #fff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .logo {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav ul li {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.sidebar nav ul li.active {
+  color: #4e73df;
+  font-weight: bold;
+}
+
+.sidebar-img img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-create {
+  background: #4e73df;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Calendar controls */
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.view-options button {
+  margin-left: 5px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: #eee;
+  border-radius: 4px;
+}
+
+.view-options .active {
+  background: #4e73df;
+  color: white;
+}
+
+/* Calendar grid */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas (LUN a DOM) */
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.day-name {
+  font-weight: bold;
+  padding: 10px;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+}
+
+.days {
+  display: contents; /* deja que los días hereden la grid del padre */
+}
+
+.day {
+  border: 1px solid #ddd;
+  min-height: 80px;
+  padding: 5px;
+  text-align: left;
+  position: relative;
+}
+
+.day-name {
+  background: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.day .date {
+  font-size: 12px;
+  color: #666;
+}
+
+.event {
+  padding: 2px 5px;
+  border-radius: 6px;
+  font-size: 11px;
+  margin-top: 4px;
+  display: block;
+  color: white;
+  text-align: center;
+}
+
+.event-blue {
+  background: #4e73df;
+}
+
+.event-green {
+  background: #1cc88a;
+}
+
+.event-pink {
+  background: #e83e8c;
+}
+
+.event-purple {
+  background: #6f42c1;
+}
+
+.modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  background:rgba(0,0,0,0.4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.hidden {
+  display: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background-image: url('/img/fondo1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
