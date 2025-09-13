@@ -20,7 +20,7 @@ public class ClienteController {
         return ResponseEntity.ok(clienteService.guardar(cliente));
     }
 
-    @GetMapping("/mostrarClientes")
+    @GetMapping("/clientes")
     public List<Cliente> listar() {
         return clienteService.listartodos();
     }
