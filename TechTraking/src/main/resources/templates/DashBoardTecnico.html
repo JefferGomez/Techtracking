@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Técnico</title>
+  <link rel="stylesheet" th:href="@{/css/EstilosTecnico.css}">
+</head>
+<body>
+  <div class="dashboard">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Mi Panel</h2>
+      <nav>
+        <ul>
+          <li><a href="#" onclick="cargarVista('cronograma')">📅 Cronograma</a></li>
+          <li><a href="#" onclick="cargarVista('chat')">💬 Chat</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Contenido dinámico -->
+    <main class="contenido" id="contenido"></main>
+    
+  </div>
+
+  <script th:src="@{/js/tecnicoDashboard.js}"></script>
+</body>
+</html>

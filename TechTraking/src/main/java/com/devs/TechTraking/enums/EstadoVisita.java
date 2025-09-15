@@ -1,6 +1,6 @@
 package com.devs.TechTraking.enums;
 
-public enum Estadovisita {
+public enum EstadoVisita {
 
     AGENDADA,
     REPROGRAMADA,

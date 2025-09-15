@@ -1,10 +1,14 @@
 package com.devs.TechTraking.model;
 
 
-import com.devs.TechTraking.enums.Estadovisita;
+import com.devs.TechTraking.enums.EstadoVisita;
+import com.devs.TechTraking.enums.TipoServicio;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "visita")
@@ -16,31 +20,37 @@ public class Visita {
     private LocalDate fecha;
     @ManyToOne
     @JoinColumn(name = "tecnico_id")
-    private Tecnico tecnicoId;
-    @ManyToOne
+    @JsonIgnoreProperties({"visitas"})
+    private Tecnico tecnico;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cliente_id")
-    private Cliente clienteId; @ManyToOne
-    @JoinColumn(name = "equipo_id")
-    private Equipo equipoId;
-    @ManyToOne
-    @JoinColumn(name = "tipo_servicioId")
-    private TipoServicio tipoServicioId;
-    private Estadovisita estado;
-
+    @JsonIgnoreProperties({"equipos"})
+    private Cliente cliente;
+    @Enumerated(EnumType.STRING)
+    private EstadoVisita estado;
+    @Enumerated(EnumType.STRING)
+    private TipoServicio tipoServicio;
+    @ManyToMany
+    @JoinTable(
+            name = "visita_equipo",
+            joinColumns = @JoinColumn(name = "visita_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipo_id")
+    )
+    @JsonIgnoreProperties("visitas")
+    private List<Equipo> equipos = new ArrayList<>();
 
     public Visita() {
     }
 
-    public Visita(Integer id, LocalDate fecha, Tecnico tecnicoId, Cliente clienteId, Equipo equipoId, TipoServicio tipoServicioId, Estadovisita estado) {
+    public Visita(Integer id, LocalDate fecha, Tecnico tecnico, Cliente cliente, EstadoVisita estado, TipoServicio tipoServicio, List<Equipo> equipos) {
         this.id = id;
         this.fecha = fecha;
-        this.tecnicoId = tecnicoId;
-        this.clienteId = clienteId;
-        this.equipoId = equipoId;
-        this.tipoServicioId = tipoServicioId;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
         this.estado = estado;
+        this.tipoServicio = tipoServicio;
+        this.equipos = equipos;
     }
-
 
     public Integer getId() {
         return id;
@@ -58,43 +68,43 @@ public class Visita {
         this.fecha = fecha;
     }
 
-    public Tecnico getTecnicoId() {
-        return tecnicoId;
+    public Tecnico getTecnico() {
+        return tecnico;
     }
 
-    public void setTecnicoId(Tecnico tecnicoId) {
-        this.tecnicoId = tecnicoId;
+    public void setTecnico(Tecnico tecnico) {
+        this.tecnico = tecnico;
     }
 
-    public Cliente getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(Cliente clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Equipo getEquipoId() {
-        return equipoId;
-    }
-
-    public void setEquipoId(Equipo equipoId) {
-        this.equipoId = equipoId;
-    }
-
-    public TipoServicio getTipoServicioId() {
-        return tipoServicioId;
-    }
-
-    public void setTipoServicioId(TipoServicio tipoServicioId) {
-        this.tipoServicioId = tipoServicioId;
-    }
-
-    public Estadovisita getEstado() {
+    public EstadoVisita getEstado() {
         return estado;
     }
 
-    public void setEstado(Estadovisita estado) {
+    public void setEstado(EstadoVisita estado) {
         this.estado = estado;
+    }
+
+    public TipoServicio getTipoServicio() {
+        return tipoServicio;
+    }
+
+    public void setTipoServicio(TipoServicio tipoServicio) {
+        this.tipoServicio = tipoServicio;
+    }
+
+    public List<Equipo> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(List<Equipo> equipos) {
+        this.equipos = equipos;
     }
 }

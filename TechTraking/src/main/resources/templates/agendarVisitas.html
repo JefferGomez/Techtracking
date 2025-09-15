@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <link rel="stylesheet" th:href="@{/css/AgendarVisitas.css}">
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="logo">ServiMarketing</div>
+    <nav>
+        <ul>
+            <li class="sidebar-item" data-target="/admin">👥 Clientes</li>
+            <li class="sidebar-item active" data-target="/admin/Visitas">📅 Calendario</li>
+        </ul>
+    </nav>
+    <div class="sidebar-img">
+        <img th:src="@{/img/sm.png}" alt="Logo">
+    </div>
+</aside>
+
+<iframe id="contenido" src="http://localhost:8080/admin" style="width:100%; height:100vh; border:none;"></iframe>
+
+<!-- Main content -->
+<main class="main">
+    <header class="header">
+        <h2>Calendario</h2>
+        <button id="btnCreate" class="btn-create">+ Crear</button>
+    </header>
+
+    <!-- Calendar controls -->
+    <div class="calendar-controls">
+        <button id="btnPrev">◀</button>
+        <h3 id="currentMonth">Mes, Año</h3>
+        <button id="btnNext">▶</button>
+        <button id="btnToday">Hoy</button>
+        <div class="view-options">
+            <button>Día</button>
+            <button>Semana</button>
+            <button class="active">Mes</button>
+        </div>
+    </div>
+
+    <!-- Calendar grid -->
+    <div class="calendar">
+        <div class="day-name">LUN</div>
+        <div class="day-name">MAR</div>
+        <div class="day-name">MIÉ</div>
+        <div class="day-name">JUE</div>
+        <div class="day-name">VIE</div>
+        <div class="day-name">SÁB</div>
+        <div class="day-name">DOM</div>
+
+        <!-- Aquí se generarán los días con JS -->
+        <div id="calendarBody" class="days"></div>
+    </div>
+
+    <!-- Modal para crear evento -->
+    <div id="visitModal" class="modal-overlay">
+        <div style="background:#fff;padding:30px 20px;border-radius:10px;min-width:300px;position:relative;">
+            <button id="closeModal" style="position:absolute;top:10px;right:10px;font-size:18px;background:none;border:none;cursor:pointer;">&times;</button>
+            <h3>Crear evento</h3>
+            <form id="visitForm">
+                <div style="margin-bottom:10px;">
+                    <label for="cliente">Id_Cliente:</label><br>
+                    <select type="text" id="cliente" name="cliente" required style="width:100%">
+                        <option value="Seleccione un Cliente"></option>
+                    </select>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="cliente">Equipos:</label><br>
+                    <select type="text" id="equipos" name="equipos" required style="width:100%" multiple>
+                        <option value="Seleccione equipos"></option>
+                    </select>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="tecnico">Id_Tecnico:</label><br>
+                    <select type="text" id="tecnico" name="tecnico" required style="width:100%">
+                        <option value="Seleccione un Tecnico"></option>
+                    </select>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="date">Fecha:</label><br>
+                    <input type="date" id="date" name="date" required style="width:100%">
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="description">Tipo servicio:</label><br>
+                    <select id="servicio" name="description" style="width:100%">
+                        <option value="PREVENTIVO">PREVENTIVO</option>
+                        <option value="CORRECTIVO">CORRECTIVO</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:10px;">
+                    <label for="color">Color:</label><br>
+                    <input type="color" id="color" name="color" value="#4a90e2">
+                </div>
+                <button type="submit" style="background:#4e73df;color:white;padding:8px 20px;border:none;border-radius:5px;cursor:pointer;">Guardar</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/AgendarVisitas.js}"></script>
+</body>
+</html>

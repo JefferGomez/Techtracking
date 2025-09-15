@@ -11,21 +11,18 @@ public class Visita_equipo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "visita_id", nullable = false)
+    @JoinColumn(name = "visita_id",referencedColumnName = "Id")
     private Visita visita;
     @ManyToOne
-    @JoinColumn(name = "equipo_id", nullable = false)
+    @JoinColumn(name = "equipo_id",referencedColumnName = "Id")
     private Equipo equipo;
-    private String estadoEquipo;
-
     public Visita_equipo() {
     }
 
-    public Visita_equipo(Integer id, Visita visita, Equipo equipo, String estadoEquipo) {
+    public Visita_equipo(Integer id, Visita visita, Equipo equipo) {
         this.id = id;
         this.visita = visita;
         this.equipo = equipo;
-        this.estadoEquipo = estadoEquipo;
     }
 
     public Integer getId() {
@@ -52,12 +49,4 @@ public class Visita_equipo {
         this.equipo = equipo;
     }
 
-
-    public String getEstadoEquipo() {
-        return estadoEquipo;
-    }
-
-    public void setEstadoEquipo(String estadoEquipo) {
-        this.estadoEquipo = estadoEquipo;
-    }
 }

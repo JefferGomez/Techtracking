@@ -1,7 +1,6 @@
 package com.devs.TechTraking.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +8,6 @@ import jakarta.persistence.*;
 public class Tecnico {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String nombre;
@@ -18,7 +16,6 @@ public class Tecnico {
 
     @OneToOne
     @JoinColumn(name = "usuario_id",referencedColumnName = "id")
-    @JsonIgnoreProperties("tecnico")
     private Usuarios usuario;
 
     public Tecnico() {
@@ -70,5 +67,8 @@ public class Tecnico {
 
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
+        if (usuario != null) {
+            this.id = usuario.getId();
+        }
     }
 }
