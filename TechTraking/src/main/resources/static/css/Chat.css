@@ -1,0 +1,44 @@
+.header {
+  background-color: #ff6262;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.servi{
+
+  color:blue
+
+}
+
+.mark{
+
+    color:#9E0707FF
+
+}
+
+.nav {
+  font-size: 1rem;
+}
+
+#messageArea {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+}
+.message {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            background-color: white;
+}

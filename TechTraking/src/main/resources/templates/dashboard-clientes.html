@@ -6,6 +6,16 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div class="header">
+    <div class="logo"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
+    <div class="nav">Busqueda Clientes</div>
+    <div class="user">Administrador</div>
+    <button class="Chat" onclick="">Chat Corporativo</button>
+    <form action="/logout" method="post">
+        <button class="logout">Cerrar Sesión</button>
+    </form>
+</div>
+
 <div class="container"> <!-- Contenedor principal de toda la página -->
 
     <div class="encabezado"> <!-- Sección superior con logo y título -->
