@@ -187,5 +187,6 @@ body::before {
   background-size: contain;
   opacity: 0.1;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none;
+
 }

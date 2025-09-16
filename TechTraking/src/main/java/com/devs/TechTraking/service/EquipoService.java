@@ -36,5 +36,10 @@ public class EquipoService {
     public List<Equipo> listartodos() {
         return equipoRepository.findAll();
     }
+
+
+    public List<Equipo> obtenerEquiposPorCliente(Integer clienteId) {
+        return equipoRepository.findByClienteId(clienteId);
+    }
 }
 

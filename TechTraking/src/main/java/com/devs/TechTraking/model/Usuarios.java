@@ -1,4 +1,5 @@
 package com.devs.TechTraking.model;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +23,11 @@ public class Usuarios implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnoreProperties("usuario")
+    private Tecnico tecnico;
+
+
 
     public Usuarios() {
     }
@@ -89,6 +95,14 @@ public class Usuarios implements UserDetails {
 
     public void setContraseñaTemporal(boolean contraseñaTemporal) {
         this.contraseñaTemporal = contraseñaTemporal;
+    }
+
+    public Tecnico getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(Tecnico tecnico) {
+        this.tecnico = tecnico;
     }
 
     @Override
