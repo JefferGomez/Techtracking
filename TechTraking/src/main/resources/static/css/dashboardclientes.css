@@ -1,108 +1,211 @@
-/* listaUsuarios.css */
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7fa;
-    color: #333;
+body { /* Estilos generales del cuerpo de la página */
+  margin: 0; /* Elimina el margen por defecto */
+  font-family: 'Segoe UI', sans-serif; /* Fuente moderna para todo el texto */
+  background: #f3f3f3; /* Color de fondo gris claro */
+}
+
+.container { /* Contenedor principal de toda la interfaz */
+  max-width: 1000px; /* Ancho máximo del contenedor */
+  margin: 30px auto; /* Centrado horizontal con espacio superior e inferior */
+  background: #fff; /* Fondo blanco para el contenido */
+  padding: 30px; /* Espacio interno en todos los lados */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra suave para dar profundidad */
+}
+
+h1 { /* Estilos del título principal */
+  margin-bottom: 20px; /* Espacio debajo del título */
+  color: #003366; /* Color azul oscuro */
+}
+
+.barra { /* Contenedor de la barra de búsqueda y botones */
+  display: flex; /* Alinea los elementos en fila */
+  justify-content: space-between; /* Separa los elementos hacia los extremos */
+  margin-bottom: 20px; /* Espacio debajo de la barra */
+}
+
+.barra input { /* Campo de búsqueda */
+  padding: 10px; /* Espacio interno */
+  font-size: 16px; /* Tamaño del texto */
+  width: 70%; /* Ocupa el 70% del ancho de la barra */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 6px; /* Bordes redondeados */
+}
+
+.barra button { /* Botones en la barra de acciones */
+  background-color: #007bff; /* Color azul para el fondo */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 2px 10px; /* Espacio interno */
+  border-radius: 6px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a mano al pasar el mouse */
+}
+
+.acciones {
+  display: flex;        /* Los pone en fila en lugar de columna */
+  gap: 10px;            /* Espacio entre botones */
 }
 
 .header {
-    background-color: #007BFF; /* azul principal */
-    color: white;
-    padding: 20px;
-    text-align: center;
+  background-color: #ff6262;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
 }
 
-.logo-blue {
-    color: white;
-    font-weight: bold;
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.servi{
+
+  color:blue
+
 }
 
-.logo-red {
-    color: #FF4C4C;
-    font-weight: bold;
+.mark{
+
+    color:#9E0707FF
+
 }
 
-.dashboard {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.1);
-    border-radius: 8px;
+.nav {
+  font-size: 1rem;
 }
 
-.overview {
-    margin-bottom: 30px;
+.user {
+  font-weight: bold;
+  color: #333
 }
 
-.overview h2 {
-    color: #007BFF;
+table { /* Estilos generales para la tabla */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Elimina el espacio entre bordes */
 }
 
-.overview p {
-    font-size: 1.2em;
+th, td { /* Encabezados y celdas de la tabla */
+  padding: 12px; /* Espacio interno */
+  border-bottom: 1px solid #ddd; /* Línea separadora gris claro entre filas */
+  text-align: left; /* Alineación a la izquierda */
 }
 
-.clientes h2 {
-    color: #007BFF;
-    margin-bottom: 10px;
+.estado { /* Clase base para las etiquetas de estado */
+  padding: 4px 8px; /* Espaciado interno horizontal y vertical */
+  border-radius: 4px; /* Bordes redondeados */
+  font-weight: bold; /* Texto en negrita */
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
+.paginacion { /* Contenedor para los botones de paginación */
+  margin-top: 20px; /* Espacio superior */
+  text-align: center; /* Centrado del contenido */
 }
 
-th, td {
-    text-align: left;
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+.paginacion button, .pagina-activa { /* Estilos comunes para botones y página activa */
+  margin: 0 5px; /* Separación horizontal entre botones */
+  padding: 8px 12px; /* Espacio interno */
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Bordes redondeados */
+  background: #eee; /* Fondo gris claro */
 }
 
-th {
-    background-color: #007BFF;
-    color: white;
+.pagina-activa { /* Estilo especial para el número de página activa */
+  background: #007bff; /* Fondo azul */
+  color: white; /* Texto blanco */
 }
 
-tr:hover {
-    background-color: #f1f9ff;
+.encabezado { /* Encabezado que contiene logo y título */
+  display: flex; /* Elementos en fila */
+  align-items: center; /* Centra verticalmente */
+  gap: 60px; /* Espacio entre logo y título */
+  margin-bottom: 20px; /* Espacio debajo del encabezado */
 }
 
-@media (max-width: 768px) {
-    .dashboard {
-        padding: 10px;
-    }
+.logo { /* Estilo del logo */
+  width: 250px; /* Ancho del logo */
+  height: auto; /* Altura proporcional (automática) */
+}
+.boton-accion {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
 
-    th {
-        position: sticky;
-        top: 0;
-    }
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
 
-    td {
-        padding-left: 50%;
-        position: relative;
-    }
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #0d1b2a; /* azul oscuro */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
+  position: fixed;  /* ← fijo a la izquierda */
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
 
-    td::before {
-        position: absolute;
-        left: 10px;
-        width: 45%;
-        white-space: nowrap;
-        font-weight: bold;
-    }
+/* Logo */
+.sidebar .logo {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-    td:nth-of-type(1)::before { content: "Nombre"; }
-    td:nth-of-type(2)::before { content: "Dirección"; }
-    td:nth-of-type(3)::before { content: "Teléfono"; }
-    td:nth-of-type(4)::before { content: "Correo"; }
-    td:nth-of-type(5)::before { content: "ID"; }
-    td:nth-of-type(6)::before { content: "Equipos"; }
+/* Menú */
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  padding: 12px 16px;
+  margin: 6px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+.sidebar nav ul li:hover {
+  background: #1b263b;
+}
+
+.sidebar nav ul li.active {
+  background: #e63946; /* rojo del logo */
+  font-weight: bold;
+  color: #ffffff; /* asegura contraste */
+}
+
+/* Imagen en el sidebar */
+.sidebar-img {
+  text-align: center;
+  margin-top: auto;
+}
+.sidebar-img img {
+  width: 100%;
+  max-width: 140px;
+}
+
+/* Contenido */
+.contenido {
+  flex-grow: 1;
+  margin-left: 240px; /* deja espacio para el sidebar */
+  padding: 30px;
 }

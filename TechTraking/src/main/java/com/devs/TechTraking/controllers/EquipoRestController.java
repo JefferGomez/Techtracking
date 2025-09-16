@@ -29,7 +29,6 @@ public class EquipoRestController {
         equipo.setId(equipoDTO.getId()); // ✅ ID manual
         equipo.setMarca(equipoDTO.getMarca());
         equipo.setModelo(equipoDTO.getModelo());
-        equipo.setSerie(equipoDTO.getSerie());
         equipo.setTipo(equipoDTO.getTipo());
         equipo.setCliente(cliente);
 

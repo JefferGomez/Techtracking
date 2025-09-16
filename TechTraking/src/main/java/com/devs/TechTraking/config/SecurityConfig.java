@@ -58,6 +58,7 @@ public class SecurityConfig {
                                .requestMatchers("/tecnico/**").hasAuthority("TECNICO")
                                .requestMatchers("/almacenista/**").hasAuthority("ALMACENISTA")
                                .requestMatchers("/superadmin/**").hasAuthority("SUPERADMIN")
+                               .requestMatchers("/chat-page/**").hasAnyAuthority("ADMIN","TECNICO","ALMACENISTA")
                                .anyRequest().authenticated()
                         )
                .formLogin(form -> form
