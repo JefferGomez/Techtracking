@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.config.http.SessionCreationPolicy;
+
 
 
 
@@ -32,6 +37,20 @@ public class SecurityConfig {
 
        return http
                .csrf(AbstractHttpConfigurer::disable)
+               .sessionManagement(session -> session
+                       .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                       .maximumSessions(10) // Permite múltiples sesiones por usuario
+                       .maxSessionsPreventsLogin(false) // No previene login si hay sesiones activas
+                       .sessionRegistry(sessionRegistry()) // Necesitarás crear este bean
+               )
+               // Configuración de logout mejorada (opcional)
+               .logout(logout -> logout
+                       .logoutUrl("/logout")
+                       .logoutSuccessUrl("/?logout")
+                       .invalidateHttpSession(true)
+                       .deleteCookies("JSESSIONID")
+                       .clearAuthentication(true)
+               )
                .authorizeHttpRequests(authRequest ->
                        authRequest
                                .requestMatchers("/","/css/**", "/js/**","/img/**","/auth/**").permitAll()
@@ -59,4 +78,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+
+
 }
+

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class Intento_login {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne

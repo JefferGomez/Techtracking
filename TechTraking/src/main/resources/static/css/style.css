@@ -1,3 +1,4 @@
+
 body { /* Estilos generales del cuerpo de la página */
   margin: 0; /* Elimina el margen por defecto */
   font-family: 'Segoe UI', sans-serif; /* Fuente moderna para todo el texto */
@@ -39,6 +40,40 @@ h1 { /* Estilos del título principal */
   padding: 10px 20px; /* Espacio interno */
   border-radius: 6px; /* Bordes redondeados */
   cursor: pointer; /* Cambia el cursor a mano al pasar el mouse */
+}
+
+.header {
+  background-color: #ff6262;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.servi{
+
+  color:blue
+
+}
+
+.mark{
+
+    color:#9E0707FF
+
+}
+
+.nav {
+  font-size: 1rem;
+}
+
+.user {
+  font-weight: bold;
+  color: #333
 }
 
 table { /* Estilos generales para la tabla */

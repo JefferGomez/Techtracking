@@ -1,59 +1,3 @@
-<!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Chat With Spring Boot & Websocket</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/Chat.css}">
-    <!--<style>
-        #messageArea {
-            height: 300px;
-            overflow-y: scroll;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 15px;
-            background-color: #f8f9fa;
-        }
-        .message {
-            margin-bottom: 8px;
-            padding: 5px;
-            border-radius: 4px;
-            background-color: white;
-        }
-    </style>-->
-</head>
-<body>
-<div class="header">
-    <div class="logo"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
-    <div class="nav">Chat</div>
-    <form action="/logout" method="post">
-        <button class="logout">Cerrar Sesión</button>
-    </form>
-</div>
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Chat en Tiempo Real</h5>
-            <div id="messageArea"></div>
-
-            <div class="mb-3">
-                <label for="username" class="form-label">Nombre de Usuario:</label>
-                <input type="text" class="form-control" id="username" placeholder="Introduce tu nombre">
-            </div>
-
-            <div class="mb-3">
-                <label for="messageInput" class="form-label">Mensaje:</label>
-                <input type="text" class="form-control" id="messageInput" placeholder="Introduce tu mensaje">
-            </div>
-
-            <button onclick="sendMessage()" class="btn btn-primary">Enviar</button>
-            <div id="connectionStatus" class="mt-2"></div>
-        </div>
-    </div>
-</div>
-
-<script th:src="@{/js/Chat.js}"></script>
-<!--<script th:inline="javascript">
     let socket = new WebSocket("ws://localhost:8080/websocket");
     let messageArea = document.getElementById("messageArea");
     let connectionStatus = document.getElementById("connectionStatus");
@@ -112,6 +56,3 @@
             sendMessage();
         }
     });
-</script>-->
-</body>
-</html>

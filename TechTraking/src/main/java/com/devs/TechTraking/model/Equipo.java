@@ -1,16 +1,19 @@
 package com.devs.TechTraking.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Equipo {
 
     @Id
-    private int id;
+    private Long id;
     private String marca;
     private String modelo;
-    private String serie;
     private String tipo;
 
     @ManyToOne
@@ -18,14 +21,28 @@ public class Equipo {
 
     @JsonBackReference
     private Cliente cliente;
+    @ManyToMany(mappedBy = "equipos")
+    @JsonIgnore
+    private List<Visita> visitas = new ArrayList<>();
 
-    public Equipo() {}
+    public Equipo() {
+    }
 
-    public int getId() {
+    public Equipo(Long id, String marca, String modelo, String tipo, Cliente cliente, List<Visita> visitas) {
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.tipo = tipo;
+        this.cliente = cliente;
+        this.visitas = visitas;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
+   
         this.id = id;
     }
 
@@ -45,14 +62,6 @@ public class Equipo {
         this.modelo = modelo;
     }
 
-    public String getSerie() {
-        return serie;
-    }
-
-    public void setSerie(String serie) {
-        this.serie = serie;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -67,6 +76,14 @@ public class Equipo {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<Visita> getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(List<Visita> visitas) {
+        this.visitas = visitas;
     }
 }
 

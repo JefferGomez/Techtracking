@@ -1,5 +1,6 @@
 package com.devs.TechTraking.service;
 
+import com.devs.TechTraking.model.Tecnico;
 import com.devs.TechTraking.model.Usuarios;
 import com.devs.TechTraking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class UsuariosService implements UserDetailsService{
          String contraseñaCodificada = passwordEncoder.encode(usuarios.getContraseña());
          usuarios.setContraseña(contraseñaCodificada);
          usuarios.setContraseñaTemporal(true);
+
+        if (usuarios.getRol().getId() == 3 && usuarios.getTecnico() != null) {
+            usuarios.getTecnico().setUsuario(usuarios);
+        }
+
+
          Usuarios nuevo = usuarioRepository.save(usuarios);
 
          String rolNombre=nuevo.getRol().getNombre().name();

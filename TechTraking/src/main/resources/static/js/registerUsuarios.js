@@ -2,6 +2,16 @@
 
 
 let boton = document.getElementById("registrar")
+let rolSelect = document.getElementById("rol");
+let tecnicoFields = document.getElementById("tecnicoFields");
+
+rolSelect.addEventListener("change", () => {
+    if (rolSelect.value === "3") {
+        tecnicoFields.style.display = "block";
+    } else {
+        tecnicoFields.style.display = "none";
+    }
+});
 
 boton.addEventListener("click",evento =>{
 
@@ -31,6 +41,14 @@ let registrarUsuario = async()=>{
     campos.correo = document.getElementById("correo").value
     campos.contraseña = password
     campos.rol = { id: parseInt(document.getElementById("rol").value) };
+
+     if (campos.rol.id === 3) {
+        campos.tecnico = {
+          especialidad: document.getElementById("especialidad").value,
+          telefono: document.getElementById("telefono").value
+        };
+      }
+
 
     const peticion = await fetch("http://localhost:8080/superadmin/crearUsuarios",
         {

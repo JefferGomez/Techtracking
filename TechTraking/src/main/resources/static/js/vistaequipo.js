@@ -6,22 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  fetch(`http://localhost:8080/api/vistaequipo/${clienteId}`)
-    .then(response => response.json())
-    .then(data => {
+  fetch(`/admin/vistaequipo/${clienteId}`)
+    .then(response => {
+      if (!response.ok) throw new Error("Error al obtener cliente");
+      return response.json();
+    })
+    .then(cliente => {
       // Cliente info
-      document.getElementById('NIT').textContent = data.cliente.id;
-      document.getElementById('Empresa').textContent = data.cliente.nombre;
-      document.getElementById('direccionCliente').textContent = data.cliente.direccion;
-      document.getElementById('Telefono').textContent = data.cliente.telefono;
-      document.getElementById('correoCliente').textContent = data.cliente.correo;
+      document.getElementById('NIT').textContent = cliente.id;
+      document.getElementById('Empresa').textContent = cliente.nombre;
+      document.getElementById('direccionCliente').textContent = cliente.direccion;
+      document.getElementById('Telefono').textContent = cliente.telefono;
+      document.getElementById('correoCliente').textContent = cliente.correo;
 
       // Equipos en tabla
       const tabla = document.getElementById('tablaEquipos');
-      tabla.innerHTML = ''; // limpiar por si acaso
+      tabla.innerHTML = '';
 
-      const equipos = data.cliente.equipos || [];
-      equipos.forEach(equipo => {
+      (cliente.equipos || []).forEach(equipo => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
           <td>${equipo.id}</td>
