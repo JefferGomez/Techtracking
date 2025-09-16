@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formato Hoja de Vida - Servimarket</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="form-wrapper">
+    <div class="card">
+
+        <!-- Encabezado -->
+        <div class="header">
+            <div class="logo-titulo">
+                <img src="img/SM.png" alt="Logo de la empresa">
+                <div class="titulo">
+                    <h1>SERVIMARKETING FM S.A.S.</h1>
+                    <p>PROCESO GESTIÓN TECNOLÓGICO</p>
+                    <p>FORMATO DE HOJA DE VIDA DE EQUIPOS</p>
+                </div>
+            </div>
+            <div class="datos-header">
+                <p><strong>Código:</strong> F.TEC-03</p>
+                <p><strong>Versión:</strong> 01</p>
+                <p><strong>Fecha:</strong> 07/12/2018</p>
+                <p><strong>Página:</strong> 1 de 1</p>
+            </div>
+        </div>
+
+        <!-- Formulario -->
+        <form id="reporteForm">
+
+            <!-- Datos Generales -->
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="tipo[]" value="escritorio"> IMPRESORA DE ESCRITORIO</label>
+                <label><input type="checkbox" name="tipo[]" value="industrial"> IMPRESORA INDUSTRIAL</label>
+                <label><input type="checkbox" name="tipo[]" value="otro"> OTRO</label>
+            </div>
+
+            <!-- Formulario 1 -->
+            <section class="datos-cliente">
+                <div class="columna-izquierda">
+                    <label>Cliente: <input type="text" name="cliente"></label>
+                    <label>Marca: <input type="text" name="marca"></label>
+                    <label>Modelo: <input type="text" name="modelo"></label>
+                    <label>Serie: <input type="text" name="serie"></label>
+                </div>
+                <div class="columna-derecha">
+                    <div class="fecha-inline" style="margin-top: 20px;">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" id="fecha" name="fecha">
+                    </div>
+                    <div class="consecutivo-inline">
+                        <label for="consecutivo">Consecutivo #</label>
+                        <input type="number" name="consecutivo" id="consecutivo" readonly style="font-size: 1em;">
+                    </div>
+                    <br>
+                    <label><input type="checkbox" name="garantia"> Equipo en Garantía </label>
+                </div>
+            </section>
+
+            <!-- Estado General y Pantalla -->
+            <div class="grid-2">
+                <div class="columna-izquierda">
+
+                    <!-- Estado General -->
+                    <section class="estado-general">
+                        <div class="seccion-titulo">
+                            <h2>Estado General</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Encendido</label>
+                            <input type="radio" name="encendido" value="SI">
+                            <input type="radio" name="encendido" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Está Operando</label>
+                            <input type="radio" name="operando" value="SI">
+                            <input type="radio" name="operando" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Prendido</label>
+                            <input type="radio" name="prendido" value="SI">
+                            <input type="radio" name="prendido" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Manchas</label>
+                            <input type="radio" name="manchas" value="SI">
+                            <input type="radio" name="manchas" value="NO">
+                        </div>
+                    </section>
+
+                    <!-- Piezas Faltantes -->
+                    <section class="piezas-faltantes">
+                        <div class="seccion-titulo">
+                            <h2>Piezas Faltantes</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Tornillos</label>
+                            <input type="radio" name="tornillos" value="SI">
+                            <input type="radio" name="tornillos" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Tapas</label>
+                            <input type="radio" name="tapas" value="SI">
+                            <input type="radio" name="tapas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Display</label>
+                            <input type="radio" name="display" value="SI">
+                            <input type="radio" name="display" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Tarjetas</label>
+                            <input type="radio" name="tarjetas" value="SI">
+                            <input type="radio" name="tarjetas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Botones</label>
+                            <input type="radio" name="botones" value="SI">
+                            <input type="radio" name="botones" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Cabezal</label>
+                            <input type="radio" name="cabezal" value="SI">
+                            <input type="radio" name="cabezal" value="NO">
+                        </div>
+                        <div class="check-group">
+                            <input type="text" placeholder="Otra, ¿Cuál?">
+                        </div>
+                    </section>
+
+                    <!-- Parte Mecánica -->
+                    <section class="parte-mecanica">
+                        <div class="seccion-titulo">
+                            <h2>Parte Mecánica</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Ejes</label>
+                            <input type="radio" name="ejes" value="SI">
+                            <input type="radio" name="ejes" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Husillos</label>
+                            <input type="radio" name="husillos" value="SI">
+                            <input type="radio" name="husillos" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Pletinas</label>
+                            <input type="radio" name="pletinas" value="SI">
+                            <input type="radio" name="pletinas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Cremas</label>
+                            <input type="radio" name="cremas" value="SI">
+                            <input type="radio" name="cremas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <input type="text" placeholder="Otra, ¿Cuál?">
+                        </div>
+                    </section>
+                </div>
+
+                <div class="columna-derecha">
+                    <!-- Pantalla -->
+                    <section class="pantalla">
+                        <div class="seccion-titulo">
+                            <h2>Pantalla</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Funciona</label>
+                            <input type="radio" name="funciona" value="SI">
+                            <input type="radio" name="funciona" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Prendida</label>
+                            <input type="radio" name="pantallaPrendida" value="SI">
+                            <input type="radio" name="pantallaPrendida" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Líneas</label>
+                            <input type="radio" name="lineas" value="SI">
+                            <input type="radio" name="lineas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Quemada</label>
+                            <input type="radio" name="quemada" value="SI">
+                            <input type="radio" name="quemada" value="NO">
+                        </div>
+                    </section>
+
+                    <!-- Cabezal de Impresión -->
+                    <section class="cabezal-impresion compacto">
+                        <div class="seccion-titulo">
+                            <h2>Cabezal de Impresión</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Bueno</label>
+                            <input type="radio" name="cabezal_bueno" value="SI">
+                            <input type="radio" name="cabezal_bueno" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Líneas Blancas</label>
+                            <input type="radio" name="lineas_blancas" value="SI">
+                            <input type="radio" name="lineas_blancas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Calibrado</label>
+                            <input type="radio" name="calibrado" value="SI">
+                            <input type="radio" name="calibrado" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Limpio</label>
+                            <input type="radio" name="limpio" value="SI">
+                            <input type="radio" name="limpio" value="NO">
+                        </div>
+                    </section>
+
+                    <!-- Rodillo de Impresión -->
+                    <section class="rodillo-impresion">
+                        <div class="seccion-titulo">
+                            <h2>Rodillo de Impresión</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Bueno</label>
+                            <input type="radio" name="rodillo" value="SI">
+                            <input type="radio" name="rodillo" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Ruedas</label>
+                            <input type="radio" name="ruedas" value="SI">
+                            <input type="radio" name="ruedas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Alineado</label>
+                            <input type="radio" name="alineado" value="SI">
+                            <input type="radio" name="alineado" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Adecuado</label>
+                            <input type="radio" name="adecuado" value="SI">
+                            <input type="radio" name="adecuado" value="NO">
+                        </div>
+                    </section>
+
+                    <!-- Estado Electrónico -->
+                    <section class="estado-electronico">
+                        <div class="seccion-titulo">
+                            <h2>Estado Electrónico</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Humedad</label>
+                            <input type="radio" name="humedad" value="SI">
+                            <input type="radio" name="humedad" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Tarjetas funcionales</label>
+                            <input type="radio" name="tarjetasOk" value="SI">
+                            <input type="radio" name="tarjetasOk" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <input type="text" placeholder="Otra, ¿Cuál?">
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Observaciones y Etiqueta -->
+            <div class="grid-2">
+                <section>
+                    <h2>Observaciones / Procedimiento Realizado</h2>
+                    <textarea rows="5"></textarea>
+                </section>
+                <section>
+                    <h2>Etiqueta de muestra</h2>
+                    <input type="file" name="etiqueta" accept="application/pdf,image/*">
+                    <img id="previewEtiqueta" style="max-width:150px; margin-top:8px; display:none;">
+                </section>
+            </div>
+
+            <!-- Firmas -->
+            <div class="grid-2">
+                <section>
+                    <h2>Técnico Servimarket FM</h2>
+                    <input type="text" placeholder="Usuario responsable">
+                    <input type="text" placeholder="Área / Unidad">
+                </section>
+                <section>
+                    <h2>Recibido por</h2>
+                    <input type="file" name="firma" accept="application/pdf,image/*">
+                    <img id="previewFirma" style="max-width:150px; margin-top:8px; display:none;">
+                </section>
+            </div>
+
+            <!-- Botón -->
+            <div class="actions">
+                <button type="submit" class="btn-red">Guardar Reporte</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- Librerías PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
