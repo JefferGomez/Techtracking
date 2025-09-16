@@ -25,6 +25,26 @@ function cargarClientes() {
     .catch(error => console.error("Error cargando clientes:", error));
 }
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".sidebar-item");
+    const currentPath = window.location.pathname;
+
+    items.forEach(item => {
+        const page = item.getAttribute("data-page");
+
+        // Marca activo si coincide con la URL
+        if (currentPath === page) {
+            item.classList.add("active");
+        }
+
+        // Al hacer click redirige
+        item.addEventListener("click", () => {
+            window.location.href = page;
+        });
+    });
+});
+
 // Función para redirigir a vistaequipo con el clienteId guardado
 function verDetalle(clienteId) {
   sessionStorage.setItem("clienteId", clienteId);

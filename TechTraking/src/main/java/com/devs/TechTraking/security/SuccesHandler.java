@@ -47,7 +47,7 @@ public class SuccesHandler implements AuthenticationSuccessHandler {
                 response.sendRedirect("/tecnico");
                 break;
             case "ALMACENISTA":
-                response.sendRedirect("/almacenista");
+                response.sendRedirect("/chat-page");
                 break;
             default:
                 response.sendRedirect("/"); // Por si acaso
