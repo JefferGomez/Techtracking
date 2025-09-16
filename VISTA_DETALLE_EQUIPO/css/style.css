@@ -1,0 +1,112 @@
+body {
+  margin: 0; /* Elimina el margen por defecto alrededor del cuerpo */
+  font-family: 'Segoe UI', sans-serif; /* Define la fuente de letra usada */
+  background: #f4f4f4; /* Color de fondo gris claro */
+  padding: 20px; /* Espacio interno de 20px alrededor del contenido */
+}
+
+.logo {
+  max-width: 300px; /* Ancho máximo del logo */
+  margin-bottom: 10px; /* Espacio inferior entre el logo y lo que sigue */
+}
+
+h1 {
+  text-align: center; /* Centra el texto del título */
+  font-size: 24px; /* Tamaño de fuente del título */
+}
+
+main {
+  max-width: 1200px; /* Ancho máximo del contenido principal */
+  margin: 0 auto; /* Centra horizontalmente el contenido */
+}
+
+.detalle-wrapper {
+  display: flex; /* Activa el modelo de caja flexible (flexbox) */
+  gap: 20px; /* Espacio de 20px entre los elementos hijos */
+  flex-wrap: wrap; /* Permite que los elementos bajen a otra línea si no caben */
+}
+
+.info-general,
+.info-servicio {
+  flex: 1; /* Cada sección ocupa el mismo espacio disponible */
+  display: flex; /* Usa flexbox también en estas secciones */
+  flex-direction: column; /* Coloca los hijos uno debajo del otro */
+  gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.card {
+  background: white; /* Fondo blanco para las tarjetas */
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  padding: 20px; /* Espacio interno dentro de la tarjeta */
+  box-shadow: 0 0 10px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
+}
+
+.card h2 {
+  margin-top: 0; /* Quita el margen superior del subtítulo */
+  font-size: 18px; /* Tamaño de fuente para el título de sección */
+}
+
+.cliente-avatar {
+  display: flex; /* Flexbox para alinear imagen e info */
+  gap: 15px; /* Espacio entre imagen y datos */
+  align-items: flex-start; /* Alinea los elementos arriba */
+}
+
+.cliente-avatar img {
+  width: 80px; /* Ancho fijo de la imagen del cliente */
+  height: 80px; /* Alto fijo de la imagen */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  object-fit: cover; /* Ajusta la imagen sin deformarla */
+}
+
+.datos-cliente p {
+  margin: 4px 0; /* Espacio vertical entre cada línea de datos */
+}
+
+.historial {
+  list-style: none; /* Quita los puntos de la lista */
+  padding-left: 0; /* Elimina el espacio a la izquierda */
+}
+
+.historial li {
+  padding: 6px 0; /* Espacio vertical dentro de cada ítem */
+  border-bottom: 1px solid #eee; /* Línea separadora entre ítems */
+  font-size: 14px; /* Tamaño de letra más pequeño */
+}
+
+textarea,
+input[type="text"] {
+  width: 100%; /* Ocupan todo el ancho disponible */
+  padding: 10px; /* Espacio interior para escribir cómodo */
+  margin-top: 10px; /* Separación desde el elemento superior */
+  border-radius: 6px; /* Esquinas redondeadas */
+  border: 1px solid #ccc; /* Borde gris claro */
+  font-size: 14px; /* Tamaño de fuente estándar */
+}
+
+.btn {
+  background-color: #007bff; /* Azul principal para los botones */
+  color: white; /* Texto blanco */
+  padding: 10px 15px; /* Espacio interno del botón */
+  margin-top: 10px; /* Espacio hacia arriba */
+  border: none; /* Sin borde visible */
+  border-radius: 6px; /* Esquinas redondeadas */
+  cursor: pointer; /* Cambia el puntero al pasar por encima */
+}
+
+.btn.descargar {
+  background-color: #28a745; /* Verde para el botón de descargar */
+  margin-top: 20px; /* Espacio adicional arriba */
+}
+
+.encabezado {
+  display: flex; /* Flexbox para alinear el logo y el título */
+  align-items: center; /* Centra verticalmente ambos elementos */
+  gap: 15px; /* Espacio entre el logo y el título */
+  margin-bottom: 20px; /* Separación inferior del encabezado */
+}
+
+.logo {
+  width: 250px; /* Ancho del logo */
+  height: auto; /* Altura automática proporcional */
+}

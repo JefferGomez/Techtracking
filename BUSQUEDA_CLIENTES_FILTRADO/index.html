@@ -1,0 +1,136 @@
+<!DOCTYPE html> <!-- Indica que el documento es HTML5 -->
+<html lang="es"> <!-- La página está en español -->
+<head> <!-- Inicio de la cabecera del documento -->
+  <meta charset="UTF-8"> <!-- Codificación de caracteres (permite tildes, ñ, etc.) -->
+  <title>Búsqueda de Clientes</title> <!-- Título que aparece en la pestaña del navegador -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Enlace a la hoja de estilos externa -->
+</head>
+<body> <!-- Inicio del cuerpo del documento (contenido visible) -->
+
+  <div class="container"> <!-- Contenedor principal de toda la página -->
+
+    <div class="encabezado"> <!-- Sección superior con logo y título -->
+      <img src="img/SM.png" alt="Logo" class="logo"> <!-- Logo de la empresa -->
+      <h1>Búsqueda de Clientes</h1> <!-- Título principal -->
+    </div>
+
+    <div class="filtros"> <!-- Sección de filtros para buscar por estado o tipo -->
+      <label>Estado: <!-- Etiqueta del primer filtro -->
+        <select id="filtroEstado"> <!-- Lista desplegable para filtrar por estado -->
+          <option value="">Todos</option> <!-- Opción por defecto que muestra todos -->
+          <option value="activo">Activo</option> <!-- Filtro por clientes activos -->
+          <option value="pendiente">Pendiente</option> <!-- Filtro por pendientes -->
+          <option value="inactivo">Inactivo</option> <!-- Filtro por inactivos -->
+        </select>
+      </label>
+      <label>Tipo de Servicio: <!-- Etiqueta del segundo filtro -->
+        <select id="filtroServicio"> <!-- Lista para filtrar por tipo de servicio -->
+          <option value="">Todos</option> <!-- Todos los tipos -->
+          <option value="mantenimiento">Mantenimiento</option> <!-- Solo mantenimiento -->
+          <option value="reparación">Reparación</option> <!-- Solo reparación -->
+          <option value="instalación">Instalación</option> <!-- Solo instalación -->
+        </select>
+      </label>
+    </div>
+
+    <div class="barra"> <!-- Barra de búsqueda y botones -->
+      <input type="text" placeholder="🔍 Buscar clientes..."> <!-- Campo para escribir búsqueda -->
+      <div class="acciones"> <!-- Contenedor de botones de acción -->
+        <button class="nuevo">+ Nuevo Cliente</button> <!-- Botón para agregar un nuevo cliente -->
+        <button class="descargar">⭳ Descargar</button> <!-- Botón para descargar lista de clientes -->
+      </div>
+    </div>
+
+    <table> <!-- Tabla para mostrar resultados -->
+      <thead> <!-- Encabezados de la tabla -->
+        <tr>
+          <th>Avatar</th> <!-- Columna para imagen del cliente -->
+          <th>Nombre</th> <!-- Nombre del cliente -->
+          <th>Código</th> <!-- Código identificador del cliente -->
+          <th>Correo</th> <!-- Correo electrónico -->
+          <th>Tipo de Servicio</th> <!-- Tipo de servicio que se presta -->
+          <th>Estado</th> <!-- Estado actual del cliente -->
+          <th>Última Visita</th> <!-- Fecha de la última visita -->
+        </tr>
+      </thead>
+      <tbody> <!-- Cuerpo de la tabla con datos de ejemplo -->
+
+        <!-- Fila de ejemplo: Cliente 1 -->
+        <tr>
+          <td><img src="https://via.placeholder.com/30" alt="avatar"></td> <!-- Avatar -->
+          <td>Juan Pérez</td>
+          <td>CL1001</td>
+          <td>juan@email.com</td>
+          <td>Mantenimiento</td>
+          <td><span class="estado activo">Activo</span></td>
+          <td>2023-10-26</td>
+        </tr>
+
+        <!-- Cliente 2 -->
+        <tr>
+          <td><img src="https://via.placeholder.com/30" alt="avatar"></td>
+          <td>María Rodríguez</td>
+          <td>CL1002</td>
+          <td>maria@gmail.com</td>
+          <td>Reparación</td>
+          <td><span class="estado pendiente">Pendiente</span></td>
+          <td>2023-09-15</td>
+        </tr>
+
+        <!-- Cliente 3 -->
+        <tr>
+          <td><img src="https://via.placeholder.com/30" alt="avatar"></td>
+          <td>Carlos Sánchez</td>
+          <td>CL1003</td>
+          <td>carlos@correo.com</td>
+          <td>Instalación</td>
+          <td><span class="estado inactivo">Inactivo</span></td>
+          <td>2024-02-01</td>
+        </tr>
+
+        <!-- Cliente 4 -->
+        <tr>
+          <td><img src="https://via.placeholder.com/30" alt="avatar"></td>
+          <td>Ana Ruiz</td>
+          <td>CL1004</td>
+          <td>ana@empresa.com</td>
+          <td>Instalación</td>
+          <td><span class="estado activo">Activo</span></td>
+          <td>2024-01-19</td>
+        </tr>
+
+        <!-- Cliente 5 -->
+        <tr>
+          <td><img src="https://via.placeholder.com/30" alt="avatar"></td>
+          <td>Luis Mejía</td>
+          <td>CL1005</td>
+          <td>luis@servicio.com</td>
+          <td>Mantenimiento</td>
+          <td><span class="estado pendiente">Pendiente</span></td>
+          <td>2024-02-05</td>
+        </tr>
+
+        <!-- Cliente 6 -->
+        <tr>
+          <td><img src="https://via.placeholder.com/30" alt="avatar"></td>
+          <td>Camila Torres</td>
+          <td>CL1006</td>
+          <td>camila@gmail.com</td>
+          <td>Reparación</td>
+          <td><span class="estado inactivo">Inactivo</span></td>
+          <td>2024-01-01</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="paginacion"> <!-- Sección inferior para navegar entre páginas -->
+      <button>&laquo; Anterior</button> <!-- Botón para ir a la página anterior -->
+      <span class="pagina-activa">1</span> <!-- Número de página actual -->
+      <button>Siguiente &raquo;</button> <!-- Botón para ir a la siguiente página -->
+    </div>
+
+  </div> <!-- Fin del contenedor principal -->
+
+  <script src="script.js"></script> <!-- Carga el archivo de JavaScript para funcionalidades -->
+</body>
+</html>
