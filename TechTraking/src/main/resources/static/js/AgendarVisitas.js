@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 // Aquí ya no usamos localStorage, sino que vamos a traer visitas desde la API
 let visitas = [];
 let currentDate = new Date();
@@ -62,8 +63,7 @@ function renderCalendar() {
     const num = document.createElement("div");
     num.classList.add("date-number");
     num.innerText = day;
-    cell.appendChild(num);
-    
+    cell.appendChild(num);    
     visitas.forEach(v => {
       if (v.fecha === dateStr) {
         const div = document.createElement("div");
@@ -89,18 +89,21 @@ btnPrev.addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar();
   cargarVisitas();
+
 });
 
 btnNext.addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar();
   cargarVisitas();
+
 });
 
 btnToday.addEventListener("click", () => {
   currentDate = new Date();
   renderCalendar();
   cargarVisitas();
+
 });
 
 // Modal
@@ -140,6 +143,14 @@ visitForm.addEventListener("submit", (e) => {
 
 
   fetch("http://localhost:8080/admin/crearVisitas", {   // cambia la URL por la de tu backend
+  const nuevaVisita = {
+    date: document.getElementById("date").value,
+    description: document.getElementById("description").value,
+    cliente: document.getElementById("cliente").value,
+    tecnico: document.getElementById("tecnico").value
+  };
+
+  fetch("http://localhost:8080/tecnico/crearVisitas", {   // cambia la URL por la de tu backend
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(nuevaVisita)
@@ -175,6 +186,7 @@ function cargarVisitas() {
   const fin = `${year}-${String(month + 1).padStart(2, "0")}-${lastDay}`;
 
   fetch(`http://localhost:8080/admin/mostrarVisitas?inicio=${inicio}&fin=${fin}`)   // cambia la URL por tu backend
+
     .then(res => res.json())
     .then(data => {
       visitas = data;
@@ -251,3 +263,6 @@ document.getElementById("cliente").addEventListener("change", (e) => {
   cargarEquiposPorCliente(clienteId);
 });
 cargarTecnicos();
+// Inicial
+modal.classList.add("hidden");
+cargarVisitas();

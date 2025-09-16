@@ -18,6 +18,7 @@ public class Equipo {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
+
     @JsonBackReference
     private Cliente cliente;
     @ManyToMany(mappedBy = "equipos")
@@ -41,6 +42,7 @@ public class Equipo {
     }
 
     public void setId(Long id) {
+   
         this.id = id;
     }
 

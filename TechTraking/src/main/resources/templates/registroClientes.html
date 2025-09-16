@@ -16,38 +16,20 @@
 
     <form id="registroCliente"> <!-- Inicio del formulario con ID para usarlo en JavaScript -->
 
-        <h2>Foto del Cliente</h2> <!-- Subtítulo que indica dónde subir la foto del cliente -->
-
-        <input type="file" id="avatar" accept="image/*"> <!-- Campo para seleccionar una imagen desde la computadora -->
-
-        <img id="preview" src="" alt="Vista previa del avatar" style="max-width: 120px; display: none; margin-top: 10px;"> <!-- Imagen oculta donde se mostrará la vista previa -->
-
         <h2>Detalles del Cliente</h2> <!-- Subtítulo para los campos de información del cliente -->
-
-        <input type="text" placeholder="Nombre de la Empresa" id="empresa"> <!-- Campo para ingresar el nombre de la empresa -->
-        <input type="text" placeholder="NIT" id="nit"> <!-- Campo para ingresar el NIT o número de identificación -->
-        <input type="text" placeholder="Dirección Principal" id="direccion"> <!-- Campo para ingresar la dirección -->
-        <input type="text" placeholder="Ciudad" id="ciudad"> <!-- Campo para ingresar la ciudad -->
-        <input type="tel" placeholder="Teléfono Principal" id="telefono"> <!-- Campo para ingresar el número de teléfono -->
-        <input type="email" placeholder="Correo Electrónico Principal" id="email"> <!-- Campo para ingresar el correo electrónico -->
-
-        <select id="tipoCliente"> <!-- Lista desplegable para elegir el tipo de cliente -->
-            <option value="">Seleccione tipo</option> <!-- Primera opción en blanco como guía -->
-            <option value="Natural">Natural</option> <!-- Opción para cliente persona natural -->
-            <option value="Jurídico">Jurídico</option> <!-- Opción para cliente persona jurídica (empresa) -->
-        </select>
-
-        <h2>Personas de Contacto</h2> <!-- Subtítulo para agregar contactos adicionales -->
-        <button type="button" class="secundario">+ Añadir Persona de Contacto</button> <!-- Botón para agregar campos de personas de contacto -->
-
-        <h2>Equipos Asociados</h2> <!-- Subtítulo para agregar equipos -->
-        <button type="button" class="secundario">+ Añadir Equipo</button> <!-- Botón para agregar campos de equipos -->
-
-        <h2>Notas Adicionales</h2> <!-- Subtítulo para escribir observaciones o requisitos -->
-        <textarea placeholder="Observaciones o Requisitos Específicos" id="notas"></textarea> <!-- Área para escribir texto largo -->
+        <label for="nit">NIT</label>
+        <input type="text" name="nit" placeholder="NIT" id="nit" required> <!-- Campo para ingresar el NIT o número de identificación -->
+        <label for="empresa">Empresa</label>
+        <input type="text" name="empresa" placeholder="Nombre de la Empresa" id="empresa" required> <!-- Campo para ingresar el nombre de la empresa -->
+        <label for="direccion">Dirección</label>
+        <input type="text" name="direccion" placeholder="Dirección Principal" id="direccion" required> <!-- Campo para ingresar la dirección -->
+        <label for="telefono">Teléfono</label>
+        <input type="telefono" name="telefono" placeholder="Teléfono Principal" id="telefono" required> <!-- Campo para ingresar el número de teléfono -->
+        <label for="email">Correo</label>
+        <input type="email" name="correo" placeholder="Correo Electrónico Principal" id="email" required> <!-- Campo para ingresar el correo electrónico -->
 
         <div class="checkbox"> <!-- Contenedor para el checkbox de aceptación -->
-            <input type="checkbox" id="terminos"> <!-- Casilla para aceptar términos y condiciones -->
+            <input type="checkbox" name="terminos" id="terminos"> <!-- Casilla para aceptar términos y condiciones -->
             <label for="terminos">Acepto los términos y condiciones y la política de privacidad.</label> <!-- Texto que acompaña el checkbox -->
         </div>
 
