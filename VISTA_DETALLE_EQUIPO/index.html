@@ -1,0 +1,97 @@
+<!DOCTYPE html> <!-- Indica que este documento es HTML5 -->
+<html lang="es"> <!-- Define que el idioma de la página es español -->
+
+<head> <!-- Sección que contiene información del documento -->
+  <meta charset="UTF-8"> <!-- Define el tipo de codificación de caracteres -->
+  <title>Detalle del Equipo - ServiMarketing</title> <!-- Título de la pestaña del navegador -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Enlace al archivo de estilos CSS -->
+</head>
+
+<body> <!-- Cuerpo de la página visible para el usuario -->
+
+  <header> <!-- Encabezado de la página -->
+
+    <div class="encabezado"> <!-- Contenedor del logo y título -->
+      <img src="img/SM.png" alt="Logo" class="logo"> <!-- Logo de la empresa -->
+      <h1>Detalle del Equipo - ST-2024-00123</h1> <!-- Título principal con ID de orden -->
+    </div>
+
+  </header>
+
+  <main>
+    <div class="detalle-wrapper">
+
+      <!-- Sección Izquierda: Cliente + Equipo -->
+      <section class="info-general">
+        <!-- Datos del Cliente -->
+        <div class="card">
+          <h2>Datos del Cliente</h2>
+          <div class="cliente-avatar">
+            <img src="img/avatar-cliente.png" alt="Avatar Cliente">
+            <div class="datos-cliente">
+              <p><strong>Nombre Completo:</strong> <span id="nombreCliente">Juan Pérez Rodríguez</span></p>
+              <p><strong>Teléfono:</strong> <span id="telefonoCliente">+1 555-123-4567</span></p>
+              <p><strong>Dirección:</strong> <span id="direccionCliente">Av. Siempre Viva 742</span></p>
+              <p><strong>Ciudad:</strong> <span id="ciudadCliente">Springfield</span></p>
+              <p><strong>Estado/Provincia:</strong> <span id="estadoCliente">Illinois</span></p>
+              <p><strong>Correo Electrónico:</strong> <span id="correoCliente">juan.perez@example.com</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información del Equipo -->
+        <div class="card">
+          <h2>Información del Equipo</h2>
+          <p><strong>Tipo:</strong> <span id="tipoEquipo">Laptop</span></p>
+          <p><strong>Marca:</strong> <span id="marcaEquipo">ServiTech</span></p>
+          <p><strong>Modelo:</strong> <span id="modeloEquipo">STProBook 15</span></p>
+          <p><strong>Número de Serie:</strong> <span id="serieEquipo">ST9876XYZ-7890</span></p>
+          <p><strong>Fecha de Compra:</strong> <span id="compraEquipo">2023-03-15</span></p>
+          <p><strong>Descripción del Problema:</strong> <span id="problemaEquipo">La laptop no enciende. Se escuchan ventiladores, pero pantalla permanece apagada.</span></p>
+        </div>
+      </section>
+
+      <!-- Sección Derecha: Historial y Detalles -->
+      <section class="info-servicio">
+        <!-- Detalles de la Orden -->
+        <div class="card">
+          <h2>Detalles de la Orden de Servicio</h2>
+          <p><strong>ID de Orden:</strong> <span id="idOrden">ST-2024-00123</span></p>
+          <p><strong>Fecha de Creación:</strong> <span id="fechaOrden">2024-07-26</span></p>
+          <p><strong>Tipo de Servicio:</strong> <span id="tipoServicio">Reparación</span></p>
+          <p><strong>Estado:</strong> <span id="estadoOrden">En Progreso</span></p>
+        </div>
+
+        <!-- Historial Técnico -->
+        <div class="card">
+          <h2>Registro de Servicio y Notas</h2>
+          <ul class="historial" id="historialServicio">
+            <li><strong>2024-07-26 09:00</strong> - Asignación a Técnico A.</li>
+            <li><strong>2024-07-26 18:13</strong> - Recepción del equipo. Diagnóstico visual inicial sin fallos aparentes externos.</li>
+            <li><strong>2024-07-27 11:00</strong> - Revisión placa base. Problema identificado en el controlador de carga.</li>
+          </ul>
+          <textarea id="nuevaNota" placeholder="Agregar nueva nota..."></textarea>
+          <button class="btn" onclick="agregarNota()">Agregar Nota</button>
+        </div>
+
+        <!-- Tareas Pendientes -->
+        <div class="card">
+          <h2>Tareas Pendientes</h2>
+          <ul id="listaTareas">
+            <li>Confirmar disponibilidad de pieza base.</li>
+            <li>Contactar al cliente para autorización de reemplazo de placa base.</li>
+            <li>Proceder con el reemplazo.</li>
+          </ul>
+          <input type="text" id="nuevaTarea" placeholder="Nueva tarea...">
+          <button class="btn" onclick="agregarTarea()">Agregar Tarea</button>
+        </div>
+
+        <button class="btn descargar" onclick="descargarOrden()">Descargar Orden</button>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
