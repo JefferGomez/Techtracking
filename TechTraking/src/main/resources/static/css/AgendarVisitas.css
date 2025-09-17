@@ -157,14 +157,6 @@ body::before {
 
 }
 
-.contenido {
-  flex: 1;
-  padding: 20px;
-  margin-left: 240px; /* 👈 mismo ancho del sidebar */
-}
-
-
-/* Sidebar */
 .sidebar {
   width: 240px;
   background: #0d1b2a; /* azul oscuro */
@@ -223,4 +215,11 @@ body::before {
 .sidebar-img img {
   width: 100%;
   max-width: 140px;
+}
+
+/* Contenido */
+.contenido {
+  flex-grow: 1;
+  margin-left: 240px; /* deja espacio para el sidebar */
+  padding: 30px;
 }

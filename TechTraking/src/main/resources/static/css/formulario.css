@@ -27,7 +27,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-start; 
   border-bottom: 3px solid #e53e3e;
   padding-bottom: 2px;
   margin-bottom: 0px;
@@ -135,13 +135,13 @@ h2 {
 .consecutivo-inline{
  display: flex;
  align-items: center;
- gap: 0px;
+ gap: 0px; 
  height: 40px;      /* ← más alto */
  width: 350px;      /* ← menos ancho */
  font-size: 17px;   /* opcional: texto un poco más grande */
  padding: 10px 15px; /* espacio interno */
  font-weight: bold;    /* Opcional: lo pone en negrita */
- border: 3px solid #e53e3e; /* Opcional: borde rojo para armonizar */
+ border: 3px solid #e53e3e; /* Opcional: borde rojo para armonizar */ 
 }
 
 
@@ -198,7 +198,6 @@ h2 {
 .pantalla{
   border: 1px solid #ccc;
   padding: 10px;
-
 }
 
 .fila-check {
@@ -229,7 +228,6 @@ h2 {
 .cabezal-impresion {
   border: 1px solid #ccc;
   padding: 10px;
-
 }
 
 
@@ -241,7 +239,6 @@ h2 {
 .estado-electronico {
   border: 1px solid #ccc;
   padding: 10px;
-
 }
 
 .grid-2 {
