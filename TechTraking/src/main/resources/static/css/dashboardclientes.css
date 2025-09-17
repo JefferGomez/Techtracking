@@ -81,6 +81,23 @@ h1 { /* Estilos del título principal */
   color: #333
 }
 
+.logout {
+    border-radius: 6px;
+    background-color: #273FF5;
+    color: white;            /* Texto blanco */
+    font-size: 14px;         /* Tamaño de letra un poco más grande */
+    padding: 10px 20px;      /* Espaciado interno para que el botón sea más grande */
+    border: none;            /* Sin borde adicional */
+    cursor: pointer;         /* Puntero cambia a mano por defecto */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover */
+.logout:hover {
+    background-color: darkblue;  /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05);      /* Pequeño efecto de "crecimiento" */
+}
+
 table { /* Estilos generales para la tabla */
   width: 100%; /* Ocupa todo el ancho disponible */
   border-collapse: collapse; /* Elimina el espacio entre bordes */

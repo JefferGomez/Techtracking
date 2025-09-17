@@ -4,23 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
     <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Primer commit backEnd">
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/VisitaRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Cronograma.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/repository/CronogramaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/repository/TecnicoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/repository/TipoServicioRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/repository/VisitaEquipoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/repository/VisitaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/service/CronogramaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/service/VisitaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/enums/Estadovisita.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/enums/EstadoVisita.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/TipoServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/TipoServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Visita.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Visita.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Visita_equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/model/Visita_equipo.java" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/AgendarVisitas.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/AgendarVisitas.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/dashboardclientes.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/dashboardclientes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/listaUsuarios.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/listaUsuarios.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/vistaequipo.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/vistaequipo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/agendarVisitas.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/agendarVisitas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/dashboard-clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/dashboard-clientes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/vistaequipo.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/vistaequipo.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +66,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Jefferson-Gómez",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/USER/Desktop/Programacion carpetas/TechTraking",
     "settings.editor.selected.configurable": "preferences.pluginManager"
