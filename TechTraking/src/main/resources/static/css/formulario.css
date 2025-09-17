@@ -9,7 +9,7 @@ body {
 .form-wrapper {
   display: flex;
   justify-content: center;
-  
+
 }
 
 /* Caja principal tipo hoja */
@@ -198,7 +198,6 @@ h2 {
 .pantalla{
   border: 1px solid #ccc;
   padding: 10px;
-  
 }
 
 .fila-check {
@@ -229,7 +228,6 @@ h2 {
 .cabezal-impresion {
   border: 1px solid #ccc;
   padding: 10px;
-  
 }
 
 
@@ -241,7 +239,6 @@ h2 {
 .estado-electronico {
   border: 1px solid #ccc;
   padding: 10px;
-  
 }
 
 .grid-2 {
