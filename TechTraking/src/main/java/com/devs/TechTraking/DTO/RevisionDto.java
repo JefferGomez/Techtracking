@@ -1,5 +1,6 @@
 package com.devs.TechTraking.DTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class RevisionDto {
@@ -55,7 +56,7 @@ public class RevisionDto {
 
     // Otros datos de la revisión
     private String observaciones;
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     // --- Getters & Setters ---
     public Long getId() {
@@ -314,11 +315,11 @@ public class RevisionDto {
         this.observaciones = observaciones;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 }

@@ -1,6 +1,8 @@
 package com.devs.TechTraking.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -60,7 +62,7 @@ public class Revision {
 
     // Otros datos de la revisión
     private String observaciones;
-    private LocalDateTime fecha = LocalDateTime.now();
+    private LocalDate fecha = LocalDate.now();
 
     // --- Getters & Setters ---
 
@@ -323,11 +325,11 @@ public class Revision {
         this.observaciones = observaciones;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 }

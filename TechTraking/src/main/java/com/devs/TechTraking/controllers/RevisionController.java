@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/admin/revisiones")
+@RequestMapping("/tecnico")
 @CrossOrigin(origins = "*")
 public class RevisionController {
 
@@ -30,7 +30,7 @@ public class RevisionController {
         this.equipoRepository = equipoRepository;
     }
 
-    @PostMapping
+    @PostMapping("/crearRevisiones")
     public RevisionDto createRevision(@RequestBody RevisionDto dto) {
         Cliente cliente = clienteRepository.findById(dto.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
@@ -43,7 +43,7 @@ public class RevisionController {
         return RevisionMapper.toDto(saved);
     }
 
-    @GetMapping
+    @GetMapping("/obtenerRevisiones")
     public List<RevisionDto> getAllRevisiones() {
         return revisionService.getAllRevisiones()
                 .stream()
