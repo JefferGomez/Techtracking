@@ -37,12 +37,13 @@ function vincularEquipo() {
     return;
   }
 
-  // Leer todos los datos del formulario, incluyendo el ID manual
+  // Leer todos los datos del formulario
   const equipo = {
     id: parseInt(document.getElementById("idEquipo").value),
     marca: document.getElementById("nombreEquipo").value,
     modelo: document.getElementById("modelo").value,
-    serie: document.getElementById("serie").value,
+    // ⚠️ Comentado porque en tu HTML no existe <input id="serie">
+    // serie: document.getElementById("serie").value,
     tipo: document.getElementById("tipo").value,
     clienteId: parseInt(clienteId)
   };
@@ -53,20 +54,24 @@ function vincularEquipo() {
     body: JSON.stringify(equipo)
   })
     .then(response => {
-      if (!response.ok) throw new Error("Error al vincular equipo");
+      if (!response.ok) {
+        return response.text().then(text => {
+          throw new Error(text || "Error al vincular equipo");
+        });
+      }
       return response.json();
     })
     .then(data => {
       alert("✅ Equipo vinculado exitosamente");
-      // Puedes limpiar los campos si lo deseas:
+      // Limpiar campos
       document.getElementById("idEquipo").value = "";
       document.getElementById("nombreEquipo").value = "";
       document.getElementById("modelo").value = "";
-      document.getElementById("serie").value = "";
+      // document.getElementById("serie").value = ""; // si luego lo agregas
       document.getElementById("tipo").value = "";
     })
-    .catch(async (error) => {
-      const errorText = await error.response?.text?.();
-      alert("❌ Error: " + error.message + "\n" + (errorText || ""));
+    .catch(error => {
+      console.error(error);
+      alert("❌ Error: " + error.message);
     });
 }
