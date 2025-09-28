@@ -2,6 +2,7 @@ package com.devs.TechTraking.security;
 
 import com.devs.TechTraking.jwt.JwtUtil;
 import com.devs.TechTraking.model.Usuarios;
+import com.devs.TechTraking.service.UsuariosService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,9 @@ public class SuccesHandler implements AuthenticationSuccessHandler {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private UsuariosService usuariosService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                        HttpServletResponse response,
@@ -26,6 +30,13 @@ public class SuccesHandler implements AuthenticationSuccessHandler {
         throws IOException, ServletException{
 
         Usuarios usuario = (Usuarios) authentication.getPrincipal();
+
+        try {
+            usuariosService.actualizarUltimaSesion(usuario.getId());
+            System.out.println("Ultima sesión registrada para usuario: "+ usuario.getCorreo());
+        } catch (Exception e) {
+            System.err.println("Error al registrar ultima sesión: " + e.getMessage());
+        }
 
         if (usuario.isContraseñaTemporal()){
 
