@@ -1,5 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<    <aside class="sidebar">
+        <div class="logo">TechTracking</div>
+        <nav>
+            <ul>
+                <li class="sidebar-item" data-page="/admin">👥 Clientes</li>
+                <li class="sidebar-item" data-page="/admin/Visitas">📅 Calendario</li>
+                <li class="sidebar-item" data-page="/chat-page">💬 Chat</li>
+            </ul>
+        </nav>
+        <div class="sidebar-img">
+            <img th:src="@{/img/smg.png}" alt="Logo">
+        </div>
+    </aside>" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Clientes - ServiMarketing</title>
@@ -20,7 +32,7 @@
         <div class="logo">TechTracking</div>
         <nav>
             <ul>
-                <li class="sidebar-item" data-page="/admin">👥 Clientes</li>
+                <li><a href="javascript:void(0)" onclick="window.history.back()">� Vista general</a></li>
                 <li class="sidebar-item" data-page="/admin/Visitas">📅 Calendario</li>
                 <li class="sidebar-item" data-page="/chat-page">💬 Chat</li>
             </ul>

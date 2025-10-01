@@ -206,3 +206,12 @@ function confirmDelete(id) {
   });
 }
 
+function cargarChat() {
+  const cont = document.getElementById("contenido");
+  cont.innerHTML = `
+    <h2>Chat</h2>
+    <iframe src="chat.html" style="width:100%;height:500px;border:none;"></iframe>
+  `;
+}
+
+
