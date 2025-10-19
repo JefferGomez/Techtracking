@@ -1,69 +1,105 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Vincular Equipo a Cliente</title>
-  <link rel="stylesheet" th:href="@{/css/vincularequipo.css}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vincular Equipo - TechTracking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/vincularequipo.css}">
 </head>
 
 <body>
 
-<header>
-  <img th:src="@{/img/SM.png}" alt="Logo ServiMarketing" class="logo">
-
-  <div class="nombre-estado">
-    <div class="nombre-equipo-horizontal">
-      <label for="idEquipo">ID del Equipo:</label>
-      <input type="number" id="idEquipo" placeholder="Ej: 101">
+<header class="main-header">
+    <div class="left">
+        <button id="btn-burger" class="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
-    <div class="nombre-equipo-horizontal">
-      <label for="nombreEquipo">Marca del Equipo:</label>
-      <input type="text" id="nombreEquipo" placeholder="Ej: Epson, Zebra...">
+    <div class="logo-h">
+        <span class="servi">Servi</span><span class="mark">Marketing</span>
     </div>
-  </div>
+    <div class="center-title">Vincular Equipo</div>
+    <div class="right">
+        <div class="admin-label">Tecnico</div>
+    </div>
 </header>
 
+<aside class="sidebar" id="sidebar">
+    <div class="brand">
+        <h3>TechTracking</h3>
+    </div>
+    <nav>
+        <ul class="menu">
+            <li> <a class="sidebar-item" href="/admin">👥 Clientes</a></li>
+            <li><a class="sidebar-item" href="/admin/Visitas">📅 Calendario</a></li>
+            <li><a class="sidebar-item" href="/chat-page">💬 Chat</a></li>
+        </ul>
+    </nav>
+
+    <form action="/logout" method="post">
+        <button class="btn-logout" type="submit">Cerrar Sesión</button>
+    </form>
+    <img src="img/smg.png" alt="origami" class="origami">
+
+</aside>
+<div id="overlay" class="overlay"></div>
+
 <main>
-  <div class="formulario">
+    <form id="vincularEquipoForm" class="formulario">
+        <div class="nombre-estado">
+            <img src="img/SM.png" alt="Logo ServiMarketing" class="logo-1">
 
-    <section class="equipo">
-      <h2>Especificaciones del Equipo</h2>
+            <div class="campo-vertical">
+                <label for="idEquipo">ID del Equipo: </label>
+                <input type="text" id="idEquipo" name="idEquipo" placeholder="Ej: 101"required>
+            </div>
+            <div class="campo-vertical">
+                <label for="nombreEquipo">Marca del Equipo:</label>
+                <input type="text" id="nombreEquipo" name="nombreEquipo" placeholder="Ej: Epson, Zebra..."required>
+            </div>
+        </div>
 
-      <label for="modelo">Modelo</label>
-      <input type="text" id="modelo" placeholder="Ej: XP-420">
+        <section class="equipo">
+            <h2>Especificaciones del Equipo</h2>
 
+<<<<<<< Updated upstream
       <label for="serie">Serie</label>
       <input type="text" id="serie" placeholder="Número de serie del equipo">
+=======
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" name="modelo" placeholder="Ej: XP-420"required>
 
-      <label for="tipo">Tipo</label>
-      <select id="tipo">
-        <option value="">Seleccione una opción</option>
-        <option value="Impresora">Impresora</option>
-        <option value="Terminal portátil">Terminal portátil</option>
-      </select>
-    </section>
+            <label for="serie">Serie</label>
+            <input type="text" id="serie" name="serie" placeholder="Número de serie del equipo"required>
+>>>>>>> Stashed changes
 
-    <section class="cliente">
-      <h2>Información del Cliente</h2>
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo"required>
+                <option value="">Seleccione una opción</option>
+                <option value="Impresora">Impresora</option>
+                <option value="Terminal portátil">Terminal portátil</option>
+            </select>
+        </section>
 
-      <div class="busqueda">
-        <input type="text" id="buscarCliente" placeholder="Buscar cliente por nombre o ID">
-        <button onclick="buscarCliente()">Buscar</button>
-      </div>
+        <section class="cliente">
+            <h2>Información del Cliente</h2>
 
-      <div id="datosCliente">
-        <p><strong>NIT:</strong> <span id="NIT"></span></p>
-        <p><strong>Nombre:</strong> <span id="Empresa"></span></p>
-        <p><strong>Dirección:</strong> <span id="Dirección"></span></p>
-        <p><strong>Teléfono:</strong> <span id="Teléfono"></span></p>
-        <p><strong>Correo:</strong> <span id="Correo"></span></p>
-      </div>
-    </section>
+            <div class="busqueda">
+                <input type="text" id="buscarCliente" placeholder="Buscar cliente por nombre o ID"required>
+                <button type="button" onclick="buscarCliente()">Buscar</button>
+            </div>
 
-  </div>
-
-  <button class="vincular" onclick="vincularEquipo()">Vincular Equipo</button>
+            <div id="datosCliente">
+                <p><strong>NIT:</strong> <span id="NIT"></span></p>
+                <p><strong>Nombre:</strong> <span id="Empresa"></span></p>
+                <p><strong>Dirección:</strong> <span id="Dirección"></span></p>
+                <p><strong>Teléfono:</strong> <span id="Teléfono"></span></p>
+                <p><strong>Correo:</strong> <span id="Correo"></span></p>
+            </div>
+            <button type="submit" class="vincular">Vincular Equipo</button>
+        </section>
+    </form>
 </main>
 
 <script th:src="@{/js/vincularequipo.js}"></script>

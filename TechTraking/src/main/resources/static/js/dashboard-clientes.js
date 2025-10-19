@@ -15,7 +15,7 @@ function cargarClientes() {
           <td>${cliente.telefono}</td>
           <td>${cliente.correo}</td>
           <td>
-            <button onclick="verDetalle(${cliente.id})">Ver detalle</button>
+            <button type="button" class="ver-detalle" onclick="verDetalle(${cliente.id})">Ver detalle</button>
           </td>
         `;
 
