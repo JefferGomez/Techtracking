@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Visitas</title>
+    <link rel="stylesheet" th:href="@{/css/DetalleVisitas.css}">
+</head>
+<body>
+    <header>
+        <h1>Visitas del día</h1>
+        <button onclick="window.history.back()">← Volver al Cronograma</button>
+    </header>
+
+    <main>
+        <div id="visitasDia" class="visitas-container">
+        </div>
+    </main>
+
+    <script th:src="@{/js/DetalleVisitas.js}"></script>
+</body>
+</html>

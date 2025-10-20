@@ -1,0 +1,35 @@
+<!DOCTYPE html> <!-- Indica que este archivo es un documento HTML5 -->
+<html lang="en"> <!-- La página está en inglés -->
+<head>
+  <meta charset="UTF-8"> <!-- Usa el juego de caracteres UTF-8 (permite tildes, símbolos, etc.) -->
+  <title>Authentication Error</title> <!-- Título que aparece en la pestaña del navegador -->
+  <link rel="stylesheet" href="css/style.css"> <!-- Enlace al archivo CSS donde están los estilos -->
+</head>
+<body> <!-- Cuerpo de la página: lo que el usuario ve -->
+
+  <!-- Tarjeta de error centrada -->
+  <div class="card"> <!-- Contenedor principal con clase "card" -->
+    
+    <!-- Ícono de advertencia (puedes cambiarlo por un SVG si quieres) -->
+    <div class="warning-icon">⚠️</div>
+    
+    <!-- Título del error -->
+    <h1 class="title">Error de Autenticación!</h1>
+    
+    <!-- Mensaje explicativo del error -->
+    <p class="message">
+      El nombre de usuario o la contraseña que ingresaste son incorrectos.<br>
+Por favor, verifica tus credenciales e inténtalo de nuevo. Si continúas teniendo problemas, es posible que necesites restablecer tu contraseña.
+    </p>
+
+    <!-- Botones con diferentes opciones para el usuario -->
+    <button class="btn" id="forgotBtn">¿Olvidaste tu contraseña?</button> <!-- Botón para recuperar contraseña -->
+    <button class="btn" id="retryBtn">Intenta iniciar sesión nuevamente</button> <!-- Botón para intentar nuevamente -->
+    <button class="btn" id="supportBtn">Contactar al soporte</button> <!-- Botón para contactar soporte -->
+
+  </div>
+
+  <script src="script.js"></script> <!-- Enlace al archivo JavaScript (acciones al hacer clic) -->
+
+</body>
+</html>

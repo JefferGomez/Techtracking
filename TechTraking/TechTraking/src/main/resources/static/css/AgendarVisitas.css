@@ -1,0 +1,275 @@
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  background: #f8f9fb;
+  color: #333;
+}
+
+/* Main content */
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-create {
+  background: #4e73df;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Calendar controls */
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.view-options button {
+  margin-left: 5px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: #eee;
+  border-radius: 4px;
+}
+
+.view-options .active {
+  background: #4e73df;
+  color: white;
+}
+
+/* Calendar grid */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas (LUN a DOM) */
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.day-name {
+  font-weight: bold;
+  padding: 10px;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+}
+
+.days {
+  display: contents; /* deja que los días hereden la grid del padre */
+}
+
+.day {
+  border: 1px solid #ddd;
+  min-height: 80px;
+  padding: 5px;
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* espacio entre eventos */
+  overflow: hidden;
+}
+
+.day-name {
+  background: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.day .date {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+/* Eventos tipo mini-card con iconos */
+.event {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;               /* ocupa todo el ancho del día */
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.4;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.event .client::before {
+  content: "👤 ";
+  font-size: 12px;
+}
+
+.event .time::before {
+  content: "🕒 ";
+  font-size: 12px;
+}
+
+.event .time {
+  font-size: 11px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+.event-blue {
+  background: #4e73df;
+}
+
+.event-green {
+  background: #1cc88a;
+}
+
+.event-pink {
+  background: #e83e8c;
+}
+
+.event-purple {
+  background: #6f42c1;
+}
+
+/* Limitar cantidad de eventos visibles */
+.day .event {
+  display: none;
+}
+
+.day .event:nth-child(2),
+.day .event:nth-child(3),
+.day .event:nth-child(4) {
+  /* Muestra solo los primeros 3 eventos después de la fecha */
+  display: flex;
+}
+
+.more-events {
+  font-size: 11px;
+  color: #555;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.more-events:hover {
+  text-decoration: underline;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Marca de agua */
+body::before {
+  content: "";
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background-image: url('/img/fondo1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #0d1b2a; /* azul oscuro */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
+  position: fixed;  /* ← fijo a la izquierda */
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+/* Logo */
+.sidebar .logo {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Menú */
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  padding: 12px 16px;
+  margin: 6px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+.sidebar nav ul li:hover {
+  background: #1b263b;
+}
+
+.sidebar nav ul li.active {
+  background: #e63946; /* rojo del logo */
+  font-weight: bold;
+  color: #ffffff; /* asegura contraste */
+}
+
+/* Imagen en el sidebar */
+.sidebar-img {
+  text-align: center;
+  margin-top: auto;
+}
+.sidebar-img img {
+  width: 100%;
+  max-width: 140px;
+}
+
+/* Contenido */
+.contenido {
+  flex-grow: 1;
+  margin-left: 240px; /* deja espacio para el sidebar */
+  padding: 30px;
+}

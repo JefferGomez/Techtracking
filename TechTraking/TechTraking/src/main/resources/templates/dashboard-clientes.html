@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<    <aside class="sidebar">
+        <div class="logo">TechTracking</div>
+        <nav>
+            <ul>
+                <li class="sidebar-item" data-page="/admin">👥 Clientes</li>
+                <li class="sidebar-item" data-page="/admin/Visitas">📅 Calendario</li>
+                <li class="sidebar-item" data-page="/chat-page">💬 Chat</li>
+            </ul>
+        </nav>
+        <div class="sidebar-img">
+            <img th:src="@{/img/smg.png}" alt="Logo">
+        </div>
+    </aside>" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - ServiMarketing</title>
+    <link rel="stylesheet" th:href="@{/css/DashboardClientes.css}">
+</head>
+<body>
+<div class="header">
+    <div class="logo"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
+    <div class="nav">Busqueda Clientes</div>
+    <div class="user">Administrador</div>
+    <form action="/logout" method="post">
+        <button class="logout">Cerrar Sesión</button>
+    </form>
+</div>
+<div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">TechTracking</div>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="window.history.back()">� Vista general</a></li>
+                <li class="sidebar-item" data-page="/admin/Visitas">📅 Calendario</li>
+                <li class="sidebar-item" data-page="/chat-page">💬 Chat</li>
+            </ul>
+        </nav>
+        <div class="sidebar-img">
+            <img th:src="@{/img/smg.png}" alt="Logo">
+        </div>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="contenido">
+        <h2>Bienvenido a TechTracking</h2>
+        <p>Selecciona una opción del menú.</p>
+
+        <div class="container">
+            <div class="encabezado">
+                <h1>Búsqueda de Clientes</h1>
+            </div>
+
+            <div class="barra">
+                <input type="text" placeholder="🔍 Buscar clientes...">
+                <div class="acciones">
+                    <button type="button" class="nuevo" onclick="window.location.href='/admin/crearclientes'">+ Nuevo Cliente</button>
+                    <button type="button" class="vincular" onclick="window.location.href='/admin/crearequipo'">Vincular Equipo</button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody id="clientesBody"></tbody>
+            </table>
+
+            <div class="paginacion">
+                <button>&laquo; Anterior</button>
+                <span class="pagina-activa">1</span>
+                <button>Siguiente &raquo;</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script th:src="@{/js/dashboard-clientes.js}"></script>
+</body>
+</html>

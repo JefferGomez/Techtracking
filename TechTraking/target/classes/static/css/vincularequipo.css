@@ -1,0 +1,367 @@
+/* ==========================
+   VARIABLES GLOBALES DE LA APP
+   ========================== */
+:root {
+    --red: #ff6262;
+    --nav: #0d1b2a;
+    --blue: #0d6efd;
+    --card-bg: #fff;
+    --muted: #f5f6fa;
+    --servimarket-red: #e53e3e;
+    /* NUEVAS VARIABLES ESTRUCTURALES */
+    --sidebar-width: 250px; /* Se define el ancho estándar del sidebar */
+    --header-height: 64px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* ======================================
+   ESTRUCTURA PRINCIPAL: HEADER / SIDEBAR
+   ====================================== */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: var(--muted);
+}
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height); /* Usa variable */
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    z-index: 1000;
+}
+
+/* Título de la página: centrado y empujado por el ancho del sidebar */
+.center-title {
+    font-weight: 400; /* Se corrige de 100 a un valor más estándar */
+    color: #fff;
+    font-size: 20px; /* Se ajusta el tamaño para que sea menos dominante */
+    margin-left: 10px;/* Utiliza la variable del sidebar */
+    flex-grow: 1; /* Permite que ocupe el espacio central */
+    text-align: center; /* Centra el texto dentro de su espacio */
+    margin-right: 18px; /* Equilibrio con el padding derecho del header */
+}
+
+/* Etiqueta de rol / usuario en el header */
+.admin-label {
+    font-weight: bold;
+    color: #0d1b2a;
+    margin-right: 25px;
+}
+
+/* Logo Servimarketing en el Header */
+.logo-h {
+    font-size: 1.5rem;
+    font-weight: 600;
+    /* Se elimina 'position: fixed;' ya que el padre ya es fijo y esto causaba redundancia. */
+    margin-right: auto; /* Empuja el título central */
+}
+
+/* FIX: Se añade el punto y coma faltante */
+.servi {
+    color: var(--blue);
+}
+
+.mark {
+    color: #9E0707FF;
+}
+
+/* ======================================
+   SIDEBAR (barra lateral de navegación)
+   ====================================== */
+
+.sidebar {
+    position: fixed;
+    top: var(--header-height); /* Inicia debajo del header */
+    left: 0;
+    bottom: 0;
+    /* FIX: Se corrige el error de sintaxis en la definición del ancho */
+    width: var(--sidebar-width);
+    background: var(--nav);
+    color: #fff;
+    padding: 18px 14px;
+    overflow-y: auto;
+    transition: transform .28s ease-in-out;
+    z-index: 999;
+}
+
+.sidebar .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.sidebar h3 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 40px;
+}
+
+.menu li {
+    margin-bottom: 18px;
+}
+
+/* Se aumenta la especificidad para que el hover solo afecte a los enlaces del menú */
+.menu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s; /* Se añade transición al hover */
+}
+
+/* HOVER: Se cambia a un selector más específico para el enlace (<a>) */
+.menu li a:hover {
+    background: var(--red);
+}
+
+/* Botón de logout y Origami */
+.btn-logout {
+    background: #2b3847;
+    color: #fff;
+    margin-top: 0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.2s;
+
+}
+.btn-logout:hover {
+    background: #ff6262;           /* Fondo rojo al pasar el cursor */
+}
+
+
+/* La imagen origami se simplifica */
+.sidebar .origami {
+    margin-top: 50px;
+    opacity: 0.85;
+    width: 100%; /* Ajuste a 100% para que sea responsiva dentro del sidebar */
+    display: block; /* Asegura que sea un elemento de bloque */
+    margin-left: 0;
+}
+
+/* Botón hamburguesa */
+.burger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/*  FORMULARIO (DIVIDIDO EN 2 COLUMNAS) */
+.formulario {
+    background: white;
+    /* Se elimina el margen izquierdo fijo y se usa la variable para el sidebar */
+    margin-left: 300px;
+    margin-top: 100px; /* Espacio para el header fijo */
+    margin-right: 50px; /* Margen derecho estándar */
+    margin-bottom: 37px;
+
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1500px;
+    display: flex;
+    gap: 50px;
+}
+
+/* Mejoras en el layout del formulario */
+
+.nombre-estado {
+    display: flex;
+    flex-direction: column; /* Se cambia a columna para mejor flujo en escritorio y móvil */
+    gap: 20px;
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.logo-1 {
+    width: 250px; /* Ajuste para mejor proporción en el layout */
+    height: auto;
+}
+
+/* Se unifican los estilos de los campos de ID y Marca en una sola clase */
+.campo-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.campo-vertical label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.campo-vertical input {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* BUSCADOR DE CLIENTE */
+.busqueda {
+    display: flex;
+    gap: 10px;
+}
+
+.busqueda input {
+    flex: 1;
+}
+
+.busqueda button {
+    padding: 10px 15px; /* Ajuste de padding */
+    background: #0d1b2a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.busqueda button:hover {
+    background: #0056b3;
+}
+
+/* BOTÓN FINAL DE VINCULACIÓN*/
+.vincular {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    background: var(--nav);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.vincular:hover {
+    background: #2b3847;
+}
+
+.vincular:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+/* SECCIONES DEL FORMULARIO */
+section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* CAMPOS DE TEXTO Y SELECT */
+input[type="text"], input[type="date"], select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    width: 100%; /* Asegura que ocupen el ancho de su contenedor */
+}
+
+/* ======================================
+   RESPONSIVE DESIGN (Media Queries)
+   ====================================== */
+
+@media (max-width: 992px) {
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+        /* Oculta el sidebar por defecto en pantallas pequeñas */
+        width: var(--sidebar-width);
+        transform: translateX(-100%); /* Lo saca completamente de la vista */
+        z-index: 1001; /* Asegura que esté sobre el contenido y el overlay */
+    }
+
+    /* Estilo para mostrar el sidebar cuando tiene la clase 'active' */
+    .sidebar.active {
+        transform: translateX(0); /* Lo vuelve a mover a la izquierda (visible) */
+    }
+
+    /* --- OVERLAY (sombra oscura detrás del menú) --- */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none; /* Oculto por defecto */
+    }
+
+    .overlay.active {
+        display: block; /* Muestra el overlay cuando el sidebar está activo */
+    }
+
+    /* --- HEADER --- */
+    .main-header .center-title {
+        /* El título se centra sin margen fijo del sidebar */
+        margin-left: 0;
+        flex-grow: 1;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .logo-h {
+        display: none; /* Ocultamos el logo en el header para ahorrar espacio */
+    }
+
+    .burger {
+        display: block; /* Muestra el botón hamburguesa */
+    }
+
+    /* --- CONTENIDO PRINCIPAL (MAIN / FORMULARIO) --- */
+    main {
+        padding-top: var(--header-height); /* Mantiene espacio para el header fijo */
+    }
+
+    .formulario {
+        /* Ocupa todo el ancho disponible y elimina el margen fijo del sidebar */
+        width: 90%;
+        margin: 20px auto; /* Centra el formulario en la pantalla */
+        margin-top: 84px; /* Pequeño ajuste para evitar el header fijo */
+        flex-direction: column; /* Apila las secciones verticalmente */
+        gap: 20px;
+        box-shadow: none; /* Quitar sombra en móvil para un diseño más limpio */
+    }
+
+    /* El logo del formulario también se ajusta */
+    .formulario .logo-1 {
+        width: 100%;
+        max-width: 250px;
+    }
+}

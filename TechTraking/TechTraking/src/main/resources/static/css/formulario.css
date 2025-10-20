@@ -1,0 +1,267 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+  padding: 30px;
+}
+
+/* Contenedor centrado */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+
+}
+
+/* Caja principal tipo hoja */
+.card {
+  width: 100%;
+  max-width: 1100px;
+  background: white;
+  padding: 20px 30px;
+  border: 2px solid #e53e3e;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Encabezado */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  border-bottom: 3px solid #e53e3e;
+  padding-bottom: 2px;
+  margin-bottom: 0px;
+}
+
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  gap: 170px; /* Espacio pequeño entre logo y título */
+  margin-left: 20px; /* <-- aquí lo separas del borde izquierdo */
+}
+
+.logo-titulo img {
+  width: 120px;
+  height: auto;
+  transform: scaleX(1.5);
+}
+
+.titulo {
+  text-align: left;  /* Para alinear el texto junto al logo */
+  margin: 0;
+}
+
+.titulo h1 {
+  color: #e53e3e;
+  margin: 0;
+  font-size: 30px;
+}
+
+.titulo p {
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.datos-header {
+  font-size: 10px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+
+/* Secciones */
+
+section {
+  background: #fafafa;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #c53030;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  align-items: center;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin: 10px 0;
+}
+
+
+/* datos cliente */
+.datos-cliente {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 5px;
+}
+
+.columna-izquierda,
+.columna-derecha {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.columna-izquierda {
+  flex: 2; /* ocupa más espacio */
+}
+
+.columna-derecha {
+  flex: 1; /* el campo Consecutivo será más ancho */
+}
+
+.fecha-inline {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.consecutivo-inline{
+ display: flex;
+ align-items: center;
+ gap: 0px; 
+ height: 40px;      /* ← más alto */
+ width: 350px;      /* ← menos ancho */
+ font-size: 17px;   /* opcional: texto un poco más grande */
+ padding: 10px 15px; /* espacio interno */
+ font-weight: bold;    /* Opcional: lo pone en negrita */
+ border: 3px solid #e53e3e; /* Opcional: borde rojo para armonizar */ 
+}
+
+
+.datos-cliente input[type="text"] {
+  width: 95%;
+}
+/* FORMULARIO */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.check-group {
+  border: 1px solid #ccc;
+  padding: 0px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.estado-general {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 95%;
+}
+
+.seccion-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seccion-titulo h2 {
+  margin: 0;
+  color: #d00;
+}
+
+.columnas-labels {
+  display: flex;
+  gap: 75px;
+  font-weight: bold;
+  margin-right: 50px;
+}
+
+.fila-check label {
+  flex: 1;
+}
+
+.fila-check input[type="radio"] {
+  margin: 0 40px;
+}
+
+.pantalla{
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.fila-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+.seccion-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.columnas-labels {
+  display: flex;
+  gap: 75px;
+  font-weight: bold;
+  margin-right: 0 65px;
+}
+
+.cabezal-impresion {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
+.rodillo-impresion {
+  border: 1px solid #ccc;
+  padding: 10px;
+  }
+
+.estado-electronico {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+  gap: 12px; /* espacio entre columnas */
+}
+
+/* Las columnas apilan sus secciones en vertical */
+.columna-izquierda, .columna-derecha {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* espacio entre secciones dentro de cada columna */
+}
+.pantalla,
+.cabezal-impresion,
+.rodillo-impresion,
+.estado-electronico {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f9f9f9;
+  width: 95%;   /* ocupa todo el ancho de la columna */
+  height: auto;  /* se adapta al contenido */
+  margin-bottom: 0px;
+}
