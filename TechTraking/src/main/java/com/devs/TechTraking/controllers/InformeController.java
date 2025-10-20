@@ -12,7 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/admin/informe")
+@RequestMapping("/tecnico")
 @CrossOrigin(origins = "*")
 public class InformeController {
 
@@ -26,7 +26,7 @@ public class InformeController {
         this.informeService = informeService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/informe/{id}")
     public ResponseEntity<byte[]> generarReporte(@PathVariable Long id) throws IOException {
         Revision revision = revisionService.getRevisionById(id);
         if (revision == null) {

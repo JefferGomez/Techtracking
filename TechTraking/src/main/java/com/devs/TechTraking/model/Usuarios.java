@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -20,9 +21,14 @@ public class Usuarios implements UserDetails {
     private String contraseña;
     private boolean bloqueado = false;
     private boolean contraseñaTemporal;
+
+    @Column(name = "ultima_sesion")
+    private LocalDateTime ultimaSesion;
+
     @ManyToOne
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
+
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnoreProperties("usuario")
     private Tecnico tecnico;
@@ -103,6 +109,14 @@ public class Usuarios implements UserDetails {
 
     public void setTecnico(Tecnico tecnico) {
         this.tecnico = tecnico;
+    }
+
+    public LocalDateTime getUltimaSesion() {
+        return ultimaSesion;
+    }
+
+    public void setUltimaSesion(LocalDateTime ultimaSesion) {
+        this.ultimaSesion = ultimaSesion;
     }
 
     @Override

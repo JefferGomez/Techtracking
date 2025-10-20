@@ -5,52 +5,81 @@
     <title>TechTracking</title>
     <link rel="stylesheet" th:href="@{/css/listaUsuarios.css}">
 </head>
- <body>
+<body>
+    <!-- Header superior -->
     <div class="header">
         <div class="logo"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
         <div class="nav">Gestión de usuarios</div>
         <div class="user">SuperAdmin</div>
-        <div class="search"><input type="text" id="search" placeholder="Buscar usuarios ..." /></div>
-        <form action="/logout" method="post">
-            <button class="logout">Cerrar Sesión</button>
-        </form>
-    </div>
-
-    <div class="overview">
-        <h3>Visión general</h3>
-        <p>Total usuarios</p>
-        <div id="totalUsers"></div>
-    </div>
-
-    <div class="user-table">
-        <h3>Usuarios</h3>
-        <button class="btn" onclick="window.location.href='/superadmin/register'">Crear Usuario</button>
-        <table>
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Rol</th>
-                <th>ID</th>
-                <th>Opciones</th>
-            </tr>
-            </thead>
-            <tbody id="userBody"></tbody>
-        </table>
-    </div>
-    <div id="confirmation" class="confirmation">Eliminación confirmada</div>
-    <div id="modalEditar" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="cerrarModalEditar()">&times;</span>
-            <h2>Editar Usuario</h2>
-            <p id="infoUsuario" class="infoUser" style="margin-top: -10px; margin-bottom: 10px; font-size: 14px; color: #666;"></p>
-            <form id="formEditar">
-                <input type="email" id="editarCorreo" placeholder="Nuevo correo" required />
-                <input type="password" id="editarPassword" placeholder="Nueva contraseña" required />
-                <button type="submit" class="btn">Guardar cambios</button>
-            </form>
+        <div class="search">
+            <input type="text" id="search" placeholder="Buscar usuarios ..." />
         </div>
     </div>
+
+    <!-- Dashboard con sidebar y contenido -->
+    <div class="dashboard">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>TechTracking</h2>
+            <div class="sidebar-img">
+                <img th:src="@{/img/smg.png}" alt="Logo">
+            </div>
+            <form action="/logout" method="post" class="logout-form">
+                <button class="logout">Cerrar Sesión</button>
+            </form>
+            <nav>
+                <ul>
+                    <li><a href="javascript:void(0)">📅 Vista general</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido dinámico -->
+        <main class="contenido" id="contenido">
+            
+            <!-- Aquí va el contenido original -->
+            <div class="overview">
+                <h3>Visión general</h3>
+                <p>Total usuarios</p>
+                <div id="totalUsers"></div>
+            </div>
+
+            <div class="user-table">
+                <h3>Usuarios</h3>
+                <button class="btn" onclick="window.location.href='/superadmin/register'">Crear Usuario</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>ID</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userBody"></tbody>
+                </table>
+            </div>
+
+            <div id="confirmation" class="confirmation">Eliminación confirmada</div>
+
+            <div id="modalEditar" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="cerrarModalEditar()">&times;</span>
+                    <h2>Editar Usuario</h2>
+                    <p id="infoUsuario" class="infoUser" style="margin-top: -10px; margin-bottom: 10px; font-size: 14px; color: #666;"></p>
+                    <form id="formEditar">
+                        <input type="email" id="editarCorreo" placeholder="Nuevo correo" required />
+                        <input type="password" id="editarPassword" placeholder="Nueva contraseña" required />
+                        <button type="submit" class="btn">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
     <script th:src="@{/js/listaUsuarios.js}"></script>
- </body>
+</body>
 </html>

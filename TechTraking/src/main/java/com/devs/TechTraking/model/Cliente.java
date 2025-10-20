@@ -15,6 +15,7 @@ public class Cliente {
     private String direccion;
     private String telefono;
     private String correo;
+    private boolean aceptarTerminos;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -60,6 +61,14 @@ public class Cliente {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public boolean isAceptarTerminos() {
+        return aceptarTerminos;
+    }
+
+    public void setAceptarTerminos(boolean aceptarTerminos) {
+        this.aceptarTerminos = aceptarTerminos;
     }
 
     public List<Equipo> getEquipos() {

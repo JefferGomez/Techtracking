@@ -17,6 +17,16 @@ async function cargarVista(vista,tecnicoId) {
       <iframe src="chat.html" style="width:100%;height:500px;border:none;"></iframe>
     `;
   }
+
+  const enlaces = document.querySelectorAll(".sidebar ul li a");
+    enlaces.forEach(a => {
+        if (a.getAttribute("onclick").includes(vista)) {
+            a.classList.add("activo");
+        } else {
+            a.classList.remove("activo");
+        }
+    });
+
 }
 
 async function cargarCronograma() {

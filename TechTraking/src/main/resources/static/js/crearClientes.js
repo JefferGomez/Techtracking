@@ -7,6 +7,7 @@ document.getElementById('registroCliente').addEventListener('submit', function(e
   const direccion = document.getElementById('direccion').value.trim();
   const telefono = document.getElementById('telefono').value.trim();
   const email = document.getElementById('email').value.trim();
+  const aceptarTerminos = document.getElementById('terminos').checked;
 
 
   // Crear el objeto que se va a enviar como JSON
@@ -15,7 +16,8 @@ document.getElementById('registroCliente').addEventListener('submit', function(e
     id: id,
     direccion: direccion,
     telefono: telefono,
-    correo: email
+    correo: email,
+    aceptarTerminos: aceptarTerminos
   };
 
   // Enviar los datos al backend (Spring Boot)

@@ -143,14 +143,6 @@ visitForm.addEventListener("submit", (e) => {
 
 
   fetch("http://localhost:8080/admin/crearVisitas", {   // cambia la URL por la de tu backend
-  const nuevaVisita = {
-    date: document.getElementById("date").value,
-    description: document.getElementById("description").value,
-    cliente: document.getElementById("cliente").value,
-    tecnico: document.getElementById("tecnico").value
-  };
-
-  fetch("http://localhost:8080/tecnico/crearVisitas", {   // cambia la URL por la de tu backend
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(nuevaVisita)
@@ -172,6 +164,7 @@ visitForm.addEventListener("submit", (e) => {
     alert("No se pudo guardar la visita");
   });
 });
+
 
 // 👉 Cargar visitas desde la API (GET)
 function cargarVisitas() {
@@ -196,7 +189,7 @@ function cargarVisitas() {
 }
 
 async function cargarClientes() {
-  const res = await fetch("http://localhost:8080/admin/mostrarClientes");
+  const res = await fetch("http://localhost:8080/admin/clientes");
   const clientes = await res.json();
   const select = document.getElementById("cliente");
 
@@ -251,6 +244,26 @@ async function cargarEquiposPorCliente(clienteId) {
     equiposSelect.innerHTML = `<option value="">Error al cargar equipos</option>`;
   }
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".sidebar-item");
+    const currentPath = window.location.pathname;
+
+    items.forEach(item => {
+        const page = item.getAttribute("data-page");
+
+        // Marca activo si coincide con la URL
+        if (currentPath === page) {
+            item.classList.add("active");
+        }
+
+        // Al hacer click redirige
+        item.addEventListener("click", () => {
+            window.location.href = page;
+        });
+    });
+});
 
 
 

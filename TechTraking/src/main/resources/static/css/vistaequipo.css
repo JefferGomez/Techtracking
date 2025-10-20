@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  /*margin: 0;*/
   font-family: 'Segoe UI', sans-serif;
   background-color: #f4f4f4; /* Fondo base */
   padding: 20px;
@@ -23,7 +23,62 @@ body::before {
   z-index: -1;
 }
 
+.header {
+  background-color: #ff6262;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
 
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.servi{
+
+  color:blue
+
+}
+
+.mark{
+
+    color:#9E0707FF
+
+}
+
+.nav {
+  font-size: 1rem;
+}
+
+.search input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.user {
+  font-weight: bold;
+  color: #333
+}
+
+.logout {
+    border-radius: 6px;
+    background-color: #273FF5;
+    color: white;            /* Texto blanco */
+    font-size: 14px;         /* Tamaño de letra un poco más grande */
+    padding: 10px 20px;      /* Espaciado interno para que el botón sea más grande */
+    border: none;            /* Sin borde adicional */
+    cursor: pointer;         /* Puntero cambia a mano por defecto */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover */
+.logout:hover {
+    background-color: darkblue;  /* Azul más oscuro al pasar el mouse */
+    transform: scale(1.05);      /* Pequeño efecto de "crecimiento" */
+}
 
 .logo {
   max-width: 300px; /* Ancho máximo del logo */
@@ -136,7 +191,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-color: #f4f4f4; /* Fondo gris claro */
-  padding: 20px;
+  /*padding: 20px;*/
   position: relative;
   min-height: 100vh; /* Altura mínima pantalla completa */
 }

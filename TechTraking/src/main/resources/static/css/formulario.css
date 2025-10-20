@@ -1,3 +1,4 @@
+
 /* ==========================
    VARIABLES GLOBALES DE LA APP
    ========================== */
@@ -46,7 +47,6 @@ body {
     margin-left: 250px;            /* Desplaza el texto hacia la derecha (ej. espacio para sidebar) */
 }
 
-<<<<<<< Updated upstream
 /* Encabezado */
 .header {
   display: flex;
@@ -55,7 +55,7 @@ body {
   border-bottom: 3px solid #e53e3e;
   padding-bottom: 2px;
   margin-bottom: 0px;
-=======
+}
 /* Etiqueta de rol / usuario en el header */
 .admin-label { 
     font-weight: 500;              /* Peso medio del texto */
@@ -67,7 +67,6 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   position: fixed; 
->>>>>>> Stashed changes
 }
 
 .servi{
@@ -358,7 +357,6 @@ h2 {
     width: 100%;                   /* Ocupa todo el ancho del contenedor padre */
 }
 
-<<<<<<< Updated upstream
 .consecutivo-inline{
  display: flex;
  align-items: center;
@@ -369,7 +367,7 @@ h2 {
  padding: 10px 15px; /* espacio interno */
  font-weight: bold;    /* Opcional: lo pone en negrita */
  border: 3px solid #e53e3e; /* Opcional: borde rojo para armonizar */
-=======
+}
 /* Contenedor visible del consecutivo (texto + input) */
 .consecutivo-inline {
     display: flex;                 /* Alinea horizontalmente el bloque del consecutivo */
@@ -381,7 +379,7 @@ h2 {
     padding: 10px 0px;             /* Padding vertical */
     font-weight: bold;             /* Texto del consecutivo en negrita */
     color: #c0392b;                /* Color rojizo para destacar el consecutivo */
->>>>>>> Stashed changes
+
 }
 
 /* Input de tipo número dentro del consecutivo (estilo para integrarlo visualmente) */
@@ -410,7 +408,6 @@ h2 {
     border-radius: 4px;            /* Bordes redondeados pequeños */
 }
 
-<<<<<<< Updated upstream
 .estado-general {
   border: 1px solid #ccc;
   padding: 10px;
@@ -491,11 +488,10 @@ h2 {
   padding: 10px;
 
 }
-=======
+
 /* ======================================
    GRID DE CHEQUEO (ESTADO / PIEZAS / ETC.)
    ====================================== */
->>>>>>> Stashed changes
 
 .grid-2 {
     display: grid;                 /* Usa CSS Grid para organizar columnas */

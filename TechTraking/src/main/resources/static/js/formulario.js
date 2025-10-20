@@ -51,9 +51,6 @@ document.querySelector("input[name='etiqueta']").addEventListener("change", func
 document.querySelector("input[name='firma']").addEventListener("change", function () {
   mostrarVistaPrevia(this, "previewFirma");
 });
-<<<<<<< Updated upstream
-=======
-
 // Envío del formulario al backend
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -155,4 +152,3 @@ const pdfRes = await fetch(`http://localhost:8080/tecnico/informe/${revisionId}`
     alert("❌ Ocurrió un error al guardar la revisión o generar el PDF.");
   }
 });
->>>>>>> Stashed changes
