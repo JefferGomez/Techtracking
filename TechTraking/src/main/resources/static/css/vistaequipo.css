@@ -1,219 +1,547 @@
+/* ==========================
+   VARIABLES GLOBALES DE LA APP
+   ========================== */
+:root {
+    --red: #ff6262;
+    --nav: #0d1b2a;
+    --blue: #0d6efd;
+    --card-bg: #fff;
+    --muted: #f5f6fa;
+    --servimarket-red: #e53e3e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* ======================================
+   ESTRUCTURA PRINCIPAL: BODY
+   ====================================== */
+
 body {
-  /*margin: 0;*/
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4; /* Fondo base */
-  padding: 20px;
-  position: relative; /* Necesario para el pseudo-elemento */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    position: relative;
+    min-height: 100vh;
 }
 
-/* Marca de agua de fondo */
+/* Marca de agua de fondo centrada */
 body::before {
-  content: "";
-  display: block; /* 👈 esto asegura que se renderice */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/img/fondo1.png');
-  background-size: 300px auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.08;
-  z-index: -1;
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/fondo1.png');
+    background-size: 300px auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.08;
+    z-index: -1;
+    pointer-events: none;
 }
 
-.header {
-  background-color: #ff6262;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
+/* ======================================
+   HEADER PRINCIPAL
+   ====================================== */
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    z-index: 1000;
+}
+
+.main-header .center {
+    font-weight: 100;
+    color: #fff;
+    font-size: 28px;
+    margin-left: 250px;
+}
+
+.admin-label {
+    font-weight: bold;
+    color: #0d1b2a;
+    margin-right: 25px;
+}
+
+.logo-h {
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: fixed;
+}
+
+.servi {
+    color: blue;
+}
+
+.mark {
+    color: #9E0707FF;
+}
+
+/* ======================================
+   SIDEBAR
+   ====================================== */
+
+.sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    background: var(--nav);
+    color: #fff;
+    padding: 18px 14px;
+    overflow: auto;
+    transition: transform 0.28s ease-in-out;
+    z-index: 999;
+}
+
+.sidebar .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.sidebar h3 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 40px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.menu li {
+    margin-bottom: 18px;
+}
+
+li:hover {
+    background: #ff6262;
+    border-radius: 6px;
+}
+
+.btn-logout {
+    background: #2b3847;
+    color: #fff;
+    margin-top: 0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background: #ff6262;
+}
+
+.sidebar .origami {
+    margin-top: 50px;
+    opacity: 0.85;
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 5px;
+}
+
+.burger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ======================================
+   CONTENIDO PRINCIPAL - CENTRADO
+   ====================================== */
+
+main {
+    margin-top: 84px;
+    margin-left: 220px;
+    margin-right: 20px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: calc(100vh - 84px);
+}
+
+.encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    padding: 20px;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-.servi{
-
-  color:blue
-
+    width: 250px;
+    height: auto;
 }
 
-.mark{
-
-    color:#9E0707FF
-
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
 }
 
-.nav {
-  font-size: 1rem;
+/* ======================================
+   FORMULARIO Y CARDS CENTRADOS
+   ====================================== */
+
+.detalle-wrapper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
 }
 
-.search input {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
+.info-general,
+.info-servicio {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+    max-width: 550px;
 }
 
-.user {
-  font-weight: bold;
-  color: #333
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #003366;
+}
+
+.cliente-avatar {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.cliente-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.datos-cliente p {
+    margin: 4px 0;
+}
+
+.historial {
+    list-style: none;
+    padding-left: 0;
+}
+
+.historial li {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+/* ======================================
+   FORMULARIOS
+   ====================================== */
+
+textarea,
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: auto;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.btn.descargar {
+    background-color: #28a745;
+    margin-top: 20px;
+}
+
+.btn.descargar:hover {
+    background-color: #218838;
 }
 
 .logout {
     border-radius: 6px;
     background-color: #273FF5;
-    color: white;            /* Texto blanco */
-    font-size: 14px;         /* Tamaño de letra un poco más grande */
-    padding: 10px 20px;      /* Espaciado interno para que el botón sea más grande */
-    border: none;            /* Sin borde adicional */
-    cursor: pointer;         /* Puntero cambia a mano por defecto */
+    color: white;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Hover */
 .logout:hover {
-    background-color: darkblue;  /* Azul más oscuro al pasar el mouse */
-    transform: scale(1.05);      /* Pequeño efecto de "crecimiento" */
+    background-color: darkblue;
+    transform: scale(1.05);
 }
 
-.logo {
-  max-width: 300px; /* Ancho máximo del logo */
-  margin-bottom: 10px; /* Espacio inferior entre el logo y lo que sigue */
+/* ======================================
+   ESTILOS PARA VISTA DE EQUIPOS
+   ====================================== */
+
+.container {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1100px;
+    margin: 20px auto;
 }
 
-h1 {
-  text-align: center; /* Centra el texto del título */
-  font-size: 24px; /* Tamaño de fuente del título */
+.mt-5 {
+    margin-top: 3rem;
 }
 
-main {
-  max-width: 1200px; /* Ancho máximo del contenido principal */
-  margin: 0 auto; /* Centra horizontalmente el contenido */
+.mb-4 {
+    margin-bottom: 1.5rem;
 }
 
-.detalle-wrapper {
-  display: flex; /* Activa el modelo de caja flexible (flexbox) */
-  gap: 20px; /* Espacio de 20px entre los elementos hijos */
-  flex-wrap: wrap; /* Permite que los elementos bajen a otra línea si no caben */
+.mb-3 {
+    margin-bottom: 1rem;
 }
 
-.info-general,
-.info-servicio {
-  flex: 1; /* Cada sección ocupa el mismo espacio disponible */
-  display: flex; /* Usa flexbox también en estas secciones */
-  flex-direction: column; /* Coloca los hijos uno debajo del otro */
-  gap: 20px; /* Espacio entre las tarjetas */
+.card-body {
+    padding: 20px;
 }
 
-.card {
-  background: white; /* Fondo blanco para las tarjetas */
-  border-radius: 8px; /* Esquinas ligeramente redondeadas */
-  padding: 20px; /* Espacio interno dentro de la tarjeta */
-  box-shadow: 0 0 10px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
+.card-body h5 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
 }
 
-.card h2 {
-  margin-top: 0; /* Quita el margen superior del subtítulo */
-  font-size: 18px; /* Tamaño de fuente para el título de sección */
+.card-body strong {
+    color: #003366;
+    font-weight: 600;
 }
 
-.cliente-avatar {
-  display: flex; /* Flexbox para alinear imagen e info */
-  gap: 15px; /* Espacio entre imagen y datos */
-  align-items: flex-start; /* Alinea los elementos arriba */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
 }
 
-.cliente-avatar img {
-  width: 80px; /* Ancho fijo de la imagen del cliente */
-  height: 80px; /* Alto fijo de la imagen */
-  border-radius: 50%; /* Hace que la imagen sea circular */
-  object-fit: cover; /* Ajusta la imagen sin deformarla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
 }
 
-.datos-cliente p {
-  margin: 4px 0; /* Espacio vertical entre cada línea de datos */
+.table-bordered {
+    border: 1px solid #dee2e6;
 }
 
-.historial {
-  list-style: none; /* Quita los puntos de la lista */
-  padding-left: 0; /* Elimina el espacio a la izquierda */
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
 }
 
-.historial li {
-  padding: 6px 0; /* Espacio vertical dentro de cada ítem */
-  border-bottom: 1px solid #eee; /* Línea separadora entre ítems */
-  font-size: 14px; /* Tamaño de letra más pequeño */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
 }
 
-textarea,
-input[type="text"] {
-  width: 100%; /* Ocupan todo el ancho disponible */
-  padding: 10px; /* Espacio interior para escribir cómodo */
-  margin-top: 10px; /* Separación desde el elemento superior */
-  border-radius: 6px; /* Esquinas redondeadas */
-  border: 1px solid #ccc; /* Borde gris claro */
-  font-size: 14px; /* Tamaño de fuente estándar */
+.table-dark {
+    background-color: var(--nav);
+    color: white;
 }
 
-.btn {
-  background-color: #007bff; /* Azul principal para los botones */
-  color: white; /* Texto blanco */
-  padding: 10px 15px; /* Espacio interno del botón */
-  margin-top: 10px; /* Espacio hacia arriba */
-  border: none; /* Sin borde visible */
-  border-radius: 6px; /* Esquinas redondeadas */
-  cursor: pointer; /* Cambia el puntero al pasar por encima */
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
 }
 
-.btn.descargar {
-  background-color: #28a745; /* Verde para el botón de descargar */
-  margin-top: 20px; /* Espacio adicional arriba */
+.table thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.5px;
 }
 
-.encabezado {
-  display: flex; /* Flexbox para alinear el logo y el título */
-  align-items: center; /* Centra verticalmente ambos elementos */
-  gap: 15px; /* Espacio entre el logo y el título */
-  margin-bottom: 20px; /* Separación inferior del encabezado */
+.table tbody td {
+    font-size: 14px;
 }
 
-.logo {
-  width: 250px; /* Ancho del logo */
-  height: auto; /* Altura automática proporcional */
+#tablaEquipos tr {
+    transition: background-color 0.2s ease;
 }
 
-/* Fondo base */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4; /* Fondo gris claro */
-  /*padding: 20px;*/
-  position: relative;
-  min-height: 100vh; /* Altura mínima pantalla completa */
+body .container {
+  margin-left: 220px;   /* espacio para la sidebar fija */
+  margin-right: 20px;   /* pequeño margen derecho */
+  max-width: calc(100% - 240px); /* asegura que el contenedor no se corte */
+  transition: margin-left 0.3s ease; /* animación suave al abrir/cerrar menú */
 }
 
-/* Marca de agua centrada */
-body::before {
-  content: "";
-  position: fixed;  /* Permanece fijo al hacer scroll */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background-image: url('/img/fondo1.png'); /* Ruta a tu logo */
-  background-size: 300px auto; /* Tamaño del logo */
-  background-repeat: no-repeat;
-  background-position: center center; /* Centrado vertical y horizontal */
-
-  opacity: 0.08; /* Transparencia para que no moleste */
-
-  z-index: -1; /* Lo coloca detrás de todo */
-  display: block;
-  pointer-events: none; /* Evita que bloquee clics */
+/* Overlay para menú móvil */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
 }
 
+.overlay.active {
+    display: block;
+}
+
+/* Estilos para elementos left y right del header */
+.main-header .left {
+    display: flex;
+    align-items: center;
+}
+
+.main-header .right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ======================================
+   RESPONSIVE DESIGN
+   ====================================== */
+
+@media (max-width: 1024px) {
+    main {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .detalle-wrapper {
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-header .center {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    main {
+        margin-left: 0;
+        margin-top: 84px;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .detalle-wrapper {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .info-general,
+    .info-servicio {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .admin-label {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .logo {
+        width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+  body .container {
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
