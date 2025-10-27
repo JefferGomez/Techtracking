@@ -40,7 +40,7 @@
     <form action="/logout" method="post">
         <button class="btn-logout" type="submit">Cerrar Sesión</button>
     </form>
-    <img src="img/smg.png" alt="origami" class="origami">
+    <img th:src="@{/img/smg.png}" alt="origami" class="origami">
 
 </aside>
 <div id="overlay" class="overlay"></div>
@@ -48,7 +48,7 @@
 <main>
     <form id="vincularEquipoForm" class="formulario">
         <div class="nombre-estado">
-            <img src="img/SM.png" alt="Logo ServiMarketing" class="logo-1">
+            <img th:src="@{/img/SM.png}" alt="Logo ServiMarketing" class="logo-1">
 
             <div class="campo-vertical">
                 <label for="idEquipo">ID del Equipo: </label>

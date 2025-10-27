@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Clientes - ServiMarketing</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-
 <html lang="es">
 
 <head>
@@ -14,16 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/DashboardClientes.css}">
-
 </head>
 
 <body>
-
-<div class="header">
-    <div class="logo"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
-    <div class="nav">Busqueda Clientes</div>
-    <div class="user">Administrador</div>
-    <button class="Chat" onclick="">Chat Corporativo</button>
 
 <header class="main-header">
     <div class="left">
@@ -45,60 +32,14 @@
     </div>
     <nav>
         <ul class="menu">
-            <li><a class="sidebar-item"  data-page="/admin/Visitas">📅 Calendario</a></li>
-            <li><a class="sidebar-item" data-page="/chat-page">💬 Chat</a></li>
+            <li><a href="/admin/Visitas">📅 Calendario</a></li>
+            <li><a href="/chat-page">💬 Chat</a></li>
         </ul>
     </nav>
-
 
     <form action="/logout" method="post">
         <button class="btn-logout" type="submit">Cerrar Sesión</button>
     </form>
-
-</div>
-
-<div class="container"> <!-- Contenedor principal de toda la página -->
-
-    <div class="encabezado"> <!-- Sección superior con logo y título -->
-       <!-- <img src="img/SM.png" alt="Logo" class="logo">  Logo de la empresa -->
-        <h1>Búsqueda de Clientes</h1> <!-- Título principal -->
-    </div>
-
-    <div class="barra"> <!-- Barra de búsqueda y botones -->
-        <input type="text" placeholder="🔍 Buscar clientes..."> <!-- Campo para escribir búsqueda -->
-        <div class="acciones"> <!-- Contenedor de botones de acción -->
-            <button type="button" class="nuevo" onclick="window.location.href='/admin/crearclientes'">+ Nuevo Cliente</button>
-            <button type="button" class="vincular" onclick="window.location.href='/admin/crearequipo'">Vincular Equipo</button>
-
-
-        </div>
-    </div>
-
-    <table> <!-- Tabla para mostrar resultados -->
-        <thead> <!-- Encabezados de la tabla -->
-        <tr>
-            <th>ID</th> <!-- Id del cliente -->
-            <th>Nombre</th> <!-- Nombre del cliente -->
-            <th>Dirección</th> <!-- Direccion del cliente -->
-            <th>Telefono</th> <!-- Telefono -->
-            <th>Correo</th> <!--Correo electrónico -->
-            <th>Acción</th>
-
-        </tr>
-        </thead>
-        <tbody> <tbody id="clientesBody"><!-- Cuerpo de la tabla con datos de ejemplo -->
-
-
-        </tbody>
-    </table>
-
-    <div class="paginacion"> <!-- Sección inferior para navegar entre páginas -->
-        <button>&laquo; Anterior</button> <!-- Botón para ir a la página anterior -->
-        <span class="pagina-activa">1</span> <!-- Número de página actual -->
-        <button>Siguiente &raquo;</button> <!-- Botón para ir a la siguiente página -->
-    </div>
-
-
     <img th:src="@{/img/smg.png}" alt="origami" class="origami">
 
 </aside>
@@ -143,7 +84,6 @@
         </div>
     </div>
 </main>
-
 </div>
 
 <script th:src="@{/js/dashboard-clientes.js}"></script>
