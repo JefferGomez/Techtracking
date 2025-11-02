@@ -5,7 +5,7 @@ public class EquipoDTO {
     private Long id; // ✅ ID manual
     private String marca;
     private String modelo;
-    private String serie;
+    private String serial;
     private String tipo;
     private Long clienteId;
 
@@ -13,10 +13,11 @@ public class EquipoDTO {
     public EquipoDTO() {}
 
     // Constructor con todos los campos
-    public EquipoDTO(Long id, String marca, String modelo, String tipo, Long clienteId) {
+    public EquipoDTO(Long id, String marca, String modelo,String  serial, String tipo, Long clienteId) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
+        this.serial = serial;
         this.tipo = tipo;
         this.clienteId = clienteId;
     }
@@ -45,6 +46,14 @@ public class EquipoDTO {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
     public String getTipo() {

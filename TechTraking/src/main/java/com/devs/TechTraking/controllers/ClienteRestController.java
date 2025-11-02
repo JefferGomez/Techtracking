@@ -3,6 +3,7 @@ package com.devs.TechTraking.controllers;
 import com.devs.TechTraking.model.Cliente;
 import com.devs.TechTraking.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,19 +14,27 @@ public class ClienteRestController {
     private ClienteRepository clienteRepository;
 
     @GetMapping("/buscar")
-    public Cliente buscarCliente(@RequestParam("query") String query) {
+    public ResponseEntity<Cliente> buscarCliente(@RequestParam("query") String query) {
         try {
-            // Si el query es un número, intenta buscar por ID
+            Cliente cliente;
+
             try {
                 Long id = Long.parseLong(query);
-                return clienteRepository.findById(id).orElse(null);
+                cliente = clienteRepository.findById(id).orElse(null);
             } catch (NumberFormatException e) {
-                // Si no es número, busca por nombre
-                return clienteRepository.findByNombreContainingIgnoreCase(query);
+                cliente = clienteRepository.findByNombreContainingIgnoreCase(query);
             }
+
+            if (cliente != null) {
+                return ResponseEntity.ok(cliente);        // ✅ JSON con 200 OK
+            } else {
+                return ResponseEntity.notFound().build(); // ✅ 404 sin HTML
+            }
+
         } catch (Exception e) {
-            e.printStackTrace(); // Útil para depurar en consola
-            return null;
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();    // ✅ Error 500 controlado
         }
     }
+
 }
