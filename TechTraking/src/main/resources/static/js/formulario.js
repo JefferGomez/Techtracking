@@ -90,12 +90,12 @@ form.addEventListener("submit", async function (e) {
 
     const savedRevision = await res.json();
     const revisionId = savedRevision.id; // <-- ID autoincremental generado
-const pdfRes = await fetch(`http://localhost:8080/tecnico/informe/${revisionId}`, {
+    const pdfRes = await fetch(`http://localhost:8080/tecnico/informe/${revisionId}`, {
       method: "GET"
     });
 
     if (!pdfRes.ok) throw new Error("Error al generar el PDF temporal");
-    
+
     const blob = await pdfRes.blob();
     const url = URL.createObjectURL(blob);
 
@@ -106,6 +106,7 @@ const pdfRes = await fetch(`http://localhost:8080/tecnico/informe/${revisionId}`
 
     // 4️⃣ Redirigir a detalle visitas
     window.location.href = "/tecnico/detallesVisitas";
+
 
   } catch (error) {
     console.error(error);

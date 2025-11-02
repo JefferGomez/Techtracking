@@ -22,18 +22,20 @@ public class EquipoRestController {
     public Equipo crearEquipo(@RequestBody EquipoDTO equipoDTO) {
         Cliente cliente = clienteRepository.findById(equipoDTO.getClienteId()).orElse(null);
         if (cliente == null) {
-            throw new RuntimeException("Cliente no encontrado");
+            throw new RuntimeException("Cliente no encontrado"); // ❌ Esto genera HTML de error
         }
 
         Equipo equipo = new Equipo();
-        equipo.setId(equipoDTO.getId()); // ✅ ID manual
+        equipo.setId(equipoDTO.getId()); // ❌ Nunca deberías setear el ID manual
         equipo.setMarca(equipoDTO.getMarca());
         equipo.setModelo(equipoDTO.getModelo());
         equipo.setTipo(equipoDTO.getTipo());
         equipo.setCliente(cliente);
+        equipo.setSerial(equipoDTO.getSerial());
 
         return equipoRepository.save(equipo);
     }
+
 
 }
 

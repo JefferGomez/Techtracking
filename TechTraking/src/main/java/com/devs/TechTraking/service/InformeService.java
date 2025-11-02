@@ -6,13 +6,20 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.*;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class InformeService {
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     public ByteArrayInputStream generarReporte(Revision revision) {
         Document document = new Document();
@@ -22,31 +29,27 @@ public class InformeService {
             PdfWriter.getInstance(document, out);
             document.open();
 
-            // 📌 Título
             Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20);
+            Font sectionFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14);
+            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
+
             Paragraph title = new Paragraph("Informe de Revisión", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             document.add(Chunk.NEWLINE);
 
-            // 📌 Datos generales
-            document.add(new Paragraph("Cliente ID: " + revision.getCliente()));
-            document.add(new Paragraph("Equipo ID: " + revision.getEquipo()));
-            document.add(new Paragraph("Fecha de Revisión: " + revision.getFecha()));
+            // Datos generales
+            document.add(new Paragraph("Cliente: " + revision.getCliente().getNombre()));
+            document.add(new Paragraph("Correo cliente: " + revision.getCliente().getCorreo()));
+            document.add(new Paragraph("Equipo: " + revision.getEquipo().getMarca() + " " + revision.getEquipo().getModelo()));
+            document.add(new Paragraph("Fecha de revisión: " + revision.getFecha()));
             document.add(Chunk.NEWLINE);
-
-            // 📌 Configuración
-            Font sectionFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14);
-            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
 
             Map<String, Boolean> criterios = getCriterios();
             Map<String, String> preguntas = getPreguntas();
             Map<String, Boolean> respuestas = RevisionMapperUtil.toMap(revision);
-
-            // 📌 Diccionario de observaciones automáticas
             Map<String, String> observacionesAuto = getObservacionesAuto();
 
-            // 📌 Definición de secciones
             Map<String, String[]> secciones = Map.of(
                     "Estado General", new String[]{"equipoEnciende", "estaOperando", "estaPartido", "estaManchado"},
                     "Piezas Faltantes", new String[]{"tornillos", "tapas", "display", "tarjetasElectronicas", "botones", "cabezal"},
@@ -59,77 +62,60 @@ public class InformeService {
 
             boolean hayNegativas = false;
 
-            // 📌 Recorremos secciones
+            // Recorremos las secciones
             for (Map.Entry<String, String[]> seccion : secciones.entrySet()) {
-                String nombreSeccion = seccion.getKey();
-                String[] campos = seccion.getValue();
-
-                // Título de la sección
-                Paragraph secTitle = new Paragraph(nombreSeccion, sectionFont);
-                secTitle.setSpacingBefore(10);
-                secTitle.setSpacingAfter(5);
-                document.add(secTitle);
-
-                // Tabla con 2 columnas
                 PdfPTable table = new PdfPTable(2);
                 table.setWidthPercentage(100);
                 table.setSpacingBefore(5);
 
-                // Encabezados
-                PdfPCell cell1 = new PdfPCell(new Phrase("Pregunta", headerFont));
-                cell1.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                table.addCell(cell1);
+                boolean seccionNeg = false;
 
-                PdfPCell cell2 = new PdfPCell(new Phrase("Resultado", headerFont));
-                cell2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                table.addCell(cell2);
-
-                boolean seccionTieneNegativas = false;
-
-                for (String campo : campos) {
+                for (String campo : seccion.getValue()) {
                     Boolean valor = respuestas.get(campo);
                     Boolean esperado = criterios.get(campo);
 
-                    if (valor != null && esperado != null) {
-                        if (!valor.equals(esperado)) { // ❌ Negativo
-                            hayNegativas = true;
-                            seccionTieneNegativas = true;
+                    if (valor != null && esperado != null && !valor.equals(esperado)) {
+                        seccionNeg = true;
+                        hayNegativas = true;
 
-                            table.addCell(preguntas.get(campo));
+                        if (table.getRows().isEmpty()) {
+                            Paragraph secTitle = new Paragraph(seccion.getKey(), sectionFont);
+                            secTitle.setSpacingBefore(10);
+                            secTitle.setSpacingAfter(5);
+                            document.add(secTitle);
 
-                            // 📌 Mostrar ❌ + observación automática dentro de la tabla
-                            String resultado = "❌";
-                            if (observacionesAuto.containsKey(campo)) {
-                                resultado += " " + observacionesAuto.get(campo);
-                            }
-                            table.addCell(resultado);
+                            PdfPCell c1 = new PdfPCell(new Phrase("Pregunta", headerFont));
+                            c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                            table.addCell(c1);
+
+                            PdfPCell c2 = new PdfPCell(new Phrase("Observación", headerFont));
+                            c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                            table.addCell(c2);
                         }
+
+                        table.addCell(preguntas.get(campo));
+                        String obs = observacionesAuto.getOrDefault(campo, "❌ Anomalía detectada");
+                        table.addCell("❌ " + obs);
                     }
                 }
 
-                if (!seccionTieneNegativas) {
-                    PdfPCell cell = new PdfPCell(new Phrase("✅ Sin observaciones negativas en esta sección"));
-                    cell.setColspan(2);
-                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    table.addCell(cell);
+                if (seccionNeg) {
+                    document.add(table);
                 }
-
-                document.add(table);
             }
 
             if (!hayNegativas) {
-                Paragraph ok = new Paragraph("✅ El equipo pasó todas las verificaciones sin observaciones negativas", sectionFont);
+                Paragraph ok = new Paragraph("✅ El equipo pasó todas las verificaciones sin observaciones negativas.", sectionFont);
                 ok.setSpacingBefore(15);
                 document.add(ok);
             }
 
             document.add(Chunk.NEWLINE);
-
-            // 📌 Observaciones manuales
             document.add(new Paragraph("Observaciones del técnico:", sectionFont));
             document.add(new Paragraph(revision.getObservaciones()));
 
             document.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,167 +123,141 @@ public class InformeService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
-    // 📌 Diccionario de observaciones automáticas
-    private Map<String, String> getObservacionesAuto() {
-        return Map.ofEntries(
-                // Estado General
-                Map.entry("equipoEnciende", "El equipo no enciende, revisar fuente de alimentación."),
-                Map.entry("estaOperando", "El equipo no está operando correctamente."),
-                Map.entry("estaPartido", "El equipo presenta daños estructurales (partido)."),
-                Map.entry("estaManchado", "El equipo presenta manchas o suciedad visible."),
-
-                // Piezas Faltantes
-                Map.entry("tornillos", "Faltan tornillos, riesgo de fijación inadecuada."),
-                Map.entry("tapas", "Faltan tapas, riesgo de exposición de componentes."),
-                Map.entry("display", "El display no funciona correctamente."),
-                Map.entry("tarjetasElectronicas", "Faltan tarjetas electrónicas, revisar integridad del sistema."),
-                Map.entry("botones", "Botones en mal estado o faltantes."),
-                Map.entry("cabezal", "Cabezal ausente o defectuoso."),
-
-                // Parte Mecánica
-                Map.entry("oxido", "Se encontró óxido en la estructura."),
-                Map.entry("ruidos", "Se detectaron ruidos anormales en la operación."),
-                Map.entry("piñoneriaEnBuenEstado", "La piñonería presenta desgaste."),
-                Map.entry("correasEnBuenEstado", "Las correas presentan desgaste o roturas."),
-
-                // Pantalla
-                Map.entry("funciona", "La pantalla no enciende."),
-                Map.entry("partida", "La pantalla está partida."),
-                Map.entry("lineasQuemadas", "Se observan líneas quemadas en la pantalla."),
-                Map.entry("quemada", "La pantalla está completamente quemada."),
-
-                // Cabezal de Impresión
-                Map.entry("bueno", "El cabezal de impresión no está en buen estado."),
-                Map.entry("lineasBlancas", "Se observan líneas blancas en las impresiones."),
-                Map.entry("calibrado", "El cabezal no está calibrado."),
-                Map.entry("limpio", "El cabezal no está limpio."),
-
-                // Rodillo de Impresión
-                Map.entry("buenos", "Los rodillos no están en buen estado."),
-                Map.entry("picados", "Los rodillos presentan picaduras."),
-                Map.entry("rayados", "Los rodillos están rayados."),
-                Map.entry("adhesivo", "Exceso de adhesivo en los rodillos."),
-
-                // Estado Electrónico
-                Map.entry("humedad", "Se detectó humedad en el sistema, riesgo eléctrico."),
-                Map.entry("tarjetaElectronica", "La tarjeta electrónica no responde correctamente.")
-        );
-    }
-
-    // 📌 Map con preguntas legibles
-    private Map<String, String> getPreguntas() {
-        return Map.ofEntries(
-                Map.entry("equipoEnciende", "¿El equipo enciende?"),
-                Map.entry("estaOperando", "¿El equipo está operando?"),
-                Map.entry("estaPartido", "¿El equipo está partido?"),
-                Map.entry("estaManchado", "¿El equipo está manchado?"),
-                Map.entry("tornillos", "¿Faltan tornillos?"),
-                Map.entry("tapas", "¿Faltan tapas?"),
-                Map.entry("display", "¿El display funciona?"),
-                Map.entry("tarjetasElectronicas", "¿Faltan tarjetas electrónicas?"),
-                Map.entry("botones", "¿Los botones funcionan?"),
-                Map.entry("cabezal", "¿El cabezal está presente y en buen estado?"),
-                Map.entry("oxido", "¿Presenta óxido?"),
-                Map.entry("ruidos", "¿Presenta ruidos anormales?"),
-                Map.entry("piñoneriaEnBuenEstado", "¿La piñonería está en buen estado?"),
-                Map.entry("correasEnBuenEstado", "¿Las correas están en buen estado?"),
-                Map.entry("funciona", "¿La pantalla funciona?"),
-                Map.entry("partida", "¿La pantalla está partida?"),
-                Map.entry("lineasQuemadas", "¿La pantalla tiene líneas quemadas?"),
-                Map.entry("quemada", "¿La pantalla está quemada?"),
-                Map.entry("bueno", "¿El cabezal está en buen estado?"),
-                Map.entry("lineasBlancas", "¿El cabezal tiene líneas blancas?"),
-                Map.entry("calibrado", "¿El cabezal está calibrado?"),
-                Map.entry("limpio", "¿El cabezal está limpio?"),
-                Map.entry("buenos", "¿Los rodillos están en buen estado?"),
-                Map.entry("picados", "¿Los rodillos están picados?"),
-                Map.entry("rayados", "¿Los rodillos están rayados?"),
-                Map.entry("adhesivo", "¿Hay exceso de adhesivo en los rodillos?"),
-                Map.entry("humedad", "¿Se detecta humedad en el sistema?"),
-                Map.entry("tarjetaElectronica", "¿La tarjeta electrónica funciona correctamente?")
-        );
-    }
-
-    // 📌 Valores esperados (true = positivo, false = negativo)
+    // ✅ Valores esperados (true = bueno, false = bueno dependiendo del caso)
     private Map<String, Boolean> getCriterios() {
-        return Map.ofEntries(
-                // Estado General
-                Map.entry("equipoEnciende", true),
-                Map.entry("estaOperando", true),
-                Map.entry("estaPartido", false),
-                Map.entry("estaManchado", false),
+        Map<String, Boolean> criterios = new HashMap<>();
 
-                // Piezas Faltantes
-                Map.entry("tornillos", false),
-                Map.entry("tapas", false),
-                Map.entry("display", true),
-                Map.entry("tarjetasElectronicas", false),
-                Map.entry("botones", true),
-                Map.entry("cabezal", true),
+        // Estado general
+        criterios.put("equipoEnciende", true);
+        criterios.put("estaOperando", true);
+        criterios.put("estaPartido", false);
+        criterios.put("estaManchado", false);
 
-                // Parte Mecánica
-                Map.entry("oxido", false),
-                Map.entry("ruidos", false),
-                Map.entry("piñoneriaEnBuenEstado", true),
-                Map.entry("correasEnBuenEstado", true),
+        // Piezas faltantes
+        criterios.put("tornillos", false);
+        criterios.put("tapas", false);
+        criterios.put("display", false);
+        criterios.put("tarjetasElectronicas", false);
+        criterios.put("botones", false);
+        criterios.put("cabezal", false);
 
-                // Pantalla
-                Map.entry("funciona", true),
-                Map.entry("partida", false),
-                Map.entry("lineasQuemadas", false),
-                Map.entry("quemada", false),
+        // Parte mecánica
+        criterios.put("oxido", false);
+        criterios.put("ruidos", false);
+        criterios.put("piñoneriaEnBuenEstado", true);
+        criterios.put("correasEnBuenEstado", true);
 
-                // Cabezal de Impresión
-                Map.entry("bueno", true),
-                Map.entry("lineasBlancas", false),
-                Map.entry("calibrado", true),
-                Map.entry("limpio", true),
+        // Pantalla
+        criterios.put("funciona", true);
+        criterios.put("partida", false);
+        criterios.put("lineasQuemadas", false);
+        criterios.put("quemada", false);
 
-                // Rodillo de Impresión
-                Map.entry("buenos", true),
-                Map.entry("picados", false),
-                Map.entry("rayados", false),
-                Map.entry("adhesivo", false),
+        // Cabezal
+        criterios.put("bueno", true);
+        criterios.put("lineasBlancas", false);
+        criterios.put("calibrado", true);
+        criterios.put("limpio", true);
 
-                // Estado Electrónico
-                Map.entry("humedad", false),
-                Map.entry("tarjetaElectronica", true)
-        );
+        // Rodillo
+        criterios.put("buenos", true);
+        criterios.put("picados", false);
+        criterios.put("rayados", false);
+        criterios.put("adhesivo", false);
+
+        // Electrónico
+        criterios.put("humedad", false);
+        criterios.put("tarjetaElectronica", true);
+
+        return criterios;
     }
 
-    // 📌 Mapper utilitario
+    // ✅ Textos descriptivos
+    private Map<String, String> getPreguntas() {
+        Map<String, String> preguntas = new HashMap<>();
+        preguntas.put("equipoEnciende", "¿El equipo enciende correctamente?");
+        preguntas.put("estaOperando", "¿El equipo opera con normalidad?");
+        preguntas.put("estaPartido", "¿El equipo presenta partes rotas?");
+        preguntas.put("estaManchado", "¿El equipo tiene manchas o suciedad?");
+        preguntas.put("tornillos", "¿Faltan tornillos?");
+        preguntas.put("tapas", "¿Faltan tapas o cubiertas?");
+        preguntas.put("display", "¿El display está ausente o dañado?");
+        preguntas.put("tarjetasElectronicas", "¿Faltan tarjetas electrónicas?");
+        preguntas.put("botones", "¿Faltan o están dañados los botones?");
+        preguntas.put("cabezal", "¿Falta el cabezal?");
+        preguntas.put("oxido", "¿Hay presencia de óxido?");
+        preguntas.put("ruidos", "¿El equipo genera ruidos anormales?");
+        preguntas.put("piñoneriaEnBuenEstado", "¿La piñonería está en buen estado?");
+        preguntas.put("correasEnBuenEstado", "¿Las correas están en buen estado?");
+        preguntas.put("funciona", "¿La pantalla funciona correctamente?");
+        preguntas.put("partida", "¿La pantalla está partida?");
+        preguntas.put("lineasQuemadas", "¿La pantalla tiene líneas quemadas?");
+        preguntas.put("quemada", "¿La pantalla está quemada?");
+        preguntas.put("bueno", "¿El cabezal está en buen estado?");
+        preguntas.put("lineasBlancas", "¿Presenta líneas blancas al imprimir?");
+        preguntas.put("calibrado", "¿Está correctamente calibrado?");
+        preguntas.put("limpio", "¿El cabezal está limpio?");
+        preguntas.put("buenos", "¿Los rodillos están en buen estado?");
+        preguntas.put("picados", "¿Los rodillos están picados?");
+        preguntas.put("rayados", "¿Los rodillos están rayados?");
+        preguntas.put("adhesivo", "¿Tienen residuos de adhesivo?");
+        preguntas.put("humedad", "¿Hay humedad en el sistema electrónico?");
+        preguntas.put("tarjetaElectronica", "¿La tarjeta electrónica está en buen estado?");
+        return preguntas;
+    }
+
+    // ✅ Observaciones automáticas para los casos negativos
+    private Map<String, String> getObservacionesAuto() {
+        Map<String, String> obs = new HashMap<>();
+        obs.put("equipoEnciende", "El equipo no enciende.");
+        obs.put("estaOperando", "El equipo no opera correctamente.");
+        obs.put("estaPartido", "El equipo presenta partes rotas.");
+        obs.put("estaManchado", "El equipo tiene manchas o suciedad visible.");
+        obs.put("tornillos", "Faltan tornillos en el equipo.");
+        obs.put("tapas", "Faltan tapas o cubiertas.");
+        obs.put("display", "El display está ausente o dañado.");
+        obs.put("tarjetasElectronicas", "Faltan tarjetas electrónicas internas.");
+        obs.put("botones", "Botones faltantes o dañados.");
+        obs.put("cabezal", "Falta el cabezal de impresión.");
+        obs.put("oxido", "Se observa presencia de óxido.");
+        obs.put("ruidos", "El equipo genera ruidos anormales.");
+        obs.put("piñoneriaEnBuenEstado", "La piñonería presenta desgaste o daños.");
+        obs.put("correasEnBuenEstado", "Las correas están desgastadas o rotas.");
+        obs.put("funciona", "La pantalla no funciona correctamente.");
+        obs.put("partida", "La pantalla está partida.");
+        obs.put("lineasQuemadas", "La pantalla presenta líneas quemadas.");
+        obs.put("quemada", "La pantalla está quemada.");
+        obs.put("bueno", "El cabezal presenta fallas o desgaste.");
+        obs.put("lineasBlancas", "El cabezal imprime con líneas blancas.");
+        obs.put("calibrado", "El cabezal no está calibrado.");
+        obs.put("limpio", "El cabezal presenta suciedad.");
+        obs.put("buenos", "Los rodillos presentan desgaste.");
+        obs.put("picados", "Los rodillos están picados.");
+        obs.put("rayados", "Los rodillos están rayados.");
+        obs.put("adhesivo", "Los rodillos tienen residuos de adhesivo.");
+        obs.put("humedad", "Presencia de humedad en la parte electrónica.");
+        obs.put("tarjetaElectronica", "La tarjeta electrónica presenta fallas.");
+        return obs;
+    }
+
+    // ✅ Convierte Revision → Map<String, Boolean>
     public static class RevisionMapperUtil {
         public static Map<String, Boolean> toMap(Revision revision) {
-            return Map.ofEntries(
-                    Map.entry("equipoEnciende", revision.isEquipoEnciende()),
-                    Map.entry("estaOperando", revision.isEstaOperando()),
-                    Map.entry("estaPartido", revision.isEstaPartido()),
-                    Map.entry("estaManchado", revision.isEstaManchado()),
-                    Map.entry("tornillos", revision.isTornillos()),
-                    Map.entry("tapas", revision.isTapas()),
-                    Map.entry("display", revision.isDisplay()),
-                    Map.entry("tarjetasElectronicas", revision.isTarjetasElectronicas()),
-                    Map.entry("botones", revision.isBotones()),
-                    Map.entry("cabezal", revision.isCabezal()),
-                    Map.entry("oxido", revision.isOxido()),
-                    Map.entry("ruidos", revision.isRuidos()),
-                    Map.entry("piñoneriaEnBuenEstado", revision.isPiñoneriaEnBuenEstado()),
-                    Map.entry("correasEnBuenEstado", revision.isCorreasEnBuenEstado()),
-                    Map.entry("funciona", revision.isFunciona()),
-                    Map.entry("partida", revision.isPartida()),
-                    Map.entry("lineasQuemadas", revision.isLineasQuemadas()),
-                    Map.entry("quemada", revision.isQuemada()),
-                    Map.entry("bueno", revision.isBueno()),
-                    Map.entry("lineasBlancas", revision.isLineasBlancas()),
-                    Map.entry("calibrado", revision.isCalibrado()),
-                    Map.entry("limpio", revision.isLimpio()),
-                    Map.entry("buenos", revision.isBuenos()),
-                    Map.entry("picados", revision.isPicados()),
-                    Map.entry("rayados", revision.isRayados()),
-                    Map.entry("adhesivo", revision.isAdhesivo()),
-                    Map.entry("humedad", revision.isHumedad()),
-                    Map.entry("tarjetaElectronica", revision.isTarjetaElectronica())
-            );
+            Map<String, Boolean> map = new HashMap<>();
+            try {
+                for (Method method : Revision.class.getDeclaredMethods()) {
+                    if (method.getName().startsWith("is")) {
+                        String field = method.getName().substring(2, 3).toLowerCase() + method.getName().substring(3);
+                        Object val = method.invoke(revision);
+                        if (val instanceof Boolean) {
+                            map.put(field, (Boolean) val);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return map;
         }
     }
 }

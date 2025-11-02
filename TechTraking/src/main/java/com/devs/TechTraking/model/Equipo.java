@@ -11,9 +11,12 @@ import java.util.List;
 public class Equipo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String marca;
     private String modelo;
+    private String serial;
     private String tipo;
 
     @ManyToOne
@@ -28,10 +31,11 @@ public class Equipo {
     public Equipo() {
     }
 
-    public Equipo(Long id, String marca, String modelo, String tipo, Cliente cliente, List<Visita> visitas) {
+    public Equipo(Long id, String marca, String modelo,String  serial, String tipo, Cliente cliente, List<Visita> visitas) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
+        this.serial = serial;
         this.tipo = tipo;
         this.cliente = cliente;
         this.visitas = visitas;
@@ -58,8 +62,14 @@ public class Equipo {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setModelo(String modelo) { this.modelo = modelo;}
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
     public String getTipo() {
