@@ -8,16 +8,16 @@ function cargarClientes() {
       clientes.forEach(cliente => {
         const row = document.createElement("tr");
 
-        row.innerHTML = `
-          <td>${cliente.id}</td>
-          <td>${cliente.nombre}</td>
-          <td>${cliente.direccion}</td>
-          <td>${cliente.telefono}</td>
-          <td>${cliente.correo}</td>
-          <td>
-            <button onclick="verDetalle(${cliente.id})">Ver detalle</button>
-          </td>
-        `;
+         row.innerHTML = `
+           <td>${cliente.id}</td>
+           <td>${cliente.nombre}</td>
+           <td>${cliente.direccion}</td>
+           <td>${cliente.telefono}</td>
+           <td>${cliente.correo}</td>
+           <td>
+             <button class="nuevo" onclick="verDetalle(${cliente.id})">Ver detalle</button>
+           </td>
+         `;
 
         tbody.appendChild(row);
       });
