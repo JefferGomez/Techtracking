@@ -1,228 +1,303 @@
+/* ==========================
+   VARIABLES GLOBALES DE LA APP
+   ========================== */
+:root {
+    --red:#ff6262;           /* Define variable --red: color rojo principal (cabecera/elementos activos) */
+    --nav:#0d1b2a;           /* Define variable --nav: color del sidebar / navegación (azul muy oscuro) */
+    --blue:#0d6efd;          /* Define variable --blue: color azul genérico (botones/enlaces) */
+    --card-bg:#fff;          /* Define variable --card-bg: fondo de tarjetas (blanco) */
+    --muted:#f5f6fa;         /* Define variable --muted: fondo general de la app (gris muy claro) */
+    --servimarket-red: #e53e3e; /* Define variable --servimarket-red: color primario de Servimarket (rojo corporativo) */
+}
+* {
+    box-sizing: border-box; /* Aplica box-sizing global: incluye padding y border dentro de ancho/alto */
+}
 
-body { /* Estilos generales del cuerpo de la página */
-  margin: 0; /* Elimina el margen por defecto */
-  font-family: 'Segoe UI', sans-serif; /* Fuente moderna para todo el texto */
-  background: #f3f3f3; /* Color de fondo gris claro */
+/* ======================================
+   ESTRUCTURA PRINCIPAL: HEADER / SIDEBAR
+   ====================================== */
+
+body {
+    font-family: Arial, sans-serif; /* Establece la fuente principal para la página (Arial por defecto) */
+    margin: 0;                      /* Elimina el margen por defecto del body */
+    background: var(--muted);       /* Usa la variable --muted para el fondo general */
+}
+
+/* Encabezado principal fijo en la parte superior */
+.main-header {
+    position: fixed;               /* Fija el header en la ventana (no se mueve al hacer scroll) */
+    top: 0;                        /* Sitúa el header en la parte superior del viewport */
+    left: 0;                       /* Ancla el header al borde izquierdo */
+    right: 0;                      /* Estira el header hasta el borde derecho */
+    height: 64px;                  /* Altura fija de 64px para el header */
+    background: var(--red);        /* Fondo del header usando la variable --red */
+    color: #fff;                   /* Color del texto dentro del header (blanco) */
+    display: flex;                 /* Habilita flexbox para distribuir el contenido del header */
+    align-items: center;           /* Centra verticalmente los elementos dentro del header */
+    justify-content: space-between;/* Distribuye espacio entre elementos (izq/der) */
+    padding: 0 18px;               /* Relleno horizontal dentro del header */
+    z-index: 1000;                 /* Coloca el header por encima de la mayoría de elementos */
+}
+
+.main-header .center {
+    font-weight: 100;
+    color: #fff;                   /* Color blanco para el texto del elemento .center dentro del header */
+    font-size: 28px;               /* Tamaño de fuente de 28px para el texto central */
+    margin-left: 250px;            /* Margen izquierdo de 250px (desplaza hacia la derecha, probable espacio para sidebar) */
+}
+
+/* Etiqueta de rol / usuario en el header */
+.admin-label {
+    font-weight: 500;              /* Peso de fuente medio para la etiqueta de administrador */
+    color:#0d1b2a;                 /* Color oscuro para el texto de la etiqueta (puede ser consistente con --nav) */
+    margin-right: 25px;            /* Espacio a la derecha entre la etiqueta y el siguiente elemento */
+    font-weight: bold;
+}
+.logo-h {
+  font-size: 1.5rem;              /* Tamaño de fuente para .logo-h (1.5 rem) */
+  font-weight: 600;               /* Peso semi-bold para .logo-h */
+  position: fixed;                /* Posición fija; ojo: un logo fijo puede solaparse con .main-header */
+}
+
+.servi{
+  color:blue;                      /* Clase .servi: cambia color de texto a azul (sin ; al final; válido en CSS pero incoherente estilo) */
+}
+
+.mark{
+  color:#9E0707FF;                 /* Clase .mark: color con formato de 8 dígitos RGBA hex (incluye alpha FF = opaco) */
+}
+
+/* ======================================
+   SIDEBAR (barra lateral de navegación)
+   ====================================== */
+
+.sidebar {
+    position: fixed;               /* Sidebar fijo en la pantalla */
+    top: 64px;                     /* Inicia debajo del header (64px) */
+    left: 0;                       /* Anclado al borde izquierdo */
+    bottom: 0;                     /* Se extiende hasta el borde inferior */
+    width: 200   0px;
+    background: var(--nav);        /* Fondo del sidebar usando variable --nav */
+    color: #fff;                   /* Texto blanco dentro del sidebar */
+    padding: 18px 14px;            /* Espaciado interno del sidebar */
+    overflow: auto;                /* Habilita scroll interno si el contenido supera la altura */
+    transition: transform .28s ease-in-out; /* Transición para transformaciones (apertura/cierre) */
+
+}
+
+/* Marca / logo dentro del sidebar */
+.sidebar .brand {
+    display: flex;                 /* Flex container para alinear logo y texto */
+    align-items: center;           /* Centrado vertical de los elementos hijos */
+    gap: 10px;                     /* Espacio entre logo y texto */
+    margin-bottom: 30px;           /* Separación inferior para separar del menú */
+}
+
+/* Título de la marca en el sidebar */
+.sidebar h3 {
+    margin: 0;                     /* Quita margenes por defecto */
+    font-size:  25px;              /* Tamaño de fuente para el título del sidebar */
+}
+
+/* Lista principal de navegación */
+.menu {
+    list-style: none;              /* Elimina las viñetas de la lista */
+    padding: 0;                    /* Elimina padding por defecto */
+    margin: 15px 0 40px;           /* Margen superior de 15px y margen inferior de 40px */
+}
+
+/* Enlaces dentro del menú: estilos visuales y de layout */
+.menu a {
+    display: flex;                 /* Permite alinear icono y texto en una fila */
+    align-items: center;           /* Centrado vertical para icono + texto */
+    gap: 10px;                     /* Espacio entre icono y texto */
+    color: #fff;                   /* Color blanco para los enlaces */
+    text-decoration: none;         /* Elimina subrayado por defecto */
+    padding: 10px;                 /* Espacio interno para que el enlace sea más grande y clicable */
+    border-radius: 8px;            /* Bordes redondeados en cada enlace */
+}
+
+/* Cada ítem de la lista de menú */
+.menu li {
+    margin-bottom: 18px;           /* Espacio entre cada elemento del menú (vertical) */
+}
+
+/* Hover genérico sobre cualquier li (resalta al pasar el cursor) */
+/* Nota: aplica a todos los li en la página, no solo los del .menu */
+li:hover {
+    background: #ff6262;           /* Fondo rojo cuando el ratón pasa por encima */
+    border-radius: 6px;            /* Bordes redondeados durante hover */
+}
+
+/* Botón para cerrar sesión o acción similar */
+.btn-logout {
+    background: #2b3847;           /* Fondo oscuro para el botón de logout */
+    color: #fff;                   /* Texto blanco */
+    margin-top: 0px;               /* Sin margen superior */
+    border: none;                  /* Sin borde visible */
+    padding: 8px 12px;             /* Espaciado interno del botón */
+    border-radius: 6px;            /* Bordes redondeados */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+    margin-left: 8px;              /* Margen izquierdo para separar de elementos previos */
+    transition: background 0.2s;   /* Transición suave en cambio de background */
+}
+
+.btn-logout:hover {
+    background: #ff6262;           /* Cambia a rojo al pasar el cursor */
+}
+
+/* Contenedor de imágenes decorativas / origami al final del sidebar */
+.sidebar .origami {
+    margin-top: 50px;              /* Espacio superior para separar del menú */
+    opacity: 0.85;                 /* Ligera transparencia para las imágenes */
+    width: 130px;                  /* Ancho del contenedor de las imágenes */
+    display: flex;                 /* Usa flexbox para organizar imágenes */
+    flex-direction: column;        /* Apila imágenes verticalmente */
+    gap: 20px;                     /* Espacio entre las imágenes */
+    margin-left: 5px;              /* Pequeño desplazamiento izquierdo */
+}
+
+/* Botón hamburguesa: oculto en escritorio, visible en móvil vía media query */
+.burger {
+    display: none;                 /* Oculto por defecto; se mostrará en el @media para móvil */
+    background: transparent;       /* Sin fondo para el botón */
+    border: none;                  /* Sin borde visible */
+    color: #fff;                   /* Color del icono del botón (blanco) */
+    font-size: 22px;               /* Tamaño del icono/texto interno */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+}
+
+/* Contenedor principal del contenido de la página (a la derecha del sidebar) */
+.content {
+    margin-top: 10px;            /* Espacio superior para dejar sitio al header fijo */
+    margin-left: 20px;          /* Espacio izquierdo para dejar sitio al sidebar fijo */
+    padding: 20px;               /* Espaciado interno del contenido */
+    max-width: 1500px;           /* Ancho máximo para no estirar demasiado en pantallas grandes */
+}
+
+.bienvenida {
+    margin-top: 50px;            /* Espacio superior para dejar sitio al header fijo */
+    margin-left: 200px;          /* Espacio izquierdo para dejar sitio al sidebar fijo */
+    padding: 5px;               /* Espaciado interno del contenido */
+    max-width: 1500px
 }
 
 .container { /* Contenedor principal de toda la interfaz */
-  max-width: 1000px; /* Ancho máximo del contenedor */
-  margin: 30px auto; /* Centrado horizontal con espacio superior e inferior */
-  background: #fff; /* Fondo blanco para el contenido */
-  padding: 30px; /* Espacio interno en todos los lados */
+  max-width: 1100px; /* Ancho maximo del contenedor */
+  background: #fff; /* Fondo blanco para el bloque principal */
+  padding: 30px; /* Espaciado interno del contenedor */
   border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra suave para dar profundidad */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra para dar profundidad */
+  margin-top: 5px;            /* Espacio superior para dejar sitio al header fijo */
+  margin-left: 180px;
+
 }
 
 h1 { /* Estilos del título principal */
   margin-bottom: 20px; /* Espacio debajo del título */
-  color: #003366; /* Color azul oscuro */
+  color: #003366; /* Color azul oscuro para el h1 */
 }
 
 .barra { /* Contenedor de la barra de búsqueda y botones */
-  display: flex; /* Alinea los elementos en fila */
-  justify-content: space-between; /* Separa los elementos hacia los extremos */
-  margin-bottom: 20px; /* Espacio debajo de la barra */
+  display: flex; /* Alinea elementos horizontalmente */
+  justify-content: space-between; /* Separa elementos a los extremos */
+  margin-bottom: 10px; /* Espacio debajo de la barra */
 }
 
 .barra input { /* Campo de búsqueda */
-  padding: 10px; /* Espacio interno */
-  font-size: 16px; /* Tamaño del texto */
-  width: 70%; /* Ocupa el 70% del ancho de la barra */
+  padding: 10px; /* Relleno interno del input */
+  font-size: 16px; /* Tamaño de fuente del input */
+  width: 70%; /* Ocupa el 70% del ancho del contenedor .barra */
   border: 1px solid #ccc; /* Borde gris claro */
-  border-radius: 6px; /* Bordes redondeados */
+  border-radius: 6px; /* Bordes redondeados en el input */
 }
 
 .barra button { /* Botones en la barra de acciones */
-  background-color: #007bff; /* Color azul para el fondo */
+  background-color: #0d1b2a; /* Fondo azul para los botones */
   color: white; /* Texto blanco */
   border: none; /* Sin borde */
-  padding: 2px 10px; /* Espacio interno */
+  padding: 2px 10px; /* Espaciado interno pequeño */
   border-radius: 6px; /* Bordes redondeados */
-  cursor: pointer; /* Cambia el cursor a mano al pasar el mouse */
+  cursor: pointer; /* Cursor pointer al pasar el mouse */
+
 }
+.vincular:hover {
+    background: #ff6262;           /* Fondo rojo al pasar el cursor */
+}
+
+.nuevo:hover {
+    background: #ff6262;           /* Fondo rojo al pasar el cursor */
+}
+
 
 .acciones {
-  display: flex;        /* Los pone en fila en lugar de columna */
-  gap: 10px;            /* Espacio entre botones */
-}
-
-.header {
-  background-color: #e63946;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-.servi{
-
-  color:blue
-
-}
-
-.mark{
-
-    color:#9E0707FF
-
-}
-
-.nav {
-  font-size: 1rem;
-}
-
-.user {
-  font-weight: bold;
-  color: #333
-}
-
-.logout {
-    border-radius: 6px;
-    background-color: #273FF5;
-    color: white;            /* Texto blanco */
-    font-size: 14px;         /* Tamaño de letra un poco más grande */
-    padding: 10px 20px;      /* Espaciado interno para que el botón sea más grande */
-    border: none;            /* Sin borde adicional */
-    cursor: pointer;         /* Puntero cambia a mano por defecto */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Hover */
-.logout:hover {
-    background-color: darkblue;  /* Azul más oscuro al pasar el mouse */
-    transform: scale(1.05);      /* Pequeño efecto de "crecimiento" */
+  display: flex;        /* Pone elementos en fila */
+  gap: 10px;            /* Espacio entre botones/acciones */
 }
 
 table { /* Estilos generales para la tabla */
   width: 100%; /* Ocupa todo el ancho disponible */
-  border-collapse: collapse; /* Elimina el espacio entre bordes */
+  border-collapse: collapse; /* Colapsa bordes para que no haya doble línea */
 }
 
-th, td { /* Encabezados y celdas de la tabla */
-  padding: 12px; /* Espacio interno */
-  border-bottom: 1px solid #ddd; /* Línea separadora gris claro entre filas */
-  text-align: left; /* Alineación a la izquierda */
+th, td { /* Encabezados y celdas de tabla */
+  padding: 12px; /* Espaciado interno en celdas */
+  border-bottom: 1px solid #ddd; /* Línea separadora entre filas */
+  text-align: left; /* Alineación del contenido a la izquierda */
 }
 
-.estado { /* Clase base para las etiquetas de estado */
-  padding: 4px 8px; /* Espaciado interno horizontal y vertical */
-  border-radius: 4px; /* Bordes redondeados */
-  font-weight: bold; /* Texto en negrita */
+.estado { /* Clase base para etiquetas de estado */
+  padding: 4px 8px; /* Relleno interno horizontal y vertical */
+  border-radius: 4px; /* Bordes redondeados para la etiqueta */
+  font-weight: bold; /* Texto en negrita para destacar estado */
 }
 
-.paginacion { /* Contenedor para los botones de paginación */
+.paginacion { /* Contenedor para paginación */
   margin-top: 20px; /* Espacio superior */
-  text-align: center; /* Centrado del contenido */
+  text-align: center; /* Centra botones/elementos de paginación */
 }
 
-.paginacion button, .pagina-activa { /* Estilos comunes para botones y página activa */
-  margin: 0 5px; /* Separación horizontal entre botones */
-  padding: 8px 12px; /* Espacio interno */
+.paginacion button, .pagina-activa { /* Estilos comunes para botones y estado activo */
+  margin: 0 5px; /* Margen horizontal entre botones */
+  padding: 8px 12px; /* Espaciado interno */
   border: none; /* Sin borde */
   border-radius: 4px; /* Bordes redondeados */
   background: #eee; /* Fondo gris claro */
 }
 
-.pagina-activa { /* Estilo especial para el número de página activa */
-  background: #007bff; /* Fondo azul */
+.pagina-activa { /* Estilo para el número de página activa */
+  background: #007bff; /* Fondo azul para la página activa */
   color: white; /* Texto blanco */
-}
-
-.encabezado { /* Encabezado que contiene logo y título */
-  display: flex; /* Elementos en fila */
-  align-items: center; /* Centra verticalmente */
-  gap: 60px; /* Espacio entre logo y título */
-  margin-bottom: 20px; /* Espacio debajo del encabezado */
-}
-
-.logo { /* Estilo del logo */
-  width: 250px; /* Ancho del logo */
-  height: auto; /* Altura proporcional (automática) */
-}
-.boton-accion {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 
 .layout {
-  display: flex;
-  min-height: 100vh;
+  display: flex;             /* Layout principal en flex (por ejemplo sidebar + contenido) */
+  min-height: 100vh;         /* Altura mínima de 100% del viewport para extender diseño verticalmente */
 }
 
-/* Sidebar */
-.sidebar {
-  width: 240px;
-  background: #0d1b2a; /* azul oscuro */
+
+
+.ver-detalle {
+  background-color: #0d1b2a;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 10px;
-  position: fixed;  /* ← fijo a la izquierda */
-  top: 0;
-  left: 0;
-  bottom: 0;
-}
-
-/* Logo */
-.sidebar .logo {
-  font-size: 1.4em;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Menú */
-.sidebar nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar nav ul li {
-  padding: 12px 16px;
-  margin: 6px 0;
+  border: none;
+  padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  transition: background 0.3s;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
-
-.sidebar nav ul li:hover {
-  background: #1b263b;
+.ver-detalle:hover {
+  background: #ff6262;
 }
-
-.sidebar nav ul li.active {
-  background: #e63946; /* rojo del logo */
-  font-weight: bold;
-  color: #ffffff; /* asegura contraste */
+.ver-detalle {
+    flex: 1;
+    min-width: 100px;
 }
-
-/* Imagen en el sidebar */
-.sidebar-img {
-  text-align: center;
-  margin-top: auto;
-}
-.sidebar-img img {
-  width: 100%;
-  max-width: 140px;
-}
-
-/* Contenido */
-.contenido {
-  flex-grow: 1;
-  margin-left: 240px; /* deja espacio para el sidebar */
-  padding: 30px;
+.ver-detalle {
+  padding: 8px 12px;
+  font-size: 13px;
 }
