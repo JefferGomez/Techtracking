@@ -1,40 +1,62 @@
-<!DOCTYPE html> <!-- Indica que este archivo es un documento HTML5 -->
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head> <!-- Inicio de la sección de configuración (no visible en la página) -->
-    <meta charset="UTF-8"> <!-- Define el tipo de codificación de caracteres (permite usar tildes y ñ) -->
-    <title>Registro de Cliente</title> <!-- Título que aparece en la pestaña del navegador -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro de clientes- TechTracking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/registroclientes.css}">
 </head>
-<body> <!-- Inicio del contenido visible en la página -->
 
-<div class="form-box"> <!-- Contenedor principal del formulario -->
+<body>
 
-    <div class="encabezado"> <!-- Encabezado del formulario (logo y título) -->
-        <img src="img/SM.png" alt="Logo" class="logo"> <!-- Imagen del logo con clase para darle estilo -->
-        <h1>Registro de Cliente</h1> <!-- Título grande que aparece en la parte superior del formulario -->
+<header class="main-header">
+    <div class="left">
+        <button id="btn-burger" class="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
+    <div class="logo-h"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
+    <div class="center">Registro de clientes</div>
 
-    <form id="registroCliente"> <!-- Inicio del formulario con ID para usarlo en JavaScript -->
+    <div class="right">
+        <div class="admin-label">Tecnico</div>
+    </div>
+</header>
 
-        <h2>Detalles del Cliente</h2> <!-- Subtítulo para los campos de información del cliente -->
-        <label for="nit">NIT</label>
-        <input type="text" name="nit" placeholder="NIT" id="nit" required> <!-- Campo para ingresar el NIT o número de identificación -->
-        <label for="empresa">Empresa</label>
-        <input type="text" name="empresa" placeholder="Nombre de la Empresa" id="empresa" required> <!-- Campo para ingresar el nombre de la empresa -->
-        <label for="direccion">Dirección</label>
-        <input type="text" name="direccion" placeholder="Dirección Principal" id="direccion" required> <!-- Campo para ingresar la dirección -->
-        <label for="telefono">Teléfono</label>
-        <input type="telefono" name="telefono" placeholder="Teléfono Principal" id="telefono" required> <!-- Campo para ingresar el número de teléfono -->
-        <label for="email">Correo</label>
-        <input type="email" name="correo" placeholder="Correo Electrónico Principal" id="email" required> <!-- Campo para ingresar el correo electrónico -->
-
-        <div class="checkbox"> <!-- Contenedor para el checkbox de aceptación -->
-            <input type="checkbox" name="aceptarTerminos" id="terminos"> <!-- Casilla para aceptar términos y condiciones -->
-            <label for="terminos">Acepto los términos y condiciones y la política de privacidad.</label> <!-- Texto que acompaña el checkbox -->
+<aside class="sidebar" id="sidebar">
+    <div class="brand">
+        <div>
+            <h3>TechTracking</h3>
         </div>
+    </div>
+    <nav>
+        <ul class="menu">
+            <li> <a class="sidebar-item" href="/admin">👥 Clientes</a></li>
+            <li><a class="sidebar-item" href="/admin/Visitas">📅 Calendario</a></li>
+            <li><a class="sidebar-item" href="/chat-page">💬 Chat</a></li>
+        </ul>
+    </nav>
 
-        <button type="submit" class="primario">Registrar Cliente</button> <!-- Botón para enviar el formulario -->
+    <form action="/logout" method="post">
+        <button class="btn-logout" type="submit">Cerrar Sesión</button>
     </form>
+    <img th:src="@{/img/smg.png}" alt="origami" class="origami">
+
+</aside>
+<div id="overlay" class="overlay"></div>
+
+<div class="form-box">
+
+    <div class="encabezado"> <img th:src="@{/img/sm.png}" alt="Logo" class="logo"> <h1>Registro de Cliente</h1> </div>
+
+    <form id="registroCliente"> <h2>Información del Cliente</h2> <label for="nit">NIT</label>
+        <input type="text" name="nit" placeholder="NIT" id="nit" required> <label for="empresa">Empresa</label>
+        <input type="text" name="empresa" placeholder="Nombre de la Empresa" id="empresa" required> <label for="direccion">Dirección</label>
+        <input type="text" name="direccion" placeholder="Dirección Principal" id="direccion" required> <label for="telefono">Teléfono</label>
+        <input type="telefono" name="telefono" placeholder="Teléfono Principal" id="telefono" required> <label for="email">Correo</label>
+        <input type="email" name="correo" placeholder="Correo Electrónico Principal" id="email" required> <div class="checkbox"> <input type="checkbox" name="terminos" id="terminos" required> <label for="terminos" >Acepto los términos y condiciones de la política de privacidad.</label> </div>
+
+        <button type="submit" class="primario">Registrar Cliente</button> </form>
 </div>
 
 <script th:src="@{/js/crearClientes.js}"></script>

@@ -1,30 +1,200 @@
-body { /* Estilos generales del cuerpo de la página */
-  margin: 0; /* Elimina los márgenes por defecto del navegador */
-  font-family: 'Segoe UI', sans-serif; /* Define la fuente del texto en toda la página */
-  background: #f9f9f9; /* Color de fondo gris muy claro */
-  display: flex; /* Usa un modelo de caja flexible para alinear el contenido */
-  justify-content: center; /* Centra horizontalmente el contenido dentro del body */
-  padding: 40px 0; /* Añade espacio arriba y abajo de 40px, 0 a los lados */
+/* ==========================
+   VARIABLES GLOBALES DE LA APP
+   ========================== */
+:root {
+    --red:#ff6262;           /* Define variable --red: color rojo principal (cabecera/elementos activos) */
+    --nav:#0d1b2a;           /* Define variable --nav: color del sidebar / navegación (azul muy oscuro) */
+    --blue:#0d6efd;          /* Define variable --blue: color azul genérico (botones/enlaces) */
+    --card-bg:#fff;          /* Define variable --card-bg: fondo de tarjetas (blanco) */
+    --muted:#f5f6fa;         /* Define variable --muted: fondo general de la app (gris muy claro) */
+    --servimarket-red: #e53e3e; /* Define variable --servimarket-red: color primario de Servimarket (rojo corporativo) */
 }
+* {
+    box-sizing: border-box; /* Aplica box-sizing global: incluye padding y border dentro de ancho/alto */
+}
+
+/* ======================================
+   ESTRUCTURA PRINCIPAL: HEADER / SIDEBAR
+   ====================================== */
+
+body {
+    font-family: Arial, sans-serif; /* Establece la fuente principal para la página (Arial por defecto) */
+    margin: 0;                      /* Elimina el margen por defecto del body */
+    background: var(--muted);       /* Usa la variable --muted para el fondo general */
+}
+
+/* Encabezado principal fijo en la parte superior */
+.main-header {
+    position: fixed;               /* Fija el header en la ventana (no se mueve al hacer scroll) */
+    top: 0;                        /* Sitúa el header en la parte superior del viewport */
+    left: 0;                       /* Ancla el header al borde izquierdo */
+    right: 0;                      /* Estira el header hasta el borde derecho */
+    height: 64px;                  /* Altura fija de 64px para el header */
+    background: var(--red);        /* Fondo del header usando la variable --red */
+    color: #fff;                   /* Color del texto dentro del header (blanco) */
+    display: flex;                 /* Habilita flexbox para distribuir el contenido del header */
+    align-items: center;           /* Centra verticalmente los elementos dentro del header */
+    justify-content: space-between;/* Distribuye espacio entre elementos (izq/der) */
+    padding: 0 18px;               /* Relleno horizontal dentro del header */
+    z-index: 1000;                 /* Coloca el header por encima de la mayoría de elementos */
+}
+
+.main-header .center {
+    font-weight: 100;
+    color: #fff;                   /* Color blanco para el texto del elemento .center dentro del header */
+    font-size: 28px;               /* Tamaño de fuente de 28px para el texto central */
+    margin-left: 250px;            /* Margen izquierdo de 250px (desplaza hacia la derecha, probable espacio para sidebar) */
+}
+
+/* Etiqueta de rol / usuario en el header */
+.admin-label {
+    font-weight: 500;              /* Peso de fuente medio para la etiqueta de administrador */
+    color:#0d1b2a;                 /* Color oscuro para el texto de la etiqueta (puede ser consistente con --nav) */
+    margin-right: 25px;            /* Espacio a la derecha entre la etiqueta y el siguiente elemento */
+    font-weight: bold;
+}
+.logo-h {
+  font-size: 1.5rem;              /* Tamaño de fuente para .logo-h (1.5 rem) */
+  font-weight: 600;               /* Peso semi-bold para .logo-h */
+  position: fixed;                /* Posición fija; ojo: un logo fijo puede solaparse con .main-header */
+}
+
+.servi{
+  color:blue;                      /* Clase .servi: cambia color de texto a azul (sin ; al final; válido en CSS pero incoherente estilo) */
+}
+
+.mark{
+  color:#9E0707FF;                 /* Clase .mark: color con formato de 8 dígitos RGBA hex (incluye alpha FF = opaco) */
+}
+
+/* ======================================
+   SIDEBAR (barra lateral de navegación)
+   ====================================== */
+
+.sidebar {
+    position: fixed;               /* Sidebar fijo en la pantalla */
+    top: 64px;                     /* Inicia debajo del header (64px) */
+    left: 0;                       /* Anclado al borde izquierdo */
+    bottom: 0;                     /* Se extiende hasta el borde inferior */
+    width: 200   0px;
+    background: var(--nav);        /* Fondo del sidebar usando variable --nav */
+    color: #fff;                   /* Texto blanco dentro del sidebar */
+    padding: 18px 14px;            /* Espaciado interno del sidebar */
+    overflow: auto;                /* Habilita scroll interno si el contenido supera la altura */
+    transition: transform .28s ease-in-out; /* Transición para transformaciones (apertura/cierre) */
+
+}
+
+/* Marca / logo dentro del sidebar */
+.sidebar .brand {
+    display: flex;                 /* Flex container para alinear logo y texto */
+    align-items: center;           /* Centrado vertical de los elementos hijos */
+    gap: 10px;                     /* Espacio entre logo y texto */
+    margin-bottom: 30px;           /* Separación inferior para separar del menú */
+}
+
+/* Título de la marca en el sidebar */
+.sidebar h3 {
+    margin: 0;                     /* Quita margenes por defecto */
+    font-size:  25px;              /* Tamaño de fuente para el título del sidebar */
+}
+
+/* Lista principal de navegación */
+.menu {
+    list-style: none;              /* Elimina las viñetas de la lista */
+    padding: 0;                    /* Elimina padding por defecto */
+    margin: 15px 0 40px;           /* Margen superior de 15px y margen inferior de 40px */
+}
+
+/* Enlaces dentro del menú: estilos visuales y de layout */
+.menu a {
+    display: flex;                 /* Permite alinear icono y texto en una fila */
+    align-items: center;           /* Centrado vertical para icono + texto */
+    gap: 10px;                     /* Espacio entre icono y texto */
+    color: #fff;                   /* Color blanco para los enlaces */
+    text-decoration: none;         /* Elimina subrayado por defecto */
+    padding: 10px;                 /* Espacio interno para que el enlace sea más grande y clicable */
+    border-radius: 8px;            /* Bordes redondeados en cada enlace */
+}
+
+/* Cada ítem de la lista de menú */
+.menu li {
+    margin-bottom: 18px;           /* Espacio entre cada elemento del menú (vertical) */
+}
+
+/* Hover genérico sobre cualquier li (resalta al pasar el cursor) */
+/* Nota: aplica a todos los li en la página, no solo los del .menu */
+li:hover {
+    background: #ff6262;           /* Fondo rojo cuando el ratón pasa por encima */
+    border-radius: 6px;            /* Bordes redondeados durante hover */
+}
+
+/* Botón para cerrar sesión o acción similar */
+.btn-logout {
+    background: #2b3847;           /* Fondo oscuro para el botón de logout */
+    color: #fff;                   /* Texto blanco */
+    margin-top: 0px;               /* Sin margen superior */
+    border: none;                  /* Sin borde visible */
+    padding: 8px 12px;             /* Espaciado interno del botón */
+    border-radius: 6px;            /* Bordes redondeados */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+    margin-left: 8px;              /* Margen izquierdo para separar de elementos previos */
+    transition: background 0.2s;   /* Transición suave en cambio de background */
+}
+
+.btn-logout:hover {
+    background: #ff6262;           /* Cambia a rojo al pasar el cursor */
+}
+
+/* Contenedor de imágenes decorativas / origami al final del sidebar */
+.sidebar .origami {
+    margin-top: 50px;              /* Espacio superior para separar del menú */
+    opacity: 0.85;                 /* Ligera transparencia para las imágenes */
+    width: 130px;                  /* Ancho del contenedor de las imágenes */
+    display: flex;                 /* Usa flexbox para organizar imágenes */
+    flex-direction: column;        /* Apila imágenes verticalmente */
+    gap: 20px;                     /* Espacio entre las imágenes */
+    margin-left: 5px;              /* Pequeño desplazamiento izquierdo */
+}
+
+/* Botón hamburguesa: oculto en escritorio, visible en móvil vía media query */
+.burger {
+    display: none;                 /* Oculto por defecto; se mostrará en el @media para móvil */
+    background: transparent;       /* Sin fondo para el botón */
+    border: none;                  /* Sin borde visible */
+    color: #fff;                   /* Color del icono del botón (blanco) */
+    font-size: 22px;               /* Tamaño del icono/texto interno */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+}
+
 
 .form-box { /* Contenedor del formulario */
   background: white; /* Fondo blanco para el formulario */
-  width: 95%; /* Ocupa el 95% del ancho de la pantalla (para que sea responsive) */
-  max-width: 800px; /* Pero nunca más de 800px de ancho */
-  padding: 40px; /* Espacio interno alrededor del contenido */
+  width: 70%; /* Ocupa el 95% del ancho de la pantalla (para que sea responsive) */
+  padding: 30px; /* Espacio interno alrededor del contenido */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra suave alrededor del formulario */
+  margin: 90px 10px 30px 290px;            /* Espacio superior para dejar sitio al header fijo */
+  max-width: 1500px;           /* Ancho máximo para no estirar demasiado en pantallas grandes */
+
 }
 
 h1 { /* Estilos para el título principal */
   text-align: center; /* Centra el texto horizontalmente */
-  color: #0056b3; /* Azul oscuro */
+  color:#0d1b2a; /* Azul oscuro */
+  margin-left: 1px;
 }
 
+h2 { /* Estilos para el título principal */
+  text-align: left; /* Centra el texto horizontalmente */
+  color:#0d1b2a; /* Azul oscuro */
+  margin-left: 1px;
+  margin-top: 1px;
+}
 form { /* Estilo general del formulario */
   display: flex; /* Flexbox para organizar los elementos en columna */
   flex-direction: column; /* Elementos se apilan verticalmente */
-  gap: 15px; /* Espacio de 15px entre cada campo */
+  gap: 10px; /* Espacio de 15px entre cada campo */
 }
 
 input, select, textarea { /* Estilos comunes a todos los campos del formulario */
@@ -36,12 +206,12 @@ input, select, textarea { /* Estilos comunes a todos los campos del formulario *
 }
 
 textarea { /* Ajuste específico para el área de texto */
-  height: 80px; /* Altura fija de 80px */
+  height: 50px; /* Altura fija de 80px */
   resize: none; /* El usuario no podrá agrandar o achicar el cuadro de texto */
 }
 
 .primario { /* Estilo para el botón principal */
-  background: #4a90e2; /* Color azul del botón */
+  background: #0d1b2a; /* Color azul del botón */
   color: white; /* Texto en blanco */
   border: none; /* Sin borde */
   padding: 14px; /* Espacio interno del botón */
@@ -51,29 +221,20 @@ textarea { /* Ajuste específico para el área de texto */
 }
 
 .primario:hover { /* Efecto al pasar el mouse sobre el botón */
-  background: #357ab8; /* Un azul un poco más oscuro */
-}
-
-.secundario { /* Botones secundarios como 'añadir contacto' o 'añadir equipo' */
-  background: transparent; /* Fondo transparente */
-  border: 1px dashed #888; /* Borde punteado gris oscuro */
-  padding: 10px; /* Espacio interno */
-  border-radius: 6px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor de mano */
-  color: #444; /* Color del texto */
+  background: #e53e3e; /* Un azul un poco más oscuro */
 }
 
 .checkbox { /* Contenedor del checkbox y su texto */
   display: flex; /* Coloca el checkbox y el texto en una misma línea */
   align-items: center; /* Centra verticalmente el checkbox y el texto */
-  font-size: 14px; /* Tamaño de fuente más pequeño */
-  margin-top: 8px; /* Espacio hacia arriba */
+  font-size: 16px; /* Tamaño de fuente más pequeño */
+  margin-top: 1px; /* Espacio hacia arriba */
   flex-wrap: wrap; /* Permite que el texto baje si no cabe (en pantallas pequeñas) */
 }
 
 .checkbox input[type="checkbox"] { /* Estilo específico para el checkbox */
-  margin-right: 6px; /* Espacio entre la casilla y el texto */
-  transform: translateY(+17px); /* Ajuste vertical para alinear el checkbox con el texto */
+  margin-left: 21px; /* Espacio entre la casilla y el texto */
+  transform: translateY(+19px); /* Ajuste vertical para alinear el checkbox con el texto */
 }
 
 .checkbox label { /* Estilos para el texto del checkbox */
@@ -84,23 +245,14 @@ textarea { /* Ajuste específico para el área de texto */
   max-width: 100%; /* Que no se pase del ancho disponible */
 }
 
-.checkbox input[type="checkbox"] {
-  margin-right: 1px;
-}
-
 .encabezado { /* Estilos para el encabezado (logo + título) */
   display: flex; /* Coloca el logo y el título en línea */
   align-items: center; /* Centra verticalmente */
-  gap: 15px; /* Espacio entre el logo y el título */
-  margin-bottom: 20px; /* Espacio debajo del encabezado */
+  gap: 5px; /* Espacio entre el logo y el título */
+  margin-bottom: 10px; /* Espacio debajo del encabezado */
 }
 
 .logo { /* Estilo del logo */
-  width: 250px; /* Ancho fijo de la imagen del logo */
+  width:280px; /* Ancho fijo de la imagen del logo */
   height: auto; /* Altura automática para mantener proporción */
-}
-
-#preview { /* Vista previa de la foto del cliente */
-  border-radius: 50%; /* Redondea los bordes para que parezca un círculo */
-  border: 1px solid #ccc; /* Borde gris claro */
 }

@@ -39,9 +39,11 @@ function vincularEquipo() {
 
   // Leer todos los datos del formulario
   const equipo = {
+    id: parseInt(document.getElementById("idEquipo").value),
     marca: document.getElementById("nombreEquipo").value,
     modelo: document.getElementById("modelo").value,
-    serial: parseInt(document.getElementById("idEquipo").value),
+    // ⚠️ Comentado porque en tu HTML no existe <input id="serie">
+    // serie: document.getElementById("serie").value,
     tipo: document.getElementById("tipo").value,
     clienteId: parseInt(clienteId)
   };
