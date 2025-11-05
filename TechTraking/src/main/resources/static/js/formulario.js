@@ -7,7 +7,6 @@
 // URL base de tu API de Spring Boot
 const API_BASE_URL = 'http://localhost:8080';
 const API_TECNICO = `${API_BASE_URL}/tecnico`;
-const API_EQUIPO = `${API_BASE_URL}/api/equipo`; // Asumiendo un endpoint para traer datos de equipo/cliente
 
 document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------------------
@@ -33,31 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
     menuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = link.textContent.trim().toLowerCase().split(' ')[1];
-
-            switch (target) {
-                case 'clientes':
-                    window.location.href = '/clientes.html'; 
-                    break;
-                case 'calendario':
-                    window.location.href = '/calendario.html';
-                    break;
-                case 'chat':
-                    window.location.href = '/chat.html';
-                    break;
-                default:
-                    console.warn('Opción de menú no reconocida:', target);
+            const href = link.getAttribute('href');
+            if (href) {
+                window.location.href = href;
             }
             if (sidebar.classList.contains('show')) toggleSidebar();
         });
-    });
-
-    // Cerrar Sesión
-    btnLogout.addEventListener('click', () => {
-        if (confirm('¿Estás seguro que deseas cerrar la sesión?')) {
-            // Lógica de deslogueo en el backend aquí (si aplica)
-            window.location.href = '/login.html';
-        }
     });
 
     // -----------------------------------------------------------------
@@ -68,32 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const fechaInput = document.getElementById('fecha');
 
     /**
-     * Simula obtener el siguiente número consecutivo de la BD SM.
+     * Obtener el siguiente número consecutivo
      */
     const obtenerConsecutivo = async () => {
         try {
-            // ** Reemplazar con la URL REAL de tu API para el consecutivo **
-            const response = await fetch(`${API_TECNICO}/next-consecutivo`); 
+            const response = await fetch(`${API_TECNICO}/next-consecutivo`);
             if (!response.ok) throw new Error("No se pudo obtener el consecutivo.");
             const data = await response.json();
-            return data.consecutivo || (Math.floor(Math.random() * 10000) + 1000); // Fallback aleatorio
+            return data.consecutivo || (Math.floor(Math.random() * 10000) + 1000);
         } catch (error) {
             console.error('Error al obtener el consecutivo:', error);
-            return 'ERROR';
+            return Math.floor(Math.random() * 10000) + 1000;
         }
     };
 
     /**
-     * Simula obtener el técnico logueado (Servimarket).
+     * Obtener el técnico logueado
      */
     const obtenerTecnicoServimarket = async () => {
         try {
-            // ** Reemplazar con la URL REAL para obtener el usuario actual **
-            // Esto es una simulación si no tienes sesión activa
-            return 'Jeisson Henao'; 
+            return 'Jeisson Henao';
         } catch (error) {
             console.error('Error al obtener el técnico:', error);
-            return 'Error de Carga';
+            return 'Técnico';
         }
     };
 
@@ -101,8 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inicializarCampos = async () => {
         consecutivoInput.value = await obtenerConsecutivo();
         tecnicoUsuarioInput.value = await obtenerTecnicoServimarket();
-        
-        // Establece la fecha actual
+
         const today = new Date();
         const yyyy = today.getFullYear();
         const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -111,18 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     inicializarCampos();
-    
+
     // -----------------------------------------------------------------
     // 3. Previsualización de Archivos
     // -----------------------------------------------------------------
     const inputEtiqueta = document.getElementById('inputEtiqueta');
     const previewEtiqueta = document.getElementById('previewEtiqueta');
-    const inputFirma = document.getElementById('inputFirma');
+    const inputFirma = document.querySelector('input[name="firma"]');
     const previewFirma = document.getElementById('previewFirma');
 
-    /**
-     * Muestra la vista previa de una imagen de entrada de archivo
-     */
     function mostrarVistaPrevia(input, previewElement) {
         const file = input.files[0];
         if (file && file.type.startsWith("image/")) {
@@ -142,10 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarVistaPrevia(this, previewEtiqueta);
     });
 
-    inputFirma.addEventListener("change", function () {
-        mostrarVistaPrevia(this, previewFirma);
-    });
-
+    if (inputFirma) {
+        inputFirma.addEventListener("change", function () {
+            mostrarVistaPrevia(this, previewFirma);
+        });
+    }
 
     // -----------------------------------------------------------------
     // 4. Lógica de Envío (Guardar Reporte y Generar PDF)
@@ -153,15 +127,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const { jsPDF } = window.jspdf;
 
     /**
-     * Helper para convertir "SI"/"NO" de los radio buttons a boolean.
+     * Helper para convertir radio buttons a boolean
      */
     const valorBooleano = (name) => {
         const val = document.querySelector(`input[name="${name}"]:checked`);
         return val ? val.value === "SI" : false;
     };
-    
+
     /**
-     * Convierte un objeto File a una cadena Base64 para incluir en el JSON.
+     * Convierte archivo a Base64
      */
     const fileToBase64 = (file) => new Promise((resolve, reject) => {
         if (!file || file.size === 0) return resolve(null);
@@ -172,155 +146,202 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /**
-     * Genera el PDF a partir del HTML del formulario.
+     * Genera el PDF del formulario
      */
-    const generarPDF = async (revisionId) => {
-        const actionsDiv = document.querySelector('.actions');
-        actionsDiv.style.display = 'none';
-
+    const generarPDF = async () => {
         try {
-            // ** Opción 1: Generar PDF en el servidor (RECOMENDADO) **
-            // Esto usa tu endpoint previo, asumiendo que el servidor maneja la plantilla HTML/Datos
-            const pdfRes = await fetch(`${API_TECNICO}/informe/${revisionId}`, {
-                method: "GET"
+            // Ocultar botón temporalmente para la captura
+            const actionsDiv = document.querySelector('.actions');
+            actionsDiv.style.display = 'none';
+
+            // Esperar un momento para que se oculte el botón
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Capturar el formulario como imagen
+            const canvas = await html2canvas(formContenedor, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff'
             });
 
-            if (!pdfRes.ok) throw new Error(`Error al generar el PDF temporal: ${pdfRes.statusText}`);
-            
-            const blob = await pdfRes.blob();
-            const url = URL.createObjectURL(blob);
-            window.open(url, "_blank");
+            // Crear el PDF
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const imgProps = pdf.getImageProperties(imgData);
+            const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            // Agregar la primera página
+            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+            heightLeft -= pdfHeight;
+
+            // Si la imagen es más alta que una página, agregar páginas adicionales
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
+                heightLeft -= pdfHeight;
+            }
+
+            // Generar nombre del archivo con fecha y consecutivo
+            const consecutivo = consecutivoInput.value;
+            const fecha = fechaInput.value.replace(/-/g, '');
+            const nombreArchivo = `Reporte_Mantenimiento_${consecutivo}_${fecha}.pdf`;
+
+            // Descargar el PDF
+            pdf.save(nombreArchivo);
+
+            // Restaurar botón
+            actionsDiv.style.display = 'flex';
 
             return true;
 
-            /* // ** Opción 2: Generar PDF en el cliente (usando html2canvas) **
-            // Si el servidor solo devuelve el ID y quieres generar el PDF en el navegador.
-            const canvas = await html2canvas(formContenedor, { scale: 2, useCORS: true });
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const imgProps = pdf.getImageProperties(imgData);
-            const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight);
-            pdf.save(`Reporte_Mantenimiento_${revisionId}.pdf`);
-            return true; 
-            */
-
         } catch (error) {
             console.error('Error al generar el PDF:', error);
-            alert("No se pudo generar el PDF. Revisa la consola.");
+            // Restaurar botón en caso de error
+            const actionsDiv = document.querySelector('.actions');
+            actionsDiv.style.display = 'flex';
             return false;
-        } finally {
-            // Volver a mostrar el botón de guardar
-            actionsDiv.style.display = 'flex'; 
         }
     };
 
-
     /**
-     * Manejador principal al enviar el formulario.
+     * Manejador principal al enviar el formulario
      */
     reporteForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // 1. Recolectar datos del formulario y archivos a Base64
-        const formData = new FormData(reporteForm);
-        
-        const etiquetaFile = inputEtiqueta.files[0];
-        const firmaFile = inputFirma.files[0];
 
-        const data = {
-            // Campos de Datos Generales del Equipo
-            cliente: formData.get("cliente"),
-            marca: formData.get("marca"),
-            modelo: formData.get("modelo"),
-            serie: formData.get("serie"),
-            tipo: formData.get("tipo_impresora"),
-            garantia: formData.get("garantia") === "on", // checkbox
-            fecha: formData.get("fecha"),
-            consecutivo: formData.get("consecutivo"),
-            
-            // Campos de Revisión (usando la estructura de tu código anterior)
-            equipoEnciende: valorBooleano("encendido"),
-            estaOperando: valorBooleano("operando"),
-            estaPartido: valorBooleano("prendido"), // Asumo 'Prendido' se refiere a si está partido
-            estaManchado: valorBooleano("manchas"),
+        // Mostrar indicador de carga
+        const submitBtn = reporteForm.querySelector('button[type="submit"]');
+        const textoOriginal = submitBtn.textContent;
+        submitBtn.textContent = '⏳ Guardando...';
+        submitBtn.disabled = true;
 
-            tornillos: valorBooleano("tornillos"),
-            tapas: valorBooleano("tapas"),
-            display: valorBooleano("display"),
-            tarjetasElectronicas: valorBooleano("tarjetas"),
-            botones: valorBooleano("botones"),
-            cabezal: valorBooleano("cabezal"),
-            otrasPiezas: formData.get("otras_piezas"),
-
-            oxido: valorBooleano("ejes"), // Asumo 'Ejes' como óxido/deterioro
-            ruidos: valorBooleano("husillos"), // Asumo 'Husillos' como ruido
-            piñoneriaEnBuenEstado: valorBooleano("pletinas"), // Asumo 'Pletinas' como piñonería
-            correasEnBuenEstado: valorBooleano("cremas"), // Asumo 'Cremas' como correas
-            otraMecanica: formData.get("otra_mecanica"),
-
-            funciona: valorBooleano("funciona"),
-            partida: valorBooleano("pantallaPrendida"), // Asumo 'Prendida' como partida/dañada
-            lineasQuemadas: valorBooleano("lineas"),
-            quemada: valorBooleano("quemada"),
-
-            bueno: valorBooleano("cabezal_bueno"),
-            lineasBlancas: valorBooleano("lineas_blancas"),
-            calibrado: valorBooleano("calibrado"),
-            limpio: valorBooleano("limpio"),
-
-            buenos: valorBooleano("rodillo"), // Rodillo: Bueno
-            picados: valorBooleano("ruedas"), // Ruedas: Picados
-            rayados: valorBooleano("alineado"), // Alineado: Rayados
-            adhesivo: valorBooleano("adecuado"), // Adecuado: Adhesivo
-
-            humedad: valorBooleano("humedad"),
-            tarjetaElectronica: valorBooleano("tarjetasOk"),
-            otraElectronica: formData.get("otra_electronica"),
-
-            observaciones: formData.get("observaciones"),
-            
-            // Datos de Técnico y Firma
-            tecnicoUsuario: formData.get("tecnico_usuario"),
-            tecnicoArea: formData.get("tecnico_area"),
-
-            // Imágenes como Base64 (las guardas en el servidor y luego las llamas en el PDF)
-            etiquetaBase64: await fileToBase64(etiquetaFile),
-            firmaBase64: await fileToBase64(firmaFile),
-        };
-        
-        console.log("Reporte Final a Enviar:", data);
-
-        // 2. Envío al Backend
         try {
+            // 1. Recolectar datos del formulario
+            const formData = new FormData(reporteForm);
+
+            const etiquetaFile = inputEtiqueta.files[0];
+            const firmaFile = inputFirma ? inputFirma.files[0] : null;
+
+            const data = {
+                // Datos del equipo
+                cliente: formData.get("cliente"),
+                marca: formData.get("marca"),
+                modelo: formData.get("modelo"),
+                serie: formData.get("serie"),
+                tipo: formData.get("tipo_impresora"),
+                garantia: formData.get("garantia") === "on",
+                fecha: formData.get("fecha"),
+                consecutivo: formData.get("consecutivo"),
+
+                // Estado General
+                equipoEnciende: valorBooleano("encendido"),
+                estaOperando: valorBooleano("operando"),
+                estaPartido: valorBooleano("prendido"),
+                estaManchado: valorBooleano("manchas"),
+
+                // Piezas Faltantes
+                tornillos: valorBooleano("tornillos"),
+                tapas: valorBooleano("tapas"),
+                display: valorBooleano("display"),
+                tarjetasElectronicas: valorBooleano("tarjetas"),
+                botones: valorBooleano("botones"),
+                cabezal: valorBooleano("cabezal"),
+                otrasPiezas: formData.get("otras_piezas"),
+
+                // Parte Mecánica
+                oxido: valorBooleano("ejes"),
+                ruidos: valorBooleano("husillos"),
+                piñoneriaEnBuenEstado: valorBooleano("pletinas"),
+                correasEnBuenEstado: valorBooleano("cremas"),
+                otraMecanica: formData.get("otra_mecanica"),
+
+                // Pantalla
+                funciona: valorBooleano("funciona"),
+                partida: valorBooleano("pantallaPrendida"),
+                lineasQuemadas: valorBooleano("lineas"),
+                quemada: valorBooleano("quemada"),
+
+                // Cabezal
+                bueno: valorBooleano("cabezal_bueno"),
+                lineasBlancas: valorBooleano("lineas_blancas"),
+                calibrado: valorBooleano("calibrado"),
+                limpio: valorBooleano("limpio"),
+
+                // Rodillo
+                buenos: valorBooleano("rodillo"),
+                picados: valorBooleano("ruedas"),
+                rayados: valorBooleano("alineado"),
+                adhesivo: valorBooleano("adecuado"),
+
+                // Estado Electrónico
+                humedad: valorBooleano("humedad"),
+                tarjetaElectronica: valorBooleano("tarjetasOk"),
+                otraElectronica: formData.get("otra_electronica"),
+
+                observaciones: formData.get("observaciones"),
+
+                // Técnico
+                tecnicoUsuario: formData.get("tecnico_usuario"),
+                tecnicoArea: formData.get("tecnico_area"),
+
+                // Imágenes
+                etiquetaBase64: await fileToBase64(etiquetaFile),
+                firmaBase64: await fileToBase64(firmaFile),
+            };
+
+            console.log("📋 Datos del reporte:", data);
+
+            // 2. Enviar al backend
             const res = await fetch(`${API_TECNICO}/crearRevisiones`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
             });
 
-            if (!res.ok) throw new Error(`Error ${res.status}: ${await res.text()}`);
-
-            const savedRevision = await res.json();
-            const revisionId = savedRevision.id; 
-
-            // 3. Generar PDF (llamando al backend)
-            const pdfSuccess = await generarPDF(revisionId);
-
-            if (pdfSuccess) {
-                alert(`✅ Revisión #${revisionId} creada y PDF generado con éxito.`);
-            } else {
-                alert(`⚠️ Revisión #${revisionId} creada, pero hubo un error al generar el PDF.`);
+            if (!res.ok) {
+                throw new Error(`Error ${res.status}: ${await res.text()}`);
             }
 
-            // 4. Redirigir a detalle visitas
-            window.location.href = "/tecnico/detallesVisitas"; 
+            const savedRevision = await res.json();
+            console.log("✅ Revisión guardada:", savedRevision);
+
+            // 3. Generar PDF
+            const pdfGenerado = await generarPDF();
+
+            // 4. Mostrar mensaje de éxito
+            if (pdfGenerado) {
+                alert(`✅ ¡Guardado con éxito!\n\nRevisión #${savedRevision.id || consecutivoInput.value} creada correctamente.\nEl PDF se ha descargado automáticamente.`);
+            } else {
+                alert(`✅ Revisión guardada con éxito.\n\n⚠️ Hubo un problema al generar el PDF. Por favor, intenta nuevamente.`);
+            }
+
+            // 5. Limpiar formulario o redirigir
+            // Opción A: Limpiar formulario
+            reporteForm.reset();
+            inicializarCampos();
+            previewEtiqueta.style.display = 'none';
+            if (previewFirma) previewFirma.style.display = 'none';
+
+            // Opción B: Redirigir (descomentar si prefieres)
+            // setTimeout(() => {
+            //     window.location.href = "/tecnico/detallesVisitas";
+            // }, 2000);
 
         } catch (error) {
-            console.error("Error completo:", error);
-            alert("❌ Ocurrió un error al guardar la revisión o generar el PDF. Revisa la consola para más detalles.");
+            console.error("❌ Error completo:", error);
+            alert(`❌ Error al guardar el reporte:\n\n${error.message}\n\nRevisa la consola para más detalles.`);
+        } finally {
+            // Restaurar botón
+            submitBtn.textContent = textoOriginal;
+            submitBtn.disabled = false;
         }
     });
-
 });

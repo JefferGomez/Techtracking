@@ -2,7 +2,7 @@
 /* ==========================
    VARIABLES GLOBALES DE LA APP
    ========================== */
-:root { 
+:root {
     --red:#ff6262;           /* Color rojo principal (cabecera, elementos activos) */
     --nav:#0d1b2a;           /* Color del sidebar / navegación (azul muy oscuro) */
     --blue:#0d6efd;          /* Color azul genérico (botones/enlaces) */
@@ -12,20 +12,20 @@
 }
 * {
     box-sizing: border-box; /* Incluye padding y border en las medidas (ancho/alto) para todos los elementos */
-} 
+}
 
 /* ======================================
    ESTRUCTURA PRINCIPAL: HEADER / SIDEBAR
    ====================================== */
 
-body { 
+body {
     font-family: Arial, sans-serif; /* Fuente principal de la aplicación */
     margin: 0;                      /* Elimina márgenes por defecto del body */
     background: var(--muted);       /* Fondo general usando la variable --muted */
 }
 
 /* Encabezado principal fijo en la parte superior */
-.main-header { 
+.main-header {
     position: fixed;               /* Fija el header en la ventana (no se mueve al hacer scroll) */
     top: 0;                        /* Lo ancla al borde superior de la ventana */
     left: 0;                       /* Lo ancla al borde izquierdo */
@@ -57,16 +57,16 @@ body {
   margin-bottom: 0px;
 }
 /* Etiqueta de rol / usuario en el header */
-.admin-label { 
+.admin-label {
     font-weight: 500;              /* Peso medio del texto */
     color:#0d1b2a;                 /* Color oscuro (posiblemente variable --nav) */
     margin-right: 25px;            /* Margen a la derecha para separarlo de otros elementos */
-    font-weight: bold;    
+    font-weight: bold;
 }
 .logo-h {
   font-size: 1.5rem;
   font-weight: 600;
-  position: fixed; 
+  position: fixed;
 }
 
 .servi{
@@ -81,12 +81,12 @@ body {
    SIDEBAR (barra lateral de navegación)
    ====================================== */
 
-.sidebar { 
+.sidebar {
     position: fixed;               /* Sidebar fijo en la pantalla */
     top: 64px;                     /* Comienza justo debajo del header (64px) */
     left: 0;                       /* Anclado al borde izquierdo */
     bottom: 0;                     /* Se extiende hasta el borde inferior */
-    width: 20   0px;               /* (ATENCIÓN: aquí hay un valor extraño '20   0px' que parece un typo) */ 
+    width: 20   0px;               /* (ATENCIÓN: aquí hay un valor extraño '20   0px' que parece un typo) */
                                    /* Mantengo la regla tal cual según tu petición (no modificar), pero revisa si debe ser '200px' o similar. */
     background: var(--nav);        /* Fondo del sidebar usando --nav */
     color: #fff;                   /* Texto blanco dentro del sidebar */
@@ -94,10 +94,10 @@ body {
     overflow: auto;                /* Permite scroll interno si el contenido excede la altura */
     transition: transform .28s ease-in-out; /* Transición suave para mostrar/ocultar en móvil */
     z-index: 1000;                 /* Colocado por encima del contenido pero cuidado con el header (también 1000) */
-} 
+}
 
 /* Marca / logo dentro del sidebar */
-.sidebar .brand { 
+.sidebar .brand {
     display: flex;                 /* Usa flex para alinear logo y texto */
     align-items: center;           /* Centrado vertical de sus hijos */
     gap: 10px;                     /* Espacio entre logo y texto */
@@ -105,20 +105,20 @@ body {
 }
 
 /* Título de la marca en el sidebar */
-.sidebar h3 { 
+.sidebar h3 {
     margin: 0;                     /* Sin margen por defecto */
     font-size:  25px;              /* Tamaño de fuente para el título */
 }
 
 /* Lista principal de navegación */
-.menu { 
+.menu {
     list-style: none;              /* Quita viñetas de la lista */
     padding: 0;                    /* Quita padding por defecto */
     margin: 15px 0 40px;           /* Márgenes superior e inferior para separar del resto */
 }
 
 /* Enlaces dentro del menú: estilos visuales y de layout */
-.menu a { 
+.menu a {
     display: flex;                 /* Hace que el enlace use flex (para icono + texto) */
     align-items: center;           /* Centra verticalmente icono y texto */
     gap: 10px;                     /* Espacio entre icono y texto */
@@ -129,7 +129,7 @@ body {
 }
 
 /* Cada ítem de la lista de menú */
-.menu li { 
+.menu li {
     margin-bottom: 18px;           /* Separación vertical entre ítems del menú */
     cursor: pointer;               /* Cursor pointer para indicar clicable */
 }
@@ -142,7 +142,7 @@ li:hover {
 }
 
 /* Botón para cerrar sesión o acción similar */
-.btn-logout { 
+.btn-logout {
     background: #2b3847;           /* Fondo oscuro para el botón */
     color: #fff;                   /* Texto blanco */
     margin-top: 0px;               /* Sin margen superior */
@@ -170,21 +170,21 @@ li:hover {
 }
 
 /* Botón hamburguesa: oculto en escritorio, visible en móvil vía media query */
-.burger { 
+.burger {
     display: none;                 /* Oculto por defecto (se muestra en @media) */
     background: transparent;       /* Fondo transparente */
     border: none;                  /* Sin borde */
     color: #fff;                   /* Color del icono (blanco) */
     font-size: 22px;               /* Tamaño del icono/texto del botón */
     cursor: pointer;               /* Cursor pointer para indicar clicable */
-} 
+}
 
 /* ======================================
    CONTENIDO PRINCIPAL Y TARJETA (FORM)
    ====================================== */
 
 /* Contenedor principal del contenido de la página (a la derecha del sidebar) */
-.content { 
+.content {
     margin-top: 70px;            /* Espacio superior para dejar sitio al header fijo */
     margin-left: 200px;          /* Espacio izquierdo para dejar sitio al sidebar fijo */
     padding: 20px;               /* Espaciado interno del contenido */
@@ -192,7 +192,7 @@ li:hover {
 }
 
 /* Tarjeta / contenedor del formulario (rol de .card / .form-wrapper) */
-.card { 
+.card {
     width: 100%;                 /* Ancho 100% relativo a su contenedor padre */
     max-width: 1100px;           /* Ancho máximo para contener el formulario */
     background: white;           /* Fondo blanco para la tarjeta */
@@ -206,7 +206,7 @@ li:hover {
    OVERLAY (CAPA OSCURA CUANDO ABRE SIDEBAR)
    ====================================== */
 
-.overlay { 
+.overlay {
     display: none;               /* Oculto por defecto (se muestra con .show) */
     position: fixed;             /* Fija la capa sobre toda la ventana */
     inset: 0;                    /* top:0; right:0; bottom:0; left:0; — cubre todo el viewport */
@@ -215,7 +215,7 @@ li:hover {
 }
 
 /* Muestra la capa de superposición cuando tiene la clase .show */
-.overlay.show { 
+.overlay.show {
     display: block;              /* Pasa a visible (bloque) cuando se añade .show vía JS */
 }
 
@@ -329,7 +329,7 @@ h2 {
     display: flex;                 /* Label como contenedor flexible (para alinear texto + input) */
     align-items: center;           /* Centrado vertical */
     gap: 5px;                      /* Espacio entre label y su control */
-    width: 100%;  
+    width: 100%;
     margin-right: 10px;                 /* Ancho completo para ocupar el espacio disponible */
 }
 
@@ -372,9 +372,9 @@ h2 {
 .consecutivo-inline {
     display: flex;                 /* Alinea horizontalmente el bloque del consecutivo */
     align-items: center;           /* Centrado vertical */
-    gap: 0px; 
+    gap: 0px;
     height: 40px;                  /* Altura del contenedor del consecutivo */
-    width: 100%; 
+    width: 100%;
     font-size: 17px;               /* Tamaño del texto del consecutivo */
     padding: 10px 0px;             /* Padding vertical */
     font-weight: bold;             /* Texto del consecutivo en negrita */
@@ -385,8 +385,8 @@ h2 {
 /* Input de tipo número dentro del consecutivo (estilo para integrarlo visualmente) */
 .consecutivo-inline input[type="number"] {
     border: none;                  /* Quita borde para integrarlo visualmente con el div */
-    padding: 0; 
-    margin: 0; 
+    padding: 0;
+    margin: 0;
     font-size: 1em;                /* Tamaño relativo (hereda del contenedor) */
     font-weight: bold;             /* Texto en negrita */
     width: 150px;                  /* Ancho fijo del input numérico */
@@ -466,9 +466,10 @@ h2 {
 
 .columnas-labels {
   display: flex;
-  gap: 75px;
+  gap: 30px;
   font-weight: bold;
-  margin-right: 0 65px;
+  margin-right: 3px;
+  padding-right: 3px;
 }
 
 .cabezal-impresion {
@@ -518,8 +519,8 @@ h2 {
     padding: 12px;                 /* Padding interno */
     border-radius: 6px;            /* Esquinas ligeramente redondeadas */
     background: #f9f9f9;           /* Fondo claro para diferenciar de secciones */
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
     margin-bottom: 1px;            /* Sin margen inferior para mantener compactación */
 }
 
@@ -622,7 +623,7 @@ h2 {
 }
 
 /* Botón principal (guardar / generar PDF) estilo rojo */
-.btn-red { 
+.btn-red {
     background: var(--servimarket-red); /* Fondo rojo corporativo */
     color: #fff;                    /* Texto blanco */
     padding: 10px 15px;             /* Padding interno del botón */
@@ -645,26 +646,26 @@ h2 {
 /* Ajustes para pantallas pequeñas (tablet / móvil) */
 @media (max-width: 900px) {
     /* Sidebar se oculta fuera del viewport (se muestra via .open) */
-    .sidebar { 
+    .sidebar {
         transform: translateX(-110%); /* Mueve el sidebar fuera a la izquierda */
-        position: fixed; 
-        top: 64px; 
-        left: 0; 
+        position: fixed;
+        top: 64px;
+        left: 0;
     }
-    .sidebar.open { 
+    .sidebar.open {
         transform: translateX(0);  /* Cuando tiene .open vuelve a su posición visible */
     }
-    .content { 
+    .content {
         margin-left: 0;           /* Quita el margen izquierdo para usar todo el ancho */
         padding: 16px;            /* Padding reducido en móvil */
     }
-    .burger { 
+    .burger {
         display: inline-block;    /* Muestra el botón hamburguesa en móvil */
     }
-    .header .center { 
+    .header .center {
         font-size: 16px;          /* Reduce el tamaño del texto central en header para móvil */
     }
-    
+
     /* Encabezado del formulario apila verticalmente sus elementos en móvil */
     .form-header-servimarket {
         flex-direction: column;   /* Apila logo y texto verticalmente */
@@ -724,7 +725,7 @@ section label:has([required])::after /* Cualquier label dentro de section que co
 
 /* Asegura que inputs/textarea marcados required muestren asterisco también (opcional) */
 .observaciones-section textarea[required]::before,
-.tecnico-section input[type="text"][required]::before, 
+.tecnico-section input[type="text"][required]::before,
 .recibido-section input[type="text"][required]::before {
     content: " *";                 /* Inserta asterisco adicional (en pseudo-elemento antes) */
     color: var(--servimarket-red); /* Color rojo */
