@@ -42,8 +42,12 @@ body {
   position: fixed;
   top: 62px;
   left: 0;
-  overflow-y: auto;
   z-index: 1000;
+  overflow: hidden;
+}
+
+.sidebar nav {
+  flex-grow: 1;
 }
 
 .logout-form {
@@ -104,14 +108,14 @@ body {
 
 .sidebar ul li {
   margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 0;
 }
 
 .sidebar ul li a {
   color: white;
   text-decoration: none;
   display: block;
-  padding: 15px 20px;
+  padding: 0 20px;
 }
 
 .sidebar ul li a.activo {
@@ -121,6 +125,37 @@ body {
 
 .sidebar ul li a:hover {
   background: #34495e;
+}
+
+.sidebar ul li.sidebar-img {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.sidebar ul li.sidebar-img img {
+  max-width: 80px;
+  height: auto;
+}
+
+.sidebar ul li .logout-form {
+  padding: 0 20px;
+}
+
+.sidebar ul li .logout {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin: 0 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: calc(100% - 40px);
+  border-radius: 5px;
+}
+
+.sidebar ul li .logout:hover {
+  background-color: #ff0000;
 }
 
 /* Contenido principal */
@@ -397,19 +432,22 @@ body::before {
 .bottom-content {
   margin-top: auto;
   text-align: center;
+  padding: 20px 0;
 }
 
 .bottom-content .sidebar-img {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .bottom-content .sidebar-img img {
-  max-width: 100%;
+  max-width: 80px;
   height: auto;
+  margin-bottom: 0;
 }
 
 .bottom-content .logout {
-  width: 100%;
+  width: calc(100% - 40px);
+  margin: 0 20px;
   padding: 10px;
   background-color: #1b263b;
   color: white;
@@ -422,5 +460,5 @@ body::before {
 .bottom-content .logout:hover {
   background-color: #415a77;
 }
-  max-width: 140px;
-}
+  
+
