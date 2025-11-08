@@ -1,32 +1,42 @@
-async function cargarVista(vista,tecnicoId) {
+async function cargarVista(vista, tecnicoId) {
   const cont = document.getElementById("contenido");
 
   if (vista === "cronograma") {
-    // aquí insertamos el cronograma
     cont.innerHTML = `
       <h2>Mi Cronograma</h2>
       <div id="cronograma"></div>
     `;
-    cargarCronograma(); // ejemplo técnico id=1
+    cargarCronograma();
   }
 
   if (vista === "chat") {
-    // como ya tienes el chat, aquí lo incrustas
-    cont.innerHTML = `
-      <h2>Chat</h2>
-      <iframe src="chat.html" style="width:100%;height:500px;border:none;"></iframe>
-    `;
+    try {
+      const response = await fetch("/chat-fragment");
+      const html = await response.text();
+      cont.innerHTML = html;
+
+      // Ejecutar los scripts que vienen en el HTML
+      const scripts = cont.querySelectorAll("script");
+      scripts.forEach(script => {
+        const newScript = document.createElement("script");
+        newScript.textContent = script.textContent;
+        document.body.appendChild(newScript);
+        document.body.removeChild(newScript);
+      });
+    } catch (error) {
+      console.error("Error al cargar el chat:", error);
+      cont.innerHTML = "<p>Error al cargar el chat</p>";
+    }
   }
 
   const enlaces = document.querySelectorAll(".sidebar ul li a");
-    enlaces.forEach(a => {
-        if (a.getAttribute("onclick").includes(vista)) {
-            a.classList.add("activo");
-        } else {
-            a.classList.remove("activo");
-        }
-    });
-
+  enlaces.forEach(a => {
+    if (a.getAttribute("onclick") && a.getAttribute("onclick").includes(vista)) {
+      a.classList.add("activo");
+    } else {
+      a.classList.remove("activo");
+    }
+  });
 }
 
 async function cargarCronograma() {
