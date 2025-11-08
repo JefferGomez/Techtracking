@@ -32,14 +32,17 @@
     <nav>
         <ul class="menu">
             <li><a href="/admin/Visitas">📅 Calendario</a></li>
+            <li>
+                <form action="/logout" method="post">
+                    <button class="btn-logout" type="submit">Cerrar Sesión</button>
+                </form>
+            </li>
+            <li class="sidebar-img">
+                <img th:src="@{/img/smg.png}" alt="origami" class="origami">
+            </li>
             <li><a href="/chat-page">💬 Chat</a></li>
         </ul>
     </nav>
-
-    <form action="/logout" method="post">
-        <button class="btn-logout" type="submit">Cerrar Sesión</button>
-    </form>
-    <img th:src="@{/img/smg.png}" alt="origami" class="origami">
 
 </aside>
 <div id="overlay" class="overlay"></div>

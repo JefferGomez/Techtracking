@@ -15,6 +15,7 @@ body {
   background: #0d1b2a;
   color: white;
   padding: 20px;
+  overflow: hidden;
 }
 
 .sidebar h2 {
@@ -46,6 +47,36 @@ body {
 
 .sidebar ul li a:hover {
   background: #34495e;
+}
+
+/* Styles for moved logout + logo inside the nav list */
+.sidebar ul li.sidebar-img {
+  text-align: center;
+  padding: 12px 0;
+}
+.sidebar ul li.sidebar-img img {
+  max-width: 80px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.sidebar ul li .logout-form {
+  padding: 0 8px;
+}
+.sidebar ul li .logout {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.sidebar ul li .logout:hover {
+  background: #ff0000;
+  color: #fff;
 }
 
 /* Contenido */
