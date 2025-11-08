@@ -59,7 +59,7 @@ body {
 /* Etiqueta de rol / usuario en el header */
 .admin-label {
     font-weight: 500;              /* Peso medio del texto */
-    color:#0d1b2a;                 /* Color oscuro (posiblemente variable --nav) */
+    color:#fff;                 /* Color oscuro (posiblemente variable --nav) */
     margin-right: 25px;            /* Margen a la derecha para separarlo de otros elementos */
     font-weight: bold;
 }
@@ -644,7 +644,7 @@ h2 {
    ============================ */
 
 /* Ajustes para pantallas pequeñas (tablet / móvil) */
-@media (max-width: 900px) {
+@media (max-width: 600px) {
     /* Sidebar se oculta fuera del viewport (se muestra via .open) */
     .sidebar {
         transform: translateX(-110%); /* Mueve el sidebar fuera a la izquierda */
@@ -735,7 +735,7 @@ section label:has([required])::after /* Cualquier label dentro de section que co
 /* Añadir al final de tu archivo styles.css */
 
 /* Muestra el botón hamburguesa y oculta el logo en pantallas pequeñas */
-@media (max-width: 900px) {
+@media (max-width: 600px) {
     .burger {
         display: block; /* Muestra el botón hamburguesa */
     }

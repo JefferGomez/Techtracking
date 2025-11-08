@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Vincular Equipo - TechTracking</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/vincularequipo.css}">
 </head>
 
@@ -21,7 +19,7 @@
     </div>
     <div class="center-title">Vincular Equipo</div>
     <div class="right">
-        <div class="admin-label">Tecnico</div>
+        <div class="admin-label">Técnico</div>
     </div>
 </header>
 
@@ -31,7 +29,7 @@
     </div>
     <nav>
         <ul class="menu">
-            <li> <a class="sidebar-item" href="/admin">👥 Clientes</a></li>
+            <li><a class="sidebar-item" href="/admin">👥 Clientes</a></li>
             <li><a class="sidebar-item" href="/admin/Visitas">📅 Calendario</a></li>
             <li><a class="sidebar-item" href="/chat-page">💬 Chat</a></li>
         </ul>
@@ -41,8 +39,8 @@
         <button class="btn-logout" type="submit">Cerrar Sesión</button>
     </form>
     <img th:src="@{/img/smg.png}" alt="origami" class="origami">
-
 </aside>
+
 <div id="overlay" class="overlay"></div>
 
 <main>
@@ -51,27 +49,26 @@
             <img th:src="@{/img/SM.png}" alt="Logo ServiMarketing" class="logo-1">
 
             <div class="campo-vertical">
-                <label for="idEquipo">ID del Equipo: </label>
-                <input type="text" id="idEquipo" name="idEquipo" placeholder="Ej: 101"required>
+                <label for="idEquipo">ID del Equipo:</label>
+                <input type="text" id="idEquipo" name="idEquipo" placeholder="Ej: 101" required>
             </div>
             <div class="campo-vertical">
                 <label for="nombreEquipo">Marca del Equipo:</label>
-                <input type="text" id="nombreEquipo" name="nombreEquipo" placeholder="Ej: Epson, Zebra..."required>
+                <input type="text" id="nombreEquipo" name="nombreEquipo" placeholder="Ej: Epson, Zebra..." required>
             </div>
         </div>
 
         <section class="equipo">
             <h2>Especificaciones del Equipo</h2>
 
-
             <label for="modelo">Modelo</label>
-            <input type="text" id="modelo" name="modelo" placeholder="Ej: XP-420"required>
+            <input type="text" id="modelo" name="modelo" placeholder="Ej: XP-420" required>
 
             <label for="serie">Serie</label>
-            <input type="text" id="serie" name="serie" placeholder="Número de serie del equipo"required>
+            <input type="text" id="serie" name="serie" placeholder="Número de serie del equipo" required>
 
             <label for="tipo">Tipo</label>
-            <select id="tipo" name="tipo"required>
+            <select id="tipo" name="tipo" required>
                 <option value="">Seleccione una opción</option>
                 <option value="Impresora">Impresora</option>
                 <option value="Terminal portátil">Terminal portátil</option>
@@ -82,23 +79,22 @@
             <h2>Información del Cliente</h2>
 
             <div class="busqueda">
-                <input type="text" id="buscarCliente" placeholder="Buscar cliente por nombre o ID"required>
-                <button type="button" onclick="buscarCliente()">Buscar</button>
+                <input type="text" id="buscarCliente" placeholder="Buscar cliente por nombre o ID">
+                <button type="button" id="btnBuscarCliente">Buscar</button>
             </div>
 
             <div id="datosCliente">
-                <p><strong>NIT:</strong> <span id="NIT"></span></p>
-                <p><strong>Nombre:</strong> <span id="Empresa"></span></p>
-                <p><strong>Dirección:</strong> <span id="Dirección"></span></p>
-                <p><strong>Teléfono:</strong> <span id="Teléfono"></span></p>
-                <p><strong>Correo:</strong> <span id="Correo"></span></p>
+                <p><strong>ID:</strong> <span id="NIT">N/A</span></p>
+                <p><strong>Nombre:</strong> <span id="Empresa">N/A</span></p>
+                <p><strong>Dirección:</strong> <span id="Dirección">N/A</span></p>
+                <p><strong>Teléfono:</strong> <span id="Teléfono">N/A</span></p>
+                <p><strong>Correo:</strong> <span id="Correo">N/A</span></p>
             </div>
-            <button type="submit" class="vincular">Vincular Equipo</button>
+            <button type="submit" class="vincular" disabled>Vincular Equipo</button>
         </section>
     </form>
 </main>
 
 <script th:src="@{/js/vincularequipo.js}"></script>
 </body>
-
 </html>

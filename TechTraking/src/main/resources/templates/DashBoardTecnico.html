@@ -1,38 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Técnico</title>
-  <link rel="stylesheet" th:href="@{/css/EstilosTecnico.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Técnico - TechTracking</title>
+    <link rel="stylesheet" th:href="@{/css/EstilosTecnico.css}">
 </head>
 <body>
-  <div class="dashboard">
-    
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2>TechTracking</h2>
-      <nav>
-        <ul>
-          <li><a href="javascript:void(0)" onclick="window.history.back()">📅 Vista general</a></li>
-          <li>
-            <form action="/logout" method="post" class="logout-form">
-              <button class="logout">Cerrar Sesión</button>
-            </form>
-          </li>
-          <li class="sidebar-img">
-            <img th:src="@{/img/smg.png}" alt="Logo">
-          </li>
-          <li><a href="#" onclick="cargarVista('chat')">💬 Chat</a></li>
+
+<!-- Header -->
+<header class="main-header">
+    <div class="left">
+        <button id="btn-burger" class="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+    <div class="logo-h">
+        <span class="servi">Servi</span><span class="mark">Marketing</span>
+    </div>
+    <div class="center">Dashboard Técnico</div>
+    <div class="right">
+        <div class="admin-label">Técnico</div>
+    </div>
+</header>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="brand">
+        <div>
+            <h3>TechTracking</h3>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu">
+            <li><a class="sidebar-item" href="#" onclick="cargarVista('cronograma'); return false;">📅 Mi Cronograma</a></li>
+            <li><a class="sidebar-item" href="#" onclick="cargarVista('chat'); return false;">💬 Chat</a></li>
         </ul>
-      </nav>
-    </aside>
+    </nav>
 
-    <!-- Contenido dinámico -->
-    <main class="contenido" id="contenido"></main>
-    
-  </div>
+    <form action="/logout" method="post">
+        <button class="btn-logout" type="submit">Cerrar Sesión</button>
+    </form>
+    <img th:src="@{/img/smg.png}" alt="origami" class="origami">
+</aside>
 
-  <script th:src="@{/js/tecnicoDashboard.js}"></script>
+<!-- Overlay para móvil -->
+<div id="overlay" class="overlay"></div>
+
+<!-- Contenido Principal -->
+<main class="content">
+    <div class="card-container">
+        <div class="card-dashboard" id="contenido">
+            <!-- Aquí se carga el contenido dinámico -->
+            <div class="bienvenida-tecnico">
+                <h2>🛠️ Bienvenido al Panel Técnico</h2>
+                <p>Selecciona una opción del menú para comenzar</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/tecnicoDashboard.js}"></script>
 </body>
 </html>

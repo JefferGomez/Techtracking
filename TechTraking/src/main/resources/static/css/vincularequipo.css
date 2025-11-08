@@ -56,7 +56,7 @@ body {
 /* Etiqueta de rol / usuario en el header */
 .admin-label {
     font-weight: bold;
-    color: #0d1b2a;
+    color: #fff;
     margin-right: 25px;
 }
 
@@ -296,7 +296,7 @@ input[type="text"], input[type="date"], select {
    RESPONSIVE DESIGN (Media Queries)
    ====================================== */
 
-@media (max-width: 992px) {
+@media (max-width: 600px) {
 
     /* --- SIDEBAR --- */
     .sidebar {
