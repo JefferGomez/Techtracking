@@ -43,7 +43,7 @@ body, html {
 
 .sidebar ul li {
   margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 0;
 }
 
 .sidebar ul li a {
@@ -438,4 +438,62 @@ body::before {
 .sidebar-img img {
   width: 100%;
   max-width: 140px;
+}
+
+/* ======= Overrides: unify sidebar behavior and logout hover ======= */
+/* Ensure sidebar is fixed and no vertical scroll */
+.sidebar {
+  overflow: hidden;
+}
+
+/* Remove thin separators and tighten spacing */
+.sidebar ul li {
+  margin: 0;
+  padding: 12px 0;
+}
+
+.sidebar ul li a {
+  padding: 0 20px;
+}
+
+/* Logout: transparent by default, red on hover */
+.sidebar ul li .logout {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 6px 0;
+  font-size: 14px;
+  cursor: pointer;
+  width: calc(100% - 40px);
+  text-align: left;
+  border-radius: 6px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.sidebar ul li .logout:hover {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+.sidebar ul li.sidebar-img {
+  text-align: center;
+  padding: 10px 0 18px;
+}
+.sidebar ul li.sidebar-img img {
+  max-width: 80px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Responsive: when collapsed keep logout and logo usable */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+    overflow: visible;
+  }
+  .container { margin-left: 70px; }
+  .sidebar ul li a { text-align: center; padding: 10px 5px; }
+  .sidebar ul li .logout { padding: 8px 6px; width: calc(100% - 12px); font-size: 12px; }
+  .sidebar ul li.sidebar-img img { max-width: 50px; }
 }
