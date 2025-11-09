@@ -221,7 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(data)
             });
 
-    if (!res.ok) throw new Error("Error al crear revision");
+            if (!res.ok) {
+                throw new Error(`Error ${res.status}: ${await res.text()}`);
+            }
 
             const savedRevision = await res.json();
             console.log("✅ Revisión guardada:", savedRevision);
