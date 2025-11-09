@@ -42,23 +42,29 @@
     </form>
     <img th:src="@{/img/smg.png}" alt="origami" class="origami">
 
-      <!-- Encabezado -->
-      <div class="header">
-        <div class="logo-titulo">
-          <img th:src="@{/img/sm.png}" alt="Logo de la empresa">
-          <div class="titulo">
-            <h1>SERVIMARKETING FM S.A.S.</h1>
-            <p>PROCESO GESTIÓN TECNOLÓGICO</p>
-            <p>FORMATO DE HOJA DE VIDA DE EQUIPOS</p>
-          </div>
+</aside>
+<div id="overlay" class="overlay"></div>
+
+<main class="content">
+    <div class="card" id="form-contenedor">
+        <!--encabezado del formulario-->
+
+        <div class="form-header-servimarket">
+            <div class="logo-titulo">
+                <img th:src="@{/img/sm.png}" alt="Logo de la empresa">
+                <div class="titulo">
+                    <h1>SERVIMARKETING FM S.A.S.</h1>
+                    <p>PROCESO GESTIÓN TECNOLÓGICO</p>
+                    <p>FORMATO DE HOJA DE VIDA DE EQUIPOS</p>
+                </div>
+            </div>
+            <div class="datos-header">
+                <p><strong>Código:</strong> F.TEC-03</p>
+                <p><strong>Versión:</strong> 01</p>
+                <p><strong>Fecha:</strong> 07/12/2018</p>
+                <p><strong>Página:</strong> 1 de 1</p>
+            </div>
         </div>
-        <div class="datos-header">
-          <p><strong>Código:</strong> F.TEC-03</p>
-          <p><strong>Versión:</strong> 01</p>
-          <p><strong>Fecha:</strong> 07/12/2018</p>
-          <p><strong>Página:</strong> 1 de 1</p>
-        </div>
-      </div>
 
       <!-- Formulario -->
       <form id="reporteForm">
