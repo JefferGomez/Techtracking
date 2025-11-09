@@ -6,11 +6,41 @@
     <link rel="stylesheet" th:href="@{/css/DetalleVisitas.css}">
 </head>
 <body>
-    <header>
-        <h1>Visitas del día</h1>
-        <button onclick="window.history.back()">← Volver al Cronograma</button>
+    <!-- ======== HEADER ======== -->
+    <header class="main-header">
+        <div class="left">
+            <button id="btn-burger" class="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        </div>
+        <div class="logo-h"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
+        <div class="center">Detalle de Visitas</div>
+
+        <div class="right">
+            <div class="admin-label">Técnico</div>
+        </div>
     </header>
 
+    <!-- ======== SIDEBAR ======== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <div>
+                <h3>TechTracking</h3>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a class="sidebar-item" href="/tecnico">👥 Vista general</a></li>
+                <li><a class="sidebar-item" href="/chat-page">💬 Chat</a></li>
+            </ul>
+        </nav>
+
+        <form action="/logout" method="post">
+            <button class="btn-logout" type="submit">Cerrar Sesión</button>
+        </form>
+
+        <img th:src="@{/img/smg.png}" alt="origami" class="origami">
+    </aside>
+
+    <div id="overlay" class="overlay"></div>
     <main>
         <div id="visitasDia" class="visitas-container">
         </div>

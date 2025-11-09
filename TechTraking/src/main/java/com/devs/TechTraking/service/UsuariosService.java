@@ -46,6 +46,7 @@ public class UsuariosService implements UserDetailsService{
 
         if (usuarios.getRol().getId() == 3 && usuarios.getTecnico() != null) {
             usuarios.getTecnico().setUsuario(usuarios);
+            usuarios.getTecnico().setNombre(usuarios.getNombre());
         }
 
 
