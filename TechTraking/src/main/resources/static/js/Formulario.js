@@ -173,10 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 correasEnBuenEstado: valorBooleano("cremas"),
                 otraMecanica: formData.get("otra_mecanica"),
 
-    funciona: valorBooleano("funciona"),
-    partida: valorBooleano("pantallaPrendida"),
-    lineasQuemadas: valorBooleano("lineas"),
-    quemada: valorBooleano("quemada"),
+                // Pantalla
+                funciona: valorBooleano("funciona"),
+                partida: valorBooleano("pantallaPrendida"),
+                lineasQuemadas: valorBooleano("lineas"),
+                quemada: valorBooleano("quemada"),
 
     bueno: valorBooleano("cabezal_bueno"),
     lineasBlancas: valorBooleano("lineas_blancas"),
