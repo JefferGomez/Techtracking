@@ -276,94 +276,90 @@
                         </div>
                     </section>
 
-            <!-- Rodillo de Impresión -->
-            <section class="rodillo-impresion">
-              <div class="seccion-titulo">
-                <h2>Rodillo de Impresión</h2>
-                <div class="columnas-labels">
-                  <span>Sí</span>
-                  <span>No</span>
+                    <!-- Rodillo de Impresión -->
+                    <section class="rodillo-impresion">
+                        <div class="seccion-titulo">
+                            <h2>Rodillo de Impresión</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Buenos</label>
+                            <input type="radio" name="rodillo" value="SI" required>
+                            <input type="radio" name="rodillo" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Picados</label>
+                            <input type="radio" name="ruedas" value="SI" required>
+                            <input type="radio" name="ruedas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Rayados</label>
+                            <input type="radio" name="alineado" value="SI" required>
+                            <input type="radio" name="alineado" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Adhesivo</label>
+                            <input type="radio" name="adecuado" value="SI" required>
+                            <input type="radio" name="adecuado" value="NO">
+                        </div>
+                    </section>
+                    <!-- Estado Electrónico -->
+                    <section class="estado-electronico">
+                        <div class="seccion-titulo">
+                            <h2>Estado Electrónico</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Humedad</label>
+                            <input type="radio" name="humedad" value="SI" required>
+                            <input type="radio" name="humedad" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Tarjetas Electrónicas funcionales</label>
+                            <input type="radio" name="tarjetasOk" value="SI" required>
+                            <input type="radio" name="tarjetasOk" value="NO">
+                        </div>
+                        <div class="fila-check fila-input-bottom">
+                            <label><input type="text" name="otra_electronica" placeholder="Otra, ¿Cuál?"></label>
+                        </div>
+                    </section>
                 </div>
-              </div>
-              <div class="fila-check">
-                <label>Bueno</label>
-                <input type="radio" name="rodillo" value="SI">
-                <input type="radio" name="rodillo" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Ruedas</label>
-                <input type="radio" name="ruedas" value="SI">
-                <input type="radio" name="ruedas" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Alineado</label>
-                <input type="radio" name="alineado" value="SI">
-                <input type="radio" name="alineado" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Adecuado</label>
-                <input type="radio" name="adecuado" value="SI">
-                <input type="radio" name="adecuado" value="NO">
-              </div>
-            </section>
-
-            <!-- Estado Electrónico -->
-            <section class="estado-electronico">
-              <div class="seccion-titulo">
-                <h2>Estado Electrónico</h2>
-                <div class="columnas-labels">
-                  <span>Sí</span>
-                  <span>No</span>
-                </div>
-              </div>
-              <div class="fila-check">
-                <label>Humedad</label>
-                <input type="radio" name="humedad" value="SI">
-                <input type="radio" name="humedad" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Tarjetas funcionales</label>
-                <input type="radio" name="tarjetasOk" value="SI">
-                <input type="radio" name="tarjetasOk" value="NO">
-              </div>
-              <div class="fila-check">
-                <input type="text" placeholder="Otra, ¿Cuál?">
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <!-- Observaciones y Etiqueta -->
-        <div class="grid-2">
-          <section>
-            <h2>Observaciones / Procedimiento Realizado</h2>
-            <textarea rows="5"></textarea>
-          </section>
-          <section>
-            <h2>Etiqueta de muestra</h2>
-            <input type="file" name="etiqueta" accept="application/pdf,image/*">
-            <img id="previewEtiqueta" style="max-width:150px; margin-top:8px; display:none;">
-          </section>
-        </div>
-
-        <!-- Firmas -->
-        <div class="grid-2">
-          <section>
-            <h2>Técnico Servimarket FM</h2>
-            <input type="text" placeholder="Usuario responsable">
-            <input type="text" placeholder="Área / Unidad">
-          </section>
-          <section>
-            <h2>Recibido por</h2>
-            <input type="file" name="firma" accept="application/pdf,image/*">
-            <img id="previewFirma" style="max-width:150px; margin-top:8px; display:none;">
-          </section>
-        </div>
-
-        <!-- Botón -->
-        <div class="actions">
-          <button type="submit" class="btn-red">Guardar Reporte</button>
-        </div>
+            </div>
+            <!-- Observaciones y Etiqueta -->
+            <div class="grid-2">
+                <section class="observaciones-section">
+                    <h2>Observaciones / Procedimiento Realizado</h2>
+                    <textarea name="observaciones" maxlength="500" rows="5" cols="65" placeholder="Máximo 500 caracteres"></textarea>
+                </section>
+                <section class="etiqueta-section">
+                    <h2>Etiqueta de muestra</h2>
+                    <input type="file" name="etiqueta" id="inputEtiqueta" accept="image/*" required>
+                    <img id="previewEtiqueta" alt="Vista previa de la etiqueta" style="max-width:150px; margin-top:8px; display:none;">
+                </section>
+            </div>
+            <!-- Firmas -->
+            <div class="grid-2">
+                <section class="tecnico-section">
+                    <h2>Técnico Servimarket FM</h2>
+                    <input type="text" name="tecnico_usuario" placeholder="Usuario responsable" required>
+                    <input type="text" name="tecnico_area" placeholder="Área / Unidad" required>
+                </section>
+                <section>
+                    <h2>Recibido por</h2>
+                    <input type="file" name="firma" accept="application/pdf,image/*" required>
+                    <img id="previewFirma" style="max-width:150px; margin-top:8px; display:none;">
+                </section>
+            </div>
+            <!-- Botón -->
+            <div class="actions">
+                <button type="submit" class="btn-red">Enviar Reporte y Generar PDF</button>
+            </div>
 
       </form>
     </div>
