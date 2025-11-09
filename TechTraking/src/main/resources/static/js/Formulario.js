@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-document.querySelector("input[name='etiqueta']").addEventListener("change", function () {
-  mostrarVistaPrevia(this, "previewEtiqueta");
-});
+    inputEtiqueta.addEventListener("change", function () {
+        mostrarVistaPrevia(this, previewEtiqueta);
+    });
 
     if (inputFirma) {
         inputFirma.addEventListener("change", function () {
