@@ -1,4 +1,45 @@
-const form = document.querySelector("#reporteForm");
+/**
+ * =================================================================
+ * SCRIPT.JS - Lógica de TechTracking - Formulario de Mantenimiento
+ * =================================================================
+ */
+
+// URL base de tu API de Spring Boot
+const API_BASE_URL = 'http://localhost:8080';
+const API_TECNICO = `${API_BASE_URL}/tecnico`;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // -----------------------------------------------------------------
+    // 1. Elementos del DOM y Lógica de Sidebar
+    // -----------------------------------------------------------------
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const btnBurger = document.getElementById('btn-burger');
+    const menuLinks = document.querySelectorAll('.menu a');
+    const btnLogout = document.querySelector('.btn-logout');
+    const reporteForm = document.getElementById('reporteForm');
+    const formContenedor = document.getElementById('form-contenedor');
+
+    // Botón hamburguesa y Overlay
+    const toggleSidebar = () => {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+    };
+    btnBurger.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+
+    // Navegación Sidebar
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href) {
+                window.location.href = href;
+            }
+            if (sidebar.classList.contains('show')) toggleSidebar();
+        });
+    });
+
 
 // Función para convertir "SI"/"NO" a boolean
 const valorBooleano = (name) => {
