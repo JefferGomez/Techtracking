@@ -208,6 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log("📋 Datos del reporte:", data);
 
+            // 2. Primero crear/obtener el equipo si no existe
+            let equipoId = sessionStorage.getItem("equipoId");
 
   try {
     const res = await fetch("http://localhost:8080/tecnico/crearRevisiones", {
