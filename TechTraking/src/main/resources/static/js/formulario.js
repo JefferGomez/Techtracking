@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lineasQuemadas: valorBooleano("lineas"),
                 quemada: valorBooleano("quemada"),
 
-                // Cabezales
+                // Cabezal
                 bueno: valorBooleano("cabezal_bueno"),
                 lineasBlancas: valorBooleano("lineas_blancas"),
                 calibrado: valorBooleano("calibrado"),
@@ -198,11 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 observaciones: formData.get("observaciones"),
 
-                // Técnicos
+                // Técnico
                 tecnicoUsuario: formData.get("tecnico_usuario"),
                 tecnicoArea: formData.get("tecnico_area"),
 
-                // Imagenes
+                // Imágenes
                 etiquetaBase64: await fileToBase64(etiquetaFile),
                 firmaBase64: await fileToBase64(firmaFile),
             };
