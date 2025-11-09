@@ -40,107 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // -----------------------------------------------------------------
-    // 2. Pre-Carga de Datos (Consecutivo, Técnico y DATOS DEL EQUIPO)
-    // -----------------------------------------------------------------
-    const consecutivoInput = document.getElementById('consecutivo');
-    const tecnicoUsuarioInput = document.querySelector('input[name="tecnico_usuario"]');
-    const fechaInput = document.getElementById('fecha');
-
-    // Inputs del equipo
-    const clienteInput = document.querySelector('input[name="cliente"]');
-    const marcaInput = document.querySelector('input[name="marca"]');
-    const modeloInput = document.querySelector('input[name="modelo"]');
-    const serieInput = document.querySelector('input[name="serie"]');
-
-    /**
-     * Obtener el siguiente número consecutivo
-     */
-    // const obtenerConsecutivo = async () => {
-    //     try {
-    //         const response = await fetch(`${API_TECNICO}/next-consecutivo`);
-    //         if (!response.ok) throw new Error("No se pudo obtener el consecutivo.");
-    //         const data = await response.json();
-    //         return data.consecutivo || (Math.floor(Math.random() * 10000) + 1000);
-    //     } catch (error) {
-    //         console.error('Error al obtener el consecutivo:', error);
-    //         return Math.floor(Math.random() * 10000) + 1000;
-    //     }
-    // };
-
-    /**
-     * Obtener el técnico logueado
-     */
-    const obtenerTecnicoServimarket = async () => {
-        try {
-            return 'Jeisson Henao';
-        } catch (error) {
-            console.error('Error al obtener el técnico:', error);
-            return 'Técnico';
-        }
-    };
-
-    /**
-     * NUEVO: Cargar datos del equipo desde el backend
-     */
-    const cargarDatosEquipo = async () => {
-        const equipoId = sessionStorage.getItem("equipoId");
-        const clienteId = sessionStorage.getItem("clienteId");
-
-        if (!equipoId && !clienteId) {
-            console.log("ℹ️ No hay equipo seleccionado. Formulario vacío.");
-            return;
-        }
-
-        try {
-            let equipoData = null;
-            let clienteData = null;
-
-            // Obtener datos del equipo si existe
-            if (equipoId) {
-                const equipoRes = await fetch(`${API_BASE_URL}/admin/equipos/${equipoId}`);
-                if (equipoRes.ok) {
-                    equipoData = await equipoRes.json();
-                    console.log("✅ Equipo cargado:", equipoData);
-                }
-            }
-
-            // Obtener datos del cliente si existe
-            if (clienteId) {
-                const clienteRes = await fetch(`${API_BASE_URL}/admin/clientes/${clienteId}`);
-                if (clienteRes.ok) {
-                    clienteData = await clienteRes.json();
-                    console.log("✅ Cliente cargado:", clienteData);
-                }
-            }
-
-            // Rellenar el formulario con los datos obtenidos
-            if (equipoData) {
-                if (marcaInput) marcaInput.value = equipoData.marca || '';
-                if (modeloInput) modeloInput.value = equipoData.modelo || '';
-                if (serieInput) serieInput.value = equipoData.serie || '';
-
-                // Si el equipo tiene el tipo, seleccionarlo
-                if (equipoData.tipo) {
-                    const tipoRadio = document.querySelector(`input[name="tipo_impresora"][value="${equipoData.tipo}"]`);
-                    if (tipoRadio) tipoRadio.checked = true;
-                }
-            }
-
-            if (clienteData) {
-                if (clienteInput) clienteInput.value = clienteData.nombre || '';
-            }
-
-            // Si el equipo tiene clienteId pero no cargamos el cliente separado
-            if (equipoData && equipoData.cliente && !clienteData) {
-                if (clienteInput) clienteInput.value = equipoData.cliente.nombre || equipoData.cliente || '';
-            }
-
-        } catch (error) {
-            console.error("❌ Error al cargar datos del equipo:", error);
-            alert("⚠️ No se pudieron cargar los datos del equipo. Puedes ingresarlos manualmente.");
-        }
-    };
 
     /** Inicializa TODOS los campos del formulario */
     const inicializarCampos = async () => {
@@ -236,14 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const etiquetaFile = inputEtiqueta.files[0];
             const firmaFile = inputFirma ? inputFirma.files[0] : null;
 
-            // Verificar si hay un equipoId en sessionStorage (desde vista equipo)
-            const equipoId = sessionStorage.getItem("equipoId");
-            const clienteId = sessionStorage.getItem("clienteId");
-
             const data = {
                 // IDs (si existen)
-                equipoId: equipoId ? parseInt(equipoId) : null,
-                clienteId: clienteId ? parseInt(clienteId) : null,
+                equipoId: parseInt(formData.get("equipoId")),
+                clienteId: parseInt(formData.get("clienteId")),
+
 
                 // Datos del equipo
                 cliente: formData.get("cliente"),
@@ -315,31 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 2. Primero crear/obtener el equipo si no existe
             let equipoId = sessionStorage.getItem("equipoId");
-
-            if (!equipoId) {
-                // Crear equipo nuevo primero
-                const equipoData = {
-                    marca: formData.get("marca"),
-                    modelo: formData.get("modelo"),
-                    serie: formData.get("serie"),
-                    tipo: formData.get("tipo_impresora"),
-                    clienteId: sessionStorage.getItem("clienteId") || null
-                };
-
-                const equipoRes = await fetch(`${API_BASE_URL}/admin/equipos`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(equipoData)
-                });
-
-                if (!equipoRes.ok) {
-                    throw new Error("Error al crear el equipo");
-                }
-
-                const equipoCreado = await equipoRes.json();
-                equipoId = equipoCreado.id;
-                console.log("✅ Equipo creado:", equipoCreado);
-            }
 
             // Ahora crear la revisión con el equipoId
             data.equipoId = parseInt(equipoId);
