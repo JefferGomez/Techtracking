@@ -80,10 +80,10 @@
             <section class="datos-cliente">
 
                 <div class="columna-izquierda">
-                    <label>Cliente: <input style="margin-left: 3px;"type="text" placeholder="macpollo" name="cliente" required ></label>
-                    <label>Marca: <input style="margin-left: 6px;"type="text" placeholder="dell" name="marca" required></label>
-                    <label>Modelo: <input type="text" placeholder="l350"name="modelo" required></label>
-                    <label>Serie: <input style="margin-left: 10px;"type="text" placeholder="mt54245552"name="serie" required></label>
+                    <label>Cliente: <input style="margin-left: 3px;" type="text" name="cliente" required  th:value="${clienteId}"></label>
+                    <label>Marca: <input style="margin-left: 6px;" type="text" name="marca" required th:value="${marca}"></label>
+                    <label>Modelo: <input type="text" name="modelo"  required th:value="${modelo}"></label>
+                    <label>Serie: <input style="margin-left: 10px;" type="text" name="serie" required th:value="${equipoId}"></label>
                 </div>
 
                 <div class="columna-derecha">
@@ -95,8 +95,11 @@
                         <div for="consecutivo">Consecutivo #</div>
                         <input type="number" name="consecutivo" id="consecutivo" readonly style="font-size: 1em;">
                     </div>
-
-                    <label style="margin-top: 38px;"><input type="checkbox" name="garantia" required> Equipo en Garantía </label>
+                    <div class="fila-check">
+                    <label>Equipo en Garantía </label>
+                    <input type="radio" name="garantia" value="SI" required><span>Sí</span>
+                    <input type="radio" name="garantia" value="NO"><span>No</span>
+                    </div>
                 </div>
             </section>
 
@@ -355,7 +358,7 @@
             </div>
             <!-- Botón -->
             <div class="actions">
-                <button type="submit" class="btn-red">Guardar Reporte y Generar PDF</button>
+                <button type="submit" class="btn-red">Enviar Reporte y Generar PDF</button>
             </div>
 
         </form>

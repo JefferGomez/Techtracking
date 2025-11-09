@@ -49,7 +49,7 @@ body {
 
 .admin-label {
     font-weight: 500;
-    color:#0d1b2a;
+    color:#fff;
     margin-right: 25px;
     font-weight: bold;
 }
@@ -81,7 +81,7 @@ body {
     background: var(--nav);
     color: #fff;
     padding: 18px 14px;
-    overflow: auto;
+    overflow: hidden;
     transition: transform .28s ease-in-out;
 }
 
@@ -146,6 +146,18 @@ li:hover {
     flex-direction: column;
     gap: 20px;
     margin-left: 5px;
+}
+
+/* When image moved into the nav list */
+.sidebar ul li.sidebar-img {
+    text-align: center;
+    padding: 12px 0;
+}
+.sidebar ul li.sidebar-img .origami,
+.sidebar ul li.sidebar-img img {
+    width: 100px;
+    height: auto;
+    margin: 0 auto;
 }
 
 .burger {
@@ -302,7 +314,7 @@ td:last-child {
    RESPONSIVE
    ====================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .sidebar {
         transform: translateX(-100%);
     }

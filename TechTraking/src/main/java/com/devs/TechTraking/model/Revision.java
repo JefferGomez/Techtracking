@@ -12,6 +12,10 @@ public class Revision {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false, length = 5)
+    private String consecutivo;
+
+
     // ✅ Checklist (31 preguntas Sí/No del documento)
     //ESTADO GENERAL
     private boolean equipoEnciende;
@@ -75,6 +79,14 @@ public class Revision {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getConsecutivo() {
+        return consecutivo;
+    }
+
+    public void setConsecutivo(String consecutivo) {
+        this.consecutivo = consecutivo;
     }
 
     public boolean isEquipoEnciende() {
