@@ -184,10 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
     calibrado: valorBooleano("calibrado"),
     limpio: valorBooleano("limpio"),
 
-    buenos: valorBooleano("rodillo"),
-    picados: valorBooleano("ruedas"),
-    rayados: valorBooleano("alineado"),
-    adhesivo: valorBooleano("adecuado"),
+                // Rodillo
+                buenos: valorBooleano("rodillo"),
+                picados: valorBooleano("ruedas"),
+                rayados: valorBooleano("alineado"),
+                adhesivo: valorBooleano("adecuado"),
 
     humedad: valorBooleano("humedad"),
     tarjetaElectronica: valorBooleano("tarjetasOk"),
