@@ -2,6 +2,30 @@ console.log(localStorage.getItem("fechaSeleccionada"));
 
 document.addEventListener("DOMContentLoaded", async () => {
     const fecha = localStorage.getItem("fechaSeleccionada");
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const btnBurger = document.getElementById('btn-burger');
+    const menuLinks = document.querySelectorAll('.menu a');
+
+    const toggleSidebar = () => {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+    };
+    btnBurger.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+
+    // Navegación Sidebar
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href) {
+                window.location.href = href;
+            }
+            if (sidebar.classList.contains('show')) toggleSidebar();
+        });
+    });
+
     if (!fecha) {
         alert("No se seleccionó ninguna fecha.");
         return;

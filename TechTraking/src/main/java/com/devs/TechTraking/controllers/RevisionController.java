@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,7 +83,7 @@ public class RevisionController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("⚠️ No se pudo enviar el correo: " + e.getMessage());
+            return ResponseEntity.status(500).body(null);
         }
 
         // 🔹 Devolver DTO actualizado con el consecutivo
