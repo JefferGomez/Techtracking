@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lineasQuemadas: valorBooleano("lineas"),
                 quemada: valorBooleano("quemada"),
 
+                // Cabezales
                 bueno: valorBooleano("cabezal_bueno"),
                 lineasBlancas: valorBooleano("lineas_blancas"),
                 calibrado: valorBooleano("calibrado"),
