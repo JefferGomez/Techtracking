@@ -103,9 +103,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return val ? val.value === "SI" : false;
     };
 
-// Envío del formulario al backend
-form.addEventListener("submit", async function (e) {
-  e.preventDefault();
+    /**
+     * Convierte archivo a Base64
+     */
+    const fileToBase64 = (file) => new Promise((resolve, reject) => {
+        if (!file || file.size === 0) return resolve(null);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
+   
+
+    /**
+     * Manejador principal al enviar el formulario
+     */
+    reporteForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
   const data = {
     clienteId: parseInt(document.querySelector('input[name="clienteId"]').value),
