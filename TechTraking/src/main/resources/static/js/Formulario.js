@@ -240,8 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
             //     window.location.href = "/tecnico/detallesVisitas";
             // }, 2000);
 
-  } catch (error) {
-    console.error(error);
-    alert("❌ Ocurrió un error al guardar la revisión o generar el PDF.");
-  }
+        } catch (error) {
+            console.error("❌ Error completo:", error);
+            alert(`❌ Error al guardar el reporte:\n\n${error.message}\n\nRevisa la consola para más detalles.`);
+        } finally {
+            // Restaurar botón
+            submitBtn.textContent = textoOriginal;
+            submitBtn.disabled = false;
+        }
+    });
 });
