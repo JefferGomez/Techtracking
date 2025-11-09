@@ -157,12 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 estaPartido: valorBooleano("prendido"),
                 estaManchado: valorBooleano("manchas"),
 
-    tornillos: valorBooleano("tornillos"),
-    tapas: valorBooleano("tapas"),
-    display: valorBooleano("display"),
-    tarjetasElectronicas: valorBooleano("tarjetas"),
-    botones: valorBooleano("botones"),
-    cabezal: valorBooleano("cabezal"),
+                // Piezas Faltantes
+                tornillos: valorBooleano("tornillos"),
+                tapas: valorBooleano("tapas"),
+                display: valorBooleano("display"),
+                tarjetasElectronicas: valorBooleano("tarjetas"),
+                botones: valorBooleano("botones"),
+                cabezal: valorBooleano("cabezal"),
+                otrasPiezas: formData.get("otras_piezas"),
 
     oxido: valorBooleano("ejes"),
     ruidos: valorBooleano("husillos"),
