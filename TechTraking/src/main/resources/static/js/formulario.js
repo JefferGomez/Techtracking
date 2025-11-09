@@ -198,11 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 observaciones: formData.get("observaciones"),
 
-                // Técnico
+                // Técnicos
                 tecnicoUsuario: formData.get("tecnico_usuario"),
                 tecnicoArea: formData.get("tecnico_area"),
 
-                // Imágenes
+                // Imagenes
                 etiquetaBase64: await fileToBase64(etiquetaFile),
                 firmaBase64: await fileToBase64(firmaFile),
             };
