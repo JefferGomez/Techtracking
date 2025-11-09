@@ -85,9 +85,23 @@ document.querySelector("input[name='etiqueta']").addEventListener("change", func
   mostrarVistaPrevia(this, "previewEtiqueta");
 });
 
-document.querySelector("input[name='firma']").addEventListener("change", function () {
-  mostrarVistaPrevia(this, "previewFirma");
-});
+    if (inputFirma) {
+        inputFirma.addEventListener("change", function () {
+            mostrarVistaPrevia(this, previewFirma);
+        });
+    }
+
+    // -----------------------------------------------------------------
+    // 4. Lógica de Envío (Guardar Reporte y Generar PDF)
+    // -----------------------------------------------------------------
+
+    /**
+     * Helper para convertir radio buttons a boolean
+     */
+    const valorBooleano = (name) => {
+        const val = document.querySelector(`input[name="${name}"]:checked`);
+        return val ? val.value === "SI" : false;
+    };
 
 // Envío del formulario al backend
 form.addEventListener("submit", async function (e) {
