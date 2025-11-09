@@ -51,14 +51,15 @@ public class SecurityConfig {
                )
                .authorizeHttpRequests(authRequest ->
                        authRequest
-                               .requestMatchers("/","/css/**", "/js/**","/img/**","/auth/**").permitAll()
+                               .requestMatchers("/", "/css/**", "/js/**", "/img/**", "/auth/**").permitAll()
                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                .requestMatchers("/tecnico/**").hasAuthority("TECNICO")
                                .requestMatchers("/almacenista/**").hasAuthority("ALMACENISTA")
                                .requestMatchers("/superadmin/**").hasAuthority("SUPERADMIN")
                                .requestMatchers("/chat-page/**").hasAnyAuthority("ADMIN","TECNICO","ALMACENISTA")
                                .anyRequest().authenticated()
-                        )
+               )
+
                .formLogin(form -> form
                        .loginPage("/")
                        .loginProcessingUrl("/procesarLogin")
