@@ -45,6 +45,9 @@ public class RevisionController {
         this.emailService = emailService;
     }
 
+    /**
+     * Crea una nueva revisión, asigna consecutivo, genera PDF y envía el correo al cliente.
+     */
     @PostMapping("/crearRevisiones")
     public ResponseEntity<RevisionDto> createRevision(@RequestBody RevisionDto dto) {
         Cliente cliente = clienteRepository.findById(dto.getClienteId())
@@ -52,30 +55,44 @@ public class RevisionController {
         Equipo equipo = equipoRepository.findById(dto.getEquipoId())
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
 
-        // Guardamos la revisión
+        // 🔹 Convertir DTO a entidad
         Revision revision = RevisionMapper.toEntity(dto, cliente, equipo);
+
+        // 🔹 Guardar revisión (el servicio se encarga de generar el consecutivo)
         Revision saved = revisionService.saveRevision(revision);
 
-        // Generamos el PDF con el informe
+        // 🔹 Generar el PDF del informe
         ByteArrayInputStream pdfStream = informeService.generarReporte(saved);
 
-        Path carpetaTemp = Paths.get("temp-pdfs");
+        // 🔹 Enviar correo al cliente
+        try {
+            String correo = cliente.getCorreo();
+            if (correo == null || correo.isEmpty()) {
+                throw new RuntimeException("El cliente no tiene un correo registrado.");
+            }
 
+            String asunto = "Informe de revisión de equipo #" + saved.getConsecutivo();
+            String cuerpo = "Estimado(a) " + cliente.getNombre() +
+                    ",\n\nAdjunto encontrará el informe de revisión correspondiente al consecutivo Nº " +
+                    saved.getConsecutivo() +
+                    " del equipo " + equipo.getModelo() +
+                    ".\n\nSaludos,\nEquipo Técnico TechTracking.";
 
-        String nombreArchivo = "Informe_" + saved.getId() + ".pdf";
-        Path archivoPath = carpetaTemp.resolve(nombreArchivo);
+            emailService.enviarInformePdf(correo, asunto, cuerpo, pdfStream);
+            System.out.println("✅ Correo enviado con el consecutivo " + saved.getConsecutivo());
 
-        // Guardar el PDF
-        try (OutputStream out = Files.newOutputStream(archivoPath)) {
-            pdfStream.transferTo(out);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body(null);
         }
 
+        // 🔹 Devolver DTO actualizado con el consecutivo
         return ResponseEntity.ok(RevisionMapper.toDto(saved));
     }
 
+    /**
+     * Obtiene todas las revisiones con su consecutivo.
+     */
     @GetMapping("/obtenerRevisiones")
     public List<RevisionDto> getAllRevisiones() {
         return revisionService.getAllRevisiones()
@@ -84,6 +101,9 @@ public class RevisionController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Obtiene una revisión específica por ID.
+     */
     @GetMapping("/{id}")
     public RevisionDto getRevisionById(@PathVariable Long id) {
         Revision revision = revisionService.getRevisionById(id);
