@@ -223,16 +223,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!res.ok) throw new Error("Error al crear revision");
 
-    const savedRevision = await res.json();
-    const revisionId = savedRevision.id; // <-- ID autoincremental generado
-const pdfRes = await fetch(`http://localhost:8080/tecnico/informe/${revisionId}`, {
-      method: "GET"
-    });
+            const savedRevision = await res.json();
+            console.log("✅ Revisión guardada:", savedRevision);
 
-    if (!pdfRes.ok) throw new Error("Error al generar el PDF temporal");
-    
-    const blob = await pdfRes.blob();
-    const url = URL.createObjectURL(blob);
+            // 5. Limpiar formulario o redirigir
+            // Opción A: Limpiar formulario
+            reporteForm.reset();
+            inicializarCampos();
+            previewEtiqueta.style.display = 'none';
+            if (previewFirma) previewFirma.style.display = 'none';
 
     // 3️⃣ Abrir PDF en nueva pestaña para probar
     window.open(url, "_blank");
