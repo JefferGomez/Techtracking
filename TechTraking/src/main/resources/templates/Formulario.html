@@ -103,119 +103,116 @@
                 </div>
             </section>
 
-        <!-- Estado General y Pantalla -->
-        <div class="grid-2">
-          <div class="columna-izquierda">
-
-            <!-- Estado General -->
-            <section class="estado-general">
-              <div class="seccion-titulo">
-                <h2>Estado General</h2>
-                <div class="columnas-labels">
-                  <span>Sí</span>
-                  <span>No</span>
+            <!-- Estado General y Pantalla -->
+            <div class="grid-2">
+                <div class="columna-izquierda">
+                    <!-- Estado General -->
+                    <section class="estado-general">
+                        <div class="seccion-titulo">
+                            <h2>Estado General</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Enciende</label>
+                            <input type="radio" name="encendido" value="SI" required>
+                            <input type="radio" name="encendido" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Está Operando</label>
+                            <input type="radio" name="operando" value="SI" required>
+                            <input type="radio" name="operando" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Partido</label>
+                            <input type="radio" name="prendido" value="SI" required>
+                            <input type="radio" name="prendido" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Manchado</label>
+                            <input type="radio" name="manchas" value="SI" required>
+                            <input type="radio" name="manchas" value="NO">
+                        </div>
+                    </section>
+                    <!-- Piezas Faltantes -->
+                    <section class="piezas-faltantes">
+                        <div class="seccion-titulo">
+                            <h2>Piezas Faltantes</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Tornillos</label>
+                            <input type="radio" name="tornillos" value="SI" required>
+                            <input type="radio" name="tornillos" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Tapas</label>
+                            <input type="radio" name="tapas" value="SI" required>
+                            <input type="radio" name="tapas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Display</label>
+                            <input type="radio" name="display" value="SI" required>
+                            <input type="radio" name="display" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Tarjetas Electrónicas</label>
+                            <input type="radio" name="tarjetas" value="SI" required>
+                            <input type="radio" name="tarjetas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Botones</label>
+                            <input type="radio" name="botones" value="SI" required>
+                            <input type="radio" name="botones" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Cabezal</label>
+                            <input type="radio" name="cabezal" value="SI" required>
+                            <input type="radio" name="cabezal" value="NO">
+                        </div>
+                        <div class="fila-check fila-input-bottom">
+                            <label><input type="text" name="otras_piezas" placeholder="Otra, ¿Cuál?"></label>
+                        </div>
+                    </section>
+                    <!-- Parte Mecánica -->
+                    <section class="parte-mecanica">
+                        <div class="seccion-titulo">
+                            <h2>Parte Mecánica</h2>
+                            <div class="columnas-labels">
+                                <span>Sí</span>
+                                <span>No</span>
+                            </div>
+                        </div>
+                        <div class="fila-check">
+                            <label>Oxido</label>
+                            <input type="radio" name="ejes" value="SI" required>
+                            <input type="radio" name="ejes" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Ruidos</label>
+                            <input type="radio" name="husillos" value="SI" required>
+                            <input type="radio" name="husillos" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Piñoneria en buen estado</label>
+                            <input type="radio" name="pletinas" value="SI" required>
+                            <input type="radio" name="pletinas" value="NO">
+                        </div>
+                        <div class="fila-check">
+                            <label>Correas en buen estado</label>
+                            <input type="radio" name="cremas" value="SI" required>
+                            <input type="radio" name="cremas" value="NO">
+                        </div>
+                        <div class="fila-check fila-input-bottom">
+                            <label><input type="text" name="otra_mecanica" placeholder="Otra, ¿Cuál?"></label>
+                        </div>
+                    </section>
                 </div>
-              </div>
-              <div class="fila-check">
-                <label>Encendido</label>
-                <input type="radio" name="encendido" value="SI">
-                <input type="radio" name="encendido" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Está Operando</label>
-                <input type="radio" name="operando" value="SI">
-                <input type="radio" name="operando" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Prendido</label>
-                <input type="radio" name="prendido" value="SI">
-                <input type="radio" name="prendido" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Manchas</label>
-                <input type="radio" name="manchas" value="SI">
-                <input type="radio" name="manchas" value="NO">
-              </div>
-            </section>
-
-            <!-- Piezas Faltantes -->
-            <section class="piezas-faltantes">
-              <div class="seccion-titulo">
-                <h2>Piezas Faltantes</h2>
-                <div class="columnas-labels">
-                  <span>Sí</span>
-                  <span>No</span>
-                </div>
-              </div>
-              <div class="fila-check">
-                <label>Tornillos</label>
-                <input type="radio" name="tornillos" value="SI">
-                <input type="radio" name="tornillos" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Tapas</label>
-                <input type="radio" name="tapas" value="SI">
-                <input type="radio" name="tapas" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Display</label>
-                <input type="radio" name="display" value="SI">
-                <input type="radio" name="display" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Tarjetas</label>
-                <input type="radio" name="tarjetas" value="SI">
-                <input type="radio" name="tarjetas" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Botones</label>
-                <input type="radio" name="botones" value="SI">
-                <input type="radio" name="botones" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Cabezal</label>
-                <input type="radio" name="cabezal" value="SI">
-                <input type="radio" name="cabezal" value="NO">
-              </div>
-              <div class="check-group">
-                <input type="text" placeholder="Otra, ¿Cuál?">
-              </div>
-            </section>
-
-            <!-- Parte Mecánica -->
-            <section class="parte-mecanica">
-              <div class="seccion-titulo">
-                <h2>Parte Mecánica</h2>
-                <div class="columnas-labels">
-                  <span>Sí</span>
-                  <span>No</span>
-                </div>
-              </div>
-              <div class="fila-check">
-                <label>Ejes</label>
-                <input type="radio" name="ejes" value="SI">
-                <input type="radio" name="ejes" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Husillos</label>
-                <input type="radio" name="husillos" value="SI">
-                <input type="radio" name="husillos" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Pletinas</label>
-                <input type="radio" name="pletinas" value="SI">
-                <input type="radio" name="pletinas" value="NO">
-              </div>
-              <div class="fila-check">
-                <label>Cremas</label>
-                <input type="radio" name="cremas" value="SI">
-                <input type="radio" name="cremas" value="NO">
-              </div>
-              <div class="fila-check">
-                <input type="text" placeholder="Otra, ¿Cuál?">
-              </div>
-            </section>
-          </div>
 
           <div class="columna-derecha">
             <!-- Pantalla -->
