@@ -54,3 +54,21 @@ let registrarUsuario = async () => {
     console.error(error);
   }
 };
+
+document.getElementById("userForm").addEventListener("submit", (e) => {
+  e.preventDefault(); // Evita que recargue la página
+  registrarUsuario();
+});
+
+document.getElementById("rol").addEventListener("change", function () {
+  const tecnicoFields = document.getElementById("tecnicoFields");
+  const rolSeleccionado = parseInt(this.value);
+
+  if (rolSeleccionado === 3) {
+    tecnicoFields.style.display = "block";
+  } else {
+    tecnicoFields.style.display = "none";
+  }
+});
+
+

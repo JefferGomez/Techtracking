@@ -1,3 +1,12 @@
+:root {
+    --red:#ff6262;           /* Color rojo principal (cabecera, elementos activos) */
+    --nav:#0d1b2a;           /* Color del sidebar / navegación (azul muy oscuro) */
+    --blue:#0d6efd;          /* Color azul genérico (botones/enlaces) */
+    --card-bg:#fff;          /* Fondo de tarjetas (blanco) */
+    --muted:#f5f6fa;         /* Fondo general de la app (gris muy claro) */
+    --servimarket-red: #e53e3e; /* Color primario de Servimarket (rojo corporativo) */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,33 +14,156 @@ body {
     background: #f9f9f9;
 }
 
-header {
-    background: #007bff;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.main-header {
+    position: fixed;               /* Fija el header en la ventana (no se mueve al hacer scroll) */
+    top: 0;                        /* Lo ancla al borde superior de la ventana */
+    left: 0;                       /* Lo ancla al borde izquierdo */
+    right: 0;                      /* Lo estira hasta el borde derecho */
+    height: 64px;                  /* Altura fija del header */
+    background: var(--red);        /* Fondo rojo del header usando la variable --red */
+    color: #fff;                   /* Texto blanco dentro del header */
+    display: flex;                 /* Habilita flexbox para alinear su contenido */
+    align-items: center;           /* Centra verticalmente los elementos dentro del header */
+    justify-content: space-between;/* Distribuye los elementos a los extremos (izq/der) */
+    padding: 0 18px;               /* Espaciado horizontal interno */
+    z-index: 1000;                 /* Se coloca por encima de la mayoría de elementos */
 }
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
+.main-header .center {
+    font-weight: 100;            /* Peso de fuente exagerado (puede forzar grosor visual) */
+    color: #fff;                   /* Color de texto blanco */
+    font-size: 28px;               /* Tamaño del texto central del header */
+    margin-left: 250px;            /* Desplaza el texto hacia la derecha (ej. espacio para sidebar) */
 }
 
-header button {
-    background: white;
-    color: #007bff;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
+.admin-label {
+    font-weight: 500;              /* Peso medio del texto */
+    color:#0d1b2a;                 /* Color oscuro (posiblemente variable --nav) */
+    margin-right: 25px;            /* Margen a la derecha para separarlo de otros elementos */
     font-weight: bold;
 }
 
-header button:hover {
-    background: #e6e6e6;
+.logo-h {
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: fixed;
 }
+
+.servi{
+  color:blue
+}
+
+.mark{
+  color:#9E0707FF
+}
+
+.sidebar {
+    position: fixed;               /* Sidebar fijo en la pantalla */
+    top: 64px;                     /* Comienza justo debajo del header (64px) */
+    left: 0;                       /* Anclado al borde izquierdo */
+    bottom: 0;                     /* Se extiende hasta el borde inferior */
+    width: 20   0px;               /* (ATENCIÓN: aquí hay un valor extraño '20   0px' que parece un typo) */
+                                   /* Mantengo la regla tal cual según tu petición (no modificar), pero revisa si debe ser '200px' o similar. */
+    background: var(--nav);        /* Fondo del sidebar usando --nav */
+    color: #fff;                   /* Texto blanco dentro del sidebar */
+    padding: 18px 14px;            /* Espaciado interno del sidebar */
+    overflow: auto;                /* Permite scroll interno si el contenido excede la altura */
+    transition: transform .28s ease-in-out; /* Transición suave para mostrar/ocultar en móvil */
+    z-index: 1000;                 /* Colocado por encima del contenido pero cuidado con el header (también 1000) */
+}
+
+/* Marca / logo dentro del sidebar */
+.sidebar .brand {
+    display: flex;                 /* Usa flex para alinear logo y texto */
+    align-items: center;           /* Centrado vertical de sus hijos */
+    gap: 10px;                     /* Espacio entre logo y texto */
+    margin-bottom: 30px;           /* Separación inferior respecto al resto del menú */
+}
+
+
+.sidebar h3 {
+    margin: 0;                     /* Sin margen por defecto */
+    font-size:  25px;              /* Tamaño de fuente para el título */
+}
+
+/* Lista principal de navegación */
+.menu {
+    list-style: none;              /* Quita viñetas de la lista */
+    padding: 0;                    /* Quita padding por defecto */
+    margin: 15px 0 40px;           /* Márgenes superior e inferior para separar del resto */
+}
+
+/* Enlaces dentro del menú: estilos visuales y de layout */
+.menu a {
+    display: flex;                 /* Hace que el enlace use flex (para icono + texto) */
+    align-items: center;           /* Centra verticalmente icono y texto */
+    gap: 10px;                     /* Espacio entre icono y texto */
+    color: #fff;                   /* Texto blanco para enlaces */
+    text-decoration: none;         /* Quita subrayado */
+    padding: 10px;                 /* Espacio interno del enlace */
+    border-radius: 8px;            /* Bordes redondeados en el enlace */
+}
+
+/* Cada ítem de la lista de menú */
+.menu li {
+    margin-bottom: 18px;           /* Separación vertical entre ítems del menú */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+}
+
+/* Hover genérico sobre cualquier li (resalta al pasar el cursor) */
+/* Nota: aplica a todos los li, no sólo a los del .menu. Mantengo tal cual. */
+li:hover {
+    background: #ff6262;           /* Fondo rojo al pasar ratón (resalta la fila) */
+    border-radius: 6px;            /* Redondea esquinas durante hover */
+}
+
+
+.btn-logout {
+    background: #2b3847;           /* Fondo oscuro para el botón */
+    color: #fff;                   /* Texto blanco */
+    margin-top: 0px;               /* Sin margen superior */
+    border: none;                  /* Sin borde visible */
+    padding: 8px 12px;             /* Padding interno del botón */
+    border-radius: 6px;            /* Bordes redondeados */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+    margin-left: 8px;              /* Espacio a la izquierda del botón */
+    transition: background 0.2s;   /* Transición suave al cambiar fondo (hover) */
+}
+
+.btn-logout:hover {
+    background: #ff6262;           /* Fondo rojo al pasar el cursor */
+}
+
+/* Contenedor de imágenes decorativas / origami al final del sidebar */
+.sidebar .origami {
+    margin-top: 50px;              /* Separación desde la parte superior del contenedor */
+    opacity: 0.85;                 /* Ligera transparencia de las imágenes */
+    width: 130px;                  /* Ancho del contenedor de imágenes */
+    display: flex;                 /* Usa flexbox para apilar imágenes */
+    flex-direction: column;        /* Apila las imágenes en columna (vertical) */
+    gap: 20px;                     /* Espacio entre imágenes */
+    margin-left: 5px;              /* Pequeño desplazamiento a la derecha */
+}
+
+/* Botón hamburguesa: oculto en escritorio, visible en móvil vía media query */
+.burger {
+    display: none;                 /* Oculto por defecto (se muestra en @media) */
+    background: transparent;       /* Fondo transparente */
+    border: none;                  /* Sin borde */
+    color: #fff;                   /* Color del icono (blanco) */
+    font-size: 22px;               /* Tamaño del icono/texto del botón */
+    cursor: pointer;               /* Cursor pointer para indicar clicable */
+}
+
+
+main {
+  margin-top: 60px; /* debajo del header */
+  margin-left: 250px; /* espacio para el sidebar */
+  padding: 2rem;
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
 
 .visitas-container {
     padding: 20px;
@@ -54,3 +186,4 @@ header button:hover {
 .visita p strong {
     color: #333;
 }
+

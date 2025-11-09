@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,17 +59,18 @@ public class RevisionController {
         // Generamos el PDF con el informe
         ByteArrayInputStream pdfStream = informeService.generarReporte(saved);
 
-        // Enviamos el correo con el PDF adjunto
-        try {
-            emailService.enviarInformePdf(
-                    cliente.getCorreo(), // correo del cliente
-                    "Informe de revisión de equipo",
-                    "Estimado cliente,\n\nAdjunto encontrará el informe de revisión de su equipo.\n\nSaludos,\nEquipo Técnico TechTracking.",
-                    pdfStream
-            );
-        } catch (Exception e) {
+        Path carpetaTemp = Paths.get("temp-pdfs");
+
+
+        String nombreArchivo = "Informe_" + saved.getId() + ".pdf";
+        Path archivoPath = carpetaTemp.resolve(nombreArchivo);
+
+        // Guardar el PDF
+        try (OutputStream out = Files.newOutputStream(archivoPath)) {
+            pdfStream.transferTo(out);
+        } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("⚠️ No se pudo enviar el correo: " + e.getMessage());
+            return ResponseEntity.status(500).body(null);
         }
 
         return ResponseEntity.ok(RevisionMapper.toDto(saved));
