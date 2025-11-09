@@ -122,9 +122,24 @@ document.addEventListener('DOMContentLoaded', () => {
     reporteForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-  const data = {
-    clienteId: parseInt(document.querySelector('input[name="clienteId"]').value),
-    equipoId: parseInt(document.querySelector('input[name="serie"]').value),
+        // Mostrar indicador de carga
+        const submitBtn = reporteForm.querySelector('button[type="submit"]');
+        const textoOriginal = submitBtn.textContent;
+        submitBtn.textContent = '⏳ Guardando...';
+        submitBtn.disabled = true;
+
+        try {
+            // 1. Recolectar datos del formulario
+            const formData = new FormData(reporteForm);
+
+            const etiquetaFile = inputEtiqueta.files[0];
+            const firmaFile = inputFirma ? inputFirma.files[0] : null;
+
+            const data = {
+                // IDs (si existen)
+                equipoId: parseInt(formData.get("equipoId")),
+                clienteId: parseInt(formData.get("clienteId")),
+
 
     equipoEnciende: valorBooleano("encendido"),
     estaOperando: valorBooleano("operando"),
