@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 firmaBase64: await fileToBase64(firmaFile),
             };
 
-  console.log("Revision JSON:", data);
+            console.log("📋 Datos del reporte:", data);
 
 
   try {
