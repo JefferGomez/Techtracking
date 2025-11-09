@@ -56,20 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
         await cargarDatosEquipo();
     };
 
-// Vista previa de imágenes (opcional)
-function mostrarVistaPrevia(input, previewId) {
-  const file = input.files[0];
-  if (file && file.type.startsWith("image/")) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      document.getElementById(previewId).src = e.target.result;
-      document.getElementById(previewId).style.display = "block";
-    };
-    reader.readAsDataURL(file);
-  } else {
-    document.getElementById(previewId).style.display = "none";
-  }
-}
+    inicializarCampos();
+
+    // -----------------------------------------------------------------
+    // 3. Previsualización de Archivos
+    // -----------------------------------------------------------------
+    const inputEtiqueta = document.getElementById('inputEtiqueta');
+    const previewEtiqueta = document.getElementById('previewEtiqueta');
+    const inputFirma = document.querySelector('input[name="firma"]');
+    const previewFirma = document.getElementById('previewFirma');
+
+    function mostrarVistaPrevia(input, previewElement) {
+        const file = input.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewElement.src = e.target.result;
+                previewElement.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewElement.style.display = "none";
+            previewElement.src = "";
+        }
+    }
 
 document.querySelector("input[name='etiqueta']").addEventListener("change", function () {
   mostrarVistaPrevia(this, "previewEtiqueta");
