@@ -141,10 +141,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 clienteId: parseInt(formData.get("clienteId")),
 
 
-    equipoEnciende: valorBooleano("encendido"),
-    estaOperando: valorBooleano("operando"),
-    estaPartido: valorBooleano("prendido"),
-    estaManchado: valorBooleano("manchas"),
+                // Datos del equipo
+                cliente: formData.get("cliente"),
+                marca: formData.get("marca"),
+                modelo: formData.get("modelo"),
+                serie: formData.get("serie"),
+                tipo: formData.get("tipo_impresora"),
+                garantia: formData.get("garantia") === "on",
+                fecha: formData.get("fecha"),
+                consecutivo: formData.get("consecutivo"),
+
+                // Estado General
+                equipoEnciende: valorBooleano("encendido"),
+                estaOperando: valorBooleano("operando"),
+                estaPartido: valorBooleano("prendido"),
+                estaManchado: valorBooleano("manchas"),
 
     tornillos: valorBooleano("tornillos"),
     tapas: valorBooleano("tapas"),
