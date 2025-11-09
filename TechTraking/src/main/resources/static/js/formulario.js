@@ -50,17 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Obtener el siguiente número consecutivo
      */
-    const obtenerConsecutivo = async () => {
-        try {
-            const response = await fetch(`${API_TECNICO}/next-consecutivo`);
-            if (!response.ok) throw new Error("No se pudo obtener el consecutivo.");
-            const data = await response.json();
-            return data.consecutivo || (Math.floor(Math.random() * 10000) + 1000);
-        } catch (error) {
-            console.error('Error al obtener el consecutivo:', error);
-            return Math.floor(Math.random() * 10000) + 1000;
-        }
-    };
+    // const obtenerConsecutivo = async () => {
+    //     try {
+    //         const response = await fetch(`${API_TECNICO}/next-consecutivo`);
+    //         if (!response.ok) throw new Error("No se pudo obtener el consecutivo.");
+    //         const data = await response.json();
+    //         return data.consecutivo || (Math.floor(Math.random() * 10000) + 1000);
+    //     } catch (error) {
+    //         console.error('Error al obtener el consecutivo:', error);
+    //         return Math.floor(Math.random() * 10000) + 1000;
+    //     }
+    // };
 
     /**
      * Obtener el técnico logueado
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** Inicializa Consecutivo, Técnico y Fecha */
     const inicializarCampos = async () => {
-        consecutivoInput.value = await obtenerConsecutivo();
+        // consecutivoInput.value = await obtenerConsecutivo();
         tecnicoUsuarioInput.value = await obtenerTecnicoServimarket();
 
         const today = new Date();
@@ -124,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------------------
     // 4. Lógica de Envío (Guardar Reporte y Generar PDF)
     // -----------------------------------------------------------------
-    const { jsPDF } = window.jspdf;
 
     /**
      * Helper para convertir radio buttons a boolean
@@ -145,71 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onerror = error => reject(error);
     });
 
-    /**
-     * Genera el PDF del formulario
-     */
-    const generarPDF = async () => {
-        try {
-            // Ocultar botón temporalmente para la captura
-            const actionsDiv = document.querySelector('.actions');
-            actionsDiv.style.display = 'none';
-
-            // Esperar un momento para que se oculte el botón
-            await new Promise(resolve => setTimeout(resolve, 100));
-
-            // Capturar el formulario como imagen
-            const canvas = await html2canvas(formContenedor, {
-                scale: 2,
-                useCORS: true,
-                logging: false,
-                backgroundColor: '#ffffff'
-            });
-
-            // Crear el PDF
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const imgProps = pdf.getImageProperties(imgData);
-            const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            // Agregar la primera página
-            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-            heightLeft -= pdfHeight;
-
-            // Si la imagen es más alta que una página, agregar páginas adicionales
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-                heightLeft -= pdfHeight;
-            }
-
-            // Generar nombre del archivo con fecha y consecutivo
-            const consecutivo = consecutivoInput.value;
-            const fecha = fechaInput.value.replace(/-/g, '');
-            const nombreArchivo = `Reporte_Mantenimiento_${consecutivo}_${fecha}.pdf`;
-
-            // Descargar el PDF
-            pdf.save(nombreArchivo);
-
-            // Restaurar botón
-            actionsDiv.style.display = 'flex';
-
-            return true;
-
-        } catch (error) {
-            console.error('Error al generar el PDF:', error);
-            // Restaurar botón en caso de error
-            const actionsDiv = document.querySelector('.actions');
-            actionsDiv.style.display = 'flex';
-            return false;
-        }
-    };
+   
 
     /**
      * Manejador principal al enviar el formulario
@@ -312,16 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const savedRevision = await res.json();
             console.log("✅ Revisión guardada:", savedRevision);
-
-            // 3. Generar PDF
-            const pdfGenerado = await generarPDF();
-
-            // 4. Mostrar mensaje de éxito
-            if (pdfGenerado) {
-                alert(`✅ ¡Guardado con éxito!\n\nRevisión #${savedRevision.id || consecutivoInput.value} creada correctamente.\nEl PDF se ha descargado automáticamente.`);
-            } else {
-                alert(`✅ Revisión guardada con éxito.\n\n⚠️ Hubo un problema al generar el PDF. Por favor, intenta nuevamente.`);
-            }
 
             // 5. Limpiar formulario o redirigir
             // Opción A: Limpiar formulario
