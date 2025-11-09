@@ -197,9 +197,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 observaciones: formData.get("observaciones"),
 
-    observaciones: document.querySelector("textarea").value,
-    fecha: document.querySelector('input[name="fecha"]').value
-  };
+                // Técnico
+                tecnicoUsuario: formData.get("tecnico_usuario"),
+                tecnicoArea: formData.get("tecnico_area"),
+
+                // Imágenes
+                etiquetaBase64: await fileToBase64(etiquetaFile),
+                firmaBase64: await fileToBase64(firmaFile),
+            };
 
   console.log("Revision JSON:", data);
 
