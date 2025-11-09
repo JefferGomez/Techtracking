@@ -190,8 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 rayados: valorBooleano("alineado"),
                 adhesivo: valorBooleano("adecuado"),
 
-    humedad: valorBooleano("humedad"),
-    tarjetaElectronica: valorBooleano("tarjetasOk"),
+                // Estado Electrónico
+                humedad: valorBooleano("humedad"),
+                tarjetaElectronica: valorBooleano("tarjetasOk"),
+                otraElectronica: formData.get("otra_electronica"),
+
+                observaciones: formData.get("observaciones"),
 
     observaciones: document.querySelector("textarea").value,
     fecha: document.querySelector('input[name="fecha"]').value
