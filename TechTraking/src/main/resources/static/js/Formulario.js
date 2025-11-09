@@ -41,11 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-// Función para convertir "SI"/"NO" a boolean
-const valorBooleano = (name) => {
-  const val = document.querySelector(`input[name="${name}"]:checked`);
-  return val ? val.value === "SI" : false;
-};
+    /** Inicializa TODOS los campos del formulario */
+    const inicializarCampos = async () => {
+        // consecutivoInput.value = await obtenerConsecutivo();
+        tecnicoUsuarioInput.value = await obtenerTecnicoServimarket();
+
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        fechaInput.value = `${yyyy}-${mm}-${dd}`;
+
+        // NUEVO: Cargar datos del equipo
+        await cargarDatosEquipo();
+    };
 
 // Vista previa de imágenes (opcional)
 function mostrarVistaPrevia(input, previewId) {
