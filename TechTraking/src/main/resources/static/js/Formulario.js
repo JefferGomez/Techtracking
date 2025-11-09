@@ -211,12 +211,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Primero crear/obtener el equipo si no existe
             let equipoId = sessionStorage.getItem("equipoId");
 
-  try {
-    const res = await fetch("http://localhost:8080/tecnico/crearRevisiones", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+            // Ahora crear la revisión con el equipoId
+            data.equipoId = parseInt(equipoId);
+
+            // 3. Enviar revisión al backend
+            const res = await fetch(`${API_TECNICO}/crearRevisiones`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
 
     if (!res.ok) throw new Error("Error al crear revision");
 
