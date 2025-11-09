@@ -235,13 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
             previewEtiqueta.style.display = 'none';
             if (previewFirma) previewFirma.style.display = 'none';
 
-    // 3️⃣ Abrir PDF en nueva pestaña para probar
-    window.open(url, "_blank");
-
-    alert("✅ Revisión creada y PDF generado temporalmente. Puedes ver el PDF en la nueva pestaña.");
-
-    // 4️⃣ Redirigir a detalle visitas
-    window.location.href = "/tecnico/detallesVisitas";
+            // Opción B: Redirigir (descomentar si prefieres)
+            // setTimeout(() => {
+            //     window.location.href = "/tecnico/detallesVisitas";
+            // }, 2000);
 
   } catch (error) {
     console.error(error);
