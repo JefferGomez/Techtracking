@@ -166,10 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 cabezal: valorBooleano("cabezal"),
                 otrasPiezas: formData.get("otras_piezas"),
 
-    oxido: valorBooleano("ejes"),
-    ruidos: valorBooleano("husillos"),
-    piñoneriaEnBuenEstado: valorBooleano("pletinas"),
-    correasEnBuenEstado: valorBooleano("cremas"),
+                // Parte Mecánica
+                oxido: valorBooleano("ejes"),
+                ruidos: valorBooleano("husillos"),
+                piñoneriaEnBuenEstado: valorBooleano("pletinas"),
+                correasEnBuenEstado: valorBooleano("cremas"),
+                otraMecanica: formData.get("otra_mecanica"),
 
     funciona: valorBooleano("funciona"),
     partida: valorBooleano("pantallaPrendida"),
