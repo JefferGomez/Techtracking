@@ -20,18 +20,20 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <h2>TechTracking</h2>
-      <div class="sidebar-img">
-        <img th:src="@{/img/smg.png}" alt="Logo">
-      </div>
-      <form action="/logout" method="post" class="logout-form">
-        <button class="logout">Cerrar Sesión</button>
-      </form>
       <nav>
         <ul>
           <li><a href="javascript:void(0)" onclick="window.history.back()">📅 Vista general</a></li>
+          <li>
+            <form action="/logout" method="post" class="logout-form">
+              <button class="logout" type="submit">Cerrar Sesión</button>
+            </form>
+          </li>
+          <li class="sidebar-img">
+            <img th:src="@{/img/smg.png}" alt="Logo">
+          </li>
         </ul>
       </nav>
-    </aside> 
+    </aside>
 
     <!-- Contenido -->
     <div class="container">

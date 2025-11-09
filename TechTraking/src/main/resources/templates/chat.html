@@ -60,7 +60,7 @@
     <!-- Contenido principal -->
     <div class="container">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body"></div>
                 <h5 class="card-title">Chat en Tiempo Real</h5>
             <div id="messageArea"></div>
 
@@ -112,17 +112,17 @@
         // Crear nuevo elemento de mensaje
         let messageDiv = document.createElement('div');
         messageDiv.className = 'message';
-        
+
         // Crear el contenido del mensaje
         let contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
         contentDiv.textContent = event.data;
-        
+
         // Crear la marca de tiempo
         let timeDiv = document.createElement('div');
         timeDiv.className = 'message-time';
         timeDiv.textContent = getCurrentDateTime();
-        
+
         // Agregar contenido y tiempo al mensaje
         messageDiv.appendChild(contentDiv);
         messageDiv.appendChild(timeDiv);
@@ -168,6 +168,6 @@
             sendMessage();
         }
     });
-</script>-->
+</script>
 </body>
 </html>

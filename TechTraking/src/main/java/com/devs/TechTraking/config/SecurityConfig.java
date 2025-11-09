@@ -35,6 +35,10 @@ public class SecurityConfig {
 
        return http
                .csrf(AbstractHttpConfigurer::disable)
+
+               .headers(headers -> headers
+                       .frameOptions(frameOptions -> frameOptions.sameOrigin()))
+
                .sessionManagement(session -> session
                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                        .maximumSessions(10) // Permite múltiples sesiones por usuario
@@ -57,6 +61,7 @@ public class SecurityConfig {
                                .requestMatchers("/almacenista/**").hasAuthority("ALMACENISTA")
                                .requestMatchers("/superadmin/**").hasAuthority("SUPERADMIN")
                                .requestMatchers("/chat-page/**").hasAnyAuthority("ADMIN","TECNICO","ALMACENISTA")
+                               .requestMatchers("/websocket/**").permitAll()
                                .anyRequest().authenticated()
                         )
                .formLogin(form -> form

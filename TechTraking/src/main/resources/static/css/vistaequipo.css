@@ -72,7 +72,7 @@ body::before {
 
 .admin-label {
     font-weight: bold;
-    color: #0d1b2a;
+    color: #fff;
     margin-right: 25px;
 }
 
@@ -469,7 +469,7 @@ body .container {
    RESPONSIVE DESIGN
    ====================================== */
 
-@media (max-width: 1024px) {
+@media (max-width: 600px) {
     main {
         margin-left: 200px;
         width: calc(100% - 200px);
@@ -480,7 +480,7 @@ body .container {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .burger {
         display: block;
     }
@@ -539,7 +539,7 @@ body .container {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   body .container {
     margin-left: 0;
     max-width: 100%;

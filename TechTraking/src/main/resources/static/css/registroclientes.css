@@ -49,7 +49,7 @@ body {
 /* Etiqueta de rol / usuario en el header */
 .admin-label {
     font-weight: 500;              /* Peso de fuente medio para la etiqueta de administrador */
-    color:#0d1b2a;                 /* Color oscuro para el texto de la etiqueta (puede ser consistente con --nav) */
+    color:#fff;                 /* Color oscuro para el texto de la etiqueta (puede ser consistente con --nav) */
     margin-right: 25px;            /* Espacio a la derecha entre la etiqueta y el siguiente elemento */
     font-weight: bold;
 }
