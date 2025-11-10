@@ -12,7 +12,16 @@ public class RevisionMapper {
         Revision revision = new Revision();
         revision.setId(dto.getId());
 
-        // Checklist
+        // 🔹 Nuevos campos
+        revision.setImpEscritorio(dto.isImpEscritorio());
+        revision.setImpIndustrial(dto.isImpIndustrial());
+        revision.setOtro(dto.isOtro());
+        revision.setEquipoGarantia(dto.isEquipoGarantia());
+        revision.setOtroPiezaFaltante(dto.getOtroPiezaFaltante());
+        revision.setOtroParteMecanica(dto.getOtroParteMecanica());
+        revision.setOtroEstadoElectronico(dto.getOtroEstadoElectronico());
+
+        // ✅ Resto igual
         revision.setEquipoEnciende(dto.isEquipoEnciende());
         revision.setEstaOperando(dto.isEstaOperando());
         revision.setEstaPartido(dto.isEstaPartido());
@@ -64,7 +73,16 @@ public class RevisionMapper {
         RevisionDto dto = new RevisionDto();
         dto.setId(revision.getId());
 
-        // Checklist
+        // 🔹 Nuevos campos
+        dto.setImpEscritorio(revision.isImpEscritorio());
+        dto.setImpIndustrial(revision.isImpIndustrial());
+        dto.setOtro(revision.isOtro());
+        dto.setEquipoGarantia(revision.isEquipoGarantia());
+        dto.setOtroPiezaFaltante(revision.isOtroPiezaFaltante());
+        dto.setOtroParteMecanica(revision.isOtroParteMecanica());
+        dto.setOtroEstadoElectronico(revision.isOtroEstadoElectronico());
+
+        // ✅ Resto igual
         dto.setEquipoEnciende(revision.isEquipoEnciende());
         dto.setEstaOperando(revision.isEstaOperando());
         dto.setEstaPartido(revision.isEstaPartido());
