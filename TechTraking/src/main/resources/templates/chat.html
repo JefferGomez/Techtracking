@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/Chat.css}">
-    <style>
+    <!--<style>
         #messageArea {
             height: 300px;
             overflow-y: scroll;
@@ -30,7 +30,7 @@
         .message-content {
             margin-bottom: 4px;
         }
-    </style>
+    </style>-->
 </head>
 <body>
 <div class="header">
@@ -58,30 +58,41 @@
     </aside>
 
     <!-- Contenido principal -->
-    <div class="container">
+    <div class="chat-container">
         <div class="card">
-            <div class="card-body"></div>
-                <h5 class="card-title">Chat en Tiempo Real</h5>
-            <div id="messageArea"></div>
+            <div class="card-body">
+                <h5 class="card-title">💬 Chat en Tiempo Real</h5>
 
-            <div class="mb-3">
-                <label for="username" class="form-label">Nombre de Usuario:</label>
-                <input type="text" class="form-control" id="username" placeholder="Introduce tu nombre">
+                <!-- Información del usuario conectado -->
+                <div class="user-info-badge">
+                    <span>👤</span>
+                    <div>
+                        <strong>Chateando como:</strong>
+                        <span th:text="${nombreUsuario}"></span>
+                    </div>
+                </div>
+
+                <div id="messageArea"></div>
+
+                <!-- Campo oculto con el nombre del usuario -->
+                <input type="hidden" id="username" th:value="${nombreUsuario}">
+
+                <div class="mb-3">
+                    <label for="messageInput" class="form-label">✉️ Mensaje:</label>
+                    <input type="text" class="form-control" id="messageInput" placeholder="Escribe tu mensaje aquí...">
+                </div>
+
+                <button onclick="sendMessage()" class="btn btn-primary">
+                    📤 Enviar
+                </button>
+                <div id="connectionStatus"></div>
             </div>
-
-            <div class="mb-3">
-                <label for="messageInput" class="form-label">Mensaje:</label>
-                <input type="text" class="form-control" id="messageInput" placeholder="Introduce tu mensaje">
-            </div>
-
-            <button onclick="sendMessage()" class="btn btn-primary">Enviar</button>
-            <div id="connectionStatus" class="mt-2"></div>
         </div>
     </div>
 </div>
 
 <script th:src="@{/js/Chat.js}"></script>
-<script th:inline="javascript">
+<!--<script th:inline="javascript">
     let socket = new WebSocket("ws://localhost:8080/websocket");
     let messageArea = document.getElementById("messageArea");
     let connectionStatus = document.getElementById("connectionStatus");
@@ -168,6 +179,6 @@
             sendMessage();
         }
     });
-</script>
+</script>-->
 </body>
 </html>

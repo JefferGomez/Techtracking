@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico">
-      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/chat-fragment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/chat-fragment.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/chat-fragment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/AgendarVisitas.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/AgendarVisitas.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/Chat.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/dashboardclientes.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/dashboardclientes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/AgendarVisitas.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/AgendarVisitas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Chat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Formulario.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Formulario.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/tecnicoDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/tecnicoDashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/Formulario.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/Formulario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/agendarVisitas.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/agendarVisitas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/chat-fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/chat-fragment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/chat.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/dashboard-clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/dashboard-clientes.html" afterDir="false" />
     </list>
@@ -216,5 +222,20 @@
     <MESSAGE value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
     <MESSAGE value="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico" />
     <option name="LAST_COMMIT_MESSAGE" value="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/AgendarVisitasController.java</url>
+          <line>12</line>
+          <properties class="com.devs.TechTraking.controllers.AgendarVisitasController" method="calendario">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
