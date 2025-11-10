@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cont.innerHTML = `
                 <div class="vista-chat">
                     <h2>💬 Chat</h2>
-                    <iframe src="/chat-page" style="width:100%;height:600px;border:none;border-radius:8px;"></iframe>
+                    <iframe src="/chat-fragment" style="width:100%;height:600px;border:none;border-radius:8px;"></iframe>
                 </div>
             `;
         }
