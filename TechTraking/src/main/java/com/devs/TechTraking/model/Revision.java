@@ -16,7 +16,14 @@ public class Revision {
     private String consecutivo;
 
 
+
+
     // ✅ Checklist (31 preguntas Sí/No del documento)
+
+    private boolean impEscritorio;
+    private boolean impIndustrial;
+    private boolean otro;
+    private boolean equipoGarantia;
     //ESTADO GENERAL
     private boolean equipoEnciende;
     private boolean estaOperando;
@@ -29,11 +36,14 @@ public class Revision {
     private boolean tarjetasElectronicas;
     private boolean botones;
     private boolean cabezal;
+    private String otroPiezaFaltante;
     //PARTE MECANICA
     private boolean oxido;
     private boolean ruidos;
     private boolean piñoneriaEnBuenEstado;
     private boolean correasEnBuenEstado;
+    private String otroParteMecanica;
+
     //PANTALLA
     private boolean funciona;
     private boolean partida;
@@ -52,6 +62,8 @@ public class Revision {
     //ESTADO ELECTRONICO
     private boolean humedad;
     private boolean tarjetaElectronica;
+    private String otroEstadoElectronico;
+
 
 
     // 🔹 Relación con Cliente
@@ -87,6 +99,38 @@ public class Revision {
 
     public void setConsecutivo(String consecutivo) {
         this.consecutivo = consecutivo;
+    }
+
+    public boolean isImpEscritorio() {
+        return impEscritorio;
+    }
+
+    public void setImpEscritorio(boolean impEscritorio) {
+        this.impEscritorio = impEscritorio;
+    }
+
+    public boolean isImpIndustrial() {
+        return impIndustrial;
+    }
+
+    public void setImpIndustrial(boolean impIndustrial) {
+        this.impIndustrial = impIndustrial;
+    }
+
+    public boolean isOtro() {
+        return otro;
+    }
+
+    public void setOtro(boolean otro) {
+        this.otro = otro;
+    }
+
+    public boolean isEquipoGarantia() {
+        return equipoGarantia;
+    }
+
+    public void setEquipoGarantia(boolean equipoGarantia) {
+        this.equipoGarantia = equipoGarantia;
     }
 
     public boolean isEquipoEnciende() {
@@ -169,6 +213,14 @@ public class Revision {
         this.cabezal = cabezal;
     }
 
+    public String isOtroPiezaFaltante() {
+        return otroPiezaFaltante;
+    }
+
+    public void setOtroPiezaFaltante(String otroPiezaFaltante) {
+        this.otroPiezaFaltante = otroPiezaFaltante;
+    }
+
     public boolean isOxido() {
         return oxido;
     }
@@ -199,6 +251,14 @@ public class Revision {
 
     public void setCorreasEnBuenEstado(boolean correasEnBuenEstado) {
         this.correasEnBuenEstado = correasEnBuenEstado;
+    }
+
+    public String isOtroParteMecanica() {
+        return otroParteMecanica;
+    }
+
+    public void setOtroParteMecanica(String otroParteMecanica) {
+        this.otroParteMecanica = otroParteMecanica;
     }
 
     public boolean isFunciona() {
@@ -311,6 +371,14 @@ public class Revision {
 
     public void setTarjetaElectronica(boolean tarjetaElectronica) {
         this.tarjetaElectronica = tarjetaElectronica;
+    }
+
+    public String isOtroEstadoElectronico() {
+        return otroEstadoElectronico;
+    }
+
+    public void setOtroEstadoElectronico(String otroEstadoElectronico) {
+        this.otroEstadoElectronico = otroEstadoElectronico;
     }
 
     public Cliente getCliente() {
