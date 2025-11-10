@@ -55,7 +55,7 @@ public class SecurityConfig {
                )
                .authorizeHttpRequests(authRequest ->
                        authRequest
-                               .requestMatchers("/","/css/**", "/js/**","/img/**","/auth/**").permitAll()
+                               .requestMatchers("/", "/css/**", "/js/**", "/img/**", "/auth/**").permitAll()
                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                .requestMatchers("/tecnico/**").hasAuthority("TECNICO")
                                .requestMatchers("/almacenista/**").hasAuthority("ALMACENISTA")
@@ -63,7 +63,8 @@ public class SecurityConfig {
                                .requestMatchers("/chat-page/**").hasAnyAuthority("ADMIN","TECNICO","ALMACENISTA")
                                .requestMatchers("/websocket/**").permitAll()
                                .anyRequest().authenticated()
-                        )
+               )
+
                .formLogin(form -> form
                        .loginPage("/")
                        .loginProcessingUrl("/procesarLogin")
