@@ -43,6 +43,11 @@ public class InformeService {
             document.add(new Paragraph("Correo cliente: " + revision.getCliente().getCorreo()));
             document.add(new Paragraph("Equipo: " + revision.getEquipo().getMarca() + " " + revision.getEquipo().getModelo()));
             document.add(new Paragraph("Fecha de revisión: " + revision.getFecha()));
+            document.add(new Paragraph(
+                    "Tipo de impresora: " + revision.getTipoImpresora()
+            ));
+            String garantiaTexto = revision.isEquipoGarantia() ? "SI" : "NO";
+            document.add(new Paragraph("Garantía: " + garantiaTexto));
             document.add(Chunk.NEWLINE);
 
             Map<String, Boolean> criterios = getCriterios();
@@ -51,7 +56,6 @@ public class InformeService {
             Map<String, String> observacionesAuto = getObservacionesAuto();
 
             Map<String, String[]> secciones = Map.of(
-                    "Tipo de Impresora", new String[]{"impEscritorio", "impIndustrial", "otro"},
                     "Garantía", new String[]{"equipoGarantia"},
                     "Estado General", new String[]{"equipoEnciende", "estaOperando", "estaPartido", "estaManchado"},
                     "Piezas Faltantes", new String[]{"tornillos", "tapas", "display", "tarjetasElectronicas", "botones", "cabezal"},
@@ -105,14 +109,14 @@ public class InformeService {
             }
 
             // Campos de texto adicionales
-            if (revision.isOtroPiezaFaltante() != null && !revision.isOtroPiezaFaltante().isEmpty()) {
-                document.add(new Paragraph("🧩 Otro pieza faltante: " + revision.isOtroPiezaFaltante()));
+            if (revision.getOtroPiezaFaltante() != null && !revision.getOtroPiezaFaltante().isEmpty()) {
+                document.add(new Paragraph("🧩 Otro pieza faltante: " + revision.getOtroPiezaFaltante()));
             }
-            if (revision.isOtroParteMecanica() != null && !revision.isOtroParteMecanica().isEmpty()) {
-                document.add(new Paragraph("⚙️ Otro parte mecánica: " + revision.isOtroParteMecanica()));
+            if (revision.getOtroParteMecanica() != null && !revision.getOtroParteMecanica().isEmpty()) {
+                document.add(new Paragraph("⚙️ Otro parte mecánica: " + revision.getOtroParteMecanica()));
             }
-            if (revision.isOtroEstadoElectronico() != null && !revision.isOtroEstadoElectronico().isEmpty()) {
-                document.add(new Paragraph("💡 Otro estado electrónico: " + revision.isOtroEstadoElectronico()));
+            if (revision.getOtroEstadoElectronico() != null && !revision.getOtroEstadoElectronico().isEmpty()) {
+                document.add(new Paragraph("💡 Otro estado electrónico: " + revision.getOtroEstadoElectronico()));
             }
 
             if (!hayNegativas) {
@@ -124,6 +128,8 @@ public class InformeService {
             document.add(Chunk.NEWLINE);
             document.add(new Paragraph("Observaciones del técnico:", sectionFont));
             document.add(new Paragraph(revision.getObservaciones()));
+
+
 
             document.close();
 
@@ -138,10 +144,6 @@ public class InformeService {
     private Map<String, Boolean> getCriterios() {
         Map<String, Boolean> criterios = new HashMap<>();
 
-        // Tipo impresora
-        criterios.put("impEscritorio", true);
-        criterios.put("impIndustrial", true);
-        criterios.put("otro", true);
 
         // Garantía
         criterios.put("equipoGarantia", true);
@@ -196,9 +198,7 @@ public class InformeService {
         Map<String, String> preguntas = new HashMap<>();
 
         // Nuevos campos
-        preguntas.put("impEscritorio", "¿Es una impresora de escritorio?");
-        preguntas.put("impIndustrial", "¿Es una impresora industrial?");
-        preguntas.put("otro", "¿Otro tipo de impresora?");
+
         preguntas.put("equipoGarantia", "¿El equipo está en garantía?");
 
         // Estado general
@@ -238,9 +238,6 @@ public class InformeService {
         Map<String, String> obs = new HashMap<>();
 
         // Nuevos campos
-        obs.put("impEscritorio", "Verificar tipo de impresora de escritorio.");
-        obs.put("impIndustrial", "Verificar impresora industrial.");
-        obs.put("otro", "Especificar otro tipo de impresora.");
         obs.put("equipoGarantia", "Equipo fuera de garantía.");
 
         // Resto de observaciones

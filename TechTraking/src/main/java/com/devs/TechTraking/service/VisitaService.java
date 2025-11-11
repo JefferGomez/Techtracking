@@ -29,6 +29,8 @@ public class VisitaService {
     private ClienteRepository clienteRepository;
     @Autowired
     private TecnicoRepository tecnicoRepository;
+    @Autowired
+    private EnviarCorreoService enviarCorreoService;
 
 
     public List<Visita> obtenerVisitas(LocalDate inicio,LocalDate fin){
@@ -47,14 +49,6 @@ public class VisitaService {
             throw new IllegalArgumentException("La visita debe programarse con al menos un dia de diferencia");
         }
 
-//        if (visita.getTecnico() != null && visita.getTecnico().getId() != null) {
-//            Tecnico tecnico = tecnicoRepository.findById(visita.getTecnico().getId())
-//                    .orElseThrow(() -> new IllegalArgumentException("Tecnico no encontrado"));
-//            visita.setTecnico(tecnico);
-//        } else {
-//            throw new IllegalArgumentException("Se debe proporcionar un técnico válido");
-//        }
-//
         if (visita.getCliente() != null && visita.getCliente().getId() != null) {
             Cliente cliente = clienteRepository.findById(visita.getCliente().getId())
                     .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
@@ -75,8 +69,18 @@ public class VisitaService {
 
         visita.setEstado(EstadoVisita.AGENDADA);
         Visita nuevaVisita = visitaRepository.save(visita);
-        return visitaRepository.findVisitaCompleta(nuevaVisita.getId())
+        Visita visitaCompleta = visitaRepository.findVisitaCompleta(nuevaVisita.getId())
                 .orElseThrow(() -> new RuntimeException("No se pudo cargar la visita completa"));
+
+        if (visitaCompleta.getTecnico() != null) {
+            enviarCorreoService.EnviarAsignacionVisita(
+                    visitaCompleta.getTecnico().getUsuario().getCorreo(),
+                    visitaCompleta.getTecnico(),
+                    visitaCompleta
+            );
+        }
+
+        return visitaCompleta;
     }
 
     public Visita actualizarVisita(Integer Id, Visita datosActualizados){
@@ -90,10 +94,13 @@ public class VisitaService {
             }
 
             visita.setFecha(datosActualizados.getFecha());
-            visita.setEstado(EstadoVisita.REPROGRAMADA);
+
         }
         if (datosActualizados.getTecnico() != null) {
             visita.setTecnico(datosActualizados.getTecnico());
+        }
+        if (datosActualizados.getEstado() != null) {
+            visita.setEstado(datosActualizados.getEstado());
         }
 
         return visitaRepository.save(visita);
@@ -111,6 +118,12 @@ public class VisitaService {
 
         visitaRepository.delete(visita);
     }
+
+    public Visita obtenerPorId(Integer id){
+        return visitaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Visita no encontrada"));
+    }
+
 
 
 }

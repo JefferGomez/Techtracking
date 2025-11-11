@@ -4,6 +4,8 @@ public enum EstadoVisita {
 
     AGENDADA,
     REPROGRAMADA,
-    CANCELADA
+    CANCELADA,
+    INICIADA,
+    FINALIZADA
 
 }

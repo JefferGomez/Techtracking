@@ -1,5 +1,6 @@
 package com.devs.TechTraking.model;
 
+import com.devs.TechTraking.enums.TipoImpresora;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,9 +21,8 @@ public class Revision {
 
     // ✅ Checklist (31 preguntas Sí/No del documento)
 
-    private boolean impEscritorio;
-    private boolean impIndustrial;
-    private boolean otro;
+    @Enumerated(EnumType.STRING)
+    private TipoImpresora tipoImpresora;
     private boolean equipoGarantia;
     //ESTADO GENERAL
     private boolean equipoEnciende;
@@ -101,28 +101,12 @@ public class Revision {
         this.consecutivo = consecutivo;
     }
 
-    public boolean isImpEscritorio() {
-        return impEscritorio;
+    public TipoImpresora getTipoImpresora() {
+        return tipoImpresora;
     }
 
-    public void setImpEscritorio(boolean impEscritorio) {
-        this.impEscritorio = impEscritorio;
-    }
-
-    public boolean isImpIndustrial() {
-        return impIndustrial;
-    }
-
-    public void setImpIndustrial(boolean impIndustrial) {
-        this.impIndustrial = impIndustrial;
-    }
-
-    public boolean isOtro() {
-        return otro;
-    }
-
-    public void setOtro(boolean otro) {
-        this.otro = otro;
+    public void setTipoImpresora(TipoImpresora tipoImpresora) {
+        this.tipoImpresora = tipoImpresora;
     }
 
     public boolean isEquipoGarantia() {
@@ -137,16 +121,16 @@ public class Revision {
         return equipoEnciende;
     }
 
+    public void setEquipoEnciende(boolean equipoEnciende) {
+        this.equipoEnciende = equipoEnciende;
+    }
+
     public boolean isEstaOperando() {
         return estaOperando;
     }
 
     public void setEstaOperando(boolean estaOperando) {
         this.estaOperando = estaOperando;
-    }
-
-    public void setEquipoEnciende(boolean equipoEnciende) {
-        this.equipoEnciende = equipoEnciende;
     }
 
     public boolean isEstaPartido() {
@@ -213,7 +197,7 @@ public class Revision {
         this.cabezal = cabezal;
     }
 
-    public String isOtroPiezaFaltante() {
+    public String getOtroPiezaFaltante() {
         return otroPiezaFaltante;
     }
 
@@ -253,7 +237,7 @@ public class Revision {
         this.correasEnBuenEstado = correasEnBuenEstado;
     }
 
-    public String isOtroParteMecanica() {
+    public String getOtroParteMecanica() {
         return otroParteMecanica;
     }
 
@@ -373,7 +357,7 @@ public class Revision {
         this.tarjetaElectronica = tarjetaElectronica;
     }
 
-    public String isOtroEstadoElectronico() {
+    public String getOtroEstadoElectronico() {
         return otroEstadoElectronico;
     }
 

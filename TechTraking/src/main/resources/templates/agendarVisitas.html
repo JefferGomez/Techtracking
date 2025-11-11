@@ -119,6 +119,21 @@
             </div>
         </div>
     </div>
+
+    <div id="modalOpciones" class="modal" style="display:none;">
+        <div class="modal-content">
+            <button class="close-btn" onclick="cerrarModalOpciones()">&times;</button>
+            <h3>Opciones de Visita</h3>
+            <button onclick="cancelarDesdeModal()">Cancelar Visita</button>
+            <button onclick="mostrarReprogramar()">Reprogramar Visita</button>
+
+            <!-- Sección de reprogramar, inicialmente oculta -->
+            <div id="seccionReprogramar" style="display:none; margin-top:10px;">
+                <input type="date" id="nuevaFecha">
+                <button onclick="enviarReprogramacion()">Guardar Nueva Fecha</button>
+            </div>
+        </div>
+    </div>
 </main>
 
 <!-- JS -->

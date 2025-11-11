@@ -260,6 +260,12 @@ body {
   border-left-color: #f6c23e;
 }
 
+.visit-cancelada {
+  opacity: 0.5; /* más opaco */
+  pointer-events: none; /* opcional, para que no se pueda interactuar */
+  filter: grayscale(50%); /* opcional, para “apagarlas” visualmente */
+}
+
 .visit-correctivo .visit-type {
   background: rgba(246, 194, 62, 0.1);
   color: #d49617;
@@ -459,6 +465,90 @@ body::before {
 .modal-overlay form button[type="submit"]:hover {
   background: #3d5fc4;
 }
+
+.modal {
+  background: #f8f9fa; /* color claro, combina con las tarjetas del calendario */
+  border-radius: 12px;
+  padding: 25px 30px;
+  min-width: 320px;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  position: fixed;       /* fijo en la ventana */
+  top: 50%;             /* centrado vertical */
+  left: 50%;            /* centrado horizontal */
+  transform: translate(-50%, -50%); /* realmente lo centra */
+  z-index: 9999;  
+}
+
+/* Título del modal */
+.modal h2 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #0d1b2a; /* combina con el sidebar */
+  text-align: center;
+}
+
+/* Botones del modal */
+.modal button {
+  background-color: #0d6efd; /* azul principal de la app */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  margin: 5px 3px 0 3px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.modal button:hover {
+  background-color: #0b5ed7;
+}
+
+/* Botón de cancelar */
+.modal button.cancel {
+  background-color: #dc3545;
+}
+
+.modal button.cancel:hover {
+  background-color: #bb2d3b;
+}
+
+/* Campo de fecha */
+.modal input[type="date"] {
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin-top: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+/* Icono de cierre (si lo quieres) */
+.modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 22px;
+  background: none;      /* quita el fondo azul */
+  border: none;          /* quita borde */
+  color: #888;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.modal .close-btn:hover {
+  color: #333;
+}
+
 
 /* Modal de detalles */
 #visitDetailModal h3 {

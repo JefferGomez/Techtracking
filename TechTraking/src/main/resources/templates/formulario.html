@@ -71,19 +71,19 @@
 
             <!-- Datos Generales -->
             <div class="checkbox-group">
-                <label><input type="radio" name="tipo_impresora" value="escritorio" required> IMPRESORA DE ESCRITORIO</label>
-                <label><input type="radio" name="tipo_impresora" value="industrial" required> IMPRESORA INDUSTRIAL</label>
-                <label><input type="radio" name="tipo_impresora" value="otro" required> OTRO</label>
+                <label><input type="radio" name="tipo_impresora" value="ESCRITORIO" required> IMPRESORA DE ESCRITORIO</label>
+                <label><input type="radio" name="tipo_impresora" value="INDUSTRIAL" required> IMPRESORA INDUSTRIAL</label>
+                <label><input type="radio" name="tipo_impresora" value="OTRO" required> OTRO</label>
             </div>
 
             <!-- Formulario-datos del cliente -->
             <section class="datos-cliente">
 
                 <div class="columna-izquierda">
-                    <label>Cliente: <input style="margin-left: 3px;" type="text" name="cliente" required  th:value="${clienteId}"></label>
+                    <label>Cliente: <input style="margin-left: 3px;" type="text" name="clienteId" required  th:value="${clienteId}"></label>
                     <label>Marca: <input style="margin-left: 6px;" type="text" name="marca" required th:value="${marca}"></label>
                     <label>Modelo: <input type="text" name="modelo"  required th:value="${modelo}"></label>
-                    <label>Serie: <input style="margin-left: 10px;" type="text" name="serie" required th:value="${equipoId}"></label>
+                    <label>Serie: <input style="margin-left: 10px;" type="text" name="equipoId" required th:value="${equipoId}"></label>
                 </div>
 
                 <div class="columna-derecha">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="consecutivo-inline">
                         <div for="consecutivo">Consecutivo #</div>
-                        <input type="number" name="consecutivo" id="consecutivo" readonly style="font-size: 1em;">
+                        <input type="number" name="consecutivo" id="consecutivo" readonly style="font-size: 1em;" th:value="${consecutivo}">
                     </div>
                     <div class="fila-check">
                     <label>Equipo en Garantía </label>
@@ -347,8 +347,8 @@
             <div class="grid-2">
                 <section class="tecnico-section">
                     <h2>Técnico Servimarket FM</h2>
-                    <input type="text" name="tecnico_usuario" placeholder="Usuario responsable" required>
-                    <input type="text" name="tecnico_area" placeholder="Área / Unidad" required>
+                    <input type="text" name="tecnico_usuario" placeholder="Usuario responsable" required th:Value="${tecnico}">
+                    <input type="text" name="tecnico_area" placeholder="Área / Unidad" required th:Value="${tecnicoE}">
                 </section>
                 <section>
                     <h2>Recibido por</h2>
