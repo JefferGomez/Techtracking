@@ -36,7 +36,8 @@ body {
 }
 
 .header .mark {
-    color: #ffffff;
+    background: transparent;
+    color: #9E0707FF;
 }
 
 .header .nav {
