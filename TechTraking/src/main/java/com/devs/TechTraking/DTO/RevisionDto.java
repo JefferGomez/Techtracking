@@ -1,23 +1,22 @@
 package com.devs.TechTraking.DTO;
 
+import com.devs.TechTraking.enums.TipoImpresora;
+
 import java.time.LocalDate;
 
 public class RevisionDto {
-
-    private Long id;
 
     // 🔹 Relación con Cliente y Equipo (solo enviamos los IDs, no los objetos completos)
     private Long clienteId;
     private Long equipoId;
 
     // 🔹 NUEVOS CAMPOS
-    private boolean impEscritorio;
-    private boolean impIndustrial;
-    private boolean otro;
+    private TipoImpresora tipoImpresora;
     private boolean equipoGarantia;
     private String otroPiezaFaltante;
     private String otroParteMecanica;
     private String otroEstadoElectronico;
+    private String consecutivo;
 
     // ✅ Checklist (31 preguntas Sí/No)
     // ESTADO GENERAL
@@ -67,125 +66,308 @@ public class RevisionDto {
     private LocalDate fecha;
 
     // --- Getters & Setters ---
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public Long getClienteId() { return clienteId; }
-    public void setClienteId(Long clienteId) { this.clienteId = clienteId; }
+    public Long getClienteId() {
+        return clienteId;
+    }
 
-    public Long getEquipoId() { return equipoId; }
-    public void setEquipoId(Long equipoId) { this.equipoId = equipoId; }
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
+    }
 
-    // 🔹 Nuevos campos getters y setters
-    public boolean isImpEscritorio() { return impEscritorio; }
-    public void setImpEscritorio(boolean impEscritorio) { this.impEscritorio = impEscritorio; }
+    public Long getEquipoId() {
+        return equipoId;
+    }
 
-    public boolean isImpIndustrial() { return impIndustrial; }
-    public void setImpIndustrial(boolean impIndustrial) { this.impIndustrial = impIndustrial; }
+    public void setEquipoId(Long equipoId) {
+        this.equipoId = equipoId;
+    }
 
-    public boolean isOtro() { return otro; }
-    public void setOtro(boolean otro) { this.otro = otro; }
+    public TipoImpresora getTipoImpresora() {
+        return tipoImpresora;
+    }
 
-    public boolean isEquipoGarantia() { return equipoGarantia; }
-    public void setEquipoGarantia(boolean equipoGarantia) { this.equipoGarantia = equipoGarantia; }
+    public void setTipoImpresora(TipoImpresora tipoImpresora) {
+        this.tipoImpresora = tipoImpresora;
+    }
 
-    public String getOtroPiezaFaltante() { return otroPiezaFaltante; }
-    public void setOtroPiezaFaltante(String otroPiezaFaltante) { this.otroPiezaFaltante = otroPiezaFaltante; }
+    public boolean isEquipoGarantia() {
+        return equipoGarantia;
+    }
 
-    public String getOtroParteMecanica() { return otroParteMecanica; }
-    public void setOtroParteMecanica(String otroParteMecanica) { this.otroParteMecanica = otroParteMecanica; }
+    public void setEquipoGarantia(boolean equipoGarantia) {
+        this.equipoGarantia = equipoGarantia;
+    }
 
-    public String getOtroEstadoElectronico() { return otroEstadoElectronico; }
-    public void setOtroEstadoElectronico(String otroEstadoElectronico) { this.otroEstadoElectronico = otroEstadoElectronico; }
+    public String getOtroPiezaFaltante() {
+        return otroPiezaFaltante;
+    }
 
-    // ✅ Resto igual que antes
-    public boolean isEquipoEnciende() { return equipoEnciende; }
-    public void setEquipoEnciende(boolean equipoEnciende) { this.equipoEnciende = equipoEnciende; }
+    public void setOtroPiezaFaltante(String otroPiezaFaltante) {
+        this.otroPiezaFaltante = otroPiezaFaltante;
+    }
 
-    public boolean isEstaOperando() { return estaOperando; }
-    public void setEstaOperando(boolean estaOperando) { this.estaOperando = estaOperando; }
+    public String getOtroParteMecanica() {
+        return otroParteMecanica;
+    }
 
-    public boolean isEstaPartido() { return estaPartido; }
-    public void setEstaPartido(boolean estaPartido) { this.estaPartido = estaPartido; }
+    public void setOtroParteMecanica(String otroParteMecanica) {
+        this.otroParteMecanica = otroParteMecanica;
+    }
 
-    public boolean isEstaManchado() { return estaManchado; }
-    public void setEstaManchado(boolean estaManchado) { this.estaManchado = estaManchado; }
+    public String getOtroEstadoElectronico() {
+        return otroEstadoElectronico;
+    }
 
-    public boolean isTornillos() { return tornillos; }
-    public void setTornillos(boolean tornillos) { this.tornillos = tornillos; }
+    public void setOtroEstadoElectronico(String otroEstadoElectronico) {
+        this.otroEstadoElectronico = otroEstadoElectronico;
+    }
 
-    public boolean isTapas() { return tapas; }
-    public void setTapas(boolean tapas) { this.tapas = tapas; }
+    public String getConsecutivo() {
+        return consecutivo;
+    }
 
-    public boolean isDisplay() { return display; }
-    public void setDisplay(boolean display) { this.display = display; }
+    public void setConsecutivo(String consecutivo) {
+        this.consecutivo = consecutivo;
+    }
 
-    public boolean isTarjetasElectronicas() { return tarjetasElectronicas; }
-    public void setTarjetasElectronicas(boolean tarjetasElectronicas) { this.tarjetasElectronicas = tarjetasElectronicas; }
+    public boolean isEquipoEnciende() {
+        return equipoEnciende;
+    }
 
-    public boolean isBotones() { return botones; }
-    public void setBotones(boolean botones) { this.botones = botones; }
+    public void setEquipoEnciende(boolean equipoEnciende) {
+        this.equipoEnciende = equipoEnciende;
+    }
 
-    public boolean isCabezal() { return cabezal; }
-    public void setCabezal(boolean cabezal) { this.cabezal = cabezal; }
+    public boolean isEstaOperando() {
+        return estaOperando;
+    }
 
-    public boolean isOxido() { return oxido; }
-    public void setOxido(boolean oxido) { this.oxido = oxido; }
+    public void setEstaOperando(boolean estaOperando) {
+        this.estaOperando = estaOperando;
+    }
 
-    public boolean isRuidos() { return ruidos; }
-    public void setRuidos(boolean ruidos) { this.ruidos = ruidos; }
+    public boolean isEstaPartido() {
+        return estaPartido;
+    }
 
-    public boolean isPiñoneriaEnBuenEstado() { return piñoneriaEnBuenEstado; }
-    public void setPiñoneriaEnBuenEstado(boolean piñoneriaEnBuenEstado) { this.piñoneriaEnBuenEstado = piñoneriaEnBuenEstado; }
+    public void setEstaPartido(boolean estaPartido) {
+        this.estaPartido = estaPartido;
+    }
 
-    public boolean isCorreasEnBuenEstado() { return correasEnBuenEstado; }
-    public void setCorreasEnBuenEstado(boolean correasEnBuenEstado) { this.correasEnBuenEstado = correasEnBuenEstado; }
+    public boolean isEstaManchado() {
+        return estaManchado;
+    }
 
-    public boolean isFunciona() { return funciona; }
-    public void setFunciona(boolean funciona) { this.funciona = funciona; }
+    public void setEstaManchado(boolean estaManchado) {
+        this.estaManchado = estaManchado;
+    }
 
-    public boolean isPartida() { return partida; }
-    public void setPartida(boolean partida) { this.partida = partida; }
+    public boolean isTornillos() {
+        return tornillos;
+    }
 
-    public boolean isLineasQuemadas() { return lineasQuemadas; }
-    public void setLineasQuemadas(boolean lineasQuemadas) { this.lineasQuemadas = lineasQuemadas; }
+    public void setTornillos(boolean tornillos) {
+        this.tornillos = tornillos;
+    }
 
-    public boolean isQuemada() { return quemada; }
-    public void setQuemada(boolean quemada) { this.quemada = quemada; }
+    public boolean isTapas() {
+        return tapas;
+    }
 
-    public boolean isBueno() { return bueno; }
-    public void setBueno(boolean bueno) { this.bueno = bueno; }
+    public void setTapas(boolean tapas) {
+        this.tapas = tapas;
+    }
 
-    public boolean isLineasBlancas() { return lineasBlancas; }
-    public void setLineasBlancas(boolean lineasBlancas) { this.lineasBlancas = lineasBlancas; }
+    public boolean isDisplay() {
+        return display;
+    }
 
-    public boolean isCalibrado() { return calibrado; }
-    public void setCalibrado(boolean calibrado) { this.calibrado = calibrado; }
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
 
-    public boolean isLimpio() { return limpio; }
-    public void setLimpio(boolean limpio) { this.limpio = limpio; }
+    public boolean isTarjetasElectronicas() {
+        return tarjetasElectronicas;
+    }
 
-    public boolean isBuenos() { return buenos; }
-    public void setBuenos(boolean buenos) { this.buenos = buenos; }
+    public void setTarjetasElectronicas(boolean tarjetasElectronicas) {
+        this.tarjetasElectronicas = tarjetasElectronicas;
+    }
 
-    public boolean isPicados() { return picados; }
-    public void setPicados(boolean picados) { this.picados = picados; }
+    public boolean isBotones() {
+        return botones;
+    }
 
-    public boolean isRayados() { return rayados; }
-    public void setRayados(boolean rayados) { this.rayados = rayados; }
+    public void setBotones(boolean botones) {
+        this.botones = botones;
+    }
 
-    public boolean isAdhesivo() { return adhesivo; }
-    public void setAdhesivo(boolean adhesivo) { this.adhesivo = adhesivo; }
+    public boolean isCabezal() {
+        return cabezal;
+    }
 
-    public boolean isHumedad() { return humedad; }
-    public void setHumedad(boolean humedad) { this.humedad = humedad; }
+    public void setCabezal(boolean cabezal) {
+        this.cabezal = cabezal;
+    }
 
-    public boolean isTarjetaElectronica() { return tarjetaElectronica; }
-    public void setTarjetaElectronica(boolean tarjetaElectronica) { this.tarjetaElectronica = tarjetaElectronica; }
+    public boolean isOxido() {
+        return oxido;
+    }
 
-    public String getObservaciones() { return observaciones; }
-    public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+    public void setOxido(boolean oxido) {
+        this.oxido = oxido;
+    }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public boolean isRuidos() {
+        return ruidos;
+    }
+
+    public void setRuidos(boolean ruidos) {
+        this.ruidos = ruidos;
+    }
+
+    public boolean isPiñoneriaEnBuenEstado() {
+        return piñoneriaEnBuenEstado;
+    }
+
+    public void setPiñoneriaEnBuenEstado(boolean piñoneriaEnBuenEstado) {
+        this.piñoneriaEnBuenEstado = piñoneriaEnBuenEstado;
+    }
+
+    public boolean isCorreasEnBuenEstado() {
+        return correasEnBuenEstado;
+    }
+
+    public void setCorreasEnBuenEstado(boolean correasEnBuenEstado) {
+        this.correasEnBuenEstado = correasEnBuenEstado;
+    }
+
+    public boolean isFunciona() {
+        return funciona;
+    }
+
+    public void setFunciona(boolean funciona) {
+        this.funciona = funciona;
+    }
+
+    public boolean isPartida() {
+        return partida;
+    }
+
+    public void setPartida(boolean partida) {
+        this.partida = partida;
+    }
+
+    public boolean isLineasQuemadas() {
+        return lineasQuemadas;
+    }
+
+    public void setLineasQuemadas(boolean lineasQuemadas) {
+        this.lineasQuemadas = lineasQuemadas;
+    }
+
+    public boolean isQuemada() {
+        return quemada;
+    }
+
+    public void setQuemada(boolean quemada) {
+        this.quemada = quemada;
+    }
+
+    public boolean isBueno() {
+        return bueno;
+    }
+
+    public void setBueno(boolean bueno) {
+        this.bueno = bueno;
+    }
+
+    public boolean isLineasBlancas() {
+        return lineasBlancas;
+    }
+
+    public void setLineasBlancas(boolean lineasBlancas) {
+        this.lineasBlancas = lineasBlancas;
+    }
+
+    public boolean isCalibrado() {
+        return calibrado;
+    }
+
+    public void setCalibrado(boolean calibrado) {
+        this.calibrado = calibrado;
+    }
+
+    public boolean isLimpio() {
+        return limpio;
+    }
+
+    public void setLimpio(boolean limpio) {
+        this.limpio = limpio;
+    }
+
+    public boolean isBuenos() {
+        return buenos;
+    }
+
+    public void setBuenos(boolean buenos) {
+        this.buenos = buenos;
+    }
+
+    public boolean isPicados() {
+        return picados;
+    }
+
+    public void setPicados(boolean picados) {
+        this.picados = picados;
+    }
+
+    public boolean isRayados() {
+        return rayados;
+    }
+
+    public void setRayados(boolean rayados) {
+        this.rayados = rayados;
+    }
+
+    public boolean isAdhesivo() {
+        return adhesivo;
+    }
+
+    public void setAdhesivo(boolean adhesivo) {
+        this.adhesivo = adhesivo;
+    }
+
+    public boolean isHumedad() {
+        return humedad;
+    }
+
+    public void setHumedad(boolean humedad) {
+        this.humedad = humedad;
+    }
+
+    public boolean isTarjetaElectronica() {
+        return tarjetaElectronica;
+    }
+
+    public void setTarjetaElectronica(boolean tarjetaElectronica) {
+        this.tarjetaElectronica = tarjetaElectronica;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
 }

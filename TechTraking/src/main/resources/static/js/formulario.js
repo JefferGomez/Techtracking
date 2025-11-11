@@ -43,17 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** Inicializa TODOS los campos del formulario */
     const inicializarCampos = async () => {
-        // consecutivoInput.value = await obtenerConsecutivo();
-        tecnicoUsuarioInput.value = await obtenerTecnicoServimarket();
 
         const today = new Date();
         const yyyy = today.getFullYear();
         const mm = String(today.getMonth() + 1).padStart(2, '0');
         const dd = String(today.getDate()).padStart(2, '0');
         fechaInput.value = `${yyyy}-${mm}-${dd}`;
-
-        // NUEVO: Cargar datos del equipo
-        await cargarDatosEquipo();
     };
 
     inicializarCampos();
@@ -91,10 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // -----------------------------------------------------------------
-    // 4. Lógica de Envío (Guardar Reporte y Generar PDF)
-    // -----------------------------------------------------------------
-
     /**
      * Helper para convertir radio buttons a boolean
      */
@@ -114,8 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onerror = error => reject(error);
     });
 
-   
-
     /**
      * Manejador principal al enviar el formulario
      */
@@ -134,86 +123,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const etiquetaFile = inputEtiqueta.files[0];
             const firmaFile = inputFirma ? inputFirma.files[0] : null;
+            const clienteId = parseInt(formData.get("clienteId"));
+            const equipoId = parseInt(formData.get("equipoId"));
+
+            if (isNaN(clienteId) || isNaN(equipoId)) {
+                alert("Debe seleccionar un Cliente y un Equipo válidos.");
+                return; // evita enviar datos inválidos
+            }
 
             const data = {
                 // IDs (si existen)
-                equipoId: parseInt(formData.get("equipoId")),
-                clienteId: parseInt(formData.get("clienteId")),
+                equipoId:equipoId,
+                clienteId:clienteId,
 
+                // Tipo y garantía
+                tipoImpresora: formData.get("tipo_impresora"), // el backend debe parsear a TipoImpresora
+                equipoGarantia: valorBooleano("garantia"),
 
-                // Datos del equipo
-                cliente: formData.get("cliente"),
-                marca: formData.get("marca"),
-                modelo: formData.get("modelo"),
-                serie: formData.get("serie"),
-                tipo: formData.get("tipo_impresora"),
-                garantia: formData.get("garantia") === "on",
-                fecha: formData.get("fecha"),
-                consecutivo: formData.get("consecutivo"),
+                // Otros campos de texto
+                otroPiezaFaltante: formData.get("otras_piezas"),
+                otroParteMecanica: formData.get("otra_mecanica"),
+                otroEstadoElectronico: formData.get("otra_electronica"),
 
-                // Estado General
+                // Checklist
+                // ESTADO GENERAL
                 equipoEnciende: valorBooleano("encendido"),
                 estaOperando: valorBooleano("operando"),
                 estaPartido: valorBooleano("prendido"),
                 estaManchado: valorBooleano("manchas"),
 
-                // Piezas Faltantes
+                // PIEZAS FALTANTES
                 tornillos: valorBooleano("tornillos"),
                 tapas: valorBooleano("tapas"),
                 display: valorBooleano("display"),
                 tarjetasElectronicas: valorBooleano("tarjetas"),
                 botones: valorBooleano("botones"),
                 cabezal: valorBooleano("cabezal"),
-                otrasPiezas: formData.get("otras_piezas"),
 
-                // Parte Mecánica
+                // PARTE MECÁNICA
                 oxido: valorBooleano("ejes"),
                 ruidos: valorBooleano("husillos"),
                 piñoneriaEnBuenEstado: valorBooleano("pletinas"),
                 correasEnBuenEstado: valorBooleano("cremas"),
-                otraMecanica: formData.get("otra_mecanica"),
 
-                // Pantalla
+                // PANTALLA
                 funciona: valorBooleano("funciona"),
                 partida: valorBooleano("pantallaPrendida"),
                 lineasQuemadas: valorBooleano("lineas"),
                 quemada: valorBooleano("quemada"),
 
-                // Cabezal
+                // CABEZAL DE IMPRESIÓN
                 bueno: valorBooleano("cabezal_bueno"),
                 lineasBlancas: valorBooleano("lineas_blancas"),
                 calibrado: valorBooleano("calibrado"),
                 limpio: valorBooleano("limpio"),
 
-                // Rodillo
+                // RODILLO DE IMPRESIÓN
                 buenos: valorBooleano("rodillo"),
                 picados: valorBooleano("ruedas"),
                 rayados: valorBooleano("alineado"),
                 adhesivo: valorBooleano("adecuado"),
 
-                // Estado Electrónico
+                // ESTADO ELECTRÓNICO
                 humedad: valorBooleano("humedad"),
                 tarjetaElectronica: valorBooleano("tarjetasOk"),
-                otraElectronica: formData.get("otra_electronica"),
 
+                // Otros datos
                 observaciones: formData.get("observaciones"),
-
-                // Técnico
-                tecnicoUsuario: formData.get("tecnico_usuario"),
-                tecnicoArea: formData.get("tecnico_area"),
+                fecha: formData.get("fecha"), // enviar como string yyyy-MM-dd y el backend parsea a LocalDate
 
                 // Imágenes
-                etiquetaBase64: await fileToBase64(etiquetaFile),
-                firmaBase64: await fileToBase64(firmaFile),
+                // etiquetaBase64: await fileToBase64(etiquetaFile),
+                // firmaBase64: await fileToBase64(firmaFile),
             };
 
             console.log("📋 Datos del reporte:", data);
-
-            // 2. Primero crear/obtener el equipo si no existe
-            let equipoId = sessionStorage.getItem("equipoId");
-
-            // Ahora crear la revisión con el equipoId
-            data.equipoId = parseInt(equipoId);
 
             // 3. Enviar revisión al backend
             const res = await fetch(`${API_TECNICO}/crearRevisiones`, {
@@ -230,16 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("✅ Revisión guardada:", savedRevision);
 
             // 5. Limpiar formulario o redirigir
-            // Opción A: Limpiar formulario
-            reporteForm.reset();
-            inicializarCampos();
-            previewEtiqueta.style.display = 'none';
-            if (previewFirma) previewFirma.style.display = 'none';
+            
 
-            // Opción B: Redirigir (descomentar si prefieres)
-            // setTimeout(() => {
-            //     window.location.href = "/tecnico/detallesVisitas";
-            // }, 2000);
+            //Opción B: Redirigir (descomentar si prefieres)
+            setTimeout(() => {
+                window.location.href = "/tecnico/detallesVisitas";
+            }, 2000);
 
         } catch (error) {
             console.error("❌ Error completo:", error);

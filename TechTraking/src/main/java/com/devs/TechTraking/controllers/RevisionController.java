@@ -1,15 +1,19 @@
 package com.devs.TechTraking.controllers;
 
 import com.devs.TechTraking.DTO.RevisionDto;
+import com.devs.TechTraking.enums.EstadoVisita;
 import com.devs.TechTraking.mapper.RevisionMapper;
 import com.devs.TechTraking.model.Cliente;
 import com.devs.TechTraking.model.Equipo;
 import com.devs.TechTraking.model.Revision;
+import com.devs.TechTraking.model.Visita;
 import com.devs.TechTraking.repository.ClienteRepository;
 import com.devs.TechTraking.repository.EquipoRepository;
 import com.devs.TechTraking.service.InformeService;
 import com.devs.TechTraking.service.EmailService;
 import com.devs.TechTraking.service.RevisionService;
+import com.devs.TechTraking.service.VisitaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -32,6 +36,8 @@ public class RevisionController {
     private final EquipoRepository equipoRepository;
     private final InformeService informeService;
     private final EmailService emailService;
+    @Autowired
+    private VisitaService visitaService;
 
     public RevisionController(RevisionService revisionService,
                               ClienteRepository clienteRepository,
@@ -64,31 +70,85 @@ public class RevisionController {
         // 🔹 Generar el PDF del informe
         ByteArrayInputStream pdfStream = informeService.generarReporte(saved);
 
-        // 🔹 Enviar correo al cliente
+        // 🔹 Crear pdf en carpeta
+        Path tempFolder = Paths.get("temp-pdfs"); // asumimos que ya existe
+        String fileName = "revision-" + saved.getConsecutivo() + ".pdf";
+        Path filePath = tempFolder.resolve(fileName);
         try {
-            String correo = cliente.getCorreo();
-            if (correo == null || correo.isEmpty()) {
-                throw new RuntimeException("El cliente no tiene un correo registrado.");
-            }
-
-            String asunto = "Informe de revisión de equipo #" + saved.getConsecutivo();
-            String cuerpo = "Estimado(a) " + cliente.getNombre() +
-                    ",\n\nAdjunto encontrará el informe de revisión correspondiente al consecutivo Nº " +
-                    saved.getConsecutivo() +
-                    " del equipo " + equipo.getModelo() +
-                    ".\n\nSaludos,\nEquipo Técnico TechTracking.";
-
-            emailService.enviarInformePdf(correo, asunto, cuerpo, pdfStream);
-            System.out.println("✅ Correo enviado con el consecutivo " + saved.getConsecutivo());
-
-        } catch (Exception e) {
+            Files.write(filePath, pdfStream.readAllBytes());
+            System.out.println("📄 PDF temporal creado: " + fileName);
+        } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body(null);
+            throw new RuntimeException("No se pudo crear el PDF temporal", e);
         }
+
 
         // 🔹 Devolver DTO actualizado con el consecutivo
         return ResponseEntity.ok(RevisionMapper.toDto(saved));
     }
+
+
+//    enviar todos los pdfs en un correo
+
+    @PostMapping("/finalizarVisita")
+    public ResponseEntity<String> finalizarVisita(@RequestParam String correoCliente) {
+        Path tempFolder = Paths.get("temp-pdfs"); // Carpeta donde se guardan los PDFs
+        try {
+            // 1️⃣ Obtener todos los PDFs de la carpeta
+            List<Path> pdfs = Files.list(tempFolder)
+                    .filter(Files::isRegularFile)
+                    .filter(p -> p.toString().endsWith(".pdf"))
+                    .toList();
+
+            if (pdfs.isEmpty()) {
+                return ResponseEntity.ok("No hay informes pendientes para enviar.");
+            }
+
+            // 2️⃣ Crear un array de InputStreams para enviarlos
+            List<ByteArrayInputStream> streams = pdfs.stream()
+                    .map(path -> {
+                        try {
+                            return new ByteArrayInputStream(Files.readAllBytes(path));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    })
+                    .filter(s -> s != null)
+                    .toList();
+
+            if (streams.isEmpty()) {
+                return ResponseEntity.status(500).body("Error al leer los PDFs.");
+            }
+
+            // 3️⃣ Enviar correo con todos los PDFs adjuntos
+            emailService.enviarInformeMultiplePdf(
+                    correoCliente,
+                    "Informe de visita completada",
+                    "Adjunto encontrará los informes de todos los equipos visitados.",
+                    pdfs // Pasamos los Paths para que el servicio adjunte los archivos
+            );
+
+            // 4️⃣ Eliminar todos los PDFs enviados
+            for (Path pdf : pdfs) {
+                try {
+                    Files.deleteIfExists(pdf);
+                } catch (IOException e) {
+                    System.err.println("No se pudo eliminar PDF: " + pdf.getFileName());
+                }
+            }
+
+            return ResponseEntity.ok("✅ Todos los informes fueron enviados y eliminados.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error procesando los informes.");
+        }
+    }
+
+
+
+
 
     /**
      * Obtiene todas las revisiones con su consecutivo.
@@ -110,4 +170,22 @@ public class RevisionController {
         if (revision == null) throw new RuntimeException("Revisión no encontrada");
         return RevisionMapper.toDto(revision);
     }
+
+
+
+    @PutMapping("/iniciarVisita/{id}")
+    public Visita iniciarVisita(@PathVariable Integer id) {
+        Visita visita = visitaService.obtenerPorId(id);
+        visita.setEstado(EstadoVisita.INICIADA);
+        return visitaService.actualizarVisita(id, visita);
+    }
+    @PutMapping("/finalizarVisita/{id}")
+    public Visita finalizarVisita(@PathVariable Integer id) {
+        Visita visita = visitaService.obtenerPorId(id);
+        visita.setEstado(EstadoVisita.FINALIZADA);
+        return visitaService.actualizarVisita(id, visita);
+    }
+
+
+
 }

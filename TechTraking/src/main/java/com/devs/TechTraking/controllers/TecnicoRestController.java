@@ -1,11 +1,12 @@
 package com.devs.TechTraking.controllers;
 
+import com.devs.TechTraking.enums.EstadoVisita;
 import com.devs.TechTraking.model.Tecnico;
+import com.devs.TechTraking.model.Visita;
 import com.devs.TechTraking.repository.TecnicoRepository;
+import com.devs.TechTraking.service.VisitaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

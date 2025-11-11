@@ -61,38 +61,43 @@ public class RevisionService {
     /**
      * Guarda la revisión, genera el consecutivo y envía el informe PDF por correo.
      */
-    public Revision saveRevisionAndSendReport(Revision revision) {
-        if (revision.getConsecutivo() == null || revision.getConsecutivo().isEmpty()) {
-            revision.setConsecutivo(generarConsecutivo());
-        }
+//    public Revision saveRevisionAndSendReport(Revision revision) {
+//        if (revision.getConsecutivo() == null || revision.getConsecutivo().isEmpty()) {
+//            revision.setConsecutivo(generarConsecutivo());
+//        }
+//
+//        // Guardar la revisión
+//        Revision saved = revisionRepository.save(revision);
+//
+//        try {
+//            // Generar el PDF del informe
+//            ByteArrayInputStream pdfStream = informeService.generarReporte(saved);
+//
+//            // Obtener correo del cliente
+//            String correoCliente = saved.getCliente().getCorreo();
+//            if (correoCliente == null || correoCliente.isEmpty()) {
+//                throw new RuntimeException("El cliente no tiene un correo registrado.");
+//            }
+//
+//            // Enviar correo
+//            String asunto = "Informe de revisión del equipo - " + saved.getEquipo().getMarca();
+//            String cuerpo = "Estimado(a) " + saved.getCliente().getNombre() +
+//                    ",\n\nAdjunto encontrará el informe PDF de la revisión realizada al equipo: "
+//                    + saved.getEquipo().getModelo() + ".\n\nSaludos,\nEquipo Técnico.";
+//
+//            emailService.enviarInformePdf(correoCliente, asunto, cuerpo, pdfStream);
+//
+//            System.out.println("✅ Informe enviado exitosamente al correo del cliente.");
+//
+//        } catch (Exception e) {
+//            System.err.println("❌ Error al generar o enviar el informe: " + e.getMessage());
+//        }
+//
+//        return saved;
+//    }
 
-        // Guardar la revisión
-        Revision saved = revisionRepository.save(revision);
-
-        try {
-            // Generar el PDF del informe
-            ByteArrayInputStream pdfStream = informeService.generarReporte(saved);
-
-            // Obtener correo del cliente
-            String correoCliente = saved.getCliente().getCorreo();
-            if (correoCliente == null || correoCliente.isEmpty()) {
-                throw new RuntimeException("El cliente no tiene un correo registrado.");
-            }
-
-            // Enviar correo
-            String asunto = "Informe de revisión del equipo - " + saved.getEquipo().getMarca();
-            String cuerpo = "Estimado(a) " + saved.getCliente().getNombre() +
-                    ",\n\nAdjunto encontrará el informe PDF de la revisión realizada al equipo: "
-                    + saved.getEquipo().getModelo() + ".\n\nSaludos,\nEquipo Técnico.";
-
-            emailService.enviarInformePdf(correoCliente, asunto, cuerpo, pdfStream);
-
-            System.out.println("✅ Informe enviado exitosamente al correo del cliente.");
-
-        } catch (Exception e) {
-            System.err.println("❌ Error al generar o enviar el informe: " + e.getMessage());
-        }
-
-        return saved;
+    public String getNextConsecutivo() {
+        return generarConsecutivo();
     }
+
 }

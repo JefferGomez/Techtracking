@@ -97,10 +97,16 @@ function crearTarjetaVisita(visita) {
     card.classList.add("visit-correctivo");
   }
 
+
+  if(visita.estado === "CANCELADA"){
+    card.classList.add("visit-cancelada")
+  }
+
+
   card.innerHTML = `
     <div class="visit-card-header">
       <span class="visit-type">${visita.tipoServicio}</span>
-      <button class="btn-delete-visit" onclick="eliminarVisita(${visita.id}, event)">×</button>
+      <button class="btn-delete-visit" onclick="abrirModalOpciones(${visita.id})">ⓘ</button>
     </div>
     <div class="visit-card-body">
       <div class="visit-info">
@@ -411,3 +417,55 @@ document.getElementById("cliente").addEventListener("change", (e) => {
   cargarEquiposPorCliente(clienteId);
 });
 cargarTecnicos();
+
+
+let visitaActualId = null;
+
+function abrirModalOpciones(visitaId) {
+  visitaActualId = visitaId;
+  document.getElementById("modalOpciones").style.display = "flex";
+  document.getElementById("seccionReprogramar").style.display = "none";
+}
+
+function cerrarModalOpciones() {
+  document.getElementById("modalOpciones").style.display = "none";
+  visitaActualId = null;
+}
+
+// Cancelar visita
+function cancelarDesdeModal() {
+  fetch(`http://localhost:8080/admin/actualizarVisita/${visitaActualId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ estado: "CANCELADA" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Visita cancelada");
+    cerrarModalOpciones();
+    location.reload(); // o actualizar tarjeta dinámicamente
+  });
+}
+
+// Mostrar la sección para reprogramar
+function mostrarReprogramar() {
+  document.getElementById("seccionReprogramar").style.display = "block";
+}
+
+// Enviar nueva fecha
+function enviarReprogramacion() {
+  const nuevaFecha = document.getElementById("nuevaFecha").value;
+  if (!nuevaFecha) return alert("Selecciona una fecha válida");
+
+  fetch(`http://localhost:8080/admin/actualizarVisita/${visitaActualId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fecha: nuevaFecha, estado: "REPROGRAMADA" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Visita reprogramada");
+    cerrarModalOpciones();
+    location.reload(); // o actualizar tarjeta dinámicamente
+  });
+}
