@@ -7,7 +7,7 @@
     <title>Busqueda de clientes- TechTracking</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/DashboardClientes.css}">
+    <link rel="stylesheet" th:href="@{/css/historial.css}">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         <button id="btn-burger" class="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
     </div>
     <div class="logo-h"><span class="servi">Servi</span><span class="mark">Marketing</span></div>
-    <div class="center">Busqueda de clientes</div>
+    <div class="center">Historial</div>
 
     <div class="right">
         <div class="admin-label">Administrador</div>
@@ -32,9 +32,9 @@
     </div>
     <nav>
         <ul class="menu">
+            <li> <a class="sidebar-item" href="/admin">👥 Clientes</a></li>
             <li><a href="/admin/Visitas">📅 Calendario</a></li>
             <li><a href="/chat-page">💬 Chat</a></li>
-            <li><a href="/admin/historial">⏱️ Historial</a></li>
             <li>
                 <form action="/logout" method="post">
                     <button class="btn-logout" type="submit">Cerrar Sesión</button>
@@ -50,46 +50,10 @@
 <div id="overlay" class="overlay"></div>
 <!-- Contenido -->
 <main class="content">
-    <div class="bienvenida">
-        <h2>Bienvenido a TechTracking</h2>
-    </div>
-
-    <div class="container">
-        <div class="encabezado">
-            <h1>Búsqueda de Clientes</h1>
-        </div>
-
-        <div class="barra">
-            <input id="buscarCliente"   type="text" placeholder="🔍 Buscar clientes...">
-            <div class="acciones">
-                <button type="button" class="nuevo" onclick="window.location.href='/admin/crearclientes'">+ Nuevo Cliente</button>
-                <button type="button" class="vincular" onclick="window.location.href='/admin/crearequipo'">Vincular Equipo</button>
-            </div>
-        </div>
-
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Telefono</th>
-                <th>Correo</th>
-                <th>Acción</th>
-            </tr>
-            </thead>
-            <tbody id="clientesBody"></tbody>
-        </table>
-
-        <div class="paginacion">
-            <button>&laquo; Anterior</button>
-            <span class="pagina-activa">1</span>
-            <button>Siguiente &raquo;</button>
-        </div>
-    </div>
+       <div id="clientesContainer" class="clientes-grid"></div>
 </main>
 </div>
 
-<script th:src="@{/js/dashboard-clientes.js}"></script>
+<script th:src="@{/js/historial.js}"></script>
 </body>
 </html>
