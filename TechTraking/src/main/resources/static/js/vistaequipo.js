@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${equipo.id}</td>
           <td>${equipo.marca}</td>
           <td>${equipo.modelo}</td>
-          <td>${equipo.serie}</td>
+          <td>${equipo.serial}</td>
           <td>${equipo.tipo}</td>
         `;
         tabla.appendChild(fila);

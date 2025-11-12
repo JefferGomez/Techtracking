@@ -1,3 +1,5 @@
+
+
 // =================================================================
 // CONFIGURACIÓN Y VARIABLES GLOBALES
 // =================================================================
@@ -135,17 +137,16 @@ vincularForm.addEventListener('submit', (e) => {
 
     // Recolectar datos del formulario
     const equipoData = {
-        idEquipo: document.getElementById('idEquipo').value.trim(),
         marca: document.getElementById('nombreEquipo').value.trim(),
         modelo: document.getElementById('modelo').value.trim(),
-        serie: document.getElementById('serie').value.trim(),
+        serial: document.getElementById('serie').value.trim(),
         tipo: document.getElementById('tipo').value,
         clienteId: clienteSeleccionadoId
     };
 
     // Validación
-    if (!equipoData.idEquipo || !equipoData.marca || !equipoData.modelo ||
-        !equipoData.serie || !equipoData.tipo) {
+    if (!equipoData.marca || !equipoData.modelo ||
+        !equipoData.serial || !equipoData.tipo) {
         alert("⚠️ Por favor, completa todos los campos del equipo.");
         return;
     }
