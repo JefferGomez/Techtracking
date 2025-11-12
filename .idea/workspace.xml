@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Primer commit backEnd">
+    <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico, ajuste de tarjetas en el calendario y chat en general.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/registroclientes.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/registroclientes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/vincularequipo.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/vincularequipo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/Chat.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Formulario.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Formulario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/crearClientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/crearClientes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/vincularequipo.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/vincularequipo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/Formulario.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/Formulario.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -41,14 +39,31 @@
     &quot;assignee&quot;: &quot;AndresR-527&quot;
   }
 }</component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/JefferGomez/Techtracking&quot;,
-    &quot;accountId&quot;: &quot;f4ade7f3-c4a8-4262-9856-cb81bdaf8a6a&quot;
+    &quot;url&quot;: &quot;https://github.com/JefferGomez/Techtracking.git&quot;,
+    &quot;accountId&quot;: &quot;6bfaa6ed-9699-45bf-93b4-90b3f3641f4a&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;JefferGomez&quot;,
+    &quot;repository&quot;: &quot;Techtracking&quot;
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -65,26 +80,13 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Jeisson__Guevara",
+    "git-widget-placeholder": "Jeffer__Android",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/HP/Desktop/proyecto/TechtrackingReal",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="TechTrakingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.devs.TechTraking.TechTrakingApplication" />
-      <module name="TechTraking" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.devs.TechTraking.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Techtracking" />
       <option name="ENV_FILES" value="" />
@@ -118,6 +120,19 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <method v="2" />
+    </configuration>
+    <configuration name="TechTrakingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.devs.TechTraking.TechTrakingApplication" />
+      <module name="TechTraking" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.devs.TechTraking.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
@@ -161,7 +176,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755050292074</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico, ajuste de tarjetas en el calendario y chat en general.">
+      <option name="closed" value="true" />
+      <created>1762743504901</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762743504901</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,6 +228,23 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Primer commit backEnd" />
     <MESSAGE value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se hace actualizacion de vista de equipos asociados a cada cliente" />
+    <MESSAGE value="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico" />
+    <MESSAGE value="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico, ajuste de tarjetas en el calendario y chat en general." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico, ajuste de tarjetas en el calendario y chat en general." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/AgendarVisitasController.java</url>
+          <line>12</line>
+          <properties class="com.devs.TechTraking.controllers.AgendarVisitasController" method="calendario">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

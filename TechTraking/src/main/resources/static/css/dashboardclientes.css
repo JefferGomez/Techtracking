@@ -145,7 +145,7 @@ li:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-left: 5px;
+    margin-left: 0px;
 }
 
 /* When image moved into the nav list */

@@ -2,6 +2,30 @@ console.log(localStorage.getItem("fechaSeleccionada"));
 
 document.addEventListener("DOMContentLoaded", async () => {
     const fecha = localStorage.getItem("fechaSeleccionada");
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const btnBurger = document.getElementById('btn-burger');
+    const menuLinks = document.querySelectorAll('.menu a');
+
+    const toggleSidebar = () => {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+    };
+    btnBurger.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+
+    // Navegación Sidebar
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href) {
+                window.location.href = href;
+            }
+            if (sidebar.classList.contains('show')) toggleSidebar();
+        });
+    });
+
     if (!fecha) {
         alert("No se seleccionó ninguna fecha.");
         return;
@@ -78,14 +102,37 @@ document.addEventListener("DOMContentLoaded", async () => {
                 equiposContainer.textContent = "No hay equipos asignados";
             }
 
-            // Acción al iniciar visita
-            btnIniciar.addEventListener("click", () => {
-                equiposContainer.querySelectorAll("button").forEach(b => b.disabled = false);
+
+            if(v.estado === "INICIADA") {
                 btnIniciar.style.display = "none";
                 btnFinalizar.style.display = "inline-block";
-                console.log("Visita iniciada:", v.id);
+                equiposContainer.querySelectorAll("button").forEach(b => b.disabled = false);
+            } else if(v.estado === "FINALIZADA") {
+                btnIniciar.style.display = "none";
+                btnFinalizar.style.display = "none";
+                equiposContainer.querySelectorAll("button").forEach(b => b.disabled = true);
+            }
+
+
+            // Acción al iniciar visita
+            btnIniciar.addEventListener("click",async () => {
+                try {
+                    const res = await fetch(`/tecnico/iniciarVisita/${v.id}`, { method: "PUT" });
+                    if (!res.ok) throw new Error("No se pudo iniciar la visita");
+
+                    // Habilitar botones y actualizar UI
+                    equiposContainer.querySelectorAll("button").forEach(b => b.disabled = false);
+                    btnIniciar.style.display = "none";
+                    btnFinalizar.style.display = "inline-block";
+                    console.log("Visita iniciada:", v.id);
+
+                } catch (err) {
+                    console.error("Error al iniciar visita:", err);
+                    alert("No se pudo iniciar la visita. Intenta de nuevo.");
+                }
             });
 
+            
             // Acción al finalizar visita
             btnFinalizar.addEventListener("click", async () => {
                 equiposContainer.querySelectorAll("button").forEach(b => b.disabled = true);
@@ -96,16 +143,26 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // 🔹 Aquí deberías enviar al backend los PDFs generados
                 // Ejemplo de envío al backend:
                 try {
-                    const res = await fetch(`/tecnico/finalizarVisita/${v.id}`, {
+                    // 1️⃣ Enviar correos
+                    const correoCliente = encodeURIComponent(v.cliente.correo);
+                    const resCorreo = await fetch(`/tecnico/finalizarVisita?correoCliente=${correoCliente}`, {
                         method: "POST"
                     });
-                    if (res.ok) {
-                        alert("Visita finalizada y correos enviados al cliente.");
-                    } else {
-                        alert("Error al finalizar la visita.");
-                    }
+                    if (!resCorreo.ok) throw new Error("Error al enviar correos");
+
+                    // 2️⃣ Actualizar estado de la visita
+                    const resEstado = await fetch(`/tecnico/finalizarVisita/${v.id}`, { method: "PUT" });
+                    if (!resEstado.ok) throw new Error("Error al actualizar estado");
+
+                    // Actualizar UI local
+                    v.estado = "FINALIZADA";
+                    btnIniciar.style.display = "none";
+                    btnFinalizar.style.display = "none";
+
+                    alert("Visita finalizada y correos enviados correctamente.");
                 } catch (e) {
-                    console.error("Error finalizando visita:", e);
+                    console.error(e);
+                    alert("Error al finalizar visita. Intenta de nuevo.");
                 }
             });
 

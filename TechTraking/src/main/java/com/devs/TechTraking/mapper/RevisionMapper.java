@@ -10,9 +10,15 @@ public class RevisionMapper {
     // 🔹 DTO → Entity
     public static Revision toEntity(RevisionDto dto, Cliente cliente, Equipo equipo) {
         Revision revision = new Revision();
-        revision.setId(dto.getId());
 
-        // Checklist
+        // 🔹 Nuevos campos
+        revision.setEquipoGarantia(dto.isEquipoGarantia());
+        revision.setOtroPiezaFaltante(dto.getOtroPiezaFaltante());
+        revision.setOtroParteMecanica(dto.getOtroParteMecanica());
+        revision.setOtroEstadoElectronico(dto.getOtroEstadoElectronico());
+        revision.setTipoImpresora(dto.getTipoImpresora());
+
+        // ✅ Resto igual
         revision.setEquipoEnciende(dto.isEquipoEnciende());
         revision.setEstaOperando(dto.isEstaOperando());
         revision.setEstaPartido(dto.isEstaPartido());
@@ -62,9 +68,18 @@ public class RevisionMapper {
     // 🔹 Entity → DTO
     public static RevisionDto toDto(Revision revision) {
         RevisionDto dto = new RevisionDto();
-        dto.setId(revision.getId());
 
-        // Checklist
+
+        // 🔹 Nuevos campos
+        dto.setTipoImpresora(revision.getTipoImpresora());
+        dto.setEquipoGarantia(revision.isEquipoGarantia());
+        dto.setOtroPiezaFaltante(revision.getOtroPiezaFaltante());
+        dto.setOtroParteMecanica(revision.getOtroParteMecanica());
+        dto.setOtroEstadoElectronico(revision.getOtroEstadoElectronico());
+        dto.setConsecutivo(revision.getConsecutivo());
+
+
+        // ✅ Resto igual
         dto.setEquipoEnciende(revision.isEquipoEnciende());
         dto.setEstaOperando(revision.isEstaOperando());
         dto.setEstaPartido(revision.isEstaPartido());

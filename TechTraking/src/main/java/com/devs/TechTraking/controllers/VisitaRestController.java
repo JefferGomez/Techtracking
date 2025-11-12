@@ -1,5 +1,6 @@
     package com.devs.TechTraking.controllers;
 
+    import com.devs.TechTraking.enums.EstadoVisita;
     import com.devs.TechTraking.model.Equipo;
     import com.devs.TechTraking.model.Visita;
     import com.devs.TechTraking.service.EquipoService;

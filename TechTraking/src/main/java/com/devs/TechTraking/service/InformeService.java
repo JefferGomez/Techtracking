@@ -43,6 +43,11 @@ public class InformeService {
             document.add(new Paragraph("Correo cliente: " + revision.getCliente().getCorreo()));
             document.add(new Paragraph("Equipo: " + revision.getEquipo().getMarca() + " " + revision.getEquipo().getModelo()));
             document.add(new Paragraph("Fecha de revisión: " + revision.getFecha()));
+            document.add(new Paragraph(
+                    "Tipo de impresora: " + revision.getTipoImpresora()
+            ));
+            String garantiaTexto = revision.isEquipoGarantia() ? "SI" : "NO";
+            document.add(new Paragraph("Garantía: " + garantiaTexto));
             document.add(Chunk.NEWLINE);
 
             Map<String, Boolean> criterios = getCriterios();
@@ -51,6 +56,7 @@ public class InformeService {
             Map<String, String> observacionesAuto = getObservacionesAuto();
 
             Map<String, String[]> secciones = Map.of(
+                    "Garantía", new String[]{"equipoGarantia"},
                     "Estado General", new String[]{"equipoEnciende", "estaOperando", "estaPartido", "estaManchado"},
                     "Piezas Faltantes", new String[]{"tornillos", "tapas", "display", "tarjetasElectronicas", "botones", "cabezal"},
                     "Parte Mecánica", new String[]{"oxido", "ruidos", "piñoneriaEnBuenEstado", "correasEnBuenEstado"},
@@ -62,12 +68,10 @@ public class InformeService {
 
             boolean hayNegativas = false;
 
-            // Recorremos las secciones
             for (Map.Entry<String, String[]> seccion : secciones.entrySet()) {
                 PdfPTable table = new PdfPTable(2);
                 table.setWidthPercentage(100);
                 table.setSpacingBefore(5);
-
                 boolean seccionNeg = false;
 
                 for (String campo : seccion.getValue()) {
@@ -104,6 +108,17 @@ public class InformeService {
                 }
             }
 
+            // Campos de texto adicionales
+            if (revision.getOtroPiezaFaltante() != null && !revision.getOtroPiezaFaltante().isEmpty()) {
+                document.add(new Paragraph("🧩 Otro pieza faltante: " + revision.getOtroPiezaFaltante()));
+            }
+            if (revision.getOtroParteMecanica() != null && !revision.getOtroParteMecanica().isEmpty()) {
+                document.add(new Paragraph("⚙️ Otro parte mecánica: " + revision.getOtroParteMecanica()));
+            }
+            if (revision.getOtroEstadoElectronico() != null && !revision.getOtroEstadoElectronico().isEmpty()) {
+                document.add(new Paragraph("💡 Otro estado electrónico: " + revision.getOtroEstadoElectronico()));
+            }
+
             if (!hayNegativas) {
                 Paragraph ok = new Paragraph("✅ El equipo pasó todas las verificaciones sin observaciones negativas.", sectionFont);
                 ok.setSpacingBefore(15);
@@ -114,6 +129,8 @@ public class InformeService {
             document.add(new Paragraph("Observaciones del técnico:", sectionFont));
             document.add(new Paragraph(revision.getObservaciones()));
 
+
+
             document.close();
 
         } catch (Exception e) {
@@ -123,9 +140,13 @@ public class InformeService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
-    // ✅ Valores esperados (true = bueno, false = bueno dependiendo del caso)
+    // ✅ Valores esperados
     private Map<String, Boolean> getCriterios() {
         Map<String, Boolean> criterios = new HashMap<>();
+
+
+        // Garantía
+        criterios.put("equipoGarantia", true);
 
         // Estado general
         criterios.put("equipoEnciende", true);
@@ -175,6 +196,12 @@ public class InformeService {
     // ✅ Textos descriptivos
     private Map<String, String> getPreguntas() {
         Map<String, String> preguntas = new HashMap<>();
+
+        // Nuevos campos
+
+        preguntas.put("equipoGarantia", "¿El equipo está en garantía?");
+
+        // Estado general
         preguntas.put("equipoEnciende", "¿El equipo enciende correctamente?");
         preguntas.put("estaOperando", "¿El equipo opera con normalidad?");
         preguntas.put("estaPartido", "¿El equipo presenta partes rotas?");
@@ -206,9 +233,14 @@ public class InformeService {
         return preguntas;
     }
 
-    // ✅ Observaciones automáticas para los casos negativos
+    // ✅ Observaciones automáticas
     private Map<String, String> getObservacionesAuto() {
         Map<String, String> obs = new HashMap<>();
+
+        // Nuevos campos
+        obs.put("equipoGarantia", "Equipo fuera de garantía.");
+
+        // Resto de observaciones
         obs.put("equipoEnciende", "El equipo no enciende.");
         obs.put("estaOperando", "El equipo no opera correctamente.");
         obs.put("estaPartido", "El equipo presenta partes rotas.");
@@ -237,6 +269,7 @@ public class InformeService {
         obs.put("adhesivo", "Los rodillos tienen residuos de adhesivo.");
         obs.put("humedad", "Presencia de humedad en la parte electrónica.");
         obs.put("tarjetaElectronica", "La tarjeta electrónica presenta fallas.");
+
         return obs;
     }
 

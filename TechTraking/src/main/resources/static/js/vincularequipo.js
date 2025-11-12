@@ -1,3 +1,5 @@
+
+
 // =================================================================
 // FUNCIÓN PARA MOSTRAR MODALES BONITOS
 // =================================================================
@@ -230,7 +232,7 @@ vincularForm.addEventListener('submit', (e) => {
     // Validación
     if (!equipoData.marca || !equipoData.modelo ||
         !equipoData.serial || !equipoData.tipo) {
-        mostrarModal("Por favor, completa todos los campos del equipo.", 'warning');
+        alert("⚠️ Por favor, completa todos los campos del equipo.");
         return;
     }
 

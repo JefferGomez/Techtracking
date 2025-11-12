@@ -1,15 +1,22 @@
 package com.devs.TechTraking.DTO;
 
+import com.devs.TechTraking.enums.TipoImpresora;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class RevisionDto {
-
-    private Long id;
 
     // 🔹 Relación con Cliente y Equipo (solo enviamos los IDs, no los objetos completos)
     private Long clienteId;
     private Long equipoId;
+
+    // 🔹 NUEVOS CAMPOS
+    private TipoImpresora tipoImpresora;
+    private boolean equipoGarantia;
+    private String otroPiezaFaltante;
+    private String otroParteMecanica;
+    private String otroEstadoElectronico;
+    private String consecutivo;
 
     // ✅ Checklist (31 preguntas Sí/No)
     // ESTADO GENERAL
@@ -59,13 +66,6 @@ public class RevisionDto {
     private LocalDate fecha;
 
     // --- Getters & Setters ---
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getClienteId() {
         return clienteId;
@@ -81,6 +81,54 @@ public class RevisionDto {
 
     public void setEquipoId(Long equipoId) {
         this.equipoId = equipoId;
+    }
+
+    public TipoImpresora getTipoImpresora() {
+        return tipoImpresora;
+    }
+
+    public void setTipoImpresora(TipoImpresora tipoImpresora) {
+        this.tipoImpresora = tipoImpresora;
+    }
+
+    public boolean isEquipoGarantia() {
+        return equipoGarantia;
+    }
+
+    public void setEquipoGarantia(boolean equipoGarantia) {
+        this.equipoGarantia = equipoGarantia;
+    }
+
+    public String getOtroPiezaFaltante() {
+        return otroPiezaFaltante;
+    }
+
+    public void setOtroPiezaFaltante(String otroPiezaFaltante) {
+        this.otroPiezaFaltante = otroPiezaFaltante;
+    }
+
+    public String getOtroParteMecanica() {
+        return otroParteMecanica;
+    }
+
+    public void setOtroParteMecanica(String otroParteMecanica) {
+        this.otroParteMecanica = otroParteMecanica;
+    }
+
+    public String getOtroEstadoElectronico() {
+        return otroEstadoElectronico;
+    }
+
+    public void setOtroEstadoElectronico(String otroEstadoElectronico) {
+        this.otroEstadoElectronico = otroEstadoElectronico;
+    }
+
+    public String getConsecutivo() {
+        return consecutivo;
+    }
+
+    public void setConsecutivo(String consecutivo) {
+        this.consecutivo = consecutivo;
     }
 
     public boolean isEquipoEnciende() {

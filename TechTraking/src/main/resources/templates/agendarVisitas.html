@@ -7,102 +7,134 @@
     <link rel="stylesheet" th:href="@{/css/AgendarVisitas.css}">
 </head>
 <body>
-<div class="wrapper">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">TechTracking</div>
-        <nav>
-            <ul>
-                <li class="sidebar-item" data-page="/admin">👥 Clientes</li>
-                <li class="sidebar-item active" data-page="/admin/Visitas">📅 Calendario</li>
-            </ul>
-        </nav>
-        <div class="sidebar-img">
-            <img th:src="@{/img/smg.png}" alt="Logo">
+<header class="main-header">
+    <div class="logo-h">
+        <span class="servi">Servi</span><span class="mark">Marketing</span>
+    </div>
+    <div class="center">Calendario</div>
+    <div class="right">
+        <div class="admin-label">Administrador</div>
+    </div>
+</header>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="logo">
+        <div>
+            <h3>TechTracking</h3>
         </div>
-    </aside>
+    </div>
+    <nav>
+        <ul>
+            <li class="sidebar-item" data-page="/admin">👥 Clientes</li>
+            <li class="sidebar-item active" data-page="/admin/Visitas">📅 Calendario</li>
+        </ul>
+    </nav>
+    <div class="sidebar-img">
+        <img th:src="@{/img/smg.png}" alt="Logo">
+    </div>
+</aside>
 
-    <!-- Contenido principal -->
-    <main class="contenido">
-        <!-- Encabezado -->
-        <header class="header">
-            <h2>Calendario</h2>
-            <button id="btnCreate" class="btn-create">+ Crear</button>
-        </header>
+<!-- Contenido principal -->
+<main class="contenido">
+    <!-- Encabezado -->
+    <header class="header">
+        <h2>Calendario</h2>
+        <button id="btnCreate" class="btn-create">+ Crear</button>
+    </header>
 
-        <!-- Controles del calendario -->
-        <div class="calendar-controls">
-            <button id="btnPrev">◀</button>
-            <h3 id="currentMonth">Mes, Año</h3>
-            <button id="btnNext">▶</button>
-            <button id="btnToday">Hoy</button>
-            <div class="view-options">
-                <button>Día</button>
-                <button>Semana</button>
-                <button class="active">Mes</button>
-            </div>
+    <!-- Controles del calendario -->
+    <div class="calendar-controls">
+        <button id="btnPrev">◀</button>
+        <h3 id="currentMonth">Mes, Año</h3>
+        <button id="btnNext">▶</button>
+        <button id="btnToday">Hoy</button>
+        <div class="view-options">
+            <button>Día</button>
+            <button>Semana</button>
+            <button class="active">Mes</button>
         </div>
+    </div>
 
-        <!-- Calendario -->
-        <div class="calendar">
-            <div class="day-name">LUN</div>
-            <div class="day-name">MAR</div>
-            <div class="day-name">MIÉ</div>
-            <div class="day-name">JUE</div>
-            <div class="day-name">VIE</div>
-            <div class="day-name">SÁB</div>
-            <div class="day-name">DOM</div>
+    <!-- Calendario -->
+    <div class="calendar">
+        <div class="day-name">LUN</div>
+        <div class="day-name">MAR</div>
+        <div class="day-name">MIÉ</div>
+        <div class="day-name">JUE</div>
+        <div class="day-name">VIE</div>
+        <div class="day-name">SÁB</div>
+        <div class="day-name">DOM</div>
 
-            <!-- Aquí se generarán los días con JS -->
-            <div id="calendarBody" class="days"></div>
-        </div>
+        <!-- Aquí se generarán los días con JS -->
+        <div id="calendarBody" class="days"></div>
+    </div>
 
-        <!-- Modal para crear evento -->
-            <!-- Modal para crear evento -->
-    <div id="visitModal" class="modal-overlay">
-        <div style="background:#fff;padding:30px 20px;border-radius:10px;min-width:300px;position:relative;">
-            <button id="closeModal" style="position:absolute;top:10px;right:10px;font-size:18px;background:none;border:none;cursor:pointer;">&times;</button>
+    <!-- Modal para crear evento -->
+    <div id="visitModal" class="modal-overlay hidden">
+        <div>
+            <button id="closeModal">&times;</button>
             <h3>Crear evento</h3>
             <form id="visitForm">
-                <div style="margin-bottom:10px;">
-                    <label for="cliente">Id_Cliente:</label><br>
-                    <select type="text" id="cliente" name="cliente" required style="width:100%">
-                        <option value="Seleccione un Cliente"></option>
+                <div>
+                    <label for="cliente">Cliente:</label>
+                    <select id="cliente" name="cliente" required>
+                        <option value="">Seleccione un Cliente</option>
                     </select>
                 </div>
-                <div style="margin-bottom:10px;">
-                    <label for="cliente">Equipos:</label><br>
-                    <select type="text" id="equipos" name="equipos" required style="width:100%" multiple>
-                        <option value="Seleccione equipos"></option>
+                <div>
+                    <label for="equipos">Equipos:</label>
+                    <select id="equipos" name="equipos" required multiple style="height: 100px;">
+                        <option value="">Seleccione equipos</option>
                     </select>
                 </div>
-                <div style="margin-bottom:10px;">
-                    <label for="tecnico">Id_Tecnico:</label><br>
-                    <select type="text" id="tecnico" name="tecnico" required style="width:100%">
-                        <option value="Seleccione un Tecnico"></option>
+                <div>
+                    <label for="tecnico">Técnico:</label>
+                    <select id="tecnico" name="tecnico" required>
+                        <option value="">Seleccione un Técnico</option>
                     </select>
                 </div>
-                <div style="margin-bottom:10px;">
-                    <label for="date">Fecha:</label><br>
-                    <input type="date" id="date" name="date" required style="width:100%">
+                <div>
+                    <label for="date">Fecha:</label>
+                    <input type="date" id="date" name="date" required>
                 </div>
-                <div style="margin-bottom:10px;">
-                    <label for="description">Tipo servicio:</label><br>
-                    <select id="servicio" name="description" style="width:100%">
+                <div>
+                    <label for="servicio">Tipo servicio:</label>
+                    <select id="servicio" name="description">
                         <option value="PREVENTIVO">PREVENTIVO</option>
                         <option value="CORRECTIVO">CORRECTIVO</option>
                     </select>
                 </div>
-                <div style="margin-bottom:10px;">
-                    <label for="color">Color:</label><br>
-                    <input type="color" id="color" name="color" value="#4a90e2">
-                </div>
-                <button type="submit" style="background:#4e73df;color:white;padding:8px 20px;border:none;border-radius:5px;cursor:pointer;">Guardar</button>
+                <button type="submit">Guardar</button>
             </form>
         </div>
     </div>
-</main>
 
+    <!-- Modal para ver detalles de visita -->
+    <div id="visitDetailModal" class="modal-overlay hidden">
+        <div>
+            <button id="closeDetailModal">&times;</button>
+            <div id="detailContent">
+                <!-- Aquí se cargarán los detalles dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <div id="modalOpciones" class="modal" style="display:none;">
+        <div class="modal-content">
+            <button class="close-btn" onclick="cerrarModalOpciones()">&times;</button>
+            <h3>Opciones de Visita</h3>
+            <button onclick="cancelarDesdeModal()">Cancelar Visita</button>
+            <button onclick="mostrarReprogramar()">Reprogramar Visita</button>
+
+            <!-- Sección de reprogramar, inicialmente oculta -->
+            <div id="seccionReprogramar" style="display:none; margin-top:10px;">
+                <input type="date" id="nuevaFecha">
+                <button onclick="enviarReprogramacion()">Guardar Nueva Fecha</button>
+            </div>
+        </div>
+    </div>
+</main>
 
 <!-- JS -->
 <script th:src="@{/js/AgendarVisitas.js}"></script>

@@ -1,5 +1,6 @@
 package com.devs.TechTraking.model;
 
+import com.devs.TechTraking.enums.TipoImpresora;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,7 +13,17 @@ public class Revision {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false, length = 5)
+    private String consecutivo;
+
+
+
+
     // ✅ Checklist (31 preguntas Sí/No del documento)
+
+    @Enumerated(EnumType.STRING)
+    private TipoImpresora tipoImpresora;
+    private boolean equipoGarantia;
     //ESTADO GENERAL
     private boolean equipoEnciende;
     private boolean estaOperando;
@@ -25,11 +36,14 @@ public class Revision {
     private boolean tarjetasElectronicas;
     private boolean botones;
     private boolean cabezal;
+    private String otroPiezaFaltante;
     //PARTE MECANICA
     private boolean oxido;
     private boolean ruidos;
     private boolean piñoneriaEnBuenEstado;
     private boolean correasEnBuenEstado;
+    private String otroParteMecanica;
+
     //PANTALLA
     private boolean funciona;
     private boolean partida;
@@ -48,6 +62,8 @@ public class Revision {
     //ESTADO ELECTRONICO
     private boolean humedad;
     private boolean tarjetaElectronica;
+    private String otroEstadoElectronico;
+
 
 
     // 🔹 Relación con Cliente
@@ -77,8 +93,36 @@ public class Revision {
         this.id = id;
     }
 
+    public String getConsecutivo() {
+        return consecutivo;
+    }
+
+    public void setConsecutivo(String consecutivo) {
+        this.consecutivo = consecutivo;
+    }
+
+    public TipoImpresora getTipoImpresora() {
+        return tipoImpresora;
+    }
+
+    public void setTipoImpresora(TipoImpresora tipoImpresora) {
+        this.tipoImpresora = tipoImpresora;
+    }
+
+    public boolean isEquipoGarantia() {
+        return equipoGarantia;
+    }
+
+    public void setEquipoGarantia(boolean equipoGarantia) {
+        this.equipoGarantia = equipoGarantia;
+    }
+
     public boolean isEquipoEnciende() {
         return equipoEnciende;
+    }
+
+    public void setEquipoEnciende(boolean equipoEnciende) {
+        this.equipoEnciende = equipoEnciende;
     }
 
     public boolean isEstaOperando() {
@@ -87,10 +131,6 @@ public class Revision {
 
     public void setEstaOperando(boolean estaOperando) {
         this.estaOperando = estaOperando;
-    }
-
-    public void setEquipoEnciende(boolean equipoEnciende) {
-        this.equipoEnciende = equipoEnciende;
     }
 
     public boolean isEstaPartido() {
@@ -157,6 +197,14 @@ public class Revision {
         this.cabezal = cabezal;
     }
 
+    public String getOtroPiezaFaltante() {
+        return otroPiezaFaltante;
+    }
+
+    public void setOtroPiezaFaltante(String otroPiezaFaltante) {
+        this.otroPiezaFaltante = otroPiezaFaltante;
+    }
+
     public boolean isOxido() {
         return oxido;
     }
@@ -187,6 +235,14 @@ public class Revision {
 
     public void setCorreasEnBuenEstado(boolean correasEnBuenEstado) {
         this.correasEnBuenEstado = correasEnBuenEstado;
+    }
+
+    public String getOtroParteMecanica() {
+        return otroParteMecanica;
+    }
+
+    public void setOtroParteMecanica(String otroParteMecanica) {
+        this.otroParteMecanica = otroParteMecanica;
     }
 
     public boolean isFunciona() {
@@ -299,6 +355,14 @@ public class Revision {
 
     public void setTarjetaElectronica(boolean tarjetaElectronica) {
         this.tarjetaElectronica = tarjetaElectronica;
+    }
+
+    public String getOtroEstadoElectronico() {
+        return otroEstadoElectronico;
+    }
+
+    public void setOtroEstadoElectronico(String otroEstadoElectronico) {
+        this.otroEstadoElectronico = otroEstadoElectronico;
     }
 
     public Cliente getCliente() {

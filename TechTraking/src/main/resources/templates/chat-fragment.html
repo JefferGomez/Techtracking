@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/chat-fragment.css}">
+
+</head>
+<body>
+<div class="chat-container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">💬 Chat en Tiempo Real</h5>
+
+            <!-- Información del usuario conectado -->
+            <div class="user-info-badge">
+                <span>👤</span>
+                <div>
+                    <strong>Chateando como:</strong>
+                    <span th:text="${nombreUsuario}"></span>
+                </div>
+            </div>
+
+            <div id="messageArea"></div>
+
+            <!-- Campo oculto con el nombre del usuario -->
+            <input type="hidden" id="username" th:value="${nombreUsuario}">
+
+            <div class="mb-3">
+                <label for="messageInput" class="form-label">✉️ Mensaje:</label>
+                <input type="text" class="form-control" id="messageInput" placeholder="Escribe tu mensaje aquí...">
+            </div>
+
+            <button onclick="sendMessage()" class="btn btn-primary">
+                📤 Enviar
+            </button>
+            <div id="connectionStatus"></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/chat-fragment.js}"></script>
+
+</body>
+</html>
