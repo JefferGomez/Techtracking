@@ -1,4 +1,76 @@
 // =================================================================
+// FUNCIÓN PARA MOSTRAR MODALES BONITOS
+// =================================================================
+
+/**
+ * Muestra un modal personalizado en lugar de alert()
+ * @param {string} mensaje - Mensaje a mostrar
+ * @param {string} tipo - 'success', 'error', 'warning', 'info'
+ */
+function mostrarModal(mensaje, tipo = 'info') {
+    // Remover modal anterior si existe
+    const modalAnterior = document.getElementById('customModal');
+    if (modalAnterior) {
+        modalAnterior.remove();
+    }
+
+    // Iconos según el tipo
+    const iconos = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+    };
+
+    // Colores según el tipo
+    const colores = {
+        success: '#4CAF50',
+        error: '#f44336',
+        warning: '#ff9800',
+        info: '#2196F3'
+    };
+
+    // Crear el modal
+    const modal = document.createElement('div');
+    modal.id = 'customModal';
+    modal.innerHTML = `
+        <div class="modal-overlay">
+            <div class="modal-content modal-${tipo}">
+                <div class="modal-icon">${iconos[tipo]}</div>
+                <p class="modal-message">${mensaje}</p>
+                <button class="modal-btn" style="background: ${colores[tipo]}">Aceptar</button>
+            </div>
+        </div>
+    `;
+
+    // Agregar al body
+    document.body.appendChild(modal);
+
+    // Agregar animación de entrada
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 10);
+
+    // Event listener para cerrar
+    const btnCerrar = modal.querySelector('.modal-btn');
+    const overlay = modal.querySelector('.modal-overlay');
+
+    const cerrarModal = () => {
+        modal.querySelector('.modal-content').classList.remove('show');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    };
+
+    btnCerrar.addEventListener('click', cerrarModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            cerrarModal();
+        }
+    });
+}
+
+// =================================================================
 // CONFIGURACIÓN Y VARIABLES GLOBALES
 // =================================================================
 
@@ -51,11 +123,17 @@ const buscarCliente = () => {
     const query = buscarClienteInput.value.trim();
 
     if (!query) {
-        alert("⚠️ Por favor, introduce el nombre o ID del cliente.");
+        mostrarModal("Por favor, introduce el nombre o ID del cliente.", 'warning');
         return;
     }
 
     console.log("🔍 Buscando cliente:", query);
+
+    // Mostrar indicador de búsqueda
+    if (btnBuscarCliente) {
+        btnBuscarCliente.textContent = '🔍 Buscando...';
+        btnBuscarCliente.disabled = true;
+    }
 
     // Usar el MISMO endpoint que dashboard-clientes.js
     fetch("/admin/clientes")
@@ -92,16 +170,23 @@ const buscarCliente = () => {
                 // Habilitar botón de vincular
                 if (vincularButton) vincularButton.disabled = false;
 
-                alert(`✅ Cliente "${clienteEncontrado.nombre}" encontrado.`);
+                mostrarModal(`Cliente "${clienteEncontrado.nombre}" encontrado.`, 'success');
             } else {
                 resetClienteDatos();
-                alert(`❌ No se encontró ningún cliente con: "${query}"`);
+                mostrarModal(`No se encontró ningún cliente con: "${query}"`, 'error');
             }
         })
         .catch(error => {
             console.error("❌ Error al buscar cliente:", error);
-            alert("❌ Error al buscar el cliente. Verifica la consola.");
+            mostrarModal("Error al buscar el cliente. Verifica la consola.", 'error');
             resetClienteDatos();
+        })
+        .finally(() => {
+            // Restaurar botón de búsqueda
+            if (btnBuscarCliente) {
+                btnBuscarCliente.textContent = 'Buscar';
+                btnBuscarCliente.disabled = false;
+            }
         });
 };
 
@@ -129,28 +214,33 @@ vincularForm.addEventListener('submit', (e) => {
 
     // Verificar que hay un cliente seleccionado
     if (!clienteSeleccionadoId) {
-        alert("⚠️ Por favor, busca y selecciona un cliente primero.");
+        mostrarModal("Por favor, busca y selecciona un cliente primero.", 'warning');
         return;
     }
 
     // Recolectar datos del formulario
     const equipoData = {
-        idEquipo: document.getElementById('idEquipo').value.trim(),
         marca: document.getElementById('nombreEquipo').value.trim(),
         modelo: document.getElementById('modelo').value.trim(),
-        serie: document.getElementById('serie').value.trim(),
+        serial: document.getElementById('serie').value.trim(),
         tipo: document.getElementById('tipo').value,
         clienteId: clienteSeleccionadoId
     };
 
     // Validación
-    if (!equipoData.idEquipo || !equipoData.marca || !equipoData.modelo ||
-        !equipoData.serie || !equipoData.tipo) {
-        alert("⚠️ Por favor, completa todos los campos del equipo.");
+    if (!equipoData.marca || !equipoData.modelo ||
+        !equipoData.serial || !equipoData.tipo) {
+        mostrarModal("Por favor, completa todos los campos del equipo.", 'warning');
         return;
     }
 
     console.log("📦 Datos del equipo a enviar:", equipoData);
+
+    // Mostrar indicador de carga
+    const submitBtn = vincularForm.querySelector('button[type="submit"]');
+    const textoOriginal = submitBtn.textContent;
+    submitBtn.textContent = '⏳ Vinculando...';
+    submitBtn.disabled = true;
 
     // Enviar al backend
     fetch("/admin/equipos", {
@@ -168,16 +258,23 @@ vincularForm.addEventListener('submit', (e) => {
     })
     .then(data => {
         console.log("✅ Equipo vinculado:", data);
-        alert("✅ Equipo vinculado exitosamente");
+        mostrarModal("Equipo vinculado exitosamente", 'success');
 
-        // Limpiar formulario
-        vincularForm.reset();
-        resetClienteDatos();
-        buscarClienteInput.value = '';
+        // Limpiar formulario después de 1 segundo
+        setTimeout(() => {
+            vincularForm.reset();
+            resetClienteDatos();
+            buscarClienteInput.value = '';
+        }, 1000);
     })
     .catch(error => {
         console.error("❌ Error al vincular equipo:", error);
-        alert(`❌ Error: ${error.message}`);
+        mostrarModal(`Error al vincular el equipo: ${error.message}`, 'error');
+    })
+    .finally(() => {
+        // Restaurar botón
+        submitBtn.textContent = textoOriginal;
+        submitBtn.disabled = false;
     });
 });
 
