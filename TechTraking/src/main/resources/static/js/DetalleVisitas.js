@@ -145,7 +145,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 try {
                     // 1️⃣ Enviar correos
                     const correoCliente = encodeURIComponent(v.cliente.correo);
-                    const resCorreo = await fetch(`/tecnico/finalizarVisita?correoCliente=${correoCliente}`, {
+                    const nombreCliente = encodeURIComponent(v.cliente.nombre);
+                    const tecnicoId = v.tecnico.id;
+                    const resCorreo = await fetch(`/tecnico/finalizarVisita?correoCliente=${correoCliente}&nombreCliente=${nombreCliente}`, {
                         method: "POST"
                     });
                     if (!resCorreo.ok) throw new Error("Error al enviar correos");

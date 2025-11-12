@@ -91,56 +91,11 @@ public class RevisionController {
 //    enviar todos los pdfs en un correo
 
     @PostMapping("/finalizarVisita")
-    public ResponseEntity<String> finalizarVisita(@RequestParam String correoCliente) {
-        Path tempFolder = Paths.get("temp-pdfs"); // Carpeta donde se guardan los PDFs
+    public ResponseEntity<String> finalizarVisita(@RequestParam String correoCliente,@RequestParam String nombreCliente) {
         try {
-            // 1️⃣ Obtener todos los PDFs de la carpeta
-            List<Path> pdfs = Files.list(tempFolder)
-                    .filter(Files::isRegularFile)
-                    .filter(p -> p.toString().endsWith(".pdf"))
-                    .toList();
-
-            if (pdfs.isEmpty()) {
-                return ResponseEntity.ok("No hay informes pendientes para enviar.");
-            }
-
-            // 2️⃣ Crear un array de InputStreams para enviarlos
-            List<ByteArrayInputStream> streams = pdfs.stream()
-                    .map(path -> {
-                        try {
-                            return new ByteArrayInputStream(Files.readAllBytes(path));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return null;
-                        }
-                    })
-                    .filter(s -> s != null)
-                    .toList();
-
-            if (streams.isEmpty()) {
-                return ResponseEntity.status(500).body("Error al leer los PDFs.");
-            }
-
-            // 3️⃣ Enviar correo con todos los PDFs adjuntos
-            emailService.enviarInformeMultiplePdf(
-                    correoCliente,
-                    "Informe de visita completada",
-                    "Adjunto encontrará los informes de todos los equipos visitados.",
-                    pdfs // Pasamos los Paths para que el servicio adjunte los archivos
-            );
-
-            // 4️⃣ Eliminar todos los PDFs enviados
-            for (Path pdf : pdfs) {
-                try {
-                    Files.deleteIfExists(pdf);
-                } catch (IOException e) {
-                    System.err.println("No se pudo eliminar PDF: " + pdf.getFileName());
-                }
-            }
-
-            return ResponseEntity.ok("✅ Todos los informes fueron enviados y eliminados.");
-
-        } catch (IOException e) {
+            String mensaje = revisionService.finalizarVisita(correoCliente,nombreCliente);
+            return ResponseEntity.ok(mensaje);
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error procesando los informes.");
         }
