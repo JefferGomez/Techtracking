@@ -133,7 +133,7 @@
 
 
 
-let boton = document.getElementById("registrar")
+/*let boton = document.getElementById("registrar")
 
 boton.addEventListener("click",evento =>{
 
@@ -185,7 +185,7 @@ let registrarUsuario = async()=>{
 
         })
     }
-
+*/
 function confirmDelete(id) {
   if (!confirm("¿Estás seguro de que deseas eliminar este usuario?")) return;
 
