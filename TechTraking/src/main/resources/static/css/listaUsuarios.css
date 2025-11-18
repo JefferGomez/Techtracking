@@ -318,6 +318,30 @@ th, td {
   z-index: 1000;
 }
 
+/* Pagination controls */
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+}
+.pagination button {
+  background: #0d1b2a;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.pagination button[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+.pagination .active-page {
+  background: #e63946;
+}
+
 /* Fondo marca de agua */
 body::before {
   content: "";

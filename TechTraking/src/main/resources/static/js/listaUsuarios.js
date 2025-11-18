@@ -1,4 +1,6 @@
-    let UsuariosTotales = []
+  let UsuariosTotales = []
+  let currentPage = 1;
+  const pageSize = 10; // items per page - adjust as needed
 
 
 
@@ -16,7 +18,11 @@
       const tbody = document.getElementById("userBody");
       tbody.innerHTML = "";
 
-      data.forEach(user => {
+      // Calculate page slice
+      const start = (currentPage - 1) * pageSize;
+      const pageData = data.slice(start, start + pageSize);
+
+      pageData.forEach(user => {
         const tr = document.createElement("tr");
 
         const opciones = user.rol.nombre.toLowerCase() !== 'superadmin'
@@ -41,17 +47,41 @@
 
         tbody.appendChild(tr);
       });
+
+      renderPagination(data);
+    }
+    function renderPagination(dataArray) {
+      const totalItems = dataArray.length;
+      const totalPages = Math.ceil(totalItems / pageSize) || 1;
+      const container = document.getElementById('pagination');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const prev = document.createElement('button');
+      prev.textContent = 'Anterior';
+      prev.disabled = currentPage === 1;
+      prev.onclick = () => { if (currentPage>1) currentPage--; renderTable(dataArray); };
+      container.appendChild(prev);
+
+      // simple page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active-page');
+        btn.onclick = () => { currentPage = i; renderTable(dataArray); };
+        container.appendChild(btn);
+      }
+
+      const next = document.createElement('button');
+      next.textContent = 'Siguiente';
+      next.disabled = currentPage === totalPages;
+      next.onclick = () => { if (currentPage<totalPages) currentPage++; renderTable(dataArray); };
+      container.appendChild(next);
     }
 
 
 
-    function confirmDelete(id) {
-      const confirmation = document.getElementById("confirmation");
-      confirmation.style.display = "block";
-      setTimeout(() => {
-        confirmation.style.display = "none";
-      }, 2000);
-    }
+    
 
 
     document.addEventListener('click', function(e) {
@@ -77,6 +107,7 @@
         user.id.toString().includes(searchTerm)
       );
 
+      currentPage = 1;
       renderTable(usuariosFiltrados);
     });
 
