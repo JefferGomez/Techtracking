@@ -1,3 +1,65 @@
+// =================================================================
+// FUNCIÓN PARA MOSTRAR MODALES BONITOS
+// =================================================================
+function mostrarModal(mensaje, tipo = 'info') {
+    const modalAnterior = document.getElementById('customModal');
+    if (modalAnterior) {
+        modalAnterior.remove();
+    }
+
+    const iconos = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+    };
+
+    const colores = {
+        success: '#4CAF50',
+        error: '#f44336',
+        warning: '#ff9800',
+        info: '#2196F3'
+    };
+
+    const modal = document.createElement('div');
+    modal.id = 'customModal';
+    modal.innerHTML = `
+        <div class="modal-overlay">
+            <div class="modal-content modal-${tipo}">
+                <div class="modal-icon">${iconos[tipo]}</div>
+                <p class="modal-message">${mensaje}</p>
+                <button class="modal-btn" style="background: ${colores[tipo]}">Aceptar</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 10);
+
+    const btnCerrar = modal.querySelector('.modal-btn');
+    const overlay = modal.querySelector('.modal-overlay');
+
+    const cerrarModal = () => {
+        modal.querySelector('.modal-content').classList.remove('show');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    };
+
+    btnCerrar.addEventListener('click', cerrarModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            cerrarModal();
+        }
+    });
+}
+
+// =================================================================
+// CÓDIGO PRINCIPAL
+// =================================================================
 console.log(localStorage.getItem("fechaSeleccionada"));
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -14,7 +76,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     btnBurger.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
 
-    // Navegación Sidebar
     menuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -27,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     if (!fecha) {
-        alert("No se seleccionó ninguna fecha.");
+        mostrarModal("No se seleccionó ninguna fecha.", 'warning');
         return;
     }
 
@@ -51,7 +112,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const div = document.createElement("div");
             div.classList.add("visita");
 
-            // Datos de la visita
             div.innerHTML = `
                 <p><strong>Cliente:</strong> ${v.cliente.nombre}</p>
                 <p><strong>Nit-Cliente:</strong> ${v.cliente.id}</p>
@@ -64,18 +124,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>Equipos:</strong></p>
             `;
 
-            // Botón Iniciar Visita
             const btnIniciar = document.createElement("button");
             btnIniciar.textContent = "Iniciar Visita";
             btnIniciar.classList.add("btn-iniciar");
 
-            // Botón Finalizar (inicialmente oculto)
             const btnFinalizar = document.createElement("button");
             btnFinalizar.textContent = "Finalizar Visita";
             btnFinalizar.classList.add("btn-finalizar");
             btnFinalizar.style.display = "none";
 
-            // Contenedor de equipos
             const equiposContainer = document.createElement("div");
             equiposContainer.classList.add("equipos-container");
 
@@ -85,7 +142,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     eqDiv.classList.add("equipo-item");
                     eqDiv.textContent = `${eq.id} - ${eq.marca} ${eq.modelo} `;
 
-                    // Botón de formulario por equipo (deshabilitado al inicio)
                     const btn = document.createElement("button");
                     btn.textContent = "Crear Formulario";
                     btn.disabled = true;
@@ -102,7 +158,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 equiposContainer.textContent = "No hay equipos asignados";
             }
 
-
             if(v.estado === "INICIADA") {
                 btnIniciar.style.display = "none";
                 btnFinalizar.style.display = "inline-block";
@@ -113,37 +168,30 @@ document.addEventListener("DOMContentLoaded", async () => {
                 equiposContainer.querySelectorAll("button").forEach(b => b.disabled = true);
             }
 
-
-            // Acción al iniciar visita
-            btnIniciar.addEventListener("click",async () => {
+            btnIniciar.addEventListener("click", async () => {
                 try {
                     const res = await fetch(`/tecnico/iniciarVisita/${v.id}`, { method: "PUT" });
                     if (!res.ok) throw new Error("No se pudo iniciar la visita");
 
-                    // Habilitar botones y actualizar UI
                     equiposContainer.querySelectorAll("button").forEach(b => b.disabled = false);
                     btnIniciar.style.display = "none";
                     btnFinalizar.style.display = "inline-block";
                     console.log("Visita iniciada:", v.id);
+                    mostrarModal("Visita iniciada correctamente.", 'success');
 
                 } catch (err) {
                     console.error("Error al iniciar visita:", err);
-                    alert("No se pudo iniciar la visita. Intenta de nuevo.");
+                    mostrarModal("No se pudo iniciar la visita. Intenta de nuevo.", 'error');
                 }
             });
 
-            
-            // Acción al finalizar visita
             btnFinalizar.addEventListener("click", async () => {
                 equiposContainer.querySelectorAll("button").forEach(b => b.disabled = true);
                 btnFinalizar.disabled = true;
 
                 console.log("Visita finalizada:", v.id);
 
-                // 🔹 Aquí deberías enviar al backend los PDFs generados
-                // Ejemplo de envío al backend:
                 try {
-                    // 1️⃣ Enviar correos
                     const correoCliente = encodeURIComponent(v.cliente.correo);
                     const nombreCliente = encodeURIComponent(v.cliente.nombre);
                     const tecnicoId = v.tecnico.id;
@@ -152,19 +200,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                     });
                     if (!resCorreo.ok) throw new Error("Error al enviar correos");
 
-                    // 2️⃣ Actualizar estado de la visita
                     const resEstado = await fetch(`/tecnico/finalizarVisita/${v.id}`, { method: "PUT" });
                     if (!resEstado.ok) throw new Error("Error al actualizar estado");
 
-                    // Actualizar UI local
                     v.estado = "FINALIZADA";
                     btnIniciar.style.display = "none";
                     btnFinalizar.style.display = "none";
 
-                    alert("Visita finalizada y correos enviados correctamente.");
+                    mostrarModal("Visita finalizada y correos enviados correctamente.", 'success');
                 } catch (e) {
                     console.error(e);
-                    alert("Error al finalizar visita. Intenta de nuevo.");
+                    mostrarModal("Error al finalizar visita. Intenta de nuevo.", 'error');
                 }
             });
 
@@ -176,5 +222,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (e) {
         console.error(e);
+        mostrarModal("Error al cargar las visitas. Por favor, recarga la página.", 'error');
     }
 });

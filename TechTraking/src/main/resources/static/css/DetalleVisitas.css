@@ -187,3 +187,356 @@ main {
     color: #333;
 }
 
+/* =================================================================
+   ESTILOS PARA BOTONES DE VISITAS
+   ================================================================= */
+
+/* Contenedor de equipos */
+.equipos-container {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--blue);
+}
+
+.equipo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.equipo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.equipo-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Botón Crear Formulario (dentro de equipos) */
+.equipo-item button {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.equipo-item button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+.equipo-item button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.equipo-item button:disabled {
+    background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+/* Botón Iniciar Visita */
+.btn-iniciar {
+    margin-top: 15px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+    width: 100%;
+}
+
+.btn-iniciar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(72, 187, 120, 0.5);
+    background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+}
+
+.btn-iniciar:active {
+    transform: translateY(0);
+}
+
+/* Botón Finalizar Visita */
+.btn-finalizar {
+    margin-top: 15px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
+    width: 100%;
+}
+
+.btn-finalizar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 101, 101, 0.5);
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+}
+
+.btn-finalizar:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-finalizar:disabled {
+    background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+/* Mejoras en las tarjetas de visita */
+.visita {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--blue);
+}
+
+.visita:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.visita p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.visita p strong {
+    color: #2d3748;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 120px;
+}
+
+/* Estados de la visita con colores */
+.visita p:has(strong:contains("Estado")) {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Separador visual */
+.visita > p:first-child {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--nav);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Responsive: ajuste en móviles */
+@media (max-width: 768px) {
+    .visitas-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .btn-iniciar,
+    .btn-finalizar {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .equipo-item {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .equipo-item button {
+        width: 100%;
+    }
+}
+
+/* Animación de carga */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.visita {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Efecto de pulso en botones activos */
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(72, 187, 120, 0.6);
+    }
+}
+
+.btn-iniciar:hover {
+    animation: pulse 2s infinite;
+}
+/* =================================================================
+   ESTILOS PARA MODALES PERSONALIZADOS
+   ================================================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+    animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.modal-content.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.modal-btn {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modal-btn:active {
+    transform: translateY(0);
+}
+
+/* Variantes de color según el tipo */
+.modal-success {
+    border-top: 5px solid #4CAF50;
+}
+
+.modal-error {
+    border-top: 5px solid #f44336;
+}
+
+.modal-warning {
+    border-top: 5px solid #ff9800;
+}
+
+.modal-info {
+    border-top: 5px solid #2196F3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    .modal-icon {
+        font-size: 48px;
+    }
+
+    .modal-message {
+        font-size: 16px;
+    }
+
+    .modal-btn {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+}

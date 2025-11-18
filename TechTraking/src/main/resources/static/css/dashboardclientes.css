@@ -355,3 +355,28 @@ td:last-child {
 .ver-detalle:hover {
     background: #ff6262;
 }
+.paginacion button {
+    padding: 10px 20px;
+    background: white;
+    color: var(--nav);
+    border: 2px solid var(--blue);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.paginacion button:hover:not(:disabled) {
+    background: var(--blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+.paginacion button:disabled {
+    background: #f5f6fa;
+    color: #cbd5e0;
+    border-color: #e2e8f0;
+    cursor: not-allowed;
+}
