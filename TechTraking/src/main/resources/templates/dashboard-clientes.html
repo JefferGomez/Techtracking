@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Busqueda de clientes- TechTracking</title>
+    <title>Busqueda de clientes - TechTracking</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/DashboardClientes.css}">
@@ -26,9 +25,7 @@
 
 <aside class="sidebar" id="sidebar">
     <div class="brand">
-        <div>
-            <h3>TechTracking</h3>
-        </div>
+        <h3>TechTracking</h3>
     </div>
     <nav>
         <ul class="menu">
@@ -44,9 +41,10 @@
             </li>
         </ul>
     </nav>
-
 </aside>
+
 <div id="overlay" class="overlay"></div>
+
 <!-- Contenido -->
 <main class="content">
     <div class="bienvenida">
@@ -59,7 +57,7 @@
         </div>
 
         <div class="barra">
-            <input id="buscarCliente"   type="text" placeholder="🔍 Buscar clientes...">
+            <input id="buscarCliente" type="text" placeholder="🔍 Buscar clientes...">
             <div class="acciones">
                 <button type="button" class="nuevo" onclick="window.location.href='/admin/crearclientes'">+ Nuevo Cliente</button>
                 <button type="button" class="vincular" onclick="window.location.href='/admin/crearequipo'">Vincular Equipo</button>
@@ -80,14 +78,14 @@
             <tbody id="clientesBody"></tbody>
         </table>
 
+        <!-- PAGINACIÓN -->
         <div class="paginacion">
-            <button>&laquo; Anterior</button>
-            <span class="pagina-activa">1</span>
-            <button>Siguiente &raquo;</button>
+            <button id="btnAnterior">&laquo; Anterior</button>
+            <span id="paginaActual">1</span>
+            <button id="btnSiguiente">Siguiente &raquo;</button>
         </div>
     </div>
 </main>
-</div>
 
 <script th:src="@{/js/dashboard-clientes.js}"></script>
 </body>

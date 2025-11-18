@@ -76,14 +76,32 @@
                 <label><input type="radio" name="tipo_impresora" value="OTRO" required> OTRO</label>
             </div>
 
-            <!-- Formulario-datos del cliente -->
+            <!-- Formulario-datos del cliente (MODIFICADO CON CAMPOS DE SOLO LECTURA) -->
             <section class="datos-cliente">
 
                 <div class="columna-izquierda">
-                    <label>Cliente: <input style="margin-left: 3px;" type="text" name="clienteId" required  th:value="${clienteId}"></label>
-                    <label>Marca: <input style="margin-left: 6px;" type="text" name="marca" required th:value="${marca}"></label>
-                    <label>Modelo: <input type="text" name="modelo"  required th:value="${modelo}"></label>
-                    <label>Serie: <input style="margin-left: 10px;" type="text" name="equipoId" required th:value="${equipoId}"></label>
+                    <!-- Campos de solo lectura (no editables) -->
+                    <div class="campo-info-readonly">
+                        <label>Cliente:</label>
+                        <p id="clienteId" class="dato-readonly" th:text="${clienteId}">N/A</p>
+                        <input type="hidden" name="clienteId" id="clienteIdHidden" th:value="${clienteId}">
+                    </div>
+
+                    <div class="campo-info-readonly">
+                        <label>Marca:</label>
+                        <p id="marca" class="dato-readonly" th:text="${marca}">N/A</p>
+                    </div>
+
+                    <div class="campo-info-readonly">
+                        <label>Modelo:</label>
+                        <p id="modelo" class="dato-readonly" th:text="${modelo}">N/A</p>
+                    </div>
+
+                    <div class="campo-info-readonly">
+                        <label>Serie:</label>
+                        <p id="equipoId" class="dato-readonly" th:text="${equipoId}">N/A</p>
+                        <input type="hidden" name="equipoId" id="equipoIdHidden" th:value="${equipoId}">
+                    </div>
                 </div>
 
                 <div class="columna-derecha">
@@ -91,14 +109,15 @@
                         <label for="fecha">Fecha:</label>
                         <input type="date" id="fecha" name="fecha" required>
                     </div>
-                    <div class="consecutivo-inline">
-                        <div for="consecutivo">Consecutivo #</div>
-                        <input type="number" name="consecutivo" id="consecutivo" readonly style="font-size: 1em;" th:value="${consecutivo}">
+                    <div class="consecutivo-readonly">
+                        <label>Consecutivo #</label>
+                        <p id="consecutivo" class="dato-readonly" th:text="${consecutivo}">0000</p>
+                        <input type="hidden" name="consecutivo" id="consecutivoHidden" th:value="${consecutivo}">
                     </div>
                     <div class="fila-check">
-                    <label>Equipo en Garantía </label>
-                    <input type="radio" name="garantia" value="SI" required><span>Sí</span>
-                    <input type="radio" name="garantia" value="NO"><span>No</span>
+                        <label>Equipo en Garantía </label>
+                        <input type="radio" name="garantia" value="SI" required><span>Sí</span>
+                        <input type="radio" name="garantia" value="NO"><span>No</span>
                     </div>
                 </div>
             </section>

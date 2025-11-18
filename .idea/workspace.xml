@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3885f698-74e4-4086-8da7-748b5069ef57" name="Changes" comment="Se realiza ajuste de chat, ajustes visuales y chat ajustado dentro de la visual del tecnico, ajuste de tarjetas en el calendario y chat en general.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/java/com/devs/TechTraking/controllers/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/css/Chat.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Formulario.js" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/static/js/Formulario.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/Formulario.html" beforeDir="false" afterPath="$PROJECT_DIR$/TechTraking/src/main/resources/templates/Formulario.html" afterDir="false" />
     </list>
@@ -39,29 +37,22 @@
     &quot;assignee&quot;: &quot;AndresR-527&quot;
   }
 }</component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="main" />
-      </list>
-    </option>
-  </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/JefferGomez/Techtracking.git&quot;,
-    &quot;accountId&quot;: &quot;6bfaa6ed-9699-45bf-93b4-90b3f3641f4a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/JefferGomez/Techtracking.git",
+    "accountId": "9104db09-1e23-4a61-9c13-88b5e67a3f71"
   },
-  &quot;recentNewPullRequestHead&quot;: {
-    &quot;server&quot;: {
-      &quot;useHttp&quot;: false,
-      &quot;host&quot;: &quot;github.com&quot;,
-      &quot;port&quot;: null,
-      &quot;suffix&quot;: null
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
     },
-    &quot;owner&quot;: &quot;JefferGomez&quot;,
-    &quot;repository&quot;: &quot;Techtracking&quot;
+    "owner": "JefferGomez",
+    "repository": "Techtracking"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
@@ -75,18 +66,32 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.TechTrakingApplication.executor": "Run",
+    "Application.TechTrakingApplication.executor": "Debug",
     "DefaultHtmlFileTemplate": "HTML File",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Jeffer__Android",
+    "git-widget-placeholder": "Jeisson__Guevara",
     "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/HP/Desktop/proyecto/TechtrackingReal",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "configurable.group.language"
   }
 }]]></component>
   <component name="RunManager">
+    <configuration name="TechTrakingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.devs.TechTraking.TechTrakingApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.devs.TechTraking.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Techtracking" />
       <option name="ENV_FILES" value="" />
@@ -121,19 +126,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <method v="2" />
     </configuration>
-    <configuration name="TechTrakingApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.devs.TechTraking.TechTrakingApplication" />
-      <module name="TechTraking" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.devs.TechTraking.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TechTrakingApplication" />
@@ -143,6 +135,13 @@
         <item itemvalue="Application.TechTrakingApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -246,5 +245,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
