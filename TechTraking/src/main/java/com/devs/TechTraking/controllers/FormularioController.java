@@ -56,7 +56,7 @@ public class FormularioController {
         model.addAttribute("consecutivo", consecutivo);
 
 
-        return "Formulario";
+        return "formulario2";
     }
 
 }

@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("✅ Revisión guardada:", savedRevision);
 
             // 5. Limpiar formulario o redirigir
-            
+
 
             //Opción B: Redirigir (descomentar si prefieres)
             setTimeout(() => {
@@ -254,3 +254,166 @@ function cargarDatosFormulario(equipoId) {
             mostrarModal('Error al cargar los datos del equipo', 'error');
         });
 }
+
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const btnAgregar = document.getElementById("btnAgregarRepuesto");
+    const modal = document.getElementById("modalRepuestos");
+    const cerrar = document.getElementById("cerrarModal");
+    const lista = document.getElementById("listaRepuestos");
+    const buscador = document.getElementById("buscadorRepuestos");
+    const btnCrear = document.getElementById("btnCrearRepuesto");
+    const inputNombre = document.getElementById("nuevoRepuestoNombre");
+    const inputSerie = document.getElementById("nuevoRepuestoSerie");
+    const inputReferencia = document.getElementById("nuevoRepuestoReferencia");
+
+    // Lista donde se mostrarán los repuestos seleccionados
+    const listaSeleccionados = document.createElement("div"); // contenedor tipo chips
+    listaSeleccionados.id = "repuestosSeleccionados";
+    listaSeleccionados.style.marginTop = "8px";
+    listaSeleccionados.style.display = "flex";
+    listaSeleccionados.style.flexWrap = "wrap";
+    listaSeleccionados.style.gap = "4px";
+    btnAgregar.parentNode.appendChild(listaSeleccionados);
+
+    let repuestos = [];
+    let seleccionados = [];
+
+    // Abrir / cerrar modal
+    btnAgregar.addEventListener("click", () => modal.style.display = "block");
+    cerrar.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", e => { if(e.target == modal) modal.style.display = "none"; });
+
+    // Cargar repuestos
+    const cargarRepuestos = async () => {
+        const res = await fetch("/tecnico/repuestos");
+        repuestos = await res.json();
+        mostrarRepuestos(repuestos);
+    };
+
+    // Mostrar repuestos en el modal con input de cantidad
+    const mostrarRepuestos = (listaDatos) => {
+        lista.innerHTML = "";
+        listaDatos.forEach(r => {
+            const li = document.createElement("li");
+            li.style.display = "flex";
+            li.style.justifyContent = "space-between";
+            li.style.alignItems = "center";
+            li.style.marginBottom = "4px";
+
+            const span = document.createElement("span");
+            span.textContent = `${r.serie} - ${r.nombre} - ${r.referencia}`;
+
+            const inputCant = document.createElement("input");
+            inputCant.type = "number";
+            inputCant.min = 1;
+            inputCant.value = 1;
+            inputCant.style.width = "50px";
+            inputCant.style.marginLeft = "8px";
+
+            const btnAgregarRepuesto = document.createElement("button");
+            btnAgregarRepuesto.textContent = "Agregar";
+            btnAgregarRepuesto.style.marginLeft = "8px";
+            btnAgregarRepuesto.addEventListener("click", () => {
+                const cantidad = parseInt(inputCant.value);
+                if(cantidad < 1) return alert("Cantidad debe ser mayor a 0");
+
+                // clave única
+                const clave = `${r.serie}-${r.nombre}-${r.referencia}`;
+                const existente = seleccionados.find(s => `${s.serie}-${s.nombre}-${s.referencia}` === clave);
+                if(existente) {
+                    existente.cantidad += cantidad; // sumar si ya existe
+                } else {
+                    seleccionados.push({...r, cantidad});
+                }
+                actualizarSeleccionados();
+                modal.style.display = "none";
+            });
+
+            li.appendChild(span);
+            li.appendChild(inputCant);
+            li.appendChild(btnAgregarRepuesto);
+            lista.appendChild(li);
+        });
+    };
+
+    // Actualizar lista de repuestos seleccionados tipo chips
+    const actualizarSeleccionados = () => {
+        listaSeleccionados.innerHTML = "";
+        seleccionados.forEach(r => {
+            const chip = document.createElement("div");
+            chip.style.display = "flex";
+            chip.style.alignItems = "center";
+            chip.style.background = "#f0f0f0";
+            chip.style.padding = "4px 8px";
+            chip.style.borderRadius = "12px";
+            chip.style.fontSize = "0.9rem";
+
+            const span = document.createElement("span");
+            span.textContent = `${r.nombre} (Serie: ${r.serie}, Ref: ${r.referencia}) x${r.cantidad}`;
+
+            const btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "✕";
+            btnEliminar.style.marginLeft = "6px";
+            btnEliminar.style.border = "none";
+            btnEliminar.style.background = "transparent";
+            btnEliminar.style.cursor = "pointer";
+            btnEliminar.style.color = "red";
+            btnEliminar.addEventListener("click", () => {
+                seleccionados = seleccionados.filter(s =>
+                    `${s.serie}-${s.nombre}-${s.referencia}` !== `${r.serie}-${r.nombre}-${r.referencia}`
+                );
+                actualizarSeleccionados();
+            });
+
+            chip.appendChild(span);
+            chip.appendChild(btnEliminar);
+            listaSeleccionados.appendChild(chip);
+        });
+    };
+
+    // Filtrar repuestos
+    buscador.addEventListener("input", () => {
+        const filtro = buscador.value.toLowerCase();
+        mostrarRepuestos(repuestos.filter(r =>
+            r.nombre.toLowerCase().includes(filtro) ||
+            r.serie.toLowerCase().includes(filtro) ||
+            r.referencia.toLowerCase().includes(filtro)
+        ));
+    });
+
+    // Crear nuevo repuesto
+    btnCrear.addEventListener("click", async () => {
+        const nombre = inputNombre.value.trim();
+        const serie = inputSerie.value.trim();
+        const referencia = inputReferencia.value.trim();
+        const clienteId = parseInt(document.getElementById("clienteIdHidden").value);
+        const equipoId = parseInt(document.getElementById("equipoIdHidden").value);
+
+        if(!nombre || !serie) return alert("Nombre y serie son obligatorios");
+
+        const res = await fetch("/tecnico/repuestos/crear", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, serie, referencia, clienteId, equipoId })
+        });
+
+        if(res.ok) {
+            const nuevo = await res.json();
+            repuestos.push(nuevo);
+            seleccionados.push({...nuevo, cantidad: 1}); // agregar con cantidad 1
+            actualizarSeleccionados();
+            inputNombre.value = inputSerie.value = inputReferencia.value = "";
+            modal.style.display = "none";
+        } else {
+            alert("Error al crear repuesto");
+        }
+    });
+
+    cargarRepuestos();
+});
+
+
+
