@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/repuestos")
-@CrossOrigin(origins = "*")
+@RequestMapping("/tecnico")
 public class RepuestoController {
 
     private final RepuestoService repuestoService;
@@ -37,7 +36,7 @@ public class RepuestoController {
     }
 
     // Crear repuesto
-    @PostMapping("/crear")
+    @PostMapping("/repuestos/crear")
     public ResponseEntity<RepuestoDto> crear(@RequestBody RepuestoDto dto) {
 
         Cliente cliente = clienteRepository.findById(dto.getClienteId())
@@ -61,7 +60,7 @@ public class RepuestoController {
     }
 
     // Listar todos
-    @GetMapping
+    @GetMapping("/repuestos")
     public List<RepuestoDto> listar() {
         return repuestoService.findAll()
                 .stream()
@@ -70,13 +69,13 @@ public class RepuestoController {
     }
 
     // Buscar por ID
-    @GetMapping("/{serie}")
+    @GetMapping("/repuestos/{serie}")
     public RepuestoDto getById(@PathVariable String serie) {
         return RepuestoMapper.toDto(repuestoService.findById(serie));
     }
 
     // Eliminar
-    @DeleteMapping("/{serie}")
+    @DeleteMapping("/eliminar/{serie}")
     public ResponseEntity<?> eliminar(@PathVariable String serie) {
         repuestoService.delete(serie);
         return ResponseEntity.ok("Repuesto eliminado");
