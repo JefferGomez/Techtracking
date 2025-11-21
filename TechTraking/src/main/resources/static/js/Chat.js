@@ -80,3 +80,35 @@ let socket = new WebSocket("ws://localhost:8080/websocket");
     window.addEventListener('load', function() {
         document.getElementById("messageInput").focus();
     });
+
+    document.getElementById('downloadChat').addEventListener('click', () => {
+    if (messageArea.children.length === 0) {
+        alert('No hay mensajes para descargar');
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let y = 20; // Posición vertical inicial
+    doc.setFontSize(12);
+    doc.text("Chat Guardado - TechTracking", 105, 10, { align: "center" });
+
+    messageArea.querySelectorAll('.message').forEach(msg => {
+        const content = msg.querySelector('.message-content').textContent;
+        const time = msg.querySelector('.message-time').textContent;
+        
+        const text = `[${time}] ${content}`;
+        doc.text(text, 10, y);
+        y += 10;
+
+        // Si se llega al final de la página, agregar otra
+        if (y > 280) {
+            doc.addPage();
+            y = 20;
+        }
+    });
+
+    doc.save('chat.pdf');
+});
+

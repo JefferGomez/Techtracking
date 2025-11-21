@@ -46,14 +46,54 @@
     <!-- Controles del calendario -->
     <div class="calendar-controls">
         <button id="btnPrev">◀</button>
-        <h3 id="currentMonth">Mes, Año</h3>
+        <h3 id="currentMonth"></h3>
         <button id="btnNext">▶</button>
-        <button id="btnToday">Hoy</button>
         <div class="view-options">
-            <button>Día</button>
-            <button>Semana</button>
-            <button class="active">Mes</button>
+            <div class="filter-group">
+                <button class="filter-btn">Técnico ⌄</button>
+                <div class="filter-menu">
+                    <input type="text" id="filtroTecnico" placeholder="ID o nombre del técnico...">
+                </div>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn">Estado ⌄</button>
+                <div class="filter-menu">
+                    <select id="filtroEstado">
+                        <option value="">Todos</option>
+                        <option value="AGENDADA">Agendada</option>
+                        <option value="INICIADA">Iniciada</option>
+                        <option value="FINALIZADA">Finalizada</option>
+                        <option value="REPROGRAMADA">Reprogramada</option>
+                        <option value="CANCELADA">Cancelada</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn">Tipo ⌄</button>
+                <div class="filter-menu">
+                    <select id="filtroTipo">
+                        <option value="">Todos</option>
+                        <option value="PREVENTIVO">Preventivo</option>
+                        <option value="CORRECTIVO">Correctivo</option>
+                    </select>
+                </div>
+             </div>
         </div>
+        <div class="status-legend">
+        <div class="legend-item">
+            <span class="legend-color legend-iniciada"></span>
+            En curso
+        </div>
+        <div class="legend-item">
+            <span class="legend-color legend-finalizada"></span>
+            Finalizada
+        </div>
+        <div class="legend-item">
+            <span class="legend-color legend-cancelada"></span>
+            Cancelada
+        </div>
+    </div>
+
     </div>
 
     <!-- Calendario -->

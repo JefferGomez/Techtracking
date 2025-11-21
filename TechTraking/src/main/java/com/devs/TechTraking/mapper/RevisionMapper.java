@@ -4,11 +4,12 @@ import com.devs.TechTraking.DTO.RevisionDto;
 import com.devs.TechTraking.model.Cliente;
 import com.devs.TechTraking.model.Equipo;
 import com.devs.TechTraking.model.Revision;
+import com.devs.TechTraking.model.Tecnico;
 
 public class RevisionMapper {
 
     // 🔹 DTO → Entity
-    public static Revision toEntity(RevisionDto dto, Cliente cliente, Equipo equipo) {
+    public static Revision toEntity(RevisionDto dto, Cliente cliente, Equipo equipo, Tecnico tecnico) {
         Revision revision = new Revision();
 
         // 🔹 Nuevos campos
@@ -57,6 +58,7 @@ public class RevisionMapper {
         // Relaciones
         revision.setCliente(cliente);
         revision.setEquipo(equipo);
+        revision.setTecnico(tecnico);
 
         // Otros
         revision.setObservaciones(dto.getObservaciones());
@@ -118,6 +120,8 @@ public class RevisionMapper {
         // Relaciones (solo IDs)
         dto.setClienteId(revision.getCliente() != null ? revision.getCliente().getId() : null);
         dto.setEquipoId(revision.getEquipo() != null ? revision.getEquipo().getId() : null);
+        dto.setTecnicoId(revision.getTecnico() != null ? revision.getTecnico().getId() : null);
+
 
         // Otros
         dto.setObservaciones(revision.getObservaciones());

@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/chat-fragment.css}">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="chat-container">
@@ -33,6 +33,7 @@
             <button onclick="sendMessage()" class="btn btn-primary">
                 📤 Enviar
             </button>
+            <button id="downloadChat" class="btn-download">💾 Descargar Chat</button>
             <div id="connectionStatus"></div>
         </div>
     </div>

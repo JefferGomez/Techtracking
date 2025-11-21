@@ -76,6 +76,12 @@ public class Revision {
     @JoinColumn(name = "equipo_id", nullable = false)
     private Equipo equipo;
 
+    // 🔹 Relación con Técnico
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id", nullable = false)
+    private Tecnico tecnico;
+
+
     // Otros datos de la revisión
     private String observaciones;
     private LocalDate fecha = LocalDate.now();
@@ -395,5 +401,13 @@ public class Revision {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public Tecnico getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(Tecnico tecnico) {
+        this.tecnico = tecnico;
     }
 }
