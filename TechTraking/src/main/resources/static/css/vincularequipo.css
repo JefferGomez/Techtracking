@@ -157,7 +157,7 @@ body {
 .sidebar .origami {
     margin-top: 50px;
     opacity: 0.85;
-    width: 100%; /* Ajuste a 100% para que sea responsiva dentro del sidebar */
+    width: 50%; /* Ajuste a 100% para que sea responsiva dentro del sidebar */
     display: block; /* Asegura que sea un elemento de bloque */
     margin-left: 0;
 }
@@ -193,16 +193,16 @@ body {
 
 .nombre-estado {
     display: flex;
-    flex-direction: column; /* Se cambia a columna para mejor flujo en escritorio y móvil */
-    gap: 20px;
-    align-items: flex-start; /* Alinea los elementos a la izquierda */
-    flex-wrap: wrap;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 10px; /* 👈 Más espacio entre elementos */
+    align-items: flex-start;
+    margin-bottom: 0px; /* 👈 Más margen inferior */
 }
-
 .logo-1 {
-    width: 250px; /* Ajuste para mejor proporción en el layout */
+
+    width: 300px; /* Ajuste para mejor proporción en el layout */
     height: auto;
+    margin-bottom: 0; /* Sin margen inferior adicional */
 }
 
 /* Se unifican los estilos de los campos de ID y Marca en una sola clase */
@@ -279,7 +279,8 @@ section {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
+    margin-top: 0px;
 }
 
 /* CAMPOS DE TEXTO Y SELECT */
@@ -363,5 +364,136 @@ input[type="text"], input[type="date"], select {
     .formulario .logo-1 {
         width: 100%;
         max-width: 250px;
+    }
+}
+
+/* =================================================================
+   ESTILOS PARA MODALES PERSONALIZADOS
+   ================================================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+    animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.modal-content.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.modal-btn {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modal-btn:active {
+    transform: translateY(0);
+}
+
+/* Variantes de color según el tipo */
+.modal-success {
+    border-top: 5px solid #4CAF50;
+}
+
+.modal-error {
+    border-top: 5px solid #f44336;
+}
+
+.modal-warning {
+    border-top: 5px solid #ff9800;
+}
+
+.modal-info {
+    border-top: 5px solid #2196F3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    .modal-icon {
+        font-size: 48px;
+    }
+
+    .modal-message {
+        font-size: 16px;
+    }
+
+    .modal-btn {
+        padding: 10px 30px;
+        font-size: 14px;
     }
 }

@@ -231,3 +231,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// Cuando cargues los datos del equipo/cliente
+function cargarDatosFormulario(equipoId) {
+    fetch(`/api/equipo/${equipoId}`)
+        .then(response => response.json())
+        .then(data => {
+            // Rellenar datos del cliente (solo lectura)
+            document.getElementById('idCliente').textContent = data.cliente.id;
+            document.getElementById('nombreCliente').textContent = data.cliente.nombre;
+            document.getElementById('direccionCliente').textContent = data.cliente.direccion;
+            document.getElementById('telefonoCliente').textContent = data.cliente.telefono;
+            document.getElementById('correoCliente').textContent = data.cliente.correo;
+
+            // Rellenar datos del equipo (solo lectura)
+            document.getElementById('marcaEquipo').textContent = data.marca;
+            document.getElementById('modeloEquipo').textContent = data.modelo;
+            document.getElementById('serieEquipo').textContent = data.serial;
+            document.getElementById('tipoEquipo').textContent = data.tipo;
+        })
+        .catch(error => {
+            console.error('Error cargando datos:', error);
+            mostrarModal('Error al cargar los datos del equipo', 'error');
+        });
+}

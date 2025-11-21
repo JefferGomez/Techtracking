@@ -479,7 +479,7 @@ body::before {
    ESTILOS PARA MODALES PERSONALIZADOS
    ================================================================= */
 
-/* .modal-overlay {
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -588,7 +588,7 @@ body::before {
 }
 
 /* Variantes de color según el tipo */
-/* .modal-success {
+.modal-success {
     border-top: 5px solid #4CAF50;
 }
 
@@ -605,7 +605,7 @@ body::before {
 }
 
 /* Responsive */
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
     .modal-content {
         padding: 30px 20px;
         max-width: 90%;
@@ -626,4 +626,4 @@ body::before {
         font-size: 14px;
         min-width: 100px;
     }
-} */ 
+}

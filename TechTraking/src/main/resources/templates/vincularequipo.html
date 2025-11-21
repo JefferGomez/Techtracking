@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 
@@ -46,32 +45,14 @@
 
 <main>
     <form id="vincularEquipoForm" class="formulario">
-        <div class="nombre-estado">
-            <img th:src="@{/img/SM.png}" alt="Logo ServiMarketing" class="logo-1">
-            <div class="campo-vertical">
-                <label for="nombreEquipo">Marca del Equipo:</label>
-                <input type="text" id="nombreEquipo" name="nombreEquipo" placeholder="Ej: Epson, Zebra..." required>
-            </div>
-        </div>
 
-        <section class="equipo">
-            <h2>Especificaciones del Equipo</h2>
-
-            <label for="modelo">Modelo</label>
-            <input type="text" id="modelo" name="modelo" placeholder="Ej: XP-420" required>
-
-            <label for="serie">Serie</label>
-            <input type="text" id="serie" name="serie" placeholder="Número de serie del equipo" required>
-
-            <label for="tipo">Tipo</label>
-            <select id="tipo" name="tipo" required>
-                <option value="">Seleccione una opción</option>
-                <option value="Impresora">Impresora</option>
-                <option value="Terminal portátil">Terminal portátil</option>
-            </select>
-        </section>
-
+        <!-- 👇 SECCIÓN CLIENTE (IZQUIERDA) -->
         <section class="cliente">
+            <!-- Logo y Marca movidos aquí -->
+            <div class="nombre-estado">
+                <img th:src="@{/img/SM.png}" alt="Logo ServiMarketing" class="logo-1">
+
+            </div>
             <h2>Información del Cliente</h2>
 
             <div class="busqueda">
@@ -88,10 +69,32 @@
             </div>
             <button type="submit" class="vincular" disabled>Vincular Equipo</button>
         </section>
+
+        <!-- 👇 SECCIÓN EQUIPO (DERECHA)  INCLUYE LOGO Y MARCA -->
+        <section class="equipo">
+
+            <h2>Especificaciones del Equipo</h2>
+            <div class="campo-vertical">
+                <label for="nombreEquipo">Marca del Equipo:</label>
+                <input type="text" id="nombreEquipo" name="nombreEquipo" placeholder="Ej: Epson, Zebra..." required>
+            </div>
+
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" name="modelo" placeholder="Ej: XP-420" required>
+
+            <label for="serie">Serie</label>
+            <input type="text" id="serie" name="serie" placeholder="Número de serie del equipo" required>
+
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" required>
+                <option value="">Seleccione una opción</option>
+                <option value="Impresora">Impresora</option>
+                <option value="Terminal portátil">Terminal portátil</option>
+            </select>
+        </section>
     </form>
 </main>
 
 <script th:src="@{/js/vincularequipo.js}"></script>
 </body>
 </html>
-
