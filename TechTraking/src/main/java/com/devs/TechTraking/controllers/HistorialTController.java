@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class HistorialController {
+public class HistorialTController {
 
-    @GetMapping("/historialC")
-    public String historial(){
-        return "historialC";
+    @GetMapping("/historialT")
+    public String historialT(){
+        return "historialT";
     }
 
 }

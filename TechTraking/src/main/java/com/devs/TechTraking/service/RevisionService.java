@@ -1,7 +1,14 @@
 package com.devs.TechTraking.service;
 
 import com.devs.TechTraking.model.Revision;
+import com.devs.TechTraking.model.Tecnico;
+import com.devs.TechTraking.model.Usuarios;
 import com.devs.TechTraking.repository.RevisionRepository;
+import com.devs.TechTraking.repository.TecnicoRepository;
+import com.devs.TechTraking.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -10,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +27,10 @@ public class RevisionService {
     private final RevisionRepository revisionRepository;
     private final InformeService informeService;
     private final EmailService emailService;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private TecnicoRepository tecnicoRepository;
 
     public RevisionService(RevisionRepository revisionRepository,
                            InformeService informeService,
@@ -65,52 +77,92 @@ public class RevisionService {
     }
 
     public String finalizarVisita(String correoCliente, String nombreCliente) {
-        Path tempFolder = Paths.get("temp-pdfs");
-        Path registrosFolder = Paths.get("registros");
+
+        // 🔹 Obtener usuario logueado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String correo = auth.getName();
+
+        Usuarios usuario = usuarioRepository.findByCorreo(correo)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // 🔹 Obtener el técnico asociado al usuario
+        Tecnico tecnico = tecnicoRepository.findByUsuarioCorreo(correo)
+                .orElseThrow(() -> new RuntimeException("Técnico no encontrado"));
+
+        // Carpeta del técnico
+        String tecnicoFolderName = tecnico.getNombre().replace(" ", "_");
+        Path tecnicoFolder = Paths.get("temp-pdfs", tecnicoFolderName);
+
+        if (!Files.exists(tecnicoFolder)) {
+            return "No hay informes pendientes para este técnico.";
+        }
 
         try {
-            if (!Files.exists(tempFolder)) {
-                return "No hay informes pendientes.";
-            }
 
-            // Normalizar el nombre del cliente para usarlo en la carpeta
-            String nombreSeguro = nombreCliente.replaceAll("[^a-zA-Z0-9_\\-]", "_");
+            Path carpetaClientes = Paths.get("registros", "clientes");
+            Path carpetaTecnicos = Paths.get("registros", "tecnicos");
 
-            // Crear carpeta del cliente dentro de registros
-            Path carpetaCliente = registrosFolder.resolve(nombreSeguro);
+            // Crear carpeta del cliente
+            String nombreSeguroCliente = nombreCliente.replaceAll("[^a-zA-Z0-9_\\-]", "_");
+            Path carpetaCliente = carpetaClientes.resolve(nombreSeguroCliente);
             Files.createDirectories(carpetaCliente);
 
-            // 1️⃣ Obtener todos los PDFs en la carpeta temporal
-            List<Path> pdfs = Files.list(tempFolder)
+            // 📁 Carpeta del técnico
+            Path carpetaTecnicoHistorial = carpetaTecnicos.resolve(tecnicoFolderName);
+            Files.createDirectories(carpetaTecnicoHistorial);
+
+            // 1️⃣ obtener solo los PDFs del técnico logueado
+            List<Path> pdfs = Files.list(tecnicoFolder)
                     .filter(Files::isRegularFile)
                     .filter(p -> p.toString().endsWith(".pdf"))
                     .toList();
 
             if (pdfs.isEmpty()) {
-                return "No hay informes pendientes para enviar.";
+                return "No hay informes pendientes para este técnico.";
             }
 
-            // 2️⃣ Enviar correo con todos los PDFs
+            // 2️⃣ Enviar correo con SOLO los PDFs del técnico
             emailService.enviarInformeMultiplePdf(
                     correoCliente,
                     "Informe de visita completada",
-                    "Adjunto encontrará los informes de todos los equipos visitados.",
+                    "Adjunto encontrará los informes del técnico " + tecnico.getNombre(),
                     pdfs
             );
 
-            // 3️⃣ Mover los archivos a la carpeta del cliente dentro de registros
-            for (Path pdf : pdfs) {
-                Path destino = carpetaCliente.resolve(pdf.getFileName());
-                Files.move(pdf, destino, StandardCopyOption.REPLACE_EXISTING);
-            }
+            String fecha = LocalDate.now().toString(); // YYYY-MM-DD
 
-            return "✅ Informes enviados y movidos a la carpeta del cliente: " + nombreSeguro;
+            // 📥 Procesar PDFs
+            for (Path pdf : pdfs) {
+
+                // 1️⃣ Obtener consecutivo desde el nombre original del archivo
+                String originalFileName = pdf.getFileName().toString();  // ej: 12345.pdf
+                String consecutivo = originalFileName.replace(".pdf", ""); // ej: 12345
+
+                // 2️⃣ Crear nombres finales
+                String filenameCliente =
+                        tecnicoFolderName + "+" + consecutivo + "+" + fecha + ".pdf";
+
+                String filenameTecnico =
+                        nombreSeguroCliente + "+" + consecutivo + "+" + fecha + ".pdf";
+
+                // 3️⃣ Mover PDF al historial del cliente
+                Files.move(pdf, carpetaCliente.resolve(filenameCliente),
+                        StandardCopyOption.REPLACE_EXISTING);
+
+                // 4️⃣ Copiar PDF al historial del técnico
+                Files.copy(
+                        carpetaCliente.resolve(filenameCliente),
+                        carpetaTecnicoHistorial.resolve(filenameTecnico),
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+            }
+            return "✅ Informes enviados y movidos: Técnico = " + tecnico.getNombre();
 
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error procesando los informes.", e);
+            throw new RuntimeException("Error al mover o enviar los informes", e);
         }
     }
+
 
 
     public String getNextConsecutivo() {

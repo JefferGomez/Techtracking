@@ -3,17 +3,18 @@ package com.devs.TechTraking.controllers;
 import com.devs.TechTraking.DTO.RevisionDto;
 import com.devs.TechTraking.enums.EstadoVisita;
 import com.devs.TechTraking.mapper.RevisionMapper;
-import com.devs.TechTraking.model.Cliente;
-import com.devs.TechTraking.model.Equipo;
-import com.devs.TechTraking.model.Revision;
-import com.devs.TechTraking.model.Visita;
+import com.devs.TechTraking.model.*;
 import com.devs.TechTraking.repository.ClienteRepository;
 import com.devs.TechTraking.repository.EquipoRepository;
+import com.devs.TechTraking.repository.TecnicoRepository;
+import com.devs.TechTraking.repository.UsuarioRepository;
 import com.devs.TechTraking.service.InformeService;
 import com.devs.TechTraking.service.EmailService;
 import com.devs.TechTraking.service.RevisionService;
 import com.devs.TechTraking.service.VisitaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -38,6 +39,10 @@ public class RevisionController {
     private final EmailService emailService;
     @Autowired
     private VisitaService visitaService;
+    @Autowired
+    private TecnicoRepository tecnicoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public RevisionController(RevisionService revisionService,
                               ClienteRepository clienteRepository,
@@ -61,8 +66,18 @@ public class RevisionController {
         Equipo equipo = equipoRepository.findById(dto.getEquipoId())
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
 
+        // Obtener el usuario logueado
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String correo = auth.getName(); // username
+
+        // El técnico REAL viene del usuario logueado
+        Tecnico tecnico = tecnicoRepository.findByUsuarioCorreo(correo)
+                .orElseThrow(() -> new RuntimeException("Técnico no encontrado"));
+
+
+
         // 🔹 Convertir DTO a entidad
-        Revision revision = RevisionMapper.toEntity(dto, cliente, equipo);
+        Revision revision = RevisionMapper.toEntity(dto, cliente, equipo,tecnico);
 
         // 🔹 Guardar revisión (el servicio se encarga de generar el consecutivo)
         Revision saved = revisionService.saveRevision(revision);
@@ -70,17 +85,28 @@ public class RevisionController {
         // 🔹 Generar el PDF del informe
         ByteArrayInputStream pdfStream = informeService.generarReporte(saved);
 
-        // 🔹 Crear pdf en carpeta
-        Path tempFolder = Paths.get("temp-pdfs"); // asumimos que ya existe
-        String fileName = "revision-" + saved.getConsecutivo() + ".pdf";
-        Path filePath = tempFolder.resolve(fileName);
+        // 🔹 Crear carpeta por técnico
+        String tecnicoFolderName = tecnico.getNombre().replace(" ", "_");
+        Path tecnicoFolder = Paths.get("temp-pdfs", tecnicoFolderName);
+
+        try {
+            Files.createDirectories(tecnicoFolder);
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo crear el directorio del técnico", e);
+        }
+
+        //🔹 Guardar el PDF dentro de la carpeta del técnico
+        String fileName = saved.getConsecutivo() + ".pdf";
+        Path filePath = tecnicoFolder.resolve(fileName);
+
         try {
             Files.write(filePath, pdfStream.readAllBytes());
-            System.out.println("📄 PDF temporal creado: " + fileName);
+            System.out.println("📄 PDF creado: " + filePath.toString());
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("No se pudo crear el PDF temporal", e);
+            throw new RuntimeException("No se pudo crear el PDF", e);
         }
+
 
 
         // 🔹 Devolver DTO actualizado con el consecutivo

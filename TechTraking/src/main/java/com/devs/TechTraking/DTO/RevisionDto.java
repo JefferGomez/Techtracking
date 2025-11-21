@@ -9,6 +9,7 @@ public class RevisionDto {
     // 🔹 Relación con Cliente y Equipo (solo enviamos los IDs, no los objetos completos)
     private Long clienteId;
     private Long equipoId;
+    private Integer tecnicoId;
 
     // 🔹 NUEVOS CAMPOS
     private TipoImpresora tipoImpresora;
@@ -369,5 +370,13 @@ public class RevisionDto {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public Integer getTecnicoId() {
+        return tecnicoId;
+    }
+
+    public void setTecnicoId(Integer tecnicoId) {
+        this.tecnicoId = tecnicoId;
     }
 }
