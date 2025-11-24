@@ -3,6 +3,16 @@ const confirmPassword = document.getElementById("confirmPassword");
 const strengthText = document.getElementById("strengthText");
 const submitBtn = document.getElementById("submitBtn");
 
+// show passwords toggle
+const showPasswordsCheckbox = document.getElementById("showPasswords");
+if (showPasswordsCheckbox) {
+  showPasswordsCheckbox.addEventListener('change', () => {
+    const type = showPasswordsCheckbox.checked ? 'text' : 'password';
+    newPassword.type = type;
+    confirmPassword.type = type;
+  });
+}
+
 const requirements = {
   length: document.getElementById("length"),
   uppercase: document.getElementById("uppercase"),
