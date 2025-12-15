@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "rol")
+@Table(name = "_rol")
 public class Rol {
 
     @Id
