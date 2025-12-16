@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "_visita")
+@Table(name = "_Visita")
 public class Visita {
 
     @Id
