@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>TechTracking</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
 <div class="login-container">
     <div class="login-box">
-        <img th:src="@{/img/sm.png}" alt="TechTraking Logo" class="logo">
+        <img src="/img/sm.png" alt="TechTraking Logo" class="logo">
         <h2>Iniciar Sesión en <strong>TechTraking</strong></h2>
         <form id="loginForm" method="post" action="/procesarLogin">
             <label for="correo">Correo</label>
@@ -34,6 +34,6 @@
         </form>
     </div>
 </div>
-<script th:src="@{/js/logIn.js}"></script>
+<script src="/js/logIn.js"></script>
 </body>
 </html>
