@@ -4,7 +4,7 @@ package com.devs.TechTraking.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "_tecnico")
+@Table(name = "_Tecnico")
 public class Tecnico {
 
     @Id
