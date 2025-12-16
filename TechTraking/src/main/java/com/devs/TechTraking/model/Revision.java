@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "_revision")    
+@Table(name = "_Revision")    
 public class Revision {
 
     @Id
